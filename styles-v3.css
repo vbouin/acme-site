@@ -1,0 +1,170 @@
+/* ===== ACMÉ v3 — Cursor-revealed grid (no halo) ===== */
+:root {
+  --v3-blue:       #1f5bff;
+  --v3-blue-soft:  rgba(31, 91, 255, 0.55);
+  --v3-grid-size:  64px;
+  --gx: 50vw;
+  --gy: 50vh;
+}
+
+/* Faint base grid that's always visible across the whole page */
+.v3-grid-base {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: var(--v3-grid-size) var(--v3-grid-size);
+  background-attachment: fixed;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, black 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse at center, black 0%, black 60%, transparent 100%);
+  animation: v3-grid-pan 60s linear infinite;
+}
+@keyframes v3-grid-pan {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: var(--v3-grid-size) var(--v3-grid-size), var(--v3-grid-size) var(--v3-grid-size); }
+}
+
+/* Vivid grid revealed near the cursor */
+.v3-reveal {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image:
+    linear-gradient(to right, var(--v3-blue-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--v3-blue-soft) 1px, transparent 1px);
+  background-size: var(--v3-grid-size) var(--v3-grid-size);
+  background-attachment: fixed;
+  -webkit-mask-image: radial-gradient(
+    circle 280px at var(--gx) var(--gy),
+    black 0%,
+    rgba(0,0,0,0.5) 40%,
+    transparent 75%
+  );
+          mask-image: radial-gradient(
+    circle 280px at var(--gx) var(--gy),
+    black 0%,
+    rgba(0,0,0,0.5) 40%,
+    transparent 75%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.v3-reveal.is-on { opacity: 1; }
+
+/* Soft glow at the cursor centre — small dot, not a halo */
+.v3-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  background: var(--v3-blue);
+  box-shadow:
+    0 0 0 4px rgba(31, 91, 255, 0.18),
+    0 0 14px rgba(31, 91, 255, 0.45);
+  opacity: 0.85;
+}
+
+/* Crosshair lines through the cursor — extends grid sensation */
+.v3-dot::before,
+.v3-dot::after {
+  content: "";
+  position: fixed;
+  background: rgba(31, 91, 255, 0.25);
+  pointer-events: none;
+}
+.v3-dot::before {
+  /* Vertical line through cursor */
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-0.5px);
+}
+.v3-dot::after {
+  /* Horizontal line through cursor */
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-0.5px);
+}
+
+/* Cursor coordinates badge (top-left of cursor) */
+.v3-dot[data-coord]::after { /* placeholder if needed later */ }
+
+/* Pulse pings: short blue circles that briefly appear near cursor */
+.v3-ping {
+  position: fixed;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--v3-blue);
+  pointer-events: none;
+  z-index: 998;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0.8;
+  animation: v3-ping 1.4s ease-out forwards;
+  box-shadow: 0 0 0 0 rgba(31, 91, 255, 0.55);
+}
+@keyframes v3-ping {
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0.9; box-shadow: 0 0 0 0 rgba(31,91,255,0.55); }
+  60%  { transform: translate(-50%, -50%) scale(1.4); opacity: 0.5; box-shadow: 0 0 0 16px rgba(31,91,255,0); }
+  100% { transform: translate(-50%, -50%) scale(2);   opacity: 0;   box-shadow: 0 0 0 24px rgba(31,91,255,0); }
+}
+
+/* On v3 we hide native cursor for the immersive grid feel */
+@media (hover: hover) and (pointer: fine) {
+  body.v3 { cursor: none; }
+}
+
+/* The bottom-right v3 pill picks up blue */
+body.v3 .v2-toggle .v2-current {
+  background: linear-gradient(135deg, #0a2eaa, var(--v3-blue));
+}
+
+/* Hover effects on v3 — keep them subtle and grid-aligned */
+body.v3 .sector-card,
+body.v3 .pillar,
+body.v3 .method-step,
+body.v3 .tier-card {
+  transition: border-color 0.35s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+body.v3 .sector-card:hover,
+body.v3 .pillar:hover,
+body.v3 .method-step:hover,
+body.v3 .tier-card:hover {
+  border-color: var(--v3-blue);
+  box-shadow: 0 0 0 2px rgba(31, 91, 255, 0.12), 0 14px 38px rgba(31, 91, 255, 0.10);
+}
+
+body.v3 a:not(.btn):not(.nav-logo):hover {
+  color: var(--v3-blue);
+}
+
+body.v3 .btn-primary-dark {
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+body.v3 .btn-primary-dark:hover {
+  background: linear-gradient(135deg, #0a2eaa 0%, var(--v3-blue) 100%);
+  border-color: var(--v3-blue);
+  box-shadow: 0 10px 30px rgba(31, 91, 255, 0.28);
+}
+body.v3 .btn-outline-dark:hover {
+  background: var(--v3-blue);
+  border-color: var(--v3-blue);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-grid-base { animation: none; }
+  .v3-ping { display: none; }
+}
+
+/* v3.1-style auto-cycle hero rules are now applied globally in styles.css */

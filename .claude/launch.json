@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "acme-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4321"],
+      "port": 4321
+    },
+    {
+      "name": "acme-site-v4",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js", "4325"],
+      "port": 4325
+    }
+  ]
+}

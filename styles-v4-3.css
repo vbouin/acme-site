@@ -1,0 +1,174 @@
+/* ================================================================
+   ACMÉ v4.3 — HERO SCROLLÉ « LE DÉMONTAGE »
+   Se charge PAR-DESSUS styles-v4-2.css : les quatre actes, le HUD de
+   transport, les plaques, la recette d'estompage, le letterbox, le HUD
+   de tournage et l'invite à défiler viennent de là. Ce fichier ne
+   contient que le delta du hero.
+
+   Le hero change de nature : au lieu d'un plan fixe, une séquence
+   continue de 17,3 s — deux plans HD montés bout à bout (démontage de
+   l'appareil, puis éruption de données) — dont la tête de lecture est
+   le scroll. Leur raccord est franc : la cassette est au même cadrage
+   de part et d'autre.
+
+   Même intégration qu'en v4.2 : le fond de section reprend le fond réel
+   de la vidéo (relevé aux 4 coins), et --fade-in / --fade-v pilotent
+   l'estompage via la recette commune.
+   ================================================================ */
+
+body.v4-3 {
+  /* relevé aux 4 coins de la séquence : 208 en bas-gauche, 165 en haut-droite.
+     Les bornes sont remontées de ~6 : le dégradé du plan est calé sur SA boîte
+     (2/3 d'écran) alors que celui de la page couvre toute la section — caler sur
+     la moyenne des bords, pas sur les coins, referme l'écart résiduel. */
+  --plate-story: linear-gradient(45deg, #D6D6D6 0%, #C2C2C2 46%, #ACACAD 100%);
+}
+
+.v4-hero2 {
+  position: relative;
+  background: var(--plate-story);
+  color: var(--on-plate);
+  /* estompage : franc à gauche (là où la typo arrive), généreux en haut et en
+     bas (le plateau continue), nul à droite (fond perdu) */
+  --fade-in: linear-gradient(90deg, transparent 0%, rgba(var(--ink-rgb), .45) 8%, #000 24%);
+  --fade-v:  var(--fade-tb);
+}
+/* le hero2 n'est pas une grille demi-écran : son plan est en absolute.
+   D'où un stage à lui, plutôt qu'un .v4-act-stage réhabillé. */
+.h2-stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: hidden;
+  contain: layout paint;
+}
+/* la séquence se referme sur le dernier palier — le letterbox suit --p */
+body.v4-open .v4-hero2 .v4-bar { transform: scaleY(calc(.07 + var(--p, 0) * .93)); }
+.v4-hero2 .v4-bar { height: 62px; }
+
+/* ── le plan : 2/3 d'écran, à fond perdu à droite ────────────────
+   La largeur est plafonnée par la hauteur disponible : sur une fenêtre
+   basse, le 16:9 sortirait du cadre et l'objet serait rogné.
+   Le masque est porté par la BOÎTE (recette commune de v4.2), pas par la
+   vidéo : la poussée d'objectif est un scale sur la <video>, et si le
+   masque était sur elle il grandirait avec — les bords redeviendraient
+   francs.                                                              */
+.h2-media {
+  position: absolute; top: 50%; right: 0;
+  width: min(68vw, calc(74vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  transform: translateY(-50%);
+  overflow: hidden;
+  z-index: 1;
+}
+.h2-media video {
+  width: 100%; height: 100%; object-fit: cover;
+  /* l'objet est petit dans le cadre source : on entre dedans, et on se
+     rapproche encore au fil du scroll (--p est posé par acts.js) */
+  transform: scale(calc(1.12 + var(--p, 0) * .08));
+  transform-origin: 50% 50%;
+}
+
+/* ── les paliers de texte ────────────────────────────────────────
+   Un seul bloc à la fois, dans le tiers gauche : ils se remplacent sur
+   place au fil du scroll. La zone reste sur le plateau et sur le bord
+   estompé du plan — jamais sur l'objet, qui est au centre du cadre.  */
+.h2-copy { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+/* voile très léger, teinté de la couleur du plateau : invisible sur le fond
+   nu, il rend la typo tenable quand la séquence crache ses graphiques dans
+   le tiers gauche (paliers 05 et 06). */
+.h2-copy::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: min(46vw, 720px); z-index: -1;
+  background: linear-gradient(90deg,
+    rgba(214, 214, 214, .72) 0%, rgba(214, 214, 214, .58) 52%, rgba(214, 214, 214, 0) 100%);
+  pointer-events: none;
+}
+.h2-beat {
+  position: absolute; left: var(--gutter); top: 50%;
+  width: min(40vw, 560px);
+  transform: translateY(-46%);
+  opacity: 0; visibility: hidden;
+  transition: opacity .5s var(--ease-out), transform .6s var(--ease-out), visibility .5s;
+}
+.h2-beat.on { opacity: 1; visibility: visible; transform: translateY(-50%); }
+.h2-beat > * { pointer-events: auto; }
+.h2-beat .eyebrow { color: var(--on-plate-soft); margin-bottom: 20px; display: block; }
+.h2-beat h1, .h2-beat h2 { margin: 0; }
+.h2-beat h1 { font-size: clamp(38px, 4.9vw, 76px); }
+.h2-beat h2 { font-size: clamp(30px, 3.9vw, 58px); }
+/* seuls les <span> du h1 sont des lignes : les h2 découpent avec des <br>, et
+   passer leurs <span> en block ajouterait une ligne vide de chaque côté */
+.h2-beat h1 span { display: block; }
+.h2-beat p {
+  margin-top: 20px; max-width: 40ch;
+  color: var(--on-plate-soft); font-size: clamp(15px, 1.2vw, 19px); line-height: 1.5;
+}
+.h2-beat .v4-hero-ctas { margin-top: 32px; }
+
+/* ── chapitrage : la timeline du plan, en filet ───────────────────── */
+.h2-rail {
+  position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%);
+  z-index: 4; display: grid; gap: 11px; justify-items: end;
+  pointer-events: none;
+}
+.h2-rail span {
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .26em;
+  text-transform: uppercase; color: rgba(var(--ink-rgb), .42);
+  transition: color .3s var(--ease-out);
+}
+.h2-rail span::after {
+  content: ""; display: block; width: 14px; height: 1px; background: currentColor;
+  transition: width .3s var(--ease-out);
+}
+.h2-rail span.on { color: var(--on-plate); }
+.h2-rail span.on::after { width: 34px; height: 2px; }
+
+/* ── position des repères empruntés à v4.2 (.v4-hud, .v4-cue) ─────── */
+.h2-tc { bottom: 26px; right: var(--gutter); }
+.h2-cue { left: var(--gutter); bottom: 26px; opacity: calc(1 - var(--p, 0) * 6); }
+.h2-cue i { width: 26px; height: 1px; animation: h2cue 2.4s ease-in-out infinite; }
+@keyframes h2cue { 0%, 100% { transform: scaleX(.35); opacity: .5 } 50% { transform: scaleX(1); opacity: 1 } }
+
+/* ── responsive : le plan passe en bandeau, la typo dessous ───────── */
+@media (max-width: 1000px) {
+  .h2-media {
+    top: 92px; right: 0; left: 0; width: auto;
+    transform: none; height: 42vh; aspect-ratio: auto;
+  }
+  .h2-media video { transform: none; }
+  .v4-hero2 { --fade-in: var(--fade-off); --fade-v: var(--fade-b); }
+  .h2-copy::before { width: 100%; background: none; }
+  .h2-beat {
+    left: var(--gutter); right: var(--gutter);
+    width: auto; top: auto; bottom: 96px; transform: translateY(8px);
+  }
+  .h2-beat.on { transform: none; }
+  .h2-beat h1 { font-size: clamp(30px, 8.4vw, 44px); }
+  .h2-beat h2 { font-size: clamp(26px, 7.4vw, 38px); }
+  .h2-beat p { font-size: 14.5px; }
+  .h2-rail { display: none; }
+  .v4-hero2 .v4-bar { height: 40px; }
+  body.v4-open .v4-hero2 .v4-bar { transform: scaleY(.07); }
+  .h2-tc { bottom: 14px; }
+}
+
+/* ── mouvement réduit : la séquence devient une image, les paliers
+      s'empilent et se lisent tous ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  body.v4-3 .v4-hero2 .v4-act-track { height: auto !important; }
+  body.v4-3 .h2-stage { position: static; height: auto; padding: 120px 0 80px; contain: none; }
+  body.v4-3 .h2-media {
+    position: relative; top: auto; right: auto; width: 100%;
+    transform: none; margin-bottom: 40px;
+  }
+  body.v4-3 .h2-media video { transform: none; }
+  body.v4-3 .h2-copy { position: static; inset: auto; }
+  body.v4-3 .h2-copy::before { display: none; }
+  body.v4-3 .h2-beat {
+    position: static; width: auto; max-width: 62ch;
+    opacity: 1 !important; visibility: visible !important; transform: none !important;
+    margin-bottom: 54px;
+  }
+  body.v4-3 .h2-rail, body.v4-3 .h2-tc, body.v4-3 .h2-cue { display: none; }
+  body.v4-3 .v4-hero2 .v4-bar { transform: scaleY(.07) !important; }
+}

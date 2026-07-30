@@ -1,0 +1,122 @@
+/* ===== ACMÉ v2 — Mouse-driven blue gradient layer (no halo) ===== */
+:root {
+  --v2-blue:        #1f5bff;
+  --v2-blue-deep:   #0a2eaa;
+  --v2-blue-light:  #6ea0ff;
+  --v2-c-accent:    var(--v2-blue);
+}
+
+/* The colour cursor: now a discreet dot, not a halo */
+.v2-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  background: var(--v2-blue);
+  box-shadow: 0 0 0 4px rgba(31, 91, 255, 0.18);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  mix-blend-mode: normal;
+  filter: none;
+}
+.v2-cursor.is-on { opacity: 0.9; }
+
+/* Subtle blue wash at the cursor position per section (much smaller, no haze) */
+body.v2 section { position: relative; overflow: hidden; }
+body.v2 section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle 280px at var(--mx, 50%) var(--my, 50%),
+    rgba(31, 91, 255, 0.07) 0%,
+    rgba(31, 91, 255, 0.02) 35%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+body.v2 section:hover::after { opacity: 1; }
+
+/* Interactive elements share a single blue accent + gradient on hover */
+body.v2 a:not(.btn):not(.nav-logo):hover {
+  color: var(--v2-blue);
+}
+
+body.v2 .btn-primary-dark {
+  background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+body.v2 .btn-primary-dark:hover {
+  background: linear-gradient(135deg, var(--v2-blue-deep) 0%, var(--v2-blue) 50%, var(--v2-blue-light) 100%);
+  border-color: var(--v2-blue);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(31, 91, 255, 0.32);
+  transform: translateY(-1px);
+}
+body.v2 .btn-outline-dark:hover {
+  background: linear-gradient(135deg, var(--v2-blue) 0%, var(--v2-blue-deep) 100%);
+  border-color: var(--v2-blue);
+  color: #fff;
+}
+
+body.v2 .sector-card,
+body.v2 .pillar,
+body.v2 .method-step,
+body.v2 .tier-card {
+  position: relative;
+  transition: color 0.35s ease, border-color 0.35s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+body.v2 .sector-card::before,
+body.v2 .pillar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(31, 91, 255, 0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+body.v2 .sector-card:hover,
+body.v2 .pillar:hover,
+body.v2 .method-step:hover,
+body.v2 .tier-card:hover {
+  border-color: var(--v2-blue);
+  box-shadow: 0 14px 38px rgba(31, 91, 255, 0.16);
+  transform: translateY(-2px);
+}
+body.v2 .sector-card:hover::before,
+body.v2 .pillar:hover::before { opacity: 1; }
+
+body.v2 .sector-card:hover .sector-icon,
+body.v2 .pillar:hover .pillar-icon,
+body.v2 .method-step:hover .step-icon {
+  color: var(--v2-blue);
+}
+
+/* The bottom-right v2 pill picks up blue when on v2 */
+body.v2 .v2-toggle .v2-current {
+  background: linear-gradient(135deg, var(--v2-blue-deep), var(--v2-blue));
+}
+
+/* On v2 the eyebrow/dividing lines pick up faint blue tints */
+body.v2 .eyebrow::before,
+body.v2 .hero-eyebrow::before {
+  background: linear-gradient(to right, var(--v2-blue), transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.v2 { cursor: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-cursor { display: none; }
+  body.v2 section::after { display: none; }
+  body.v2 .btn-primary-dark:hover { transform: none; }
+}

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ACMÉ v3.1 — Hero auto-cycle</title>
+<meta name="description" content="ACMÉ — grille interactive + hero auto-cycle des deux animations." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-v3.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="v3 v3-1">
+<script src="variant.js"></script>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo/logo-noir.png" alt="ACMÉ" />
+    </a>
+    <nav class="nav-menu">
+      <a href="#methodologie" data-i18n="nav.methodology">Méthodologie</a>
+      <a href="#sectors" data-i18n="nav.sectors">Secteurs</a>
+      <a href="#expertises" data-i18n="nav.expertises">Expertises</a>
+      <a href="references.html" data-i18n="nav.references">Références</a>
+      <a href="territoires.html" data-i18n="nav.territories">Territoires</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="fr" type="button">FR</button>
+        <span class="lang-sep">/</span>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <a href="contact.html" class="btn btn-primary-dark" style="padding: 12px 20px;">
+        <span data-i18n="nav.cta">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO — split slider: value prop (left) + brand keyword SVGs (right) -->
+<section class="hero hero-split" id="sliderHero">
+  <div class="hero-bg dot-grid"></div>
+  <div class="container hero-split-inner">
+
+    <!-- LEFT: value proposition -->
+    <div class="hsplit-text">
+      <div class="hero-eyebrow eyebrow" data-i18n="hero.eyebrow">ACMÉ · CONSULTANTS · DEPUIS 1987</div>
+      <h1 class="display">
+        <span data-i18n="hero.h1.l1">La parole client,</span><br>
+        <span class="serif-accent" data-i18n="hero.h1.l2">transformée en</span><br>
+        <span data-i18n="hero.h1.l3">décisions business.</span>
+      </h1>
+      <p class="lead" data-i18n="hero.lead">30 ans d'expertise en études qualitatives. De la prise de brief à l'aide à la décision finale — nous révélons les insights qui orientent vos politiques publiques, vos lancements produits et vos expériences clients.</p>
+      <div class="hero-ctas">
+        <a href="#methodologie" class="btn btn-primary-dark">
+          <span data-i18n="hero.cta.primary">Découvrir notre méthode</span>
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        <a href="#sectors" class="btn btn-outline-dark" data-i18n="hero.cta.secondary">Voir nos secteurs</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: animation slider (Strategise / Highlight) -->
+    <div class="hsplit-visual" aria-roledescription="slider">
+      <div class="hsplit-stage">
+        <div class="hsplit-frame is-active" data-hs-key="strategise">
+          <iframe src="assets/hero/anim/chess.html" title="Strategise animation" loading="lazy" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="hsplit-frame" data-hs-key="highlight">
+          <iframe src="assets/hero/anim/highlight.html" title="Highlight animation" loading="lazy" frameborder="0" scrolling="no"></iframe>
+        </div>
+      </div>
+
+      <!-- Slider HUD -->
+      <div class="hsplit-hud">
+        <button class="hsplit-arrow hsplit-prev" type="button" aria-label="Previous">
+          <svg viewBox="0 0 14 10" width="14" height="10"><path d="M5 9L1 5L5 1M1 5H13" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <div class="hsplit-counter">
+          <span class="hsplit-num" data-hs-num>01</span>
+          <span class="hsplit-bar"><span class="hsplit-bar-fill" data-hs-fill></span></span>
+          <span class="hsplit-total">02</span>
+        </div>
+        <button class="hsplit-arrow hsplit-next" type="button" aria-label="Next">
+          <svg viewBox="0 0 14 10" width="14" height="10"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+      </div>
+
+      <!-- Slider labels (current keyword) -->
+      <div class="hsplit-labels" aria-hidden="true">
+        <span class="hsplit-label is-active" data-hs-label="0">Strategise</span>
+        <span class="hsplit-label" data-hs-label="1">Highlight</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Automobile</span><span>Mobilité</span><span>Territoires</span><span>Tourisme</span><span>FMCG</span><span>Retail</span><span>Cosmétique</span><span>DIY</span><span>Santé</span><span>Inclusion</span>
+    <span>Automobile</span><span>Mobilité</span><span>Territoires</span><span>Tourisme</span><span>FMCG</span><span>Retail</span><span>Cosmétique</span><span>DIY</span><span>Santé</span><span>Inclusion</span>
+  </div>
+</div>
+
+<!-- VALUE PILLARS -->
+<section class="section-pad">
+  <div class="container">
+    <div class="pillars-head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="pillars.eyebrow">— Notre valeur ajoutée</div>
+        <h2 class="display">
+          <span data-i18n="pillars.h2.l1">Trois leviers</span><br>
+          <span data-i18n="pillars.h2.l2">au service de</span><br>
+          <span data-i18n="pillars.h2.l3">vos décisions.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="ti-pawn-head" cx="12" cy="6" r="2.4"/>
+              <path class="ti-pawn-body" d="M9.5 10.2h5l-.7 3H10.2zM8 17h8l1 4H7z"/>
+            </svg>
+          </span>
+        </h2>
+      </div>
+      <p class="lead" data-i18n="pillars.intro">Nous concentrons nos efforts sur trois leviers qui servent directement vos enjeux business : la rigueur des sciences humaines, la puissance de la prospective, et la rapidité d'exécution.</p>
+    </div>
+
+    <div class="pillars-grid reveal">
+      <div class="pillar">
+        <div class="pillar-n" data-i18n="pillar1.label">01 / Rigueur</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4L4 14v8c0 11 8 20 20 22 12-2 20-11 20-22v-8z"/><path d="M14 22l8 8 14-14"/></svg>
+        </div>
+        <h3 data-i18n="pillar1.title">Sciences humaines appliquées</h3>
+        <p data-i18n="pillar1.body">Nous tirons parti de la rigueur des sciences humaines pour les mettre au service des enjeux business de nos clients.</p>
+        <div class="pillar-viz">
+          <canvas data-three="pillar" data-kind="axes"></canvas>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-n" data-i18n="pillar2.label">02 / Prospective</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="20"/><path d="M4 24h40M24 4v40M8 12c8 8 24 8 32 0M8 36c8-8 24-8 32 0"/></svg>
+        </div>
+        <h3 data-i18n="pillar2.title">Prospective & planning stratégique</h3>
+        <p data-i18n="pillar2.body">Nous conjuguons études qualitatives, prospective et planning stratégique pour dépasser la photographie du présent et éclairer les mutations à venir.</p>
+        <div class="pillar-viz">
+          <canvas data-three="pillar" data-kind="stairs"></canvas>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-n" data-i18n="pillar3.label">03 / Vitesse</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4v20l12 6"/><circle cx="24" cy="24" r="20"/><path d="M14 10l2-3M34 10l-2-3M14 38l2 3M34 38l-2 3"/></svg>
+        </div>
+        <h3 data-i18n="pillar3.title">Rapidité d'exécution</h3>
+        <p data-i18n="pillar3.body">Des dispositifs méthodologiques sur-mesure, conçus pour coller aux délais business les plus serrés, sans concéder sur la qualité terrain.</p>
+        <div class="pillar-viz">
+          <canvas data-three="pillar" data-kind="cylinder"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="method section-pad" id="methodologie">
+  <div class="dot-grid" style="position:absolute;inset:0;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="method-head reveal">
+      <div>
+        <div class="eyebrow" style="color:var(--grey-500);margin-bottom:20px;" data-i18n="method.eyebrow">— Méthodologie</div>
+        <h2 class="display">
+          <span data-i18n="method.h2.l1">Une approche</span><br>
+          <span data-i18n="method.h2.l2">holistique, de la</span><br>
+          <span data-i18n="method.h2.l3">prise de brief à</span><br>
+          <span data-i18n="method.h2.l4">la décision.</span><span class="title-icon balance-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- column + base -->
+              <path d="M16 5 V26"/>
+              <path d="M11 26 H21"/>
+              <circle cx="16" cy="5" r="1.4" fill="currentColor"/>
+              <!-- beam (tilts) -->
+              <g class="ti-beam">
+                <path d="M5 9 H27" stroke-width="1.6"/>
+                <path d="M5 9 V11"/>
+                <path d="M27 9 V11"/>
+                <!-- left pan -->
+                <path class="ti-pan ti-pan-l" d="M2 11 L8 11 L6 16 Z" fill="currentColor" fill-opacity="0.16"/>
+                <!-- right pan -->
+                <path class="ti-pan ti-pan-r" d="M24 11 L30 11 L26 16 Z" fill="currentColor" fill-opacity="0.16"/>
+              </g>
+            </svg>
+          </span>
+        </h2>
+      </div>
+      <p class="lead" data-i18n="method.intro">Forts de 30 années d'expérience, nos collaborateurs ont structuré une méthode qui couvre l'intégralité du parcours étude. Nous sommes présents à chaque étape — immersif, analytique, actionnable.</p>
+    </div>
+
+    <div class="method-steps reveal">
+      <div class="m-step">
+        <div class="m-step-dot"></div>
+        <div class="m-step-n">01</div>
+        <h4 data-i18n="method.s1.title">Prise de brief & cadrage</h4>
+        <p data-i18n="method.s1.body">Atelier de cadrage avec vos équipes produit, marketing et R&D pour aligner question business et dispositif terrain.</p>
+      </div>
+      <div class="m-step">
+        <div class="m-step-dot"></div>
+        <div class="m-step-n">02</div>
+        <h4 data-i18n="method.s2.title">Design & recrutement</h4>
+        <p data-i18n="method.s2.body">Conception du protocole et sourcing de profils complexes à forte valeur.</p>
+      </div>
+      <div class="m-step">
+        <div class="m-step-dot"></div>
+        <div class="m-step-n">03</div>
+        <h4 data-i18n="method.s3.title">Terrain & collecte</h4>
+        <p data-i18n="method.s3.body">Exécution sur site, logistique multi-pays si nécessaire, captation haute fidélité.</p>
+      </div>
+      <div class="m-step">
+        <div class="m-step-dot"></div>
+        <div class="m-step-n">04</div>
+        <h4 data-i18n="method.s4.title">Analyse & insight</h4>
+        <p data-i18n="method.s4.body">Décryptage croisé terrain / data, transformation de la parole client en données business priorisées.</p>
+      </div>
+      <div class="m-step">
+        <div class="m-step-dot"></div>
+        <div class="m-step-n">05</div>
+        <h4 data-i18n="method.s5.title">Restitution & décision</h4>
+        <p data-i18n="method.s5.body">Ateliers de restitution, intégration dans vos roadmaps, programmes de connaissance client récurrents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES TIERS -->
+<section class="section-pad">
+  <div class="container">
+    <div class="tiers-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="tiers.eyebrow">— Livrables</div>
+      <h2 class="display">
+        <span data-i18n="tiers.h2.l1">Trois niveaux</span><br>
+        <span data-i18n="tiers.h2.l2">de lecture.</span><span class="title-icon" data-title-icon aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle class="ti-glass-ring" cx="10" cy="10" r="6"/>
+            <path class="ti-glass-handle" d="M14.4 14.4 L20 20"/>
+          </svg>
+        </span>
+      </h2>
+      <p class="lead" data-i18n="tiers.intro">Chaque équipe consomme la connaissance client différemment. Nous livrons trois formats conçus pour s'intégrer à vos usages réels.</p>
+    </div>
+
+    <div class="tiers reveal">
+      <div class="tier">
+        <div class="tier-label" data-i18n="tier1.label">Niveau 01</div>
+        <div class="tier-visual"><canvas data-three="tier" data-kind="docs"></canvas></div>
+        <h3 data-i18n="tier1.title">Livrable complet extensif</h3>
+        <p data-i18n="tier1.body">Synthèse exhaustive avec scripts spécifiques pour consultation par IA générative.</p>
+        <ul>
+          <li data-i18n="tier1.i1">Verbatims complets annotés</li>
+          <li data-i18n="tier1.i2">Scripts IA générative</li>
+          <li data-i18n="tier1.i3">Grille d'analyse structurée</li>
+          <li data-i18n="tier1.i4">Export JSON / RAG-ready</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-label" data-i18n="tier2.label">Niveau 02</div>
+        <div class="tier-visual"><canvas data-three="tier" data-kind="video"></canvas></div>
+        <h3 data-i18n="tier2.title">Livrable vidéo contextuel</h3>
+        <p data-i18n="tier2.body">Synthèse contextualisée avec vidéos terrain pour refléter au plus près la réalité des utilisateurs et illustrer les moments de vérité.</p>
+        <ul>
+          <li data-i18n="tier2.i1">Montage vidéo insight</li>
+          <li data-i18n="tier2.i2">Moments de vérité annotés</li>
+          <li data-i18n="tier2.i3">Synthèse thématique</li>
+          <li data-i18n="tier2.i4">Fiches persona illustrées</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-label" data-i18n="tier3.label">Niveau 03</div>
+        <div class="tier-visual"><canvas data-three="tier" data-kind="flash"></canvas></div>
+        <h3 data-i18n="tier3.title">Flash présentation</h3>
+        <p data-i18n="tier3.body">Films et présentations courts pour les équipes moins directement concernées ou ayant besoin d'un niveau synthétique.</p>
+        <ul>
+          <li data-i18n="tier3.i1">Film synthèse 3 min</li>
+          <li data-i18n="tier3.i2">Deck flash 8 slides</li>
+          <li data-i18n="tier3.i3">Key takeaways</li>
+          <li data-i18n="tier3.i4">Partage asynchrone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT DASHBOARD -->
+<section class="impact section-pad">
+  <div class="container">
+    <div class="impact-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="impact.eyebrow">— Impact business</div>
+      <h2 class="display">
+        <span data-i18n="impact.h2.l1">Des études ancrées</span><br>
+        <span data-i18n="impact.h2.l2">dans vos enjeux.</span><span class="title-icon" data-title-icon aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <g class="ti-target-ring">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="5.4"/>
+              <line x1="12" y1="2" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="22" y2="12"/>
+            </g>
+            <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+      </h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="impact.intro">Nos livrables ne sont pas des rapports : ce sont des leviers de décision intégrés à votre roadmap.</p>
+    </div>
+
+    <div class="impact-grid reveal">
+      <div class="impact-metric">
+        <div class="label" data-i18n="impact.m1.label">Expertise</div>
+        <div>
+          <div class="value counter" data-count-to="30" data-suffix="">30</div>
+          <div class="sub" data-i18n="impact.m1.sub">années d'existence</div>
+        </div>
+      </div>
+      <div class="impact-metric">
+        <div class="label" data-i18n="impact.m2.label">Automobile</div>
+        <div>
+          <div class="value counter" data-count-to="30" data-suffix="+">30+</div>
+          <div class="sub" data-i18n="impact.m2.sub">ans d'expertise sectorielle</div>
+        </div>
+      </div>
+      <div class="impact-metric">
+        <div class="label" data-i18n="impact.m3.label">Secteurs</div>
+        <div>
+          <div class="value counter" data-count-to="9" data-suffix="">9</div>
+          <div class="sub" data-i18n="impact.m3.sub">domaines d'intervention</div>
+        </div>
+      </div>
+      <div class="impact-metric">
+        <div class="label" data-i18n="impact.m4.label">Livrables</div>
+        <div>
+          <div class="value counter" data-count-to="3" data-suffix="">3</div>
+          <div class="sub" data-i18n="impact.m4.sub">formats différenciés</div>
+        </div>
+      </div>
+
+      <div class="impact-chart">
+        <h4 data-i18n="impact.chart1.label">Couverture méthodologique</h4>
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" class="draw-in">
+          <g transform="translate(200,100)">
+            <polygon points="0,-80 70,-40 70,40 0,80 -70,40 -70,-40" fill="none" stroke="#DDD" stroke-width="1"/>
+            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="none" stroke="#DDD" stroke-width="1"/>
+            <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="none" stroke="#DDD" stroke-width="1"/>
+            <polygon points="0,-74 64,-36 68,38 0,74 -62,32 -60,-36" fill="rgba(0,0,0,0.08)" stroke="#000" stroke-width="1.5"/>
+            <text x="0" y="-92" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#6E6E6E">FOCUS GROUP</text>
+            <text x="88" y="-38" text-anchor="start" font-family="JetBrains Mono" font-size="10" fill="#6E6E6E">IMMERSION</text>
+            <text x="88" y="48" text-anchor="start" font-family="JetBrains Mono" font-size="10" fill="#6E6E6E">TEST PRODUIT</text>
+            <text x="0" y="96" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#6E6E6E">IN-SITU</text>
+            <text x="-88" y="48" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#6E6E6E">ETHNO</text>
+            <text x="-88" y="-38" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#6E6E6E">CO-CRÉATION</text>
+          </g>
+        </svg>
+      </div>
+      <div class="impact-chart">
+        <h4 data-i18n="impact.chart2.label">De l'insight à la décision</h4>
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" class="draw-in">
+          <path d="M20,180 C80,180 80,100 160,100 S240,100 240,40 S360,40 380,40" stroke="#000" stroke-width="2" fill="none"/>
+          <path d="M20,180 C60,180 70,140 140,140 S220,140 220,90 S320,90 340,90 L380,90" stroke="#6E6E6E" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+          <circle cx="20" cy="180" r="4" fill="#000"/>
+          <circle cx="160" cy="100" r="4" fill="#000"/>
+          <circle cx="240" cy="40" r="4" fill="#000"/>
+          <circle cx="380" cy="40" r="5" fill="#000"/>
+          <text x="20" y="196" font-family="JetBrains Mono" font-size="9" fill="#6E6E6E">BRIEF</text>
+          <text x="140" y="96" font-family="JetBrains Mono" font-size="9" fill="#6E6E6E">TERRAIN</text>
+          <text x="220" y="36" font-family="JetBrains Mono" font-size="9" fill="#6E6E6E">INSIGHT</text>
+          <text x="340" y="36" font-family="JetBrains Mono" font-size="9" fill="#6E6E6E">DÉCISION</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS (9) -->
+<section class="sectors section-pad" id="sectors">
+  <div class="container">
+    <div class="sectors-head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="sectors.eyebrow">— Nos secteurs</div>
+        <h2 class="display">
+          <span data-i18n="sectors.h2.l1">Neuf terrains</span><br>
+          <span data-i18n="sectors.h2.l2">d'expertise.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="ti-pawn-head" cx="12" cy="6" r="2.4"/>
+              <path class="ti-pawn-body" d="M9.5 10.2h5l-.7 3H10.2zM8 17h8l1 4H7z"/>
+            </svg>
+          </span>
+        </h2>
+      </div>
+      <p class="lead" data-i18n="sectors.intro">De la mobilité aux territoires positifs, du FMCG à la santé — trente ans d'enquêtes sur le terrain, au service d'une même ambition : écouter, comprendre, décider.</p>
+    </div>
+
+    <div class="sectors-grid reveal">
+      <!-- 01 Mobilité -->
+      <article class="sector-card">
+        <div class="n">01 / Mobilité</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 30h32M10 30v-6l4-10h20l4 10v6"/>
+            <circle cx="14" cy="34" r="3.5"/><circle cx="34" cy="34" r="3.5"/>
+            <path d="M20 20h8" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.mobility.title">Mobilité</h3>
+        <p data-i18n="sec.mobility.body">Passer d'une politique d'infrastructures à une approche centrée usagers : véhicule électrique, autonome, mobilités partagées et services d'information.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.mobility.clients">Métropole Rouen Normandie · Sraddet Bretagne / Breizh COP</span>
+        </div>
+      </article>
+
+      <!-- 02 Territoires -->
+      <article class="sector-card">
+        <div class="n">02 / Territoires</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M24 4a12 12 0 0 0-12 12c0 10 12 28 12 28s12-18 12-28a12 12 0 0 0-12-12z"/>
+            <circle cx="24" cy="16" r="4"/>
+            <path d="M4 40h40" stroke-dasharray="2,3"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.territories.title">Territoires positifs</h3>
+        <p data-i18n="sec.territories.body">Faire AVEC les citoyens, pas SANS ni CONTRE. Revitaliser le dialogue décideurs / citoyens sur l'habitat, les loisirs, les services, la culture.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.territories.clients">Strasbourg Métropole · Ville de Melun · Genève · CG Loire</span>
+        </div>
+      </article>
+
+      <!-- 03 Tourisme -->
+      <article class="sector-card">
+        <div class="n">03 / Tourisme</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="24" r="18"/>
+            <ellipse cx="24" cy="24" rx="18" ry="8"/>
+            <path d="M24 6c-4 6-4 30 0 36M6 24h36"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.tourism.title">Tourisme & développement durable</h3>
+        <p data-i18n="sec.tourism.body">Saisir les dynamiques du tourisme durable, responsable et solidaire. Dépasser le modèle du tourisme de masse pour réinventer les imaginaires.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.tourism.clients">Groupe TUI · Club Méditerranée · Vacances Transat · CRT Nouvelle-Aquitaine · VNF · Le Futuroscope</span>
+        </div>
+      </article>
+
+      <!-- 04 FMCG -->
+      <article class="sector-card">
+        <div class="n">04 / FMCG</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="10" y="12" width="28" height="30" rx="1"/>
+            <path d="M16 12V8h16v4M10 20h28M10 28h28"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.fmcg.title">FMCG</h3>
+        <p data-i18n="sec.fmcg.body">Décrypter les nouvelles consommations : utilité, durabilité, hybridation online/offline, communautés multiples et pragmatisme hédonisant.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.fmcg.clients">Adéo Groupe</span>
+        </div>
+      </article>
+
+      <!-- 05 Automobile -->
+      <article class="sector-card">
+        <div class="n">05 / Automobile</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 30v-5l4-9c0.5-1 1.5-2 3-2h22c1.5 0 2.5 1 3 2l4 9v5"/>
+            <path d="M6 30v6h6v-4M42 30v6h-6v-4"/>
+            <circle cx="14" cy="32" r="3.5"/><circle cx="34" cy="32" r="3.5"/>
+            <path d="M12 20l2-4h20l2 4"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.automotive.title">Automobile</h3>
+        <p data-i18n="sec.automotive.body">Trente ans d'expertise sectorielle : tendances sociétales, évaluation de nouveaux objets de mobilité, tests de services, impact des énergies alternatives.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.automotive.clients">Renault Groupe (Dacia, Renault) · Stellantis (Peugeot, DS, Citroën)</span>
+        </div>
+      </article>
+
+      <!-- 06 Cosmétique -->
+      <article class="sector-card">
+        <div class="n">06 / Cosmétique</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 8h12v6h-12zM16 14h16v26a4 4 0 0 1-4 4h-8a4 4 0 0 1-4-4z"/>
+            <path d="M20 22h8M20 28h8M20 34h8"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.cosmetics.title">Cosmétique & parfumerie</h3>
+        <p data-i18n="sec.cosmetics.body">Transparence, personnalisation, Beauty Tech : où l'innovation technologique rencontre l'expertise sur le soin et le plaisir olfactif.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.cosmetics.clients">L'École Supérieure du Parfum</span>
+        </div>
+      </article>
+
+      <!-- 07 Retail -->
+      <article class="sector-card">
+        <div class="n">07 / Retail</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 14l4-8h32l4 8"/>
+            <path d="M4 14v28h40V14"/>
+            <path d="M12 14v6a4 4 0 0 0 8 0v-6M20 14v6a4 4 0 0 0 8 0v-6M28 14v6a4 4 0 0 0 8 0v-6"/>
+            <rect x="18" y="28" width="12" height="14"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.retail.title">Espaces marchands — « le lieu fait le lien »</h3>
+        <p data-i18n="sec.retail.body">Audit d'espace, bilan d'identité, test de merchandising, élaboration de nouveaux concepts : quatre outils pour que le lieu crée du lien.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.retail.clients">Groupe ADP · Air France · Klépierre · Carrefour · E. Leclerc · Nature & Découvertes · Ville de Saint-Étienne</span>
+        </div>
+      </article>
+
+      <!-- 08 DIY -->
+      <article class="sector-card">
+        <div class="n">08 / DIY</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 42l10-10M24 12l8 8M30 6l12 12-6 6-12-12z"/>
+            <path d="M14 36l-4 4 4 4 4-4z"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.diy.title">DIY & décoration</h3>
+        <p data-i18n="sec.diy.body">Hybridation bricolage / décoration / jardinage, féminisation des marchés, upcycling : le DIY comme nouvelle forme de participation au monde.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.diy.clients">Adéo Groupe</span>
+        </div>
+      </article>
+
+      <!-- 09 Santé / Inclusion -->
+      <article class="sector-card">
+        <div class="n">09 / Santé</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M24 42s-14-8-14-20a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 12-14 20-14 20z"/>
+            <path d="M20 24h8M24 20v8"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec.health.title">Santé, fragilité & inclusion</h3>
+        <p data-i18n="sec.health.body">Au-delà du handicap, rendre visibles les fragilités — visibles ou invisibles — pour inclure 30 millions de personnes dans les dynamiques sociales.</p>
+        <div class="sector-clients">
+          <div class="sector-clients-label" data-i18n="sec.clients.label">Clients</div>
+          <span data-i18n="sec.health.clients">Groupe Keolis</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISES -->
+<section class="expertises section-pad" id="expertises">
+  <div class="container">
+    <div class="expertises-head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="exp.eyebrow">— Expertises</div>
+        <h2 class="display">
+          <span data-i18n="exp.h2.l1">Incarnées par</span><br>
+          <span data-i18n="exp.h2.l2">nos consultants.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="5" r="1.8" fill="currentColor"/>
+              <path class="ti-light-cone" d="M12 6.5 L4 22 L20 22 Z" fill="currentColor" fill-opacity="0.18" stroke="currentColor"/>
+            </svg>
+          </span>
+        </h2>
+      </div>
+      <p class="lead" data-i18n="exp.intro">Chaque domaine est porté par un consultant référent qui en connaît les codes, les exigences et les enjeux.</p>
+    </div>
+
+    <!-- Thuy · Automobile & Mobilité -->
+    <article class="expertise-row reveal">
+      <div class="expertise-content">
+        <div class="eyebrow" data-i18n="exp.thuy.label">Domaine 01 / Thuy</div>
+        <h3 data-i18n="exp.thuy.title">Automobile & Mobilité — 30 ans sur l'industrie la plus exigeante du monde.</h3>
+        <p class="body" data-i18n="exp.thuy.body">L'automobile impose les plus hauts standards. Nous appliquons cette exigence à toute la mobilité.</p>
+        <ul class="expertise-diff">
+          <li data-i18n="exp.thuy.d1">Études prospectives « conspirateurs du futur »</li>
+          <li data-i18n="exp.thuy.d2">Évaluation d'objets de mobilité & innovations produits</li>
+          <li data-i18n="exp.thuy.d3">Tests de services de mobilité partagée</li>
+          <li data-i18n="exp.thuy.d4">Impact des énergies alternatives sur les imaginaires</li>
+        </ul>
+        <div class="expertise-quote">
+          <div class="quote-portrait">T</div>
+          <div class="quote-body">
+            <p data-i18n="exp.thuy.quote">« Sur l'automobile, le terrain n'a pas de seconde chance. »</p>
+            <div class="author" data-i18n="exp.thuy.role">Lead Automobile & Mobilité</div>
+          </div>
+        </div>
+      </div>
+      <div class="expertise-visual">
+        <canvas data-three="expertise" data-kind="automotive"></canvas>
+        <div class="photo-placeholder">T</div>
+      </div>
+    </article>
+
+    <!-- Alexis · Territoires & Inclusion -->
+    <article class="expertise-row alt reveal">
+      <div class="expertise-content">
+        <div class="eyebrow" data-i18n="exp.alexis.label">Domaine 02 / Alexis</div>
+        <h3 data-i18n="exp.alexis.title">Territoires positifs & inclusion — Faire AVEC, jamais CONTRE.</h3>
+        <p class="body" data-i18n="exp.alexis.body">Aménagement, santé, fragilité, inclusion : des terrains où décideurs et citoyens doivent se parler.</p>
+        <ul class="expertise-diff">
+          <li data-i18n="exp.alexis.d1">Concertation créative & études projectives</li>
+          <li data-i18n="exp.alexis.d2">Design management & communication territoriale</li>
+          <li data-i18n="exp.alexis.d3">Cartographie des fragilités visibles et invisibles</li>
+          <li data-i18n="exp.alexis.d4">Outils exploratoires, didactiques, discursifs</li>
+        </ul>
+        <div class="expertise-quote">
+          <div class="quote-portrait">A</div>
+          <div class="quote-body">
+            <p data-i18n="exp.alexis.quote">« Un projet d'aménagement se joue moins sur ce qu'on décide que sur comment on le décide. »</p>
+            <div class="author" data-i18n="exp.alexis.role">Lead Territoires & Inclusion</div>
+          </div>
+        </div>
+      </div>
+      <div class="expertise-visual">
+        <canvas data-three="expertise" data-kind="territories"></canvas>
+        <div class="photo-placeholder">A</div>
+      </div>
+    </article>
+
+    <!-- Céline · Retail / FMCG / DIY -->
+    <article class="expertise-row reveal">
+      <div class="expertise-content">
+        <div class="eyebrow" data-i18n="exp.celine.label">Domaine 03 / Céline</div>
+        <h3 data-i18n="exp.celine.title">Retail, FMCG & DIY — Là où le lieu fait le lien.</h3>
+        <p class="body" data-i18n="exp.celine.body">Des parcours d'achat phygitaux, des consommateurs-acteurs, des espaces marchands qui doivent créer du lien.</p>
+        <ul class="expertise-diff">
+          <li data-i18n="exp.celine.d1">Audit d'espace marchand réel et virtuel</li>
+          <li data-i18n="exp.celine.d2">Bilan d'identité de marque / de lieu</li>
+          <li data-i18n="exp.celine.d3">Test de merchandising & shopping experience</li>
+          <li data-i18n="exp.celine.d4">Élaboration de nouveaux concepts d'espace</li>
+        </ul>
+        <div class="expertise-quote">
+          <div class="quote-portrait">C</div>
+          <div class="quote-body">
+            <p data-i18n="exp.celine.quote">« Le consommateur pragmatique et le consommateur hédoniste cohabitent désormais dans la même personne. »</p>
+            <div class="author" data-i18n="exp.celine.role">Lead Retail & FMCG</div>
+          </div>
+        </div>
+      </div>
+      <div class="expertise-visual">
+        <canvas data-three="expertise" data-kind="retail"></canvas>
+        <div class="photo-placeholder">C</div>
+      </div>
+    </article>
+
+    <!-- Virginie · Tourisme / Cosmétique / Beauty Tech -->
+    <article class="expertise-row alt reveal">
+      <div class="expertise-content">
+        <div class="eyebrow" data-i18n="exp.virginie.label">Domaine 04 / Virginie</div>
+        <h3 data-i18n="exp.virginie.title">Tourisme durable, cosmétique & Beauty Tech — Les imaginaires qui vendent.</h3>
+        <p class="body" data-i18n="exp.virginie.body">Tourisme durable, parfumerie, cosmétique personnalisée : des marchés où l'émotion, le récit et la technologie se conjuguent.</p>
+        <ul class="expertise-diff">
+          <li data-i18n="exp.virginie.d1">Imaginaires et valeurs du tourisme durable</li>
+          <li data-i18n="exp.virginie.d2">Études sur la Beauty Tech et la personnalisation</li>
+          <li data-i18n="exp.virginie.d3">Renouvellement des imaginaires touristiques</li>
+          <li data-i18n="exp.virginie.d4">Cartographie des labels, signes du durable</li>
+        </ul>
+        <div class="expertise-quote">
+          <div class="quote-portrait">V</div>
+          <div class="quote-body">
+            <p data-i18n="exp.virginie.quote">« Les nouvelles technologies cosmétiques ne remplacent pas le soin : elles le personnalisent. »</p>
+            <div class="author" data-i18n="exp.virginie.role">Lead Tourisme & Beauty Tech</div>
+          </div>
+        </div>
+      </div>
+      <div class="expertise-visual">
+        <canvas data-three="expertise" data-kind="beauty"></canvas>
+        <div class="photo-placeholder">V</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TERRITORIES TEASER -->
+<section class="terr-teaser section-pad">
+  <div class="container">
+    <div class="terr-teaser-grid reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="terr.eyebrow">— Territoires</div>
+        <h2 class="display">
+          <span data-i18n="terr.h2.l1">Une connaissance</span><br>
+          <span data-i18n="terr.h2.l2">client présente</span><br>
+          <span data-i18n="terr.h2.l3">sur 3 continents.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path class="ti-pin-stem" d="M12 22 C5 14 5 9 12 3 C19 9 19 14 12 22 Z" fill="currentColor" fill-opacity="0.12"/>
+              <circle cx="12" cy="10" r="2.6"/>
+            </svg>
+          </span>
+        </h2>
+        <p class="lead" style="margin:24px 0 32px;" data-i18n="terr.body">Europe, Amériques, Asie : nous opérons directement ou via nos partenaires pour garantir une qualité terrain identique partout.</p>
+        <a href="territoires.html" class="btn btn-outline-dark">
+          <span data-i18n="terr.cta">Voir la carte interactive</span>
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="terr-teaser-map">
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid meet">
+          <g fill="#DDD">
+            <g transform="translate(60,80)">
+              <circle cx="60" cy="40" r="2"/><circle cx="75" cy="50" r="2"/><circle cx="65" cy="60" r="2"/><circle cx="80" cy="70" r="2"/><circle cx="95" cy="85" r="2"/><circle cx="110" cy="100" r="2"/><circle cx="100" cy="115" r="2"/><circle cx="85" cy="130" r="2"/><circle cx="95" cy="145" r="2"/><circle cx="105" cy="160" r="2"/><circle cx="85" cy="175" r="2"/><circle cx="95" cy="190" r="2"/><circle cx="75" cy="205" r="2"/><circle cx="85" cy="220" r="2"/>
+              <circle cx="50" cy="45" r="2"/><circle cx="40" cy="55" r="2"/><circle cx="55" cy="75" r="2"/><circle cx="45" cy="90" r="2"/><circle cx="70" cy="105" r="2"/>
+            </g>
+            <g transform="translate(260,60)">
+              <circle cx="20" cy="40" r="2"/><circle cx="35" cy="30" r="2"/><circle cx="50" cy="40" r="2"/><circle cx="65" cy="50" r="2"/><circle cx="40" cy="55" r="2"/><circle cx="55" cy="65" r="2"/><circle cx="30" cy="70" r="2"/><circle cx="45" cy="80" r="2"/><circle cx="60" cy="85" r="2"/><circle cx="70" cy="70" r="2"/>
+            </g>
+            <g transform="translate(280,150)">
+              <circle cx="20" cy="10" r="2"/><circle cx="35" cy="20" r="2"/><circle cx="50" cy="30" r="2"/><circle cx="30" cy="40" r="2"/><circle cx="45" cy="55" r="2"/><circle cx="40" cy="70" r="2"/><circle cx="55" cy="85" r="2"/><circle cx="35" cy="95" r="2"/>
+            </g>
+            <g transform="translate(380,60)">
+              <circle cx="20" cy="40" r="2"/><circle cx="40" cy="30" r="2"/><circle cx="60" cy="40" r="2"/><circle cx="80" cy="30" r="2"/><circle cx="100" cy="45" r="2"/><circle cx="120" cy="55" r="2"/><circle cx="140" cy="50" r="2"/><circle cx="50" cy="60" r="2"/><circle cx="70" cy="70" r="2"/><circle cx="90" cy="80" r="2"/><circle cx="110" cy="75" r="2"/><circle cx="130" cy="85" r="2"/><circle cx="150" cy="90" r="2"/>
+            </g>
+            <g transform="translate(460,240)">
+              <circle cx="20" cy="20" r="2"/><circle cx="40" cy="30" r="2"/><circle cx="60" cy="25" r="2"/><circle cx="50" cy="40" r="2"/>
+            </g>
+          </g>
+          <g>
+            <circle cx="130" cy="135" r="6" fill="#000"/>
+            <circle cx="130" cy="135" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite"/></circle>
+            <text x="130" y="122" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">US</text>
+            <circle cx="165" cy="240" r="6" fill="#000"/>
+            <circle cx="165" cy="240" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite" begin="0.6s"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" begin="0.6s"/></circle>
+            <text x="165" y="265" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">LATAM</text>
+            <circle cx="300" cy="110" r="6" fill="#000"/>
+            <circle cx="300" cy="110" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite" begin="1.2s"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" begin="1.2s"/></circle>
+            <text x="290" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">FR</text>
+            <circle cx="325" cy="100" r="6" fill="#000"/>
+            <text x="338" y="96" font-family="JetBrains Mono" font-size="9" fill="#000">DE</text>
+            <circle cx="318" cy="120" r="6" fill="#000"/>
+            <text x="332" y="128" font-family="JetBrains Mono" font-size="9" fill="#000">IT</text>
+            <circle cx="490" cy="130" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+            <circle cx="490" cy="130" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite" begin="1.8s"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" begin="1.8s"/></circle>
+            <text x="490" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">ASIA</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-block dark">
+  <div class="container">
+    <h2 class="display reveal">
+      <span data-i18n="final.h2.l1">Un enjeu business</span><br>
+      <span data-i18n="final.h2.l2">à éclairer ?</span>
+    </h2>
+    <p class="lead reveal" data-i18n="final.body">Parlons de votre prochain lancement, repositionnement ou programme de connaissance client.</p>
+    <div class="ctas reveal">
+      <a href="contact.html" class="btn btn-primary-light">
+        <span data-i18n="final.cta.primary">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <a href="references.html" class="btn btn-outline-light" data-i18n="final.cta.secondary">Voir nos références</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="dot-grid" style="position:absolute;inset:0;"></div>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; letter-spacing: 0.22em; font-size: 18px; margin-bottom: 20px;">ACMÉ</div>
+        <p data-i18n="footer.about">30 ans d'expertise dans la connaissance client. Siège : 24 rue Turbil, 69003 Lyon, France.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.sectors">Secteurs</h4>
+        <ul>
+          <li><a href="#sectors" data-i18n="sec.mobility.title">Mobilité</a></li>
+          <li><a href="#sectors" data-i18n="sec.automotive.title">Automobile</a></li>
+          <li><a href="#sectors" data-i18n="sec.territories.title">Territoires</a></li>
+          <li><a href="#sectors" data-i18n="sec.retail.title">Retail</a></li>
+          <li><a href="#sectors" data-i18n="sec.tourism.title">Tourisme</a></li>
+          <li><a href="#sectors" data-i18n="sec.health.title">Santé</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.territories">Territoires</h4>
+        <ul>
+          <li><a href="territoires.html">France</a></li>
+          <li><a href="territoires.html">Allemagne</a></li>
+          <li><a href="territoires.html">Italie</a></li>
+          <li><a href="territoires.html">États-Unis</a></li>
+          <li><a href="territoires.html">Amérique Latine</a></li>
+          <li><a href="territoires.html">Asie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@acme-consultant.fr">contact@acme-consultant.fr</a></li>
+          <li>+33 (0)4 XX XX XX XX</li>
+          <li><a href="contact.html" data-i18n="nav.contact">Formulaire</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <div>© <span data-year></span> ACMÉ Consultants · <span data-i18n="footer.legal">Tous droits réservés</span></div>
+      <div data-i18n="footer.offices">Lyon · Paris · Munich · Milan</div>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

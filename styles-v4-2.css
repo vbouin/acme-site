@@ -1,0 +1,493 @@
+/* ================================================================
+   ACMÉ v4.2 — « LA BANDE »
+   Le scroll est le défilement de la bande. Cinq plans, un objet :
+   la cassette ACMÉ. Tout reste dans le système mono editorial —
+   noir / blanc / gris, Archivo + Inter + JetBrains Mono, aucun aplat
+   de couleur (le gris est BAKÉ dans les encodages : pas de
+   filter:grayscale() qui sortirait chaque image du chemin rapide
+   vidéo du compositeur).
+
+   PRINCIPE D'INTÉGRATION : le fond de chaque section reprend le fond
+   réel de sa vidéo, échantillonné aux quatre coins (cf. --plate-*).
+   Le média occupe une moitié d'écran et seul son bord intérieur est
+   estompé : comme la page a la couleur du plateau, il n'y a plus de
+   « vignette vidéo » — le studio continue dans la typo.
+
+   PRINCIPE D'ANIMATION : acts.js publie --p (0 → 1) par séquence et ne
+   fabrique aucun transform. Parallaxe, poussée d'objectif et césure
+   demi-écran sont des calc() ici. Une seule valeur traverse la
+   frontière JS/CSS.
+
+   Dépend de styles.css pour les tokens.
+   ================================================================ */
+
+body.v4-2 {
+  --ink-rgb: 10, 10, 10;
+  --hud: rgba(var(--ink-rgb), .62);
+  /* fonds relevés sur les vidéos (RVB neutres, mesurés aux 4 coins) */
+  --plate-hero:    linear-gradient(135deg, #DADADA 0%, #C7C7C7 48%, #B3B3B3 100%);
+  --plate-bubbles: linear-gradient(180deg, #ADADAD 0%, #B4B4B4 44%, #BFBFBF 100%);
+  --plate-paper:   linear-gradient(180deg, #F4F4F4 0%, #E8E8E8 58%, #DCDCDC 100%);
+  /* le plan « stylos » s'assombrit quand les mains entrent : on cale le fond
+     sur la moyenne du plan, et on élargit l'estompage pour absorber l'écart */
+  --plate-pens:    linear-gradient(180deg, #EDEDED 0%, #DFDFDF 54%, #CFCFCF 100%);
+  --plate-turn:    linear-gradient(180deg, #9F9F9F 0%, #B7B7B7 46%, #D3D3D3 100%);
+  /* encres relevées pour rester lisibles sur ces gris */
+  --on-plate:      #141414;
+  --on-plate-soft: #2E2E2E;
+
+  /* ── L'ESTOMPAGE, écrit une fois ────────────────────────────────
+     C'est l'idée porteuse du design : la page ayant la couleur du
+     plateau, seul le bord qui rencontre la typo doit fondre. Deux
+     couches toujours présentes, composées en intersection — ce qui
+     évite les surcharges partielles, qui se perdaient en spécificité.
+
+     Les recettes sont nommées, et chaque contexte CHOISIT la sienne.
+     Elles ne sont pas paramétrées par un angle : la valeur calculée
+     d'une propriété custom substitue ses var() là où elle est DÉCLARÉE,
+     donc un --fade-angle redéfini plus bas n'aurait aucun effet — le
+     gradient serait déjà figé à l'angle du body. */
+  --fade-l: linear-gradient(90deg,  transparent 0%, rgba(var(--ink-rgb), .45) 12%, #000 30%);
+  --fade-r: linear-gradient(270deg, transparent 0%, rgba(var(--ink-rgb), .45) 12%, #000 30%);
+  --fade-b: linear-gradient(180deg, #000 74%, transparent 100%);
+  --fade-tb: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+  --fade-off: linear-gradient(#000, #000);
+
+  --fade-in: var(--fade-l);     /* bord intérieur : à gauche par défaut */
+  --fade-v:  var(--fade-off);   /* haut/bas : neutre par défaut */
+}
+
+/* la recette, appliquée partout où un média rencontre le plateau */
+.v4-act-media > video,
+.v4-act-media > img,
+.v4-tape video,
+.h2-media {
+  -webkit-mask-image: var(--fade-in), var(--fade-v);
+  -webkit-mask-composite: source-in;
+          mask-image: var(--fade-in), var(--fade-v);
+          mask-composite: intersect;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   1. HERO — le plateau
+   ════════════════════════════════════════════════════════════════ */
+.v4-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 140px 0 84px;
+  background: var(--plate-hero);
+  isolation: isolate;
+  /* la césure est calée sur la largeur réelle de l'appareil (portrait 9:16 sur
+     toute la hauteur) : au-delà, on n'ajouterait que du plateau vide.
+     Elle s'ouvre de 8 points au fil du scroll — en CSS, depuis --p. */
+  --split: calc(40% + var(--p, 0) * 8%);
+  /* estompage court : le fond de section ayant la couleur du plateau, 20 %
+     suffisent — au-delà on délaverait le flanc gauche de l'appareil */
+  --fade-in: linear-gradient(90deg, transparent 0%, rgba(var(--ink-rgb), .55) 7%, #000 20%);
+}
+/* poussière de studio : la trame de points d'Acmé, atténuée */
+.v4-hero::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(var(--ink-rgb), .12) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(130% 108% at 14% 44%, #000 0%, transparent 84%);
+          mask-image: radial-gradient(130% 108% at 14% 44%, #000 0%, transparent 84%);
+}
+/* amorces de letterbox : elles s'ouvrent au chargement (transition sur
+   .v4-open) puis se referment au fil du scroll (calc sur --p) */
+.v4-hero .v4-bar, .v4-hero2 .v4-bar {
+  position: absolute; left: 0; right: 0; z-index: 6;
+  height: 74px; background: var(--ink); pointer-events: none;
+  transform: scaleY(1); transform-origin: top;
+  transition: transform 1.15s cubic-bezier(.16, .84, .3, 1);
+}
+.v4-hero .v4-bar.bot, .v4-hero2 .v4-bar.bot { bottom: 0; transform-origin: bottom; }
+.v4-hero .v4-bar.top, .v4-hero2 .v4-bar.top { top: 0; }
+body.v4-open .v4-hero .v4-bar { transform: scaleY(calc(.06 + var(--p, 0) * .94)); }
+
+.v4-hero-inner { width: 100%; }
+
+/* ── colonne texte ─────────────────────────────────────────────── */
+.v4-hero-copy {
+  position: relative; z-index: 4;
+  max-width: min(calc(100% - var(--split) - 30px), 700px);
+  transform: translate3d(0, calc(var(--p, 0) * -78px), 0);
+}
+.v4-hero-copy .eyebrow { color: var(--on-plate-soft); margin-bottom: 26px; }
+.v4-hero h1 { margin: 0; font-size: clamp(38px, 5.2vw, 80px); color: var(--on-plate); }
+.v4-hero h1 span { display: block; }
+/* l'accent d'Acmé : un serif italique gris, jamais une couleur */
+body.v4-2 .serif {
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  font-style: italic; font-weight: 400; letter-spacing: -.01em; color: var(--grey-500);
+}
+.v4-hero h1 .serif { color: var(--grey-700); }
+.v4-hero .lead { margin-top: 26px; color: var(--on-plate-soft); max-width: 44ch; }
+.v4-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+/* la touche « BRIEF » du magnétophone, reprise en CTA : c'est un .btn du
+   système, réhabillé en mono avec une course de 4px — pas un second bouton */
+.v4-key {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em;
+  font-weight: 500; padding: 17px 26px; min-height: 52px;
+  box-shadow: 0 4px 0 0 rgba(var(--ink-rgb), .28);
+  transition: transform .18s var(--ease-out), box-shadow .18s var(--ease-out),
+              background .18s var(--ease-out), color .18s var(--ease-out);
+}
+.v4-key:hover { transform: translateY(2px); box-shadow: 0 2px 0 0 rgba(var(--ink-rgb), .28); }
+.v4-key:active { transform: translateY(4px); box-shadow: none; }
+.v4-key.btn-outline-dark { box-shadow: none; color: var(--on-plate); }
+.v4-key.btn-outline-dark:hover { transform: none; }
+.v4-key .tri { font-style: normal; font-size: 13px; line-height: 1; }
+
+/* ── le plan : plaque pleine hauteur, à fond perdu à droite ──────
+   Le média n'est pas posé dans une boîte : il tient toute la hauteur de la
+   séquence et sort du cadre en haut, à droite et en bas. Seul le bord
+   gauche — le seul qui rencontre la typo — est estompé.                 */
+.v4-hero-stage {
+  position: absolute; top: 0; right: 0; bottom: 0; z-index: 1;
+  width: var(--split); margin: 0;
+  transform-origin: 100% 58%;
+  /* on agrandit plus qu'on ne déplace : la plaque doit rester à fond perdu */
+  transform: translate3d(0, calc(var(--p, 0) * 34px), 0) scale(calc(1 + var(--p, 0) * .1));
+}
+/* le média est à la SOURCE près (9:16) et calé à droite sur toute la hauteur :
+   aucun recadrage, l'appareil est entier. */
+.v4-tape {
+  position: absolute; top: 0; bottom: 0; right: 0;
+  width: auto; aspect-ratio: 720 / 1280;
+}
+/* un seul calque : l'attribut poster de la <video> tient l'affichage jusqu'à la
+   première image décodée. Un <img> de poster en dessous se verrait à travers
+   l'estompage du bord gauche — deux appareils décalés. */
+.v4-tape video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* HUD de tournage — pas de backdrop-filter : le flou serait recalculé à
+   chaque image de la vidéo qui passe dessous, pour un effet invisible
+   derrière un aplat d'encre à 62 %. */
+.v4-hud {
+  position: absolute; z-index: 5;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--white);
+  background: var(--hud); padding: 6px 9px;
+}
+/* les repères sont posés sur le fond de plateau, pas sur l'appareil */
+.v4-hud.rec { top: 96px; right: 22px; }
+.v4-hud.tc  { bottom: 96px; right: 22px; font-variant-numeric: tabular-nums; letter-spacing: .14em; }
+.v4-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--white); flex: none;
+  animation: v4pulse 1.7s ease-in-out infinite;
+}
+@keyframes v4pulse { 0%, 100% { opacity: 1 } 50% { opacity: .22 } }
+.v4-pp {
+  position: absolute; bottom: 96px; right: 168px; z-index: 5;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--white); background: var(--hud);
+  border: 1px solid rgba(255, 255, 255, .34); padding: 0 10px; min-height: 27px;
+}
+.v4-pp:hover { background: var(--ink); border-color: var(--white); }
+
+/* vumètre — 7 barres qui respirent, purement décoratif */
+.v4-vu {
+  position: absolute; right: 22px; top: 138px; z-index: 5;
+  display: grid; gap: 4px; justify-items: end;
+}
+.v4-vu i {
+  display: block; height: 2px; background: var(--ink); opacity: .5;
+  transform-origin: right center;
+  animation: v4vu 1.4s ease-in-out infinite alternate;
+}
+.v4-vu i:nth-child(1) { width: 26px; animation-delay: 0s }
+.v4-vu i:nth-child(2) { width: 40px; animation-delay: .12s }
+.v4-vu i:nth-child(3) { width: 20px; animation-delay: .26s }
+.v4-vu i:nth-child(4) { width: 48px; animation-delay: .05s }
+.v4-vu i:nth-child(5) { width: 32px; animation-delay: .34s }
+.v4-vu i:nth-child(6) { width: 22px; animation-delay: .19s }
+.v4-vu i:nth-child(7) { width: 38px; animation-delay: .42s }
+@keyframes v4vu { from { transform: scaleX(.28) } to { transform: scaleX(1) } }
+
+/* légende de plan (ardoise) */
+.v4-slate {
+  margin-top: 38px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--on-plate-soft);
+}
+
+/* invite à défiler */
+.v4-cue {
+  position: absolute; z-index: 5;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--on-plate-soft);
+}
+.v4-cue.down { left: var(--gutter); bottom: 28px; flex-direction: column; align-items: flex-start; }
+.v4-cue i { display: block; background: currentColor; transform-origin: top; }
+.v4-cue.down i { width: 1px; height: 30px; animation: v4cue 2.6s ease-in-out infinite; }
+@keyframes v4cue { 0%, 100% { transform: scaleY(.3); opacity: .45 } 50% { transform: scaleY(1); opacity: 1 } }
+
+/* entrée : les lignes montent en cascade */
+.v4-rise { opacity: 0; transform: translateY(18px); }
+body.v4-open .v4-rise {
+  animation: v4rise 1s cubic-bezier(.16, .84, .3, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes v4rise { to { opacity: 1; transform: none } }
+
+/* ════════════════════════════════════════════════════════════════
+   2. TRANSPORT — la bande qui se déroule (HUD fixe)
+   Bobine gauche qui se vide, bobine droite qui se remplit, sens de
+   rotation piloté par le sens du scroll. C'est la barre de progression
+   du site, dans l'objet de la marque.
+   ════════════════════════════════════════════════════════════════ */
+.v4-transport {
+  position: fixed; left: var(--gutter); bottom: 26px; z-index: 90;
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 13px 9px 10px;
+  background: rgba(255, 255, 255, .9); border: 1px solid rgba(var(--ink-rgb), .14);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
+  pointer-events: none;
+}
+.v4-transport.on { opacity: 1; transform: none; }
+.v4-transport svg { display: block; width: 74px; height: 34px; overflow: visible; }
+.v4-reel-spin { transform-box: fill-box; transform-origin: center; transform: rotate(var(--a, 0deg)); }
+.v4-transport .meta {
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--grey-500); line-height: 1.5;
+}
+.v4-transport .meta b { display: block; color: var(--ink); font-weight: 500; }
+.v4-transport .mode {
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .18em;
+  color: var(--white); background: var(--ink); padding: 3px 6px;
+  opacity: 0; transition: opacity .18s;
+}
+.v4-transport .mode.on { opacity: 1; }
+/* filet de progression de page — scaleX plutôt que width : pas de layout */
+.v4-tape-line {
+  position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 120;
+  background: var(--ink); transform-origin: left;
+  transform: scaleX(var(--page, 0));
+}
+
+/* ════════════════════════════════════════════════════════════════
+   3. ACTES — gabarit commun : demi-écran typo / demi-écran plan
+   Le pin est un position:sticky dans un conteneur haut : pas de JS de
+   pinning, donc pas de saut de layout ni de recalcul au resize.
+   La césure s'ouvre pendant l'acte, en CSS depuis --p : le plan
+   « respire » au scroll sans que la typo bouge.
+   ════════════════════════════════════════════════════════════════ */
+.v4-act {
+  position: relative;
+  background: var(--plate, var(--white));
+  color: var(--on-plate);
+  --split: calc(45% + var(--p, 0) * 11%);
+  --soft: var(--on-plate-soft);
+}
+.v4-act .eyebrow, .v4-act .lead, .v4-act .v4-act-meter { color: var(--soft); }
+.v4-act-track { height: var(--track, 300vh); position: relative; }
+.v4-act-stage {
+  position: sticky; top: 0; height: 100vh; height: 100svh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: calc(100% - var(--split)) var(--split);
+  align-items: center;
+  /* la césure change la grille : on borne les conséquences du relayout */
+  contain: layout paint;
+}
+.v4-act.media-left .v4-act-stage { grid-template-columns: var(--split) calc(100% - var(--split)); }
+
+.v4-act-media { position: relative; height: 100%; overflow: hidden; order: 2; }
+.v4-act.media-left .v4-act-media { order: 1; }
+.v4-act.media-left { --fade-in: var(--fade-r); }
+.v4-act-media > video, .v4-act-media > img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.v4-act-copy { position: relative; z-index: 3; order: 1; padding: 0 var(--gutter); }
+.v4-act.media-left .v4-act-copy { order: 2; }
+.v4-act-copy > div { max-width: 62ch; }
+.v4-act h2.display { margin: 14px 0 0; font-size: clamp(30px, 3.7vw, 60px); }
+
+/* compteur d'acte + filet de progression de la séquence */
+.v4-act-meter {
+  position: absolute; left: var(--gutter); right: var(--gutter); bottom: 34px; z-index: 4;
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .24em;
+  text-transform: uppercase;
+}
+.v4-act-meter .rail { flex: 1; height: 1px; background: currentColor; opacity: .3; position: relative; }
+.v4-act-meter .rail b {
+  position: absolute; left: 0; top: -1px; height: 3px; width: 100%;
+  background: currentColor; transform-origin: left;
+  transform: scaleX(var(--fill, 0));
+}
+
+/* légendes synchronisées sur la progression de la séquence */
+.v4-beat {
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .45s var(--ease-out), transform .45s var(--ease-out);
+}
+.v4-beat.on { opacity: 1; transform: none; }
+.v4-beat-list { display: grid; gap: 10px; margin-top: 28px; }
+.v4-beat-list .v4-beat {
+  display: flex; align-items: baseline; gap: 14px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; line-height: 1.5;
+}
+.v4-beat-list .v4-beat > span:first-child { flex: none; opacity: .6; }
+.v4-beat-list .v4-beat b { font-weight: 500; }
+
+/* ── les quatre plaques : une ligne chacune ──────────────────────── */
+.v4-bubbles { --plate: var(--plate-bubbles); }
+.v4-morph   { --plate: var(--plate-paper); --soft: var(--grey-700); }
+.v4-pens    { --plate: var(--plate-pens);  --soft: var(--grey-700); }
+.v4-turn    { --plate: var(--plate-turn); }
+
+.v4-bubbles .v4-act-media > video { object-position: 50% 46%; }
+
+/* ── acte 02 · croquis → objet ───────────────────────────────────── */
+.v4-morph .v4-act-stage .container {
+  display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  gap: clamp(24px, 4vw, 64px); align-items: center; width: 100%;
+}
+.v4-morph .v4-act-media { display: grid; place-items: center; padding: 0 clamp(16px, 3vw, 40px); }
+/* hauteur pilotée par le viewport, largeur déduite du ratio : le filet
+   d'essuyage tombe alors exactement sur l'image (pas de letterbox) */
+.v4-morph-wrap {
+  position: relative; height: min(52vh, 400px); aspect-ratio: 1618 / 1092;
+  width: auto; max-width: 100%;
+}
+/* les deux stills sont des WebP à canal alpha : ils se posent sur le plateau
+   sans boîte. Pas d'estompage ici — ils ne sont pas enfants directs de
+   .v4-act-media, donc la recette de masque ne les touche pas. */
+.v4-morph-wrap img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+}
+.v4-morph-wrap img.final { clip-path: inset(0 calc(100% - var(--wipe, 0%)) 0 0); }
+/* la pointe du crayon : un filet d'encre au bord de l'essuyage */
+.v4-morph-edge {
+  position: absolute; top: 2%; bottom: 2%; left: 0; width: 1px; z-index: 3;
+  background: var(--ink); transform: translateX(var(--wipe, 0%));
+  box-shadow: -14px 0 26px -14px rgba(var(--ink-rgb), .5);
+  opacity: 0; transition: opacity .3s;
+}
+.v4-morph-edge.on { opacity: 1; }
+.v4-morph-edge::before {
+  content: ""; position: absolute; left: -3px; top: -7px;
+  width: 7px; height: 7px; background: var(--ink); transform: rotate(45deg);
+}
+.v4-morph-labels {
+  position: absolute; left: 0; right: 0; bottom: -30px;
+  display: flex; justify-content: space-between; gap: 16px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--grey-500);
+}
+
+/* ── actes 03 et 04 : deux plans larges (16:9) ───────────────────
+   Ils ne survivent pas à un recadrage en demi-écran (cover en perd 45 %) :
+   on les montre ENTIERS, dimensionnés sur leur ratio, et on estompe leurs
+   quatre bords — d'où --fade-v, actif seulement ici.                  */
+.v4-pens, .v4-turn { --fade-v: var(--fade-tb); }
+.v4-pens .v4-act-media, .v4-turn .v4-act-media { display: grid; place-items: center; }
+.v4-pens .v4-act-media > video, .v4-turn .v4-act-media > video {
+  width: 100%; height: auto; aspect-ratio: 16 / 9;
+}
+.v4-note {
+  border-left: 1px solid var(--ink); padding: 3px 0 3px 14px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink);
+}
+.v4-turn-hint {
+  margin-top: 26px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--on-plate-soft);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   4. Détails de liaison
+   ════════════════════════════════════════════════════════════════ */
+/* le marquee devient l'étiquette de la cassette : sens et vitesse
+   suivent le scroll (variables posées par acts.js) */
+body.v4-2 .marquee-track {
+  animation-direction: var(--mq-dir, normal);
+  animation-duration: var(--mq-dur, 40s);
+}
+body.v4-2 .marquee { border-top-color: rgba(var(--ink-rgb), .12); }
+
+/* ════════════════════════════════════════════════════════════════
+   5. Responsive — en dessous de 1000px, le plan passe au-dessus
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 1000px) {
+  .v4-hero { padding: 112px 0 64px; min-height: 0; display: block; }
+  .v4-hero-copy { max-width: none; transform: none; }
+  /* la bande sort des gouttières du .container pour aller bord à bord :
+     aucun bord latéral, donc aucun raccord à cacher */
+  .v4-hero-stage {
+    position: relative; inset: auto; width: auto;
+    height: 52vh; margin: 30px calc(-1 * var(--gutter)) 0;
+    transform: none;
+  }
+  .v4-tape { left: 0; right: 0; width: auto; aspect-ratio: auto; }
+  .v4-tape video { object-position: 50% 54%; }
+  .v4-hero .v4-bar, .v4-hero2 .v4-bar { height: 44px; }
+  body.v4-open .v4-hero .v4-bar { transform: scaleY(.06); }
+  .v4-hud.rec { top: 60px; right: 14px; }
+  .v4-hud.tc { bottom: 14px; right: 14px; }
+  .v4-pp { bottom: 14px; right: auto; left: 14px; }
+  .v4-vu, .v4-cue { display: none; }
+
+  .v4-act-track { height: var(--track-m, 220vh); }
+  .v4-act-stage,
+  .v4-act.media-left .v4-act-stage {
+    grid-template-columns: 1fr; grid-template-rows: 42vh 1fr;
+    align-items: start; padding-top: 78px;
+  }
+  .v4-act-media, .v4-act.media-left .v4-act-media { order: 1; }
+  .v4-act-copy, .v4-act.media-left .v4-act-copy { order: 2; padding-top: 24px; }
+  .v4-bubbles .v4-act-media { opacity: .28; }
+  /* un seul bord à fondre : le bas */
+  .v4-act, .v4-act.media-left, .v4-pens, .v4-turn {
+    --fade-in: var(--fade-off);
+    --fade-v: var(--fade-b);
+  }
+  .v4-pens .v4-act-media > video, .v4-turn .v4-act-media > video {
+    height: 100%; aspect-ratio: auto;
+  }
+  .v4-morph .v4-act-stage .container { grid-template-columns: 1fr; gap: 22px; }
+  .v4-morph .v4-act-media { padding: 0; }
+  .v4-morph-wrap { width: 100%; height: auto; }
+  .v4-morph-labels { position: static; margin-top: 12px; }
+  .v4-transport { left: 12px; bottom: 12px; padding: 7px 10px; gap: 9px; }
+  .v4-transport svg { width: 56px; height: 26px; }
+  .v4-transport .meta { font-size: 7.5px; }
+}
+@media (max-width: 620px) {
+  .v4-hero-ctas .v4-key { width: 100%; justify-content: center; }
+  .v4-act h2.display { font-size: clamp(26px, 8vw, 38px); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   6. Mouvement réduit — on garde la mise en page, on coupe le moteur
+   ════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  body.v4-2 * { animation: none !important; transition: none !important; }
+  body.v4-2 .v4-rise, body.v4-2 .v4-beat { opacity: 1 !important; transform: none !important; }
+  body.v4-2 .v4-hero .v4-bar { transform: scaleY(.06) !important; }
+  body.v4-2 .v4-hero-copy, body.v4-2 .v4-hero-stage { transform: none !important; }
+  body.v4-2 .v4-act-track { height: auto !important; }
+  body.v4-2 .v4-act-stage { position: static; height: auto; padding: 80px 0; contain: none; }
+  body.v4-2 .v4-act-media { height: 60vh; }
+  body.v4-2 .v4-morph-wrap img.final { clip-path: none; }
+  body.v4-2 .v4-morph-edge { display: none; }
+  body.v4-2 .v4-transport { display: none; }
+}

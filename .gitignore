@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Cache de polices d'export_standalone.py : re-téléchargeable, permet juste
+# de ré-exporter hors ligne.
+.fonts-cache/
+
+# Exports autoportants : artefacts de build (8 à 12 Mo chacun), régénérables
+# par `python3 export_standalone.py all`. Les versionner ferait grossir
+# l'historique d'une dizaine de Mo à chaque ré-export.
+ACME-v4.*-autoportant.html
