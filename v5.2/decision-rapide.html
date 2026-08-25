@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<title>Décision rapide — ACMÉ Consultants</title>
+<meta name="description" content="Des dispositifs d'étude resserrés pour trancher vite : lancement produit, prix, attentes de la cible. Un socle terrain, des livrables en options — composez le vôtre." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-v3.css" />
+<link rel="stylesheet" href="styles-v4-2.css" />
+<link rel="stylesheet" href="styles-v4-3.css" />
+<link rel="stylesheet" href="styles-decision.css" />
+</head>
+<body class="v3 v3-1 v4-2 v4-3">
+<script src="variant.js"></script>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo/logo-noir.png" alt="ACMÉ" /></a>
+    <nav class="nav-menu">
+      <div class="nav-dd">
+      <a href="index.html#sectors" class="nav-dd-trigger"><span data-i18n="nav.sectors">Secteurs</span><span class="nav-dd-caret" aria-hidden="true">&#9662;</span></a>
+      <div class="nav-dd-menu">
+        <a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité & Automobile</a>
+        <a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a>
+        <a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé & Cosmétiques</a>
+        <a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a>
+        <a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme & RSE</a>
+        <a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode & Luxe</a>
+      </div>
+    </div>
+      <a href="decision-rapide.html" class="current" data-i18n="nav.quick">Décision rapide</a>
+      <a href="contenus.html" data-i18n="nav.content">Contenus</a>
+      <a href="etudes-et-ia.html" data-i18n="nav.ia">Études & IA</a>
+      <a href="qui-sommes-nous.html" data-i18n="nav.about">Qui sommes-nous</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="fr" type="button">FR</button>
+        <span class="lang-sep">/</span>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <a href="contact.html" class="btn btn-primary-dark" style="padding: 12px 20px;">
+        <span data-i18n="nav.cta">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SCROLLÉ — « LA MACHINE À DÉCIDER »
+     Même moteur et même composition que le hero d'accueil (acts.js +
+     styles-v4-3.css) : le scroll est la tête de lecture, le plan tient les
+     deux tiers droits à fond perdu, et cinq paliers de texte se relaient
+     dans le tiers gauche. La séquence suit l'arc de l'offre — l'écran
+     s'allume, le corpus défile, la courbe se dessine, on tranche.
+     Pas de `data-track` ici : le HUD de transport (bobines) appartient à
+     l'accueil, il surchargerait une page dont le cœur est le configurateur. -->
+<section class="v4-hero2" id="machine" data-act>
+  <div class="v4-act-track" style="--track:460vh;--track-m:280vh">
+    <div class="h2-stage">
+      <div class="v4-bar top" aria-hidden="true"></div>
+      <div class="v4-bar bot" aria-hidden="true"></div>
+
+      <div class="h2-media">
+        <video data-scrub src="assets/v4/decision.mp4" poster="assets/v4/decision.jpg"
+               muted playsinline preload="auto" disablepictureinpicture
+               aria-label="Un terminal ACMÉ s'allume, traite un corpus d'entretiens, puis affiche la courbe de décision"
+               tabindex="-1"></video>
+      </div>
+
+      <div class="container h2-copy">
+        <div class="h2-beat" data-from="0" data-to="0.13">
+          <span class="eyebrow" data-i18n="dr.eyebrow">— Décision rapide</span>
+          <h1 class="display">
+            <span data-i18n="drh.b1.l1">Trancher en six</span>
+            <span class="serif" data-i18n="drh.b1.l2">semaines,</span>
+            <span data-i18n="drh.b1.l3">pas en six mois.</span>
+          </h1>
+          <p data-i18n="drh.b1.p">Un lancement à valider, un prix à fixer, une cible à comprendre. Des dispositifs courts, taillés sur une seule question à la fois.</p>
+          <div class="v4-hero-ctas">
+            <a href="#configurateur" class="btn btn-primary-dark v4-key"><i class="tri">&#9654;</i> <span data-i18n="drh.cta1">Composer votre dispositif</span></a>
+            <a href="contact.html" class="btn btn-outline-dark v4-key" data-i18n="nav.cta">Démarrer un projet</a>
+          </div>
+        </div>
+
+        <div class="h2-beat" data-from="0.13" data-to="0.34">
+          <span class="eyebrow" data-i18n="drh.b2.eyebrow">Étape 01</span>
+          <h2 class="display" data-i18n="drh.b2.h2">Le terrain<br>d'abord.</h2>
+          <p data-i18n="drh.b2.p">On ne branche rien avant d'avoir écouté. Recruter les bonnes personnes, les faire parler vraiment : c'est le seul maillon qui ne se sous-traite pas, et c'est celui qu'on garde toujours.</p>
+        </div>
+
+        <div class="h2-beat" data-from="0.34" data-to="0.56">
+          <span class="eyebrow" data-i18n="drh.b3.eyebrow">Étape 02</span>
+          <h2 class="display" data-i18n="drh.b3.h2">Vos transcripts,<br>intégralement.</h2>
+          <p data-i18n="drh.b3.p">La matière brute vous appartient, complète et horodatée. Vos équipes peuvent y entrer directement — et, si vous le voulez, l'interroger en langage naturel.</p>
+        </div>
+
+        <div class="h2-beat" data-from="0.56" data-to="0.79">
+          <span class="eyebrow" data-i18n="drh.b4.eyebrow">Étape 03</span>
+          <h2 class="display" data-i18n="drh.b4.h2">L'analyse,<br>à la carte.</h2>
+          <p data-i18n="drh.b4.p">Top lines, rapport complet, typologies, atelier animé. Vous prenez ce dont vous avez besoin pour décider — et rien de plus.</p>
+        </div>
+
+        <div class="h2-beat" data-from="0.79" data-to="1">
+          <span class="eyebrow" data-i18n="drh.b5.eyebrow">Étape 04</span>
+          <h2 class="display" data-i18n="drh.b5.h2">Et vous<br>tranchez.</h2>
+          <p data-i18n="drh.b5.p">Quatre questions suffisent à dessiner le dispositif, son calendrier et ses livrables. Le chiffrage suit sous 48 heures.</p>
+          <div class="v4-hero-ctas">
+            <a href="#configurateur" class="btn btn-primary-dark v4-key"><i class="tri">&#9654;</i> <span data-i18n="drh.cta1">Composer votre dispositif</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="h2-rail" aria-hidden="true">
+        <span data-at="0" data-i18n="drh.r1">Question</span>
+        <span data-at="0.13" data-i18n="drh.r2">Terrain</span>
+        <span data-at="0.34" data-i18n="drh.r3">Corpus</span>
+        <span data-at="0.56" data-i18n="drh.r4">Lecture</span>
+        <span data-at="0.79" data-i18n="drh.r5">Décision</span>
+      </div>
+
+      <div class="v4-hud tc h2-tc" aria-hidden="true">TC <span data-tc data-fps="15">00:00:00:00</span></div>
+      <div class="v4-cue h2-cue" aria-hidden="true"><i></i><span data-i18n="v4.cue">Dérouler</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LES MOMENTS DE DÉCISION -->
+<section class="section-pad">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="dr.when.eyebrow">— Le moment</div>
+      <h2 class="display" data-i18n="dr.when.h2">Quand la décision<br>ne peut pas attendre.</h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="dr.when.lead">Ces dispositifs ne remplacent pas une étude de fond. Ils tranchent une question précise, à un moment précis — celui où il faut engager, ou ne pas engager, des budgets.</p>
+    </div>
+    <div class="missions-grid reveal">
+      <article class="mission-card">
+        <div class="mission-n">01</div>
+        <h3 data-i18n="dr.w1.h3">Lancement produit</h3>
+        <p data-i18n="dr.w1.p">Concept, offre, nom, packaging : savoir ce qui accroche et ce qui bloque avant d'immobiliser une chaîne de production ou un budget média.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">02</div>
+        <h3 data-i18n="dr.w2.h3">Prix & structure d'offre</h3>
+        <p data-i18n="dr.w2.p">Ce qui justifie un prix aux yeux du client, ce qu'il compare, où passe le seuil d'acceptation, et quelle option il refuserait de payer.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">03</div>
+        <h3 data-i18n="dr.w3.h3">Attentes de la cible</h3>
+        <p data-i18n="dr.w3.p">Ce que vos clients attendent vraiment, dans leurs mots — avant d'arbitrer une roadmap sur des convictions internes.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">04</div>
+        <h3 data-i18n="dr.w4.h3">Arbitrage entre options</h3>
+        <p data-i18n="dr.w4.p">Deux directions, trois concepts, un désaccord qui dure en comité : faire trancher le terrain plutôt que la hiérarchie.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LE PRINCIPE : SOCLE + OPTIONS -->
+<section class="section-pad" style="background:var(--offwhite);">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="dr.how.eyebrow">— Le principe</div>
+      <h2 class="display" data-i18n="dr.how.h2">Un socle.<br>Des options.</h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="dr.how.lead">Ce qui ne se délègue pas, c'est le terrain : trouver les bonnes personnes, les faire parler vraiment, entendre ce qui se dit sous ce qui est dit. C'est notre socle, il est toujours là. Tout le reste se choisit — selon ce que vos équipes veulent faire elles-mêmes.</p>
+    </div>
+
+    <div class="dr-chain reveal">
+      <div class="dr-chain-row">
+        <div class="dr-chain-label" data-i18n="dr.chain.core">Le socle — toujours inclus</div>
+        <div class="dr-chain-track is-core">
+          <div class="dr-node is-core">
+            <div class="dr-node-n">01</div>
+            <h3 data-i18n="dr.c1.h3">Cadrage</h3>
+            <p data-i18n="dr.c1.p">Traduire votre décision en question de terrain, et écrire le guide qui va la creuser.</p>
+          </div>
+          <div class="dr-node is-core">
+            <div class="dr-node-n">02</div>
+            <h3 data-i18n="dr.c2.h3">Recrutement</h3>
+            <p data-i18n="dr.c2.p">Les bonnes personnes, sur critères, vérifiées une à une — ou qualifiées dans votre propre fichier client.</p>
+          </div>
+          <div class="dr-node is-core">
+            <div class="dr-node-n">03</div>
+            <h3 data-i18n="dr.c3.h3">Terrain</h3>
+            <p data-i18n="dr.c3.p">Entretiens et groupes conduits par un consultant senior. C'est là que se gagne ou se perd une étude.</p>
+          </div>
+          <div class="dr-node is-core">
+            <div class="dr-node-n">04</div>
+            <h3 data-i18n="dr.c4.h3">Transcripts intégraux</h3>
+            <p data-i18n="dr.c4.p">La matière brute, complète et horodatée, vous appartient. Sans exception.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dr-chain-row">
+        <div class="dr-chain-label" data-i18n="dr.chain.opts">Les options — à la carte</div>
+        <div class="dr-chain-track is-options">
+          <div class="dr-node is-opt">
+            <div class="dr-node-n">A</div>
+            <h3 data-i18n="dr.o1.h3">Plateforme verbatim</h3>
+            <p data-i18n="dr.o1.p">Le corpus interrogeable en langage naturel : vos équipes cherchent elles-mêmes, dans leurs propres angles.</p>
+          </div>
+          <div class="dr-node is-opt">
+            <div class="dr-node-n">B</div>
+            <h3 data-i18n="dr.o2.h3">Top lines</h3>
+            <p data-i18n="dr.o2.p">Cinq à huit pages : ce qu'on a entendu, ce que ça implique, ce qu'il faut décider.</p>
+          </div>
+          <div class="dr-node is-opt">
+            <div class="dr-node-n">C</div>
+            <h3 data-i18n="dr.o3.h3">Analyse complète</h3>
+            <p data-i18n="dr.o3.p">Le rapport détaillé, structuré et argumenté, avec ses verbatims à l'appui.</p>
+          </div>
+          <div class="dr-node is-opt">
+            <div class="dr-node-n">D</div>
+            <h3 data-i18n="dr.o4.h3">Typologies</h3>
+            <p data-i18n="dr.o4.p">Les figures qui traversent le corpus, utilisables ensuite en ciblage comme en conception.</p>
+          </div>
+          <div class="dr-node is-opt">
+            <div class="dr-node-n">E</div>
+            <h3 data-i18n="dr.o5.h3">Atelier de décision</h3>
+            <p data-i18n="dr.o5.p">Une demi-journée avec vos équipes, animée — on ne sort pas de la salle sans arbitrage écrit.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="dr-chain-note reveal" data-i18n="dr.chain.note">Beaucoup d'équipes veulent creuser elles-mêmes et n'ont besoin que du terrain et de la plateforme. D'autres n'ont ni le temps ni l'envie et veulent des top lines et un atelier. <em>Les deux sont des projets légitimes</em> — et n'ont aucune raison de coûter le même prix.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LE SIMULATEUR -->
+<section class="section-pad" id="configurateur">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="dr.sim.eyebrow">— Configurateur</div>
+      <h2 class="display" data-i18n="dr.sim.h2">Composez<br>votre dispositif.</h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="dr.sim.lead">Quatre questions, deux minutes. Vous obtenez le dispositif recommandé, son calendrier et la liste exacte de ce que vous recevez. Le chiffrage vous est envoyé sous 48 heures — il dépend de votre secteur, de la difficulté de recrutement et du contexte, pas d'un barème.</p>
+    </div>
+
+    <div class="dr-sim reveal">
+      <!-- ---------- FORMULAIRE ---------- -->
+      <div class="dr-form">
+
+        <!-- Étape 1 : la décision -->
+        <div class="dr-step">
+          <div class="dr-step-head">
+            <span class="dr-step-n">01</span>
+            <h3 data-i18n="dr.q1">Quelle décision devez-vous prendre ?</h3>
+          </div>
+          <div class="dr-chips" data-group="decision">
+            <input type="radio" name="decision" id="d-lancement" value="lancement" checked><label class="dr-chip" for="d-lancement"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.d.lancement">Lancement produit</span></label>
+            <input type="radio" name="decision" id="d-pricing" value="pricing"><label class="dr-chip" for="d-pricing"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.d.pricing">Prix &amp; offre</span></label>
+            <input type="radio" name="decision" id="d-cible" value="cible"><label class="dr-chip" for="d-cible"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.d.cible">Attentes de la cible</span></label>
+            <input type="radio" name="decision" id="d-positionnement" value="positionnement"><label class="dr-chip" for="d-positionnement"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.d.positionnement">Positionnement</span></label>
+            <input type="radio" name="decision" id="d-parcours" value="parcours"><label class="dr-chip" for="d-parcours"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.d.parcours">Parcours &amp; expérience</span></label>
+            <input type="radio" name="decision" id="d-arbitrage" value="arbitrage"><label class="dr-chip" for="d-arbitrage"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.d.arbitrage">Arbitrage entre options</span></label>
+          </div>
+        </div>
+
+        <!-- Étape 2 : le secteur -->
+        <div class="dr-step">
+          <div class="dr-step-head">
+            <span class="dr-step-n">02</span>
+            <h3 data-i18n="dr.q2">Sur quel secteur ?</h3>
+          </div>
+          <div class="dr-chips" data-group="secteur">
+            <input type="radio" name="secteur" id="s-mobilite" value="mobilite" checked><label class="dr-chip" for="s-mobilite"><span class="dr-chip-box is-radio"></span><span data-i18n="sec5.mob.title">Mobilité &amp; Automobile</span></label>
+            <input type="radio" name="secteur" id="s-fmcg" value="fmcg"><label class="dr-chip" for="s-fmcg"><span class="dr-chip-box is-radio"></span><span data-i18n="sec5.fmcg.title">Retail et FMCG</span></label>
+            <input type="radio" name="secteur" id="s-sante" value="sante"><label class="dr-chip" for="s-sante"><span class="dr-chip-box is-radio"></span><span data-i18n="sec5.sante.title">Santé &amp; Cosmétiques</span></label>
+            <input type="radio" name="secteur" id="s-batiment" value="batiment"><label class="dr-chip" for="s-batiment"><span class="dr-chip-box is-radio"></span><span data-i18n="sec5.bat.title">Bâtiment</span></label>
+            <input type="radio" name="secteur" id="s-territoires" value="territoires"><label class="dr-chip" for="s-territoires"><span class="dr-chip-box is-radio"></span><span data-i18n="sec5.terr.title">Territoires, Tourisme &amp; RSE</span></label>
+            <input type="radio" name="secteur" id="s-mode" value="mode"><label class="dr-chip" for="s-mode"><span class="dr-chip-box is-radio"></span><span data-i18n="sec5.mode.title">Mode &amp; Luxe</span></label>
+          </div>
+          <div class="dr-flag" id="dr-sector-note"></div>
+        </div>
+
+        <!-- Étape 3 : le terrain -->
+        <div class="dr-step">
+          <div class="dr-step-head">
+            <span class="dr-step-n">03</span>
+            <h3 data-i18n="dr.q3">Quel terrain ?</h3>
+          </div>
+
+          <p class="dr-step-hint" data-i18n="dr.q3.h1">Dispositif</p>
+          <div class="dr-chips" data-group="dispositif">
+            <input type="radio" name="dispositif" id="p-entretiens" value="entretiens" checked><label class="dr-chip" for="p-entretiens"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.p.entretiens">Entretiens individuels</span></label>
+            <input type="radio" name="dispositif" id="p-groupes" value="groupes"><label class="dr-chip" for="p-groupes"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.p.groupes">Focus groups</span></label>
+            <input type="radio" name="dispositif" id="p-mixte" value="mixte"><label class="dr-chip" for="p-mixte"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.p.mixte">Les deux</span></label>
+          </div>
+
+          <p class="dr-step-hint" style="margin-top:24px;" id="dr-vol-hint">Nombre d'entretiens</p>
+          <div class="dr-range-wrap">
+            <span class="dr-range-val" id="dr-vol-val">12</span>
+            <span class="dr-range-unit" id="dr-vol-unit">entretiens</span>
+            <input type="range" class="dr-range" id="dr-vol" min="6" max="30" step="1" value="12" aria-label="Volume">
+          </div>
+
+          <p class="dr-step-hint" style="margin-top:24px;" data-i18n="dr.q3.h3">Modalité</p>
+          <div class="dr-chips" data-group="modalite">
+            <input type="radio" name="modalite" id="m-online" value="online"><label class="dr-chip" for="m-online"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.m.online">À distance</span></label>
+            <input type="radio" name="modalite" id="m-presentiel" value="presentiel" checked><label class="dr-chip" for="m-presentiel"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.m.presentiel">En présentiel</span></label>
+            <input type="radio" name="modalite" id="m-hybride" value="hybride"><label class="dr-chip" for="m-hybride"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.m.hybride">Mixte</span></label>
+          </div>
+
+          <p class="dr-step-hint" style="margin-top:24px;" data-i18n="dr.q3.h4">Recrutement</p>
+          <div class="dr-chips" data-group="recrutement">
+            <input type="radio" name="recrutement" id="r-acme" value="acme" checked><label class="dr-chip" for="r-acme"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.r.acme">Par ACMÉ</span></label>
+            <input type="radio" name="recrutement" id="r-fichier" value="fichier"><label class="dr-chip" for="r-fichier"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.r.fichier">Sur votre fichier client</span></label>
+          </div>
+          <div class="dr-flag" id="dr-recrut-note" hidden></div>
+
+          <p class="dr-step-hint" style="margin-top:24px;" data-i18n="dr.q3.h5">Matériel à faire réagir</p>
+          <div class="dr-chips" data-group="materiel">
+            <input type="radio" name="materiel" id="mat-aucun" value="aucun" checked><label class="dr-chip" for="mat-aucun"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.mat.aucun">Aucun</span></label>
+            <input type="radio" name="materiel" id="mat-stimuli" value="stimuli"><label class="dr-chip" for="mat-stimuli"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.mat.stimuli">Concepts, visuels, maquettes</span></label>
+            <input type="radio" name="materiel" id="mat-produit" value="produit"><label class="dr-chip" for="mat-produit"><span class="dr-chip-box is-radio"></span><span data-i18n="dr.mat.produit">Produit physique ou prototype</span></label>
+          </div>
+        </div>
+
+        <!-- Étape 4 : les livrables -->
+        <div class="dr-step">
+          <div class="dr-step-head">
+            <span class="dr-step-n">04</span>
+            <h3 data-i18n="dr.q4">Que voulez-vous recevoir ?</h3>
+          </div>
+          <p class="dr-step-hint" data-i18n="dr.q4.hint">Le guide, le terrain et les transcripts intégraux sont toujours inclus. Le reste est à vous de voir.</p>
+          <div class="dr-chips" data-group="livrables">
+            <input type="checkbox" name="liv" id="l-plateforme" value="plateforme"><label class="dr-chip" for="l-plateforme"><span class="dr-chip-box"></span><span data-i18n="dr.l.plateforme">Plateforme verbatim</span></label>
+            <input type="checkbox" name="liv" id="l-toplines" value="toplines" checked><label class="dr-chip" for="l-toplines"><span class="dr-chip-box"></span><span data-i18n="dr.l.toplines">Top lines</span></label>
+            <input type="checkbox" name="liv" id="l-rapport" value="rapport"><label class="dr-chip" for="l-rapport"><span class="dr-chip-box"></span><span data-i18n="dr.l.rapport">Analyse complète</span></label>
+            <input type="checkbox" name="liv" id="l-typologies" value="typologies"><label class="dr-chip" for="l-typologies"><span class="dr-chip-box"></span><span data-i18n="dr.l.typologies">Typologies</span></label>
+            <input type="checkbox" name="liv" id="l-atelier" value="atelier"><label class="dr-chip" for="l-atelier"><span class="dr-chip-box"></span><span data-i18n="dr.l.atelier">Atelier de décision</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- SORTIE ---------- -->
+      <aside class="dr-out">
+        <div class="dr-out-inner">
+        <p class="dr-sr" id="dr-status" role="status" aria-live="polite"></p>
+        <div class="dr-out-eyebrow" data-i18n="dr.out.eyebrow">Votre dispositif</div>
+        <div class="dr-out-name" id="dr-name">Terrain &amp; top lines</div>
+        <p class="dr-out-sub" id="dr-sub"></p>
+
+        <div class="dr-stats">
+          <div>
+            <div class="dr-stat-n" id="dr-voices">12</div>
+            <div class="dr-stat-l" data-i18n="dr.stat.voices">voix client</div>
+          </div>
+          <div>
+            <div class="dr-stat-n" id="dr-weeks">7</div>
+            <div class="dr-stat-l" data-i18n="dr.stat.weeks">semaines</div>
+          </div>
+          <div>
+            <div class="dr-stat-n" id="dr-hours">12 h</div>
+            <div class="dr-stat-l" data-i18n="dr.stat.hours">de parole client</div>
+          </div>
+        </div>
+
+        <div class="dr-tl-label" data-i18n="dr.out.timeline">Calendrier</div>
+        <div class="dr-tl" id="dr-tl"></div>
+        <div class="dr-tl-legend" id="dr-tl-legend"></div>
+
+        <div class="dr-tl-label" data-i18n="dr.out.deliverables">Ce que vous recevez</div>
+        <ul class="dr-deliv" id="dr-deliv"></ul>
+
+        <!-- Mode présentation seulement — invisible pour un visiteur. -->
+        <div class="dr-budget">
+          <div class="dr-budget-n" id="dr-budget">—</div>
+          <div class="dr-budget-l" data-i18n="dr.out.budget">Ordre de grandeur — interne, à confirmer</div>
+        </div>
+
+        <div class="dr-out-actions">
+          <a href="contact.html" class="btn btn-primary-light" id="dr-cta">
+            <span data-i18n="dr.out.cta">Recevoir le chiffrage sous 48 h</span>
+            <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+          <button type="button" class="dr-btn-ghost" id="dr-copy" data-i18n="dr.out.copy">Copier le récapitulatif</button>
+          <p class="dr-out-legal" data-i18n="dr.out.legal">Configuration indicative. Le dispositif définitif est calé avec vous au cadrage — c'est là qu'on ajuste le volume, les critères et le calendrier.</p>
+        </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- CE QUI NE CHANGE PAS -->
+<section class="section-pad" style="background:var(--offwhite);">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="dr.keep.eyebrow">— Ce qui ne bouge pas</div>
+      <h2 class="display" data-i18n="dr.keep.h2">Court ne veut pas dire<br>approximatif.</h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="dr.keep.lead">Ce qu'on enlève d'un dispositif court, ce sont des livrables — jamais la rigueur du terrain. Trois choses restent vraies, quel que soit le budget.</p>
+    </div>
+    <div class="missions-grid reveal">
+      <article class="mission-card">
+        <div class="mission-n" data-i18n="dr.k1.n">Terrain</div>
+        <h3 data-i18n="dr.k1.h3">De vraies personnes, un vrai consultant</h3>
+        <p data-i18n="dr.k1.p">Des participants recrutés sur critères et vérifiés un à un, interrogés par un consultant senior qui sait quand relancer et quand se taire. Ni panel auto-administré, ni modération synthétique.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n" data-i18n="dr.k2.n">Traçabilité</div>
+        <h3 data-i18n="dr.k2.h3">Chaque conclusion se remonte</h3>
+        <p data-i18n="dr.k2.p">Toute phrase de synthèse se remonte jusqu'au verbatim qui la fonde, horodaté et attribué. Vous pouvez vérifier ; vos équipes aussi, et c'est fait pour.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n" data-i18n="dr.k3.n">Décision</div>
+        <h3 data-i18n="dr.k3.h3">Un livrable, ou un moment</h3>
+        <p data-i18n="dr.k3.p">On peut s'arrêter aux transcripts et vous laisser travailler. On peut aussi finir en atelier, avec vos équipes, jusqu'à l'arbitrage écrit. C'est votre choix, pas notre modèle.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block dark">
+  <div class="container">
+    <h2 class="display reveal" data-i18n="dr.cta.h2">Une décision<br>à éclairer vite ?</h2>
+    <p class="lead reveal" data-i18n="dr.cta.lead">Envoyez-nous votre question en trois lignes. Nous revenons sous 48 heures avec un dispositif chiffré.</p>
+    <div class="ctas reveal">
+      <a href="contact.html" class="btn btn-primary-light">
+        <span data-i18n="nav.cta">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <a href="#configurateur" class="btn btn-outline-light" data-i18n="dr.cta.back">Revenir au configurateur</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; letter-spacing: 0.22em; font-size: 18px; margin-bottom: 20px;">ACMÉ</div>
+        <p data-i18n="footer.about">50 ans d'expertise dans la connaissance client. Siège : 24 rue Turbil, 69003 Lyon, France.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.sectors">Secteurs</h4>
+        <ul>
+          <li><a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité & Automobile</a></li>
+          <li><a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a></li>
+          <li><a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé & Cosmétiques</a></li>
+          <li><a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a></li>
+          <li><a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme & RSE</a></li>
+          <li><a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode & Luxe</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.territories">Territoires</h4>
+        <ul>
+          <li><a href="index.html#territoires" data-i18n="geo.europe">Europe</a></li>
+          <li><a href="index.html#territoires" data-i18n="geo.americas">Amériques</a></li>
+          <li><a href="index.html#territoires" data-i18n="geo.asia">Asie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@acme-consultant.fr">contact@acme-consultant.fr</a></li>
+          <li><a href="contact.html" data-i18n="footer.form">Formulaire</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-esomar">
+      <span data-i18n="esomar.member">Membre corporate</span>
+      <img src="assets/logos/esomar.png" alt="ESOMAR" loading="lazy">
+    </div>
+    <div class="footer-legal">
+      <div>© <span data-year></span> ACMÉ Consultants · <span data-i18n="footer.legal">Tous droits réservés</span></div>
+      <div data-i18n="footer.offices">Lyon · Paris · Munich · Milan</div>
+    </div>
+  </div>
+</footer>
+
+<div class="dr-interne-tag" data-i18n="dr.interne.tag">Mode présentation — budget visible</div>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script src="acts.js"></script>
+<script src="decision-rapide.js"></script>
+</body>
+</html>

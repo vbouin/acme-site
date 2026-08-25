@@ -5,12 +5,30 @@ en bas à droite de chaque page (`variant.js`) :
 
 | variante | fichier | parti pris |
 |---|---|---|
+| **v5.2** | **[`v5.2/`](v5.2/)** | **site complet — Décision rapide (configurateur) + Contenus (blog, cas, livre blanc, FAQ)** |
 | v1 | `index.html` | base mono editorial |
 | v2 | `index-v2.html` | curseur personnalisé |
 | v3 | `index-v3.html` | grille révélée au curseur |
 | v3.1 | `index-v3-1.html` | v3 + hero auto-cycle des deux animations |
 | **v4.2** | `index-v4-2.html` | **« La bande »** — hero magnétophone + 4 actes scrubbés au scroll |
 | **v4.3** | `index-v4-3.html` | **« Le démontage »** — le hero devient une séquence continue de 17,3 s |
+
+## v5.2 — le site complet
+
+`v5.2/` n'est pas une variante de hero&nbsp;: c'est le **site entier**, repris de la
+maquette consolidée et augmenté de deux onglets.
+
+### **[→ Ouvrir v5.2](https://vbouin.github.io/acme-site/v5.2/)**
+
+- **Décision rapide** — l'offre courte (socle terrain + livrables en options) avec un
+  configurateur de dispositif. **Aucun prix n'est affiché à un visiteur** ; un mode
+  présentation (`?interne=1`) montre une fourchette indicative en rendez-vous.
+- **Contenus** — 5 articles, 3 études de cas anonymisées, un livre blanc et une FAQ de
+  22 questions, avec Open Graph et JSON-LD (`Article`, `FAQPage`, `Organization`,
+  `BreadcrumbList`) sur toutes les pages.
+
+Les pages de contenu sont générées par `v5.2/build_contenus.py` — le texte vit dans le
+script, jamais dans le HTML. Détails dans [`v5.2/README.md`](v5.2/README.md).
 
 ## Lancer
 

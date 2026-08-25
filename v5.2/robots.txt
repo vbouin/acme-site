@@ -1,0 +1,4 @@
+# Aperçu interne — ne pas indexer.
+# Ce site est une maquette de travail, pas le site de production.
+User-agent: *
+Disallow: /

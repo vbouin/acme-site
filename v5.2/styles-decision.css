@@ -1,0 +1,444 @@
+/* =========================================================
+   ACMÉ — Décision rapide
+   Feuille propre à decision-rapide.html.
+   Tout est bâti sur les tokens de styles.css (mono editorial,
+   strictement monochrome : l'accent est un serif italique gris,
+   jamais un aplat coloré).
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. La chaîne — socle vs options
+   --------------------------------------------------------- */
+.dr-chain { margin-top: 56px; }
+
+.dr-chain-row + .dr-chain-row { margin-top: 40px; }
+
+.dr-chain-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-bottom: 18px;
+}
+
+.dr-chain-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.dr-chain-track.is-options { grid-template-columns: repeat(5, 1fr); }
+
+.dr-node {
+  border: 1px solid var(--grey-200);
+  padding: 22px 20px 24px;
+  background: var(--white);
+  position: relative;
+}
+/* Le socle est plein : c'est ce qui ne se délègue pas. */
+.dr-node.is-core { background: var(--ink); border-color: var(--ink); color: var(--white); }
+/* Les options sont en pointillé : elles se choisissent. */
+.dr-node.is-opt { border-style: dashed; border-color: var(--grey-300); }
+
+.dr-node-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--grey-500);
+  margin-bottom: 14px;
+}
+.dr-node.is-core .dr-node-n { color: var(--grey-300); }
+
+.dr-node h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.dr-node p { font-size: 13.5px; line-height: 1.55; color: var(--grey-500); }
+.dr-node.is-core p { color: var(--grey-300); }
+
+/* La flèche qui relie les maillons du socle */
+.dr-chain-track.is-core .dr-node + .dr-node::before {
+  content: '';
+  position: absolute;
+  left: -12px; top: 50%;
+  width: 12px; height: 1px;
+  background: var(--grey-300);
+}
+
+.dr-chain-note {
+  margin-top: 22px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--grey-500);
+  max-width: 62ch;
+}
+.dr-chain-note em { font-family: Georgia, 'Times New Roman', serif; font-style: italic; color: var(--grey-700); }
+
+/* ---------------------------------------------------------
+   2. Le simulateur
+   --------------------------------------------------------- */
+/* `.reveal` garde un `transform: translateY(0)` même une fois révélé, et un
+   ancêtre transformé annule le `position: sticky` de ses descendants. Le
+   simulateur entre donc en opacité seule — le sticky du panneau en dépend. */
+.dr-sim.reveal, .dr-sim.reveal.in { transform: none; }
+
+.dr-sim {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 0;
+  border: 1px solid var(--grey-200);
+  margin-top: 56px;
+  align-items: stretch;
+}
+
+.dr-form { padding: clamp(28px, 3.4vw, 48px); min-width: 0; }
+
+.dr-step + .dr-step { margin-top: 38px; padding-top: 38px; border-top: 1px solid var(--grey-100); }
+
+.dr-step-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+.dr-step-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--grey-300);
+  flex: none;
+}
+.dr-step-head h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.dr-step-hint { font-size: 13px; color: var(--grey-500); margin: -8px 0 18px 42px; line-height: 1.55; }
+
+/* Les puces sélectionnables : carrées, mono, sans couleur.
+   `position: relative` sur le groupe garde les inputs masqués à l'intérieur :
+   sans ancrage, un focus clavier sur un élément 0×0 placé ailleurs dans la
+   page ferait sauter le défilement. */
+.dr-chips { display: flex; flex-wrap: wrap; gap: 8px; position: relative; }
+.dr-chips input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+
+.dr-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--grey-300);
+  background: var(--white);
+  padding: 11px 15px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey-700);
+  cursor: pointer;
+  transition: border-color .2s var(--ease-out), background .2s var(--ease-out), color .2s var(--ease-out);
+  user-select: none;
+}
+.dr-chip:hover { border-color: var(--ink); color: var(--ink); }
+.dr-chips input:checked + .dr-chip {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+.dr-chips input:focus-visible + .dr-chip { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* La case cochée : un carré qui se remplit. */
+.dr-chip-box {
+  width: 11px; height: 11px;
+  border: 1px solid currentColor;
+  flex: none;
+  position: relative;
+}
+.dr-chips input:checked + .dr-chip .dr-chip-box { background: currentColor; }
+.dr-chip-box.is-radio { border-radius: 50%; }
+
+/* Curseur de volume */
+.dr-range-wrap { display: flex; align-items: center; gap: 20px; }
+.dr-range { flex: 1; -webkit-appearance: none; appearance: none; background: transparent; height: 24px; cursor: pointer; }
+.dr-range::-webkit-slider-runnable-track { height: 1px; background: var(--grey-300); }
+.dr-range::-moz-range-track { height: 1px; background: var(--grey-300); }
+.dr-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; margin-top: -7px;
+  background: var(--ink); border: none; border-radius: 0;
+}
+.dr-range::-moz-range-thumb { width: 14px; height: 14px; background: var(--ink); border: none; border-radius: 0; }
+.dr-range:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+.dr-range-val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  min-width: 2.4ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.dr-range-unit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  min-width: 9ch;
+}
+
+/* Le gain affiché quand le recrutement se fait sur fichier client */
+.dr-flag {
+  margin-top: 14px;
+  padding: 12px 15px;
+  border-left: 2px solid var(--ink);
+  background: var(--offwhite);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--grey-700);
+}
+.dr-flag[hidden] { display: none; }
+
+/* ---------------------------------------------------------
+   3. Le panneau de sortie — section noire inversée
+   --------------------------------------------------------- */
+/* La colonne noire prend toute la hauteur du formulaire ; c'est son
+   contenu qui colle à l'intérieur. Poser `position: sticky` sur l'élément
+   de grille lui-même ne marcherait pas : `align-self: start` réduit la zone
+   de grille à la hauteur du contenu, et un sticky n'a alors aucune course. */
+.dr-out {
+  background: var(--ink);
+  color: var(--white);
+  padding: clamp(28px, 3.4vw, 44px);
+  min-width: 0;
+}
+.dr-out-inner {
+  display: flex;
+  flex-direction: column;
+  /* La barre de nav est fixe et mesure ~97 px : sans cet offset, l'en-tête
+     du panneau passerait dessous. Pas de `max-height` ici — la borner
+     ferait défiler le panneau dans lui-même et couperait son titre ; sur
+     écran court, l'appel à l'action redevient visible dès qu'on dépasse
+     la fin du formulaire, ce qui est le comportement attendu d'un sticky. */
+  position: sticky;
+  top: 113px;
+}
+
+.dr-out-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-bottom: 18px;
+}
+
+.dr-out-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.dr-out-sub { font-size: 13.5px; line-height: 1.55; color: var(--grey-300); margin-bottom: 22px; }
+
+.dr-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 26px; }
+.dr-stat-n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.dr-stat-l {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* Le calendrier : des segments proportionnels aux semaines */
+.dr-tl-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-bottom: 12px;
+}
+.dr-tl { display: flex; gap: 3px; margin-bottom: 12px; }
+.dr-tl-seg {
+  height: 5px;
+  background: var(--grey-700);
+  min-width: 4px;
+  transition: flex-grow .35s var(--ease-out);
+}
+.dr-tl-seg.is-field { background: var(--white); }
+.dr-tl-legend { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-bottom: 24px; }
+.dr-tl-item {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.dr-tl-dot { width: 7px; height: 7px; background: var(--grey-700); flex: none; }
+.dr-tl-item.is-field .dr-tl-dot { background: var(--white); }
+
+/* La liste des livrables */
+.dr-deliv { border-top: 1px solid var(--grey-900); margin-bottom: 24px; }
+.dr-deliv li {
+  list-style: none;
+  border-bottom: 1px solid var(--grey-900);
+  padding: 9px 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.dr-deliv li span.mk {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--grey-500);
+  flex: none;
+  padding-top: 2px;
+}
+.dr-deliv li.is-core span.mk { color: var(--white); }
+
+.dr-out-actions { display: flex; flex-direction: column; gap: 12px; }
+.dr-out-actions .btn { width: 100%; justify-content: center; }
+
+.dr-out-legal { font-size: 11.5px; line-height: 1.45; color: var(--grey-500); margin-top: 14px; }
+
+/* Bouton secondaire discret (copier le récapitulatif) */
+.dr-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--grey-700);
+  color: var(--grey-300);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: border-color .2s var(--ease-out), color .2s var(--ease-out);
+}
+.dr-btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+/* ---------------------------------------------------------
+   4. Mode présentation — le budget, jamais public
+   Activé par ?interne=1 ou la touche « p ». Cf. README.
+   --------------------------------------------------------- */
+.dr-budget { display: none; }
+body.dr-interne .dr-budget {
+  display: block;
+  border-top: 1px solid var(--grey-700);
+  margin-bottom: 26px;
+  padding-top: 22px;
+}
+.dr-budget-n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.dr-budget-l {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  margin-top: 8px;
+}
+.dr-interne-tag {
+  display: none;
+  position: fixed;
+  left: 16px; bottom: 16px;
+  z-index: 90;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+body.dr-interne .dr-interne-tag { display: block; }
+
+/* ---------------------------------------------------------
+   5. Responsive
+   --------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .dr-chain-track, .dr-chain-track.is-options { grid-template-columns: repeat(2, 1fr); }
+  .dr-chain-track.is-core .dr-node + .dr-node::before { display: none; }
+}
+@media (max-width: 900px) {
+  .dr-sim { grid-template-columns: 1fr; }
+  .dr-out-inner { position: static; }
+}
+@media (max-width: 640px) {
+  .dr-chain-track, .dr-chain-track.is-options { grid-template-columns: 1fr; }
+  .dr-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .dr-range-wrap { flex-wrap: wrap; gap: 12px; }
+  .dr-step-hint { margin-left: 0; }
+}
+
+/* ---------------------------------------------------------
+   6. Annonce pour lecteurs d'écran
+   Un `aria-live` sur tout le panneau relirait les livrables et le
+   calendrier à chaque cran du curseur. On n'annonce que l'essentiel.
+   --------------------------------------------------------- */
+.dr-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------
+   7. Hero scrollé — ajustements propres à cette page
+   La composition et le moteur viennent de styles-v4-3.css / acts.js
+   (mêmes que le hero d'accueil). Ne sont redéfinis ici que les points
+   où le contenu de CETTE page diffère : ses paliers sont plus longs
+   que ceux de l'accueil (un paragraphe entier plus deux boutons).
+   Ce fichier n'étant chargé que par decision-rapide.html, ces règles
+   ne touchent pas le hero d'accueil.
+   --------------------------------------------------------- */
+@media (max-width: 1000px) {
+  /* En dessous de 1000 px, styles-v4-3.css passe le plan en bandeau haut et
+     ancre les paliers par le BAS. Avec un palier haut, le texte remonte dans
+     le bandeau et l'appareil passe derrière la typo. On raccourcit le bandeau
+     et on ancre les paliers par le HAUT, juste en dessous. */
+  .v4-hero2 .h2-media { height: 34vh; }
+  .v4-hero2 .h2-beat {
+    top: calc(92px + 34vh + 28px);
+    bottom: auto;
+    transform: translateY(8px);
+  }
+  .v4-hero2 .h2-beat.on { transform: none; }
+  .v4-hero2 .v4-hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+  .v4-hero2 .v4-hero-ctas .btn { justify-content: center; }
+}
+
+/* Le plan est une image de communication, pas une information : sous les
+   lecteurs qui coupent le mouvement, styles-v4-3.css déroule déjà les
+   paliers en pile. On y remet seulement les boutons en ligne. */
+@media (prefers-reduced-motion: reduce) {
+  .v4-hero2 .v4-hero-ctas { flex-direction: row; }
+}

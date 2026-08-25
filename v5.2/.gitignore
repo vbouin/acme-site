@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+._*
+
+# Archives générées (recréables)
+*.zip
+
+# Dépendances / logs
+node_modules/
+*.log

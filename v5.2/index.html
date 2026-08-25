@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<title>ACMÉ — La parole client transformée en décisions business</title>
+<meta name="description" content="ACMÉ, 50 ans d'expertise en études qualitatives. Neuf secteurs, quatre consultants référents, trois continents." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-v3.css" />
+<link rel="stylesheet" href="styles-v4-2.css" />
+<link rel="stylesheet" href="styles-v4-3.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="v3 v3-1 v4-2 v4-3">
+<script src="variant.js"></script>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo/logo-noir.png" alt="ACMÉ" />
+    </a>
+    <nav class="nav-menu">
+      <div class="nav-dd">
+      <a href="#sectors" class="nav-dd-trigger"><span data-i18n="nav.sectors">Secteurs</span><span class="nav-dd-caret" aria-hidden="true">&#9662;</span></a>
+      <div class="nav-dd-menu">
+        <a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité & Automobile</a>
+        <a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a>
+        <a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé & Cosmétiques</a>
+        <a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a>
+        <a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme & RSE</a>
+        <a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode & Luxe</a>
+      </div>
+    </div>
+      <a href="decision-rapide.html" data-i18n="nav.quick">Décision rapide</a>
+      <a href="contenus.html" data-i18n="nav.content">Contenus</a>
+      <a href="etudes-et-ia.html" data-i18n="nav.ia">Études & IA</a>
+      <a href="qui-sommes-nous.html" data-i18n="nav.about">Qui sommes-nous</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="fr" type="button">FR</button>
+        <span class="lang-sep">/</span>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <a href="contact.html" class="btn btn-primary-dark" style="padding: 12px 20px;">
+        <span data-i18n="nav.cta">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO v4.3 — LE DÉMONTAGE (repris de la version v4.3 du collègue) -->
+<section class="v4-hero2" id="plateau" data-act data-track="Le démontage" data-track-en="The teardown">
+  <div class="v4-act-track" style="--track:520vh;--track-m:300vh">
+    <div class="h2-stage">
+      <div class="v4-bar top" aria-hidden="true"></div>
+      <div class="v4-bar bot" aria-hidden="true"></div>
+
+      <div class="h2-media">
+        <video data-scrub src="assets/v4/story.mp4" poster="assets/v4/story.jpg"
+               muted playsinline preload="auto" disablepictureinpicture
+               aria-label="Le magnétophone ACMÉ se démonte, puis la bande restitue ses données"
+               tabindex="-1"></video>
+      </div>
+
+      <div class="container h2-copy">
+        <div class="h2-beat" data-from="0" data-to="0.125">
+          <span class="eyebrow" data-i18n="hero.eyebrow">ACMÉ · CONSULTANTS · DEPUIS 1976</span>
+          <h1 class="display">
+            <span data-i18n="v4.h1.l1">La parole client,</span>
+            <span class="serif" data-i18n="v4.h1.l2">enregistrée,</span>
+            <span data-i18n="v4.h1.l3">puis décidée.</span>
+          </h1>
+          <p data-i18n="v4.lead">50 ans d'études qualitatives.</p>
+          <div class="v4-hero-ctas">
+            <a href="contact.html" class="btn btn-primary-dark v4-key"><i class="tri">&#9654;</i> <span data-i18n="v4.cta.brief">Brief</span></a>
+            <a href="#sectors" class="btn btn-outline-dark v4-key" data-i18n="v4.cta.sectors">Nos secteurs</a>
+          </div>
+        </div>
+        <div class="h2-beat" data-from="0.125" data-to="0.29">
+          <span class="eyebrow" data-i18n="v43.b2.eyebrow">Plan 02</span>
+          <h2 class="display" data-i18n="v43.b2.h2">&mdash;</h2>
+          <p data-i18n="v43.b2.p">&mdash;</p>
+        </div>
+        <div class="h2-beat" data-from="0.29" data-to="0.45">
+          <span class="eyebrow" data-i18n="v43.b3.eyebrow">Plan 03</span>
+          <h2 class="display" data-i18n="v43.b3.h2">&mdash;</h2>
+          <p data-i18n="v43.b3.p">&mdash;</p>
+        </div>
+        <div class="h2-beat" data-from="0.45" data-to="0.585">
+          <span class="eyebrow" data-i18n="v43.b4.eyebrow">Plan 04</span>
+          <h2 class="display" data-i18n="v43.b4.h2">&mdash;</h2>
+          <p data-i18n="v43.b4.p">&mdash;</p>
+        </div>
+        <div class="h2-beat" data-from="0.585" data-to="0.785">
+          <span class="eyebrow" data-i18n="v43.b5.eyebrow">Plan 05</span>
+          <h2 class="display" data-i18n="v43.b5.h2">&mdash;</h2>
+          <p data-i18n="v43.b5.p">&mdash;</p>
+        </div>
+        <div class="h2-beat" data-from="0.785" data-to="1">
+          <span class="eyebrow" data-i18n="v43.b6.eyebrow">Plan 06</span>
+          <h2 class="display" data-i18n="v43.b6.h2">&mdash;</h2>
+          <p data-i18n="v43.b6.p">&mdash;</p>
+          <div class="v4-hero-ctas">
+            <a href="contact.html" class="btn btn-primary-dark v4-key"><i class="tri">&#9654;</i> <span data-i18n="v43.cta">Démarrer un projet</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="h2-rail" aria-hidden="true">
+        <span data-at="0" data-i18n="v43.r1">Objet</span>
+        <span data-at="0.125" data-i18n="v43.r2">Démontage</span>
+        <span data-at="0.29" data-i18n="v43.r3">Grille</span>
+        <span data-at="0.45" data-i18n="v43.r4">Bande</span>
+        <span data-at="0.585" data-i18n="v43.r5">Donnée</span>
+        <span data-at="0.785" data-i18n="v43.r6">Décision</span>
+      </div>
+
+      <div class="v4-hud tc h2-tc" aria-hidden="true">TC <span data-tc data-fps="15">00:00:00:00</span></div>
+      <div class="v4-cue h2-cue" aria-hidden="true"><i></i><span data-i18n="v4.cue">Dérouler</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Automobile</span><span>Mobilité</span><span data-i18n="footer.territories">Territoires</span><span>Tourisme</span><span>FMCG</span><span>Retail</span><span>Cosmétique</span><span>DIY</span><span>Santé</span><span>Inclusion</span>
+    <span>Automobile</span><span>Mobilité</span><span data-i18n="footer.territories">Territoires</span><span>Tourisme</span><span>FMCG</span><span>Retail</span><span>Cosmétique</span><span>DIY</span><span>Santé</span><span>Inclusion</span>
+  </div>
+</div>
+
+<!-- NOS MISSIONS -->
+<section class="section-pad missions" id="missions">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="missions.eyebrow">— Nos offres</div>
+      <h2 class="display">
+        <span data-i18n="missions.h2.l1">Trois façons</span><br>
+        <span data-i18n="missions.h2.l2">de travailler ensemble.</span>
+      </h2>
+    </div>
+
+    <div class="missions-grid reveal">
+      <article class="mission-card">
+        <div class="mission-n">01</div>
+        <h3 data-i18n="mission1.title">Conseil</h3>
+        <p data-i18n="mission1.body">Notre cœur de métier : une étude ad-hoc, conçue sur-mesure et menée par des consultants seniors — du cadrage de la question business au terrain, jusqu'à l'aide à la décision. Qualitatif, quantitatif ou hybride, selon l'enjeu.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">02</div>
+        <h3 data-i18n="mission2.title">Workshop d'intégration</h3>
+        <p data-i18n="mission2.body">Une étude ne vaut que si elle est utilisée. Nous animons des ateliers collaboratifs avec vos équipes pour qu'elles s'approprient les résultats, les confrontent à leurs enjeux et les transforment en décisions et en feuilles de route concrètes.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">03</div>
+        <h3 data-i18n="mission3.title">Quick Study</h3>
+        <p data-i18n="mission3.body">Une réponse fiable, vite. Un dispositif agile et resserré pour trancher une question précise dans des délais et des budgets courts — sans sacrifier la finesse d'analyse qui fait notre signature.</p>
+        <a class="btn btn-outline-dark sector-cta" style="margin-top:22px;" href="decision-rapide.html">
+          <span data-i18n="mission3.cta">Composer votre dispositif</span>
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+    </div>
+
+    <div class="esomar-badge reveal">
+      <span data-i18n="esomar.member">Membre corporate</span>
+      <img src="assets/logos/esomar.png" alt="ESOMAR" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / CLIENT LOGOS -->
+<section class="section-pad trust-band">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:760px; margin:0 auto 48px;">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="home.trust.eyebrow">— Ils nous font confiance</div>
+      <h2 class="display" style="font-size:clamp(28px, 3.4vw, 48px);">
+        <span data-i18n="home.trust.h2.l1">Constructeurs, marques</span><br>
+        <span data-i18n="home.trust.h2.l2">et institutions de référence.</span>
+      </h2>
+      <p class="lead" style="margin:20px auto 0;" data-i18n="home.trust.intro">Depuis 1976, nous éclairons les décisions de grands groupes privés comme d'acteurs publics — en France et à l'international.</p>
+    </div>
+    <div class="logo-filters reveal" role="tablist">
+      <button class="logo-filter is-active" type="button" data-filter="mobilite" data-i18n="home.filters.mobilite">Mobilité &amp; Automobile</button>
+      <button class="logo-filter" type="button" data-filter="fmcg" data-i18n="home.filters.fmcg">FMCG &amp; Distribution</button>
+      <button class="logo-filter" type="button" data-filter="sante" data-i18n="home.filters.sante">Santé &amp; Cosmétiques</button>
+      <button class="logo-filter" type="button" data-filter="batiment" data-i18n="home.filters.batiment">Bâtiment</button>
+      <button class="logo-filter" type="button" data-filter="territoires" data-i18n="home.filters.territoires">Territoires &amp; RSE</button>
+    </div>
+    <div class="logos-wall reveal">
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/renault.svg" style="width:34px;height:44px" alt="Renault" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/dacia.svg" style="width:122px;height:17px" alt="Dacia" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/alpine.svg" style="width:61px;height:25px;--b:0.67" alt="Alpine" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/peugeot.svg" style="width:37px;height:41px" alt="Peugeot" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/citroen.svg" style="width:39px;height:38px" alt="Citroën" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/ds-automobiles.svg" style="width:44px;height:34px;--b:0.52" alt="DS Automobiles" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/opel.svg" style="width:84px;height:18px" alt="Opel" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/nissan.svg" style="width:42px;height:36px" alt="Nissan" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/volvo.svg" style="width:106px;height:18px" alt="Volvo" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/air-france.svg" style="width:122px;height:17px;--b:0.85" alt="Air France" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/korean-air.svg" style="width:120px;height:18px;--b:0.48" alt="Korean Air" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/keolis.svg" style="width:96px;height:18px;--b:0.49" alt="Keolis" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/ratp.svg" style="width:35px;height:43px;--b:0.36" alt="RATP" loading="lazy"></div>
+      <div class="logo-slot" data-cat="mobilite"><img class="logo-img" src="assets/logos/web/tcl.svg" style="width:66px;height:23px;--b:0.54" alt="TCL" loading="lazy"></div>
+      <div class="logo-slot" data-cat="fmcg"><img class="logo-img" src="assets/logos/web/carrefour.svg" style="width:43px;height:35px;--b:0.89" alt="Carrefour" loading="lazy"></div>
+      <div class="logo-slot" data-cat="fmcg"><img class="logo-img" src="assets/logos/web/fnac.svg" style="width:68px;height:22px" alt="Fnac" loading="lazy"></div>
+      <div class="logo-slot" data-cat="fmcg"><img class="logo-img" src="assets/logos/web/lu.svg" style="width:34px;height:45px;--b:0.71" alt="LU" loading="lazy"></div>
+      <div class="logo-slot" data-cat="fmcg"><img class="logo-img" src="assets/logos/web/mars.svg" style="width:69px;height:22px" alt="Mars" loading="lazy"></div>
+      <div class="logo-slot" data-cat="fmcg"><img class="logo-img" src="assets/logos/web/lactalis.svg" style="width:66px;height:23px;--b:0.39" alt="Lactalis" loading="lazy"></div>
+      <div class="logo-slot" data-cat="fmcg"><img class="logo-img" src="assets/logos/web/nutrilait.svg" style="width:70px;height:22px;--b:0.45" alt="Nutrilait" loading="lazy"></div>
+      <div class="logo-slot" data-cat="sante"><img class="logo-img" src="assets/logos/web/sanofi.svg" style="width:72px;height:21px" alt="Sanofi" loading="lazy"></div>
+      <div class="logo-slot" data-cat="sante"><img class="logo-img" src="assets/logos/web/biomerieux.svg" style="width:51px;height:29px;--b:0.58" alt="bioMérieux" loading="lazy"></div>
+      <div class="logo-slot" data-cat="sante"><img class="logo-img" src="assets/logos/web/debiopharm.svg" style="width:73px;height:20px" alt="Debiopharm" loading="lazy"></div>
+      <div class="logo-slot" data-cat="sante"><img class="logo-img" src="assets/logos/web/yves-rocher.svg" style="width:59px;height:25px;--b:0.49" alt="Yves Rocher" loading="lazy"></div>
+      <div class="logo-slot" data-cat="sante"><img class="logo-img" src="assets/logos/web/hello-pharmacie.svg" style="width:106px;height:18px" alt="Hello Pharmacie" loading="lazy"></div>
+      <div class="logo-slot" data-cat="batiment"><img class="logo-img" src="assets/logos/web/bouygues-construction.svg" style="width:53px;height:28px;--b:0.41" alt="Bouygues Construction" loading="lazy"></div>
+      <div class="logo-slot" data-cat="batiment"><img class="logo-img" src="assets/logos/web/lafarge.svg" style="width:65px;height:23px;--b:0.87" alt="Lafarge" loading="lazy"></div>
+      <div class="logo-slot" data-cat="batiment"><img class="logo-img" src="assets/logos/web/leroy-merlin.svg" style="width:49px;height:30px;--b:0.68" alt="Leroy Merlin" loading="lazy"></div>
+      <div class="logo-slot" data-cat="batiment"><img class="logo-img" src="assets/logos/web/gedimat.svg" style="width:60px;height:25px;--b:0.76" alt="Gedimat" loading="lazy"></div>
+      <div class="logo-slot" data-cat="batiment"><img class="logo-img" src="assets/logos/web/descours-cabaud.png" style="width:111px;height:18px;--b:0.48" alt="Descours & Cabaud" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/wwf.svg" style="width:31px;height:46px" alt="WWF" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/vnf.svg" style="width:47px;height:32px;--b:0.49" alt="VNF" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/agefiph.svg" style="width:122px;height:17px;--b:0.52" alt="Agefiph" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/fabrique-spinoza.svg" style="width:67px;height:22px;--b:0.53" alt="Fabrique Spinoza" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/cite-des-sciences-industrie.svg" style="width:36px;height:41px" alt="Cité des Sciences et de l'Industrie" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/departement-loire.svg" style="width:63px;height:24px;--b:0.4" alt="Département de la Loire" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/region-aquitaine.svg" style="width:40px;height:37px;--b:0.49" alt="Région Nouvelle-Aquitaine" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/paris-region.png" style="width:60px;height:25px;--b:0.5" alt="Paris Région" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/saint-etienne.png" style="width:58px;height:26px;--b:0.39" alt="Saint-Étienne" loading="lazy"></div>
+      <div class="logo-slot" data-cat="territoires"><img class="logo-img" src="assets/logos/web/blois.png" style="width:39px;height:39px" alt="Ville de Blois" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FIGURES -->
+<section>
+  <div class="container">
+    <div class="stats-band reveal">
+      <div class="stat"><div class="value counter" data-count-to="50" data-suffix="">50</div><div class="label" data-i18n="home.fig1">années d'expertise qualitative</div></div>
+      <div class="stat"><div class="value counter" data-count-to="6" data-suffix="">6</div><div class="label" data-i18n="home.fig2">secteurs d'intervention</div></div>
+      <div class="stat"><div class="value counter" data-count-to="400" data-suffix="+">400+</div><div class="label" data-i18n="home.fig3">études terrain réalisées</div></div>
+      <div class="stat"><div class="value counter" data-count-to="98" data-suffix="%">98%</div><div class="label" data-i18n="home.fig4">de clients récurrents</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS (9) -->
+<section class="sectors section-pad" id="sectors">
+  <div class="container">
+    <div class="sectors-head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="sectors.eyebrow">— Nos secteurs</div>
+        <h2 class="display">
+          <span data-i18n="sectors.h2.l1">Six terrains</span><br>
+          <span data-i18n="sectors.h2.l2">d'expertise.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="ti-pawn-head" cx="12" cy="6" r="2.4"/>
+              <path class="ti-pawn-body" d="M9.5 10.2h5l-.7 3H10.2zM8 17h8l1 4H7z"/>
+            </svg>
+          </span>
+        </h2>
+      </div>
+      <p class="lead" data-i18n="sectors.intro">De la mobilité aux territoires positifs, du FMCG à la santé — cinquante ans d'enquêtes sur le terrain, au service d'une même ambition : écouter, comprendre, décider.</p>
+    </div>
+
+    <div class="sectors-grid reveal">
+      <!-- 01 Mobilité & Automobile -->
+      <article class="sector-card">
+        <div class="n">01 / Mobilité &amp; Auto</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 30v-5l4-9c0.5-1 1.5-2 3-2h22c1.5 0 2.5 1 3 2l4 9v5"/>
+            <path d="M6 30v6h6v-4M42 30v6h-6v-4"/>
+            <circle cx="14" cy="32" r="3.5"/><circle cx="34" cy="32" r="3.5"/>
+            <path d="M12 20l2-4h20l2 4"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec5.mob.title">Mobilité &amp; Automobile</h3>
+        <p data-i18n="sec5.mob.body">Cinquante ans sur l'industrie la plus exigeante du monde : véhicule électrique et autonome, mobilités partagées, services connectés et transition énergétique — du constructeur à l'usager.</p>
+        <a class="btn btn-outline-dark sector-cta" href="secteur-mobilite.html">Découvrir
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+
+      <!-- 02 FMCG & Distribution -->
+      <article class="sector-card">
+        <div class="n">02 / Retail &amp; FMCG</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 14l4-8h32l4 8"/>
+            <path d="M4 14v28h40V14"/>
+            <path d="M12 14v6a4 4 0 0 0 8 0v-6M20 14v6a4 4 0 0 0 8 0v-6M28 14v6a4 4 0 0 0 8 0v-6"/>
+            <rect x="18" y="28" width="12" height="14"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec5.fmcg.title">Retail et FMCG</h3>
+        <p data-i18n="sec5.fmcg.body">Décrypter les nouvelles consommations et les parcours d'achat phygitaux : utilité, durabilité, communautés et expérience en magasin — là où le lieu fait le lien.</p>
+        <a class="btn btn-outline-dark sector-cta" href="secteur-retail-fmcg.html">Découvrir
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+
+      <!-- 03 Santé & Cosmétiques -->
+      <article class="sector-card">
+        <div class="n">03 / Santé &amp; Cosmétiques</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M24 42s-14-8-14-20a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 12-14 20-14 20z"/>
+            <path d="M20 24h8M24 20v8"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec5.sante.title">Santé &amp; Cosmétiques</h3>
+        <p data-i18n="sec5.sante.body">De la Beauty Tech à la santé et la fragilité : personnalisation du soin, plaisir olfactif et inclusion des publics vulnérables.</p>
+        <a class="btn btn-outline-dark sector-cta" href="secteur-sante-cosmetiques.html">Découvrir
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+
+      <!-- 04 Bâtiment -->
+      <article class="sector-card">
+        <div class="n">04 / Bâtiment</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 44V10l14-6v40"/>
+            <path d="M22 18h18v26"/>
+            <path d="M8 44h34"/>
+            <path d="M13 14v3M17 14v3M13 22v3M17 22v3M13 30v3M17 30v3M28 24v3M34 24v3M28 32v3M34 32v3"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec5.bat.title">Bâtiment</h3>
+        <p data-i18n="sec5.bat.body">Habitat, construction et distribution de matériaux : usages et attentes des professionnels comme des particuliers, nouveaux concepts d'espace.</p>
+        <a class="btn btn-outline-dark sector-cta" href="secteur-batiment.html">Découvrir
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+
+      <!-- 05 Territoires, Tourisme & RSE -->
+      <article class="sector-card">
+        <div class="n">05 / Territoires &amp; RSE</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M24 4a12 12 0 0 0-12 12c0 10 12 28 12 28s12-18 12-28a12 12 0 0 0-12-12z"/>
+            <circle cx="24" cy="16" r="4"/>
+            <path d="M4 40h40" stroke-dasharray="2,3"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec5.terr.title">Territoires, Tourisme &amp; RSE</h3>
+        <p data-i18n="sec5.terr.body">Faire AVEC les citoyens, pas SANS ni CONTRE : concertation, tourisme durable, RSE et cartographie des fragilités visibles et invisibles.</p>
+        <a class="btn btn-outline-dark sector-cta" href="secteur-territoires.html">Découvrir
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+
+      <!-- 06 Mode & Luxe (contenu factice) -->
+      <article class="sector-card">
+        <div class="n">06 / Mode &amp; Luxe</div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 17a3 3 0 1 1 3.2 3c-1.9.2-3.2 1.4-3.2 3.3V25"/>
+            <path d="M24 25 5 38h38L24 25z"/>
+          </svg>
+        </div>
+        <h3 data-i18n="sec5.mode.title">Mode &amp; Luxe</h3>
+        <p data-i18n="sec5.mode.body">Codes du désir et rituels d'exception : maisons de mode, maroquinerie, joaillerie et parfums de luxe — décrypter l'imaginaire et l'expérience client haut de gamme.</p>
+        <a class="btn btn-outline-dark sector-cta" href="secteur-mode-luxe.html">Découvrir
+          <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ÉTUDES & IA (teaser) -->
+<section class="section-pad ia-teaser">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="ia.eyebrow">— Études & IA</div>
+      <h2 class="display" data-i18n="ia.h1">L'IA accélère.<br>L'humain décide.</h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="ia.teaser.lead">Nous utilisons l'intelligence artificielle comme un accélérateur — pour gagner du temps et du budget — sans jamais déléguer l'interprétation ni la décision.</p>
+    </div>
+    <div class="ia-split reveal">
+      <div class="ia-col">
+        <div class="ia-col-label" data-i18n="ia.teaser.col1">Ce que l'IA accélère</div>
+        <ul>
+          <li data-i18n="ia.teaser.a1">Transcription &amp; structuration des verbatims</li>
+          <li data-i18n="ia.teaser.a2">Premières synthèses &amp; détection de signaux</li>
+          <li data-i18n="ia.teaser.a3">Livrables interrogeables en langage naturel (RAG)</li>
+          <li data-i18n="ia.teaser.a4">Web listening &amp; analyse de communautés</li>
+        </ul>
+      </div>
+      <div class="ia-col">
+        <div class="ia-col-label" data-i18n="ia.teaser.col2">Ce que l'humain garde</div>
+        <ul>
+          <li data-i18n="ia.teaser.b1">L'interprétation et la finesse d'analyse</li>
+          <li data-i18n="ia.teaser.b2">Le sensible, au-delà des chiffres</li>
+          <li data-i18n="ia.teaser.b3">Le regard critique face à la machine</li>
+          <li data-i18n="ia.teaser.b4">La recommandation et la décision</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:44px;">
+      <a href="etudes-et-ia.html" class="btn btn-outline-dark">
+        <span data-i18n="ia.teaser.cta">Découvrir notre approche IA</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PILLARS -->
+<section class="section-pad">
+  <div class="container">
+    <div class="pillars-head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="pillars.eyebrow">— Notre valeur ajoutée</div>
+        <h2 class="display">
+          <span data-i18n="pillars.h2.l1">Trois leviers</span><br>
+          <span data-i18n="pillars.h2.l2">au service de</span><br>
+          <span data-i18n="pillars.h2.l3">vos décisions.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="ti-pawn-head" cx="12" cy="6" r="2.4"/>
+              <path class="ti-pawn-body" d="M9.5 10.2h5l-.7 3H10.2zM8 17h8l1 4H7z"/>
+            </svg>
+          </span>
+        </h2>
+      </div>
+      <p class="lead" data-i18n="pillars.intro">Nous concentrons nos efforts sur trois leviers qui servent directement vos enjeux business : la rigueur des sciences humaines, la puissance de la prospective, et la rapidité d'exécution.</p>
+    </div>
+
+    <div class="pillars-grid reveal">
+      <div class="pillar">
+        <div class="pillar-n" data-i18n="pillar1.label">01 / Rigueur</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4L4 14v8c0 11 8 20 20 22 12-2 20-11 20-22v-8z"/><path d="M14 22l8 8 14-14"/></svg>
+        </div>
+        <h3 data-i18n="pillar1.title">Sciences humaines appliquées</h3>
+        <p data-i18n="pillar1.body">Nous tirons parti de la rigueur des sciences humaines pour les mettre au service des enjeux business de nos clients.</p>
+        <div class="pillar-viz">
+          <canvas data-three="pillar" data-kind="axes"></canvas>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-n" data-i18n="pillar2.label">02 / Prospective</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="20"/><path d="M4 24h40M24 4v40M8 12c8 8 24 8 32 0M8 36c8-8 24-8 32 0"/></svg>
+        </div>
+        <h3 data-i18n="pillar2.title">Prospective & planning stratégique</h3>
+        <p data-i18n="pillar2.body">Nous conjuguons études qualitatives, prospective et planning stratégique pour dépasser la photographie du présent et éclairer les mutations à venir.</p>
+        <div class="pillar-viz">
+          <canvas data-three="pillar" data-kind="stairs"></canvas>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-n" data-i18n="pillar3.label">03 / Vitesse</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4v20l12 6"/><circle cx="24" cy="24" r="20"/><path d="M14 10l2-3M34 10l-2-3M14 38l2 3M34 38l-2 3"/></svg>
+        </div>
+        <h3 data-i18n="pillar3.title">Rapidité d'exécution</h3>
+        <p data-i18n="pillar3.body">Des dispositifs méthodologiques sur-mesure, conçus pour coller aux délais business les plus serrés, sans concéder sur la qualité terrain.</p>
+        <div class="pillar-viz">
+          <canvas data-three="pillar" data-kind="cylinder"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERRITORIES TEASER -->
+<section class="terr-teaser section-pad" id="territoires">
+  <div class="container">
+    <div class="terr-teaser-grid reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px;" data-i18n="terr.eyebrow">— Territoires</div>
+        <h2 class="display">
+          <span data-i18n="terr.h2.l1">Nous opérons</span><br>
+          <span data-i18n="terr.h2.l2">partout où vos offres</span><br>
+          <span data-i18n="terr.h2.l3">rencontrent leurs publics.</span><span class="title-icon" data-title-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path class="ti-pin-stem" d="M12 22 C5 14 5 9 12 3 C19 9 19 14 12 22 Z" fill="currentColor" fill-opacity="0.12"/>
+              <circle cx="12" cy="10" r="2.6"/>
+            </svg>
+          </span>
+        </h2>
+        <p class="lead" style="margin:24px 0 32px;" data-i18n="terr.body">Directement sur les marchés européens et américains, et avec nos partenaires en Asie — toujours à qualité terrain constante.</p>
+      </div>
+      <div class="terr-teaser-map">
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid meet">
+          <g fill="#DDD">
+            <g transform="translate(60,80)">
+              <circle cx="60" cy="40" r="2"/><circle cx="75" cy="50" r="2"/><circle cx="65" cy="60" r="2"/><circle cx="80" cy="70" r="2"/><circle cx="95" cy="85" r="2"/><circle cx="110" cy="100" r="2"/><circle cx="100" cy="115" r="2"/><circle cx="85" cy="130" r="2"/><circle cx="95" cy="145" r="2"/><circle cx="105" cy="160" r="2"/><circle cx="85" cy="175" r="2"/><circle cx="95" cy="190" r="2"/><circle cx="75" cy="205" r="2"/><circle cx="85" cy="220" r="2"/>
+              <circle cx="50" cy="45" r="2"/><circle cx="40" cy="55" r="2"/><circle cx="55" cy="75" r="2"/><circle cx="45" cy="90" r="2"/><circle cx="70" cy="105" r="2"/>
+            </g>
+            <g transform="translate(260,60)">
+              <circle cx="20" cy="40" r="2"/><circle cx="35" cy="30" r="2"/><circle cx="50" cy="40" r="2"/><circle cx="65" cy="50" r="2"/><circle cx="40" cy="55" r="2"/><circle cx="55" cy="65" r="2"/><circle cx="30" cy="70" r="2"/><circle cx="45" cy="80" r="2"/><circle cx="60" cy="85" r="2"/><circle cx="70" cy="70" r="2"/>
+            </g>
+            <g transform="translate(280,150)">
+              <circle cx="20" cy="10" r="2"/><circle cx="35" cy="20" r="2"/><circle cx="50" cy="30" r="2"/><circle cx="30" cy="40" r="2"/><circle cx="45" cy="55" r="2"/><circle cx="40" cy="70" r="2"/><circle cx="55" cy="85" r="2"/><circle cx="35" cy="95" r="2"/>
+            </g>
+            <g transform="translate(380,60)">
+              <circle cx="20" cy="40" r="2"/><circle cx="40" cy="30" r="2"/><circle cx="60" cy="40" r="2"/><circle cx="80" cy="30" r="2"/><circle cx="100" cy="45" r="2"/><circle cx="120" cy="55" r="2"/><circle cx="140" cy="50" r="2"/><circle cx="50" cy="60" r="2"/><circle cx="70" cy="70" r="2"/><circle cx="90" cy="80" r="2"/><circle cx="110" cy="75" r="2"/><circle cx="130" cy="85" r="2"/><circle cx="150" cy="90" r="2"/>
+            </g>
+            <g transform="translate(460,240)">
+              <circle cx="20" cy="20" r="2"/><circle cx="40" cy="30" r="2"/><circle cx="60" cy="25" r="2"/><circle cx="50" cy="40" r="2"/>
+            </g>
+          </g>
+          <g>
+            <!-- Amériques (direct) -->
+            <circle cx="150" cy="180" r="6" fill="#000"/>
+            <circle cx="150" cy="180" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite"/></circle>
+            <text x="150" y="168" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">AMÉRIQUES</text>
+            <!-- Europe (direct) -->
+            <circle cx="305" cy="110" r="6" fill="#000"/>
+            <circle cx="305" cy="110" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite" begin="0.8s"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" begin="0.8s"/></circle>
+            <text x="305" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">EUROPE</text>
+            <!-- Asie (partenaire) -->
+            <circle cx="490" cy="130" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+            <circle cx="490" cy="130" r="10" fill="none" stroke="#000" stroke-width="1" opacity="0.4"><animate attributeName="r" from="6" to="16" dur="2.5s" repeatCount="indefinite" begin="1.6s"/><animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" begin="1.6s"/></circle>
+            <text x="490" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#000">ASIE</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTED CASE STUDIES -->
+<section class="section-pad" style="background:var(--offwhite);">
+  <div class="container">
+    <div class="reveal" style="max-width:800px; margin-bottom:40px;">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="home.cases.eyebrow">— Études de cas</div>
+      <h2 class="display">
+        <span data-i18n="home.cases.h2.l1">Des décisions,</span><br>
+        <span data-i18n="home.cases.h2.l2">pas des rapports.</span>
+      </h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="home.cases.intro">Un aperçu de missions récentes, anonymisées — de la validation produit à la concertation citoyenne.</p>
+    </div>
+
+    <div class="case-studies reveal">
+      <article class="case-study">
+        <div class="client" data-i18n="ref.cs1.client">OEM européen · anonymisé</div>
+        <h3 data-i18n="ref.cs1.title">Cadrage UX d'un cockpit électrique</h3>
+        <div class="cs-block">
+          <h5 data-i18n="ref.cs.label.challenge">Enjeu</h5>
+          <p data-i18n="ref.cs1.challenge">Valider les choix IHM d'un cockpit entièrement repensé avant SOP, sur 3 marchés européens.</p>
+        </div>
+        <div class="cs-block">
+          <h5 data-i18n="ref.cs.label.approach">Approche</h5>
+          <p data-i18n="ref.cs1.approach">Tests utilisateurs modérés en laboratoire (FR, DE, IT) avec prototype fonctionnel, 60 participants early-adopters VE.</p>
+        </div>
+        <div class="cs-impact" data-i18n="ref.cs1.impact">→ 7 recommandations critiques intégrées avant SOP, −40% de frictions identifiées en pré-série.</div>
+      </article>
+
+      <article class="case-study">
+        <div class="client" data-i18n="ref.cs2.client">Métropole française · anonymisé</div>
+        <h3 data-i18n="ref.cs2.title">Concertation citoyenne ZFE</h3>
+        <div class="cs-block">
+          <h5 data-i18n="ref.cs.label.challenge">Enjeu</h5>
+          <p data-i18n="ref.cs2.challenge">Mesurer l'acceptabilité d'une Zone à Faibles Émissions auprès de publics contrastés.</p>
+        </div>
+        <div class="cs-block">
+          <h5 data-i18n="ref.cs.label.approach">Approche</h5>
+          <p data-i18n="ref.cs2.approach">Programme de consultation citoyenne en 3 vagues, 120 participants, ateliers co-création.</p>
+        </div>
+        <div class="cs-impact" data-i18n="ref.cs2.impact">→ Plan de déploiement ajusté, communication repensée, adhésion citoyenne mesurée à 68%.</div>
+      </article>
+
+      <article class="case-study">
+        <div class="client" data-i18n="ref.cs4.client">Opérateur mobilité partagée · anonymisé</div>
+        <h3 data-i18n="ref.cs4.title">Irritants d'un parcours multimodal</h3>
+        <div class="cs-block">
+          <h5 data-i18n="ref.cs.label.challenge">Enjeu</h5>
+          <p data-i18n="ref.cs4.challenge">Identifier les points de rupture d'un service multimodal en déploiement sur 2 métropoles.</p>
+        </div>
+        <div class="cs-block">
+          <h5 data-i18n="ref.cs.label.approach">Approche</h5>
+          <p data-i18n="ref.cs4.approach">Ethnographie in-situ + suivi d'usage sur 3 semaines, 30 utilisateurs représentatifs.</p>
+        </div>
+        <div class="cs-impact" data-i18n="ref.cs4.impact">→ Repriorisation de la roadmap : 3 features abandonnées, 2 features ajoutées.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-block dark">
+  <div class="container">
+    <h2 class="display reveal">
+      <span data-i18n="final.h2.l1">Un enjeu business</span><br>
+      <span data-i18n="final.h2.l2">à éclairer ?</span>
+    </h2>
+    <p class="lead reveal" data-i18n="final.body">Parlons de votre prochain lancement, repositionnement ou programme de connaissance client.</p>
+    <div class="ctas reveal">
+      <a href="contact.html" class="btn btn-primary-light">
+        <span data-i18n="final.cta.primary">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="dot-grid" style="position:absolute;inset:0;"></div>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; letter-spacing: 0.22em; font-size: 18px; margin-bottom: 20px;">ACMÉ</div>
+        <p data-i18n="footer.about">50 ans d'expertise dans la connaissance client. Siège : 24 rue Turbil, 69003 Lyon, France.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.sectors">Secteurs</h4>
+        <ul>
+          <li><a href="#sectors" data-i18n="sec5.mob.title">Mobilité & Automobile</a></li>
+          <li><a href="#sectors" data-i18n="sec5.fmcg.title">FMCG & Distribution</a></li>
+          <li><a href="#sectors" data-i18n="sec5.sante.title">Santé & Cosmétiques</a></li>
+          <li><a href="#sectors" data-i18n="sec5.bat.title">Bâtiment</a></li>
+          <li><a href="#sectors" data-i18n="sec5.terr.title">Territoires, Tourisme & RSE</a></li>
+          <li><a href="#sectors" data-i18n="sec5.mode.title">Mode & Luxe</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.territories">Territoires</h4>
+        <ul>
+          <li><a href="#territoires" data-i18n="geo.france">France</a></li>
+          <li><a href="#territoires" data-i18n="geo.germany">Allemagne</a></li>
+          <li><a href="#territoires" data-i18n="geo.italy">Italie</a></li>
+          <li><a href="#territoires" data-i18n="geo.us">États-Unis</a></li>
+          <li><a href="#territoires" data-i18n="geo.latam">Amérique Latine</a></li>
+          <li><a href="#territoires" data-i18n="geo.asia">Asie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@acme-consultant.fr">contact@acme-consultant.fr</a></li>
+          <li>+33 (0)4 XX XX XX XX</li>
+          <li><a href="contact.html" data-i18n="nav.contact">Formulaire</a></li>
+        </ul>
+      </div>
+    </div>
+        <div class="footer-esomar">
+      <span data-i18n="esomar.member">Membre corporate</span>
+      <img src="assets/logos/esomar.png" alt="ESOMAR" loading="lazy">
+    </div>
+    <div class="footer-legal">
+      <div>© <span data-year></span> ACMÉ Consultants · <span data-i18n="footer.legal">Tous droits réservés</span></div>
+      <div data-i18n="footer.offices">Lyon · Paris · Munich · Milan</div>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script src="acts.js"></script>
+</body>
+</html>
