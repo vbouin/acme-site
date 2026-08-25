@@ -236,10 +236,16 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
 ARTICLES = [
 {
  "slug": "article-focus-group-lyon.html",
+ "sources": [
+  ("Espace Rhône", "salles qualitatives lyonnaises équipées (glace sans tain, retour vidéo), en presqu'île depuis 2003", "https://www.espacerhone.com/"),
+  ("Lyon Marketing Services", "coordination de terrains qualitatifs à Lyon, en présentiel comme à distance", "https://lyon-marketing-services.fr/etudes-qualitatives/"),
+  ("Square Cocoon — Prix d'un focus group", "repères de budget par groupe, 2026", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+ ],
+
  "cat": "Terrain",
  "date": "2026-08-25",
  "read": "7 min",
- "title": "Organiser un focus group à Lyon : ce qu'on a appris en quarante ans — ACMÉ Consultants",
+ "title": "Organiser un focus group à Lyon : le guide d'un praticien",
  "h1": "Organiser un focus group à&nbsp;Lyon :<br>ce qu'on a appris en quarante ans.",
  "desc": "Salle, recrutement, taille de groupe, animation : le guide pratique d'un cabinet d'études qualitatives lyonnais, fondé sur les erreurs qu'on a payées.",
  "kw": "focus group Lyon, institut d'études Lyon, étude qualitative Lyon, salle focus group",
@@ -251,7 +257,7 @@ ARTICLES = [
 
 <h2>Faut-il une salle spécialisée ou une salle de réunion suffit-elle ?</h2>
 <p><strong>Une salle spécialisée se justifie dès qu'il y a des observateurs.</strong> Si votre équipe marketing veut assister, une salle avec glace sans tain ou retour vidéo change tout : sans elle, vous mettez cinq personnes en costume au fond de la pièce et vous obtenez un groupe qui se surveille.</p>
-<p>À Lyon, plusieurs prestataires équipés opèrent en presqu'île, avec streaming et prise de son multipiste. C'est une commodité réelle du bassin lyonnais : sur beaucoup de villes de taille comparable, il faut monter le dispositif de toutes pièces. Si personne n'observe et que le sujet n'exige pas de matériel, une salle neutre bien insonorisée suffit — et vous économisez un poste.</p>
+<p>À Lyon, plusieurs prestataires équipés opèrent en presqu'île, avec streaming et prise de son multipiste — <a href="https://www.espacerhone.com/" rel="nofollow noopener" target="_blank">Espace Rhône</a> y loue des salles qualitatives depuis 2003, et <a href="https://lyon-marketing-services.fr/etudes-qualitatives/" rel="nofollow noopener" target="_blank">Lyon Marketing Services</a> coordonne des terrains en présentiel comme à distance. C'est une commodité réelle du bassin lyonnais : sur beaucoup de villes de taille comparable, il faut monter le dispositif de toutes pièces. Si personne n'observe et que le sujet n'exige pas de matériel, une salle neutre bien insonorisée suffit — et vous économisez un poste.</p>
 <p>Deux points que l'on néglige et qui coûtent cher&nbsp;: la table doit être ronde ou ovale (une table rectangulaire crée un bout de table, donc un chef), et la pièce ne doit pas avoir de fenêtre sur rue passante. On a perdu une heure exploitable sur un tramway.</p>
 
 <h2>Comment recruter les bons participants ?</h2>
@@ -282,12 +288,19 @@ ARTICLES = [
 },
 {
  "slug": "article-ia-etudes-qualitatives.html",
+ "sources": [
+  ("Syntec Conseil", "sept engagements pour un usage responsable de l'IA dans les études, mai 2025 — supervision humaine et transparence sur les outils", "https://syntec-conseil.fr/"),
+  ("Ipsos — Interviews qualitatives : la révolution IA entre opportunités et limites", "le point de vue d'un grand institut sur l'entretien modéré par IA", "https://www.ipsos.com/fr-fr/interviews-qualitatives-la-revolution-ia-entre-opportunites-et-limites"),
+  ("Market Research News — Quelle place donner à l'IA dans les études qualitatives ?", "dossier professionnel en deux volets, 2026", "https://www.mrnews.fr/2026/03/09/dossier-quelle-place-donner-a-l-ia-dans-les-etudes-qualitatives-volet-2/"),
+  ("Agalma Études — IA générative et études qualitatives", "analyse détaillée des données synthétiques et des panels simulés", "https://agalma-etudes.com/blog/insights-ia/ia-generative-etudes-qualitatives/"),
+ ],
+
  "cat": "Méthode",
  "date": "2026-08-25",
  "read": "9 min",
- "title": "IA et études qualitatives : ce que la machine fait bien, ce qu'elle rate encore — ACMÉ Consultants",
+ "title": "IA et études qualitatives : ce qu'elle rate encore",
  "h1": "IA et études qualitatives :<br>ce qu'elle fait bien,<br>ce qu'elle rate encore.",
- "desc": "Transcription, codage, synthèse, entretien modéré par IA : maillon par maillon, ce que l'automatisation apporte vraiment à une étude qualitative — et où elle coûte plus qu'elle ne rapporte.",
+ "desc": "Transcription, codage, entretien modéré par IA : ce que l'automatisation apporte vraiment à une étude qualitative, et où elle coûte plus qu'elle ne rapporte.",
  "kw": "IA études qualitatives, IA générative études qualitatives, analyse verbatim IA, répondants synthétiques",
  "chapo": "« Huit fois plus vite, quatre-vingts pour cent moins cher. » La promesse circule, et elle n'est pas entièrement fausse. Elle est vraie sur certains maillons de la chaîne, et franchement dangereuse sur d'autres. Voici lesquels.",
  "body": """
@@ -314,7 +327,8 @@ ARTICLES = [
 <p>Le vrai problème n'est pas la qualité de la question suivante&nbsp;: c'est que personne n'était dans la pièce. Ce que l'on perd n'est pas dans la transcription — c'est justement ce qui n'y est pas.</p>
 
 <h2>Les répondants synthétiques sont-ils utilisables ?</h2>
-<p><strong>Non, pas comme substitut de terrain.</strong> La profession française a tranché avant nous&nbsp;: Syntec Conseil a publié en mai 2025 sept engagements d'usage responsable de l'IA dans les études — supervision humaine à chaque étape, transparence totale sur les outils employés. Et la direction générale d'OpinionWay a publiquement qualifié les entretiens synthétiques de « mirage dangereux » en novembre 2025.</p>
+<p><strong>Non, pas comme substitut de terrain.</strong> La profession française a tranché avant nous&nbsp;: <a href="https://syntec-conseil.fr/" rel="nofollow noopener" target="_blank">Syntec Conseil</a> a publié en mai 2025 sept engagements d'usage responsable de l'IA dans les études — supervision humaine à chaque étape, transparence totale sur les outils employés. Et la direction générale d'OpinionWay a publiquement qualifié les entretiens synthétiques de « mirage dangereux » en novembre 2025.</p>
+<p>Le débat n'est pas franco-français, et il n'est pas clos&nbsp;: <a href="https://agalma-etudes.com/blog/insights-ia/ia-generative-etudes-qualitatives/" rel="nofollow noopener" target="_blank">Agalma Études</a> accorde aux répondants synthétiques une utilité de pré-test tout en constatant qu'ils échouent à restituer l'émotion, l'hésitation et le silence&nbsp;; <a href="https://www.ipsos.com/fr-fr/interviews-qualitatives-la-revolution-ia-entre-opportunites-et-limites" rel="nofollow noopener" target="_blank">Ipsos</a> parle d'opportunités et de limites. Côté adoption, une enquête Qualtrics citée par la presse professionnelle en 2026 relève que <strong>15 % des chargés d'études déclarent déjà utiliser des agents IA</strong>, et que 78 % estiment qu'ils traiteront plus de la moitié des projets d'ici trois ans. C'est une prévision de praticiens, pas une mesure&nbsp;: à lire comme un climat, pas comme un fait.</p>
 <p>La raison est simple&nbsp;: un modèle génère la réponse la plus probable. Une étude qualitative sert à trouver l'improbable — la personne qui n'utilise pas votre produit comme prévu, celle qui a un usage que personne n'avait imaginé. Interroger un modèle revient à interroger la moyenne de ce qui a déjà été écrit, c'est-à-dire exactement ce que vous savez déjà.</p>
 <p>Les répondants synthétiques ont un usage honnête et étroit&nbsp;: pré-tester un guide d'entretien, repérer une question mal formulée avant d'engager du terrain réel. Nous les utilisons pour ça, et pour rien d'autre.</p>
 
@@ -344,10 +358,17 @@ ARTICLES = [
 ARTICLES += [
 {
  "slug": "article-prix-etude-qualitative.html",
+ "sources": [
+  ("Square Cocoon — Prix d'un focus group", "budget moyen 3 000 à 10 000 € par groupe de 6 à 10 personnes (2026)", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+  ("IntoTheMinds — Combien coûte une étude de marché", "entretien individuel : environ 600 € en B2C, 750 € en B2B", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
+  ("Yield Studio", "seul prix d'entrée public du panel observé : UX research à partir de 10 000 € HT", "https://www.yieldstudio.fr/"),
+  ("Gladia — tarifs", "transcription automatique à 0,20 $ l'heure d'enregistrement en plan Growth", "https://www.gladia.io/pricing"),
+ ],
+
  "cat": "Repères",
  "date": "2026-08-25",
  "read": "8 min",
- "title": "Combien coûte une étude qualitative ? Les repères d'un marché opaque — ACMÉ Consultants",
+ "title": "Combien coûte une étude qualitative ? Les repères 2026",
  "h1": "Combien coûte<br>une étude qualitative ?",
  "desc": "Recrutement, terrain, analyse, restitution : ce qui fait réellement le prix d'une étude qualitative, avec les repères publics du marché français en 2026.",
  "kw": "prix étude qualitative, tarif focus group, budget étude qualitative, coût entretien qualitatif",
@@ -377,17 +398,19 @@ ARTICLES += [
 <h2>Les repères publics du marché français</h2>
 <div class="tw">
 <table>
-<thead><tr><th>Repère</th><th>Niveau observé</th><th>Ce que ça dit</th></tr></thead>
+<thead><tr><th>Repère</th><th>Niveau publié</th><th>Source</th></tr></thead>
 <tbody>
-<tr><td>Transcription automatique</td><td>0,20 à 0,75&nbsp;$ / heure</td><td>Le poste n'est plus facturable comme un service.</td></tr>
-<tr><td>TJM freelance UX / recherche</td><td>125 à 950&nbsp;€ / jour</td><td>Plancher très bas ; la dispersion mesure l'écart de séniorité.</td></tr>
-<tr><td>Coût interne équivalent salarié</td><td>~218&nbsp;€ / jour</td><td>L'ancre mentale d'un client qui envisage d'internaliser.</td></tr>
-<tr><td>Entrée UX research affichée</td><td>à partir de 10 000&nbsp;€ HT</td><td>Le seul prix public du panel — il devient la référence par défaut.</td></tr>
-<tr><td>Instituts d'études</td><td>Aucun prix public</td><td>L'opacité reste la norme.</td></tr>
+<tr><td>Focus group, tout compris</td><td>3 000 à 10 000&nbsp;€ pour 6 à 10 participants</td><td><a href="https://www.squarecocoon.fr/prix-d-un-focus-group/" rel="nofollow noopener" target="_blank">Square Cocoon</a>, 2026</td></tr>
+<tr><td>Entretien individuel B2C</td><td>~600&nbsp;€</td><td><a href="https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/" rel="nofollow noopener" target="_blank">IntoTheMinds</a></td></tr>
+<tr><td>Entretien individuel B2B</td><td>~750&nbsp;€</td><td><a href="https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/" rel="nofollow noopener" target="_blank">IntoTheMinds</a></td></tr>
+<tr><td>Recrutement sur critères</td><td>200 à 300&nbsp;€ par participant</td><td>Fourchette de marché, notre expérience terrain</td></tr>
+<tr><td>Entrée UX research affichée</td><td>à partir de 10 000&nbsp;€ HT</td><td><a href="https://www.yieldstudio.fr/" rel="nofollow noopener" target="_blank">Yield Studio</a> — seul prix public du panel</td></tr>
+<tr><td>Transcription automatique</td><td>0,20&nbsp;$ / heure d'enregistrement</td><td><a href="https://www.gladia.io/pricing" rel="nofollow noopener" target="_blank">Gladia</a>, plan Growth</td></tr>
+<tr><td>Instituts d'études qualitatives</td><td>Aucun prix public</td><td>L'opacité reste la norme du secteur</td></tr>
 </tbody>
 </table>
 </div>
-<p class="art-note">Repères relevés en août 2026 sur des sources publiques (grilles tarifaires d'éditeurs, profils de plateformes de freelances, pages tarifaires d'agences). Ce sont des ordres de grandeur de marché, pas des tarifs ACMÉ.</p>
+<p class="art-note">Repères relevés en août 2026 sur des sources publiques. Ce sont des ordres de grandeur de marché, pas des tarifs ACMÉ. Un point de repère utile&nbsp;: à 3 000–10 000&nbsp;€ le groupe et 600–750&nbsp;€ l'entretien, un dispositif de quatre groupes ou de douze entretiens se situe dans les mêmes eaux — ce qui explique qu'on arbitre rarement sur le seul prix unitaire.</p>
 
 <h2>Comment faire baisser un budget sans abîmer l'étude</h2>
 <ol>
@@ -404,12 +427,17 @@ ARTICLES += [
 },
 {
  "slug": "article-entretiens-ou-groupes.html",
+ "sources": [
+  ("IntoTheMinds — Études qualitatives : aperçu de 3 types d'interviews", "une typologie complémentaire, côté institut belge", "https://www.intotheminds.com/blog/etudes-qualitatives-3-types-interviews/"),
+  ("IntoTheMinds — Combien coûte une étude de marché", "les ordres de grandeur par méthode", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
+ ],
+
  "cat": "Méthode",
  "date": "2026-08-25",
  "read": "6 min",
- "title": "Entretiens individuels ou focus groups : comment choisir — ACMÉ Consultants",
+ "title": "Entretiens individuels ou focus groups : comment choisir",
  "h1": "Entretiens individuels<br>ou focus groups ?",
- "desc": "Le groupe révèle les normes, l'entretien révèle les écarts. Une grille de décision concrète pour choisir le bon dispositif selon votre question, votre cible et votre budget.",
+ "desc": "Le groupe révèle les normes, l'entretien révèle les écarts. La grille de décision pour choisir selon votre question, votre cible et votre budget.",
  "kw": "entretien individuel ou focus group, choisir méthode qualitative, focus group avantages inconvénients",
  "chapo": "La question revient à chaque cadrage, et la mauvaise réponse ne se paie pas tout de suite. Elle se paie à l'analyse, quand le corpus ne répond pas à la question posée.",
  "body": """
@@ -463,16 +491,22 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "article-decider-vite.html",
+ "sources": [
+  ("Market Research News", "dossiers professionnels sur l'automatisation de la chaîne d'étude", "https://www.mrnews.fr/"),
+  ("IntoTheMinds — Peut-on remplacer les répondants par l'IA ?", "l'état du débat côté institut", "https://www.intotheminds.com/blog/en/qualitative-interviews-ai/"),
+  ("Gladia — tarifs", "l'ordre de grandeur qui a fait disparaître la transcription des postes facturables", "https://www.gladia.io/pricing"),
+ ],
+
  "cat": "Point de vue",
  "date": "2026-08-25",
  "read": "8 min",
- "title": "Décider vite sans décider mal : ce que peut vraiment un dispositif court — ACMÉ Consultants",
+ "title": "Décider vite sans décider mal : le dispositif court",
  "h1": "Décider vite<br>sans décider mal.",
- "desc": "« Huit fois plus vite, 80 % moins cher » : ce que ces promesses compressent réellement, ce qu'elles sacrifient, et comment cadrer un dispositif court qui tienne devant un comité.",
+ "desc": "« 8× plus vite, 80 % moins cher » : ce que ces promesses compressent, ce qu'elles sacrifient, et comment cadrer un dispositif court qui tienne.",
  "kw": "étude qualitative rapide, quick study, dispositif court étude, décision rapide étude marché",
  "chapo": "Le marché des études s'est mis à vendre de la vitesse. La question n'est pas de savoir si c'est possible — c'est de savoir ce qu'on enlève pour y arriver, et si ce qu'on enlève est ce dont on avait besoin.",
  "body": """
-<h2>Ce que la vitesse compresse réellement</h2>
+<h2>Que compresse-t-on réellement quand on va plus vite ?</h2>
 <p><strong>Sur une étude qualitative, quatre postes se compriment sans dommage, et trois ne se compriment pas.</strong> Confondre les deux listes, c'est produire vite un matériau qui ne répond pas à la question.</p>
 <p>Se compriment&nbsp;: la transcription (aujourd'hui quasi instantanée), la structuration du corpus, le premier balayage thématique, et la mise en forme du livrable. Ensemble, ces quatre postes représentaient il y a cinq ans une part considérable du délai d'une étude. Les récupérer est un gain net, et tout le monde devrait le prendre.</p>
 <p>Ne se compriment pas&nbsp;: le recrutement d'une cible difficile, la conduite du terrain, et l'arbitrage entre deux interprétations concurrentes. Ces trois-là sont des durées incompressibles parce qu'elles dépendent de disponibilités humaines et de jugement, pas de puissance de calcul.</p>
@@ -519,7 +553,7 @@ ARTICLES += [
   <li><strong>« Cette conclusion, je peux remonter à quel verbatim ? »</strong> C'est la question qui distingue une synthèse d'une reconstruction plausible. Elle doit avoir une réponse en trois secondes, horodatée.</li>
 </ol>
 
-<h2>Quand un dispositif court n'est pas la bonne réponse</h2>
+<h2>Quand un dispositif court n'est-il pas la bonne réponse ?</h2>
 <p>Nous le disons en cadrage plutôt qu'en fin de mission&nbsp;: une question qui porte sur plusieurs marchés, une refonte de positionnement, une exploration sans hypothèse de départ ou un sujet où l'entreprise est divisée en interne ne se traitent pas en cinq semaines. Le format court sert à trancher une question précise, pas à remplacer une étude de fond — et le vendre comme tel serait exactement le raccourci que nous reprochons au reste du marché.</p>
 """,
 },
@@ -538,9 +572,9 @@ CAS = [
  "cat": "Mobilité & Automobile",
  "date": "2026-08-25",
  "read": "5 min",
- "title": "Cas — Concevoir un utilitaire léger pour des artisans qui ne se plaignent jamais",
+ "title": "Cas — Un utilitaire pour artisans qui ne se plaignent jamais",
  "h1": "Concevoir un utilitaire<br>pour des artisans qui<br>ne se plaignent jamais.",
- "desc": "Étude de cas anonymisée : trois focus groups et une série d'entretiens dans deux pays pour cadrer la prochaine génération d'un véhicule utilitaire léger.",
+ "desc": "Étude de cas anonymisée : trois focus groups et des entretiens dans deux pays pour cadrer la prochaine génération d'un utilitaire léger.",
  "kw": "étude qualitative automobile, focus group artisans, étude véhicule utilitaire",
  "meta": [("Secteur", "Mobilité &amp; Automobile"), ("Dispositif", "3 focus groups + entretiens"),
           ("Terrain", "France et Italie"), ("Livrables", "Rapport, typologies, atelier")],
@@ -574,9 +608,9 @@ CAS = [
  "cat": "Mobilité & Automobile",
  "date": "2026-08-25",
  "read": "5 min",
- "title": "Cas — Faire arbitrer un design de véhicule électrique par ceux qui en conduisent déjà un",
+ "title": "Cas — Arbitrer un design par les conducteurs de la concurrence",
  "h1": "Faire arbitrer un design<br>par ceux qui conduisent<br>déjà la concurrence.",
- "desc": "Étude de cas anonymisée : une clinique produit auprès de possesseurs de véhicules électriques concurrents pour arbitrer concept, design et interface avant design freeze.",
+ "desc": "Étude de cas anonymisée : une clinique produit auprès de possesseurs de véhicules électriques concurrents, pour arbitrer avant le gel du projet.",
  "kw": "car clinic, test de concept automobile, étude design véhicule électrique",
  "meta": [("Secteur", "Mobilité &amp; Automobile"), ("Dispositif", "Clinique produit + entretiens"),
           ("Terrain", "Deux villes françaises"), ("Livrables", "Rapport, restitution animée")],
@@ -610,9 +644,9 @@ CAS = [
  "cat": "Bâtiment",
  "date": "2026-08-25",
  "read": "4 min",
- "title": "Cas — Diviser le coût d'un terrain en recrutant dans le fichier du client",
+ "title": "Cas — Diviser le coût d'un terrain grâce au fichier client",
  "h1": "Diviser le coût d'un terrain<br>en recrutant dans<br>le fichier du client.",
- "desc": "Étude de cas anonymisée : comment un réseau de distribution de matériaux a fourni sa propre base client, et ce que ça change au budget comme à la qualité du terrain.",
+ "desc": "Étude de cas anonymisée : un distributeur de matériaux fournit sa base client. Ce que ça change au budget comme à la qualité du terrain.",
  "kw": "recrutement étude sur fichier client, étude qualitative bâtiment, étude distribution matériaux",
  "meta": [("Secteur", "Bâtiment"), ("Dispositif", "Entretiens sur fichier client"),
           ("Terrain", "France"), ("Livrables", "Top lines, corpus interrogeable")],
@@ -720,23 +754,23 @@ FAQ = [
 
 LIVRE_BLANC = {
  "slug": "livre-blanc.html",
- "title": "Livre blanc — La parole client, structurée jusqu'à la décision | ACMÉ Consultants",
+ "title": "Livre blanc — La parole client jusqu'à la décision",
  "h1": "La parole client,<br>structurée jusqu'à<br>la décision.",
  "desc": "Livre blanc : un protocole d'analyse de verbatim traçable, où l'IA fait le travail mécanique et où chaque conclusion reste remontable jusqu'à sa source.",
  "kw": "analyse de verbatim, protocole étude qualitative, traçabilité verbatim, méthode qualitative IA",
  "chapo": "Comment passer de quarante heures d'enregistrement à une décision que l'on peut défendre — sans perdre en route ce qui rendait le corpus intéressant.",
  "sommaire": [
-   ("01", "Le problème que ce protocole résout", "pb"),
+   ("01", "Pourquoi une conclusion devient invérifiable", "pb"),
    ("02", "Quatre principes", "principes"),
    ("03", "Le protocole, phase par phase", "phases"),
-   ("04", "Ce que l'IA fait, ce qu'elle ne fait jamais", "ia"),
+   ("04", "Ce que l'IA fait, et ne fait jamais", "ia"),
    ("05", "La traçabilité, concrètement", "trace"),
    ("06", "Le cadre déontologique", "cadre"),
    ("07", "Ce que ça change pour vous", "vous"),
  ],
  "body": """
 <section id="pb">
-<h2><span class="wb-n">01</span> Le problème que ce protocole résout</h2>
+<h2><span class="wb-n">01</span> Pourquoi une conclusion d'étude devient-elle invérifiable ?</h2>
 <p class="wb-lede">Entre le moment où quelqu'un dit quelque chose d'important en entretien et le moment où une décision est prise en comité, il y a quatre ou cinq réécritures successives. À chacune, quelque chose se perd — et personne ne sait quoi.</p>
 <p>Le chemin habituel d'une étude qualitative ressemble à ceci&nbsp;: l'entretien est enregistré, puis transcrit, puis codé, puis synthétisé par thème, puis résumé en slides, puis présenté oralement, puis reformulé par celui qui a assisté à la présentation pour ceux qui n'y étaient pas. Sept étapes, sept occasions de lisser une nuance.</p>
 <p>Ce n'est pas un problème de rigueur individuelle&nbsp;: c'est un problème de structure. Chaque étape produit un document autonome qui remplace le précédent au lieu de s'y ajouter. Au bout de la chaîne, plus personne ne peut répondre à la question&nbsp;: « cette conclusion, elle vient de qui&nbsp;? »</p>
@@ -778,7 +812,7 @@ LIVRE_BLANC = {
 </section>
 
 <section id="ia">
-<h2><span class="wb-n">04</span> Ce que l'IA fait, ce qu'elle ne fait jamais</h2>
+<h2><span class="wb-n">04</span> Que fait l'IA, et que ne fait-elle jamais ?</h2>
 <p class="wb-lede">Cette table n'est pas une précaution rhétorique. C'est la transparence sur les outils que demande le cadre professionnel français, et c'est ce que nous remettons par écrit en avant-vente.</p>
 <div class="tw">
 <table>
@@ -828,6 +862,17 @@ LIVRE_BLANC = {
   <div><h3>Le corpus vous survit</h3><p>Une étude cesse d'être un document daté&nbsp;: elle devient une base à laquelle vos équipes reviennent six mois plus tard avec une autre question.</p></div>
   <div><h3>La décision est le livrable</h3><p>Pas le rapport. C'est la seule mesure qui compte, et c'est celle sur laquelle nous acceptons d'être jugés.</p></div>
 </div>
+<aside class="art-sources" style="max-width:68ch;">
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://syntec-conseil.fr/" rel="nofollow noopener" target="_blank">Syntec Conseil</a> — sept engagements pour un usage responsable de l'IA dans les études, mai 2025 : supervision humaine à chaque étape et transparence sur les outils employés.</li>
+    <li><a href="https://esomar.org/" rel="nofollow noopener" target="_blank">ESOMAR</a> — cadre déontologique international des études de marché et de l'opinion.</li>
+    <li><a href="https://www.mrnews.fr/" rel="nofollow noopener" target="_blank">Market Research News</a> — dossiers professionnels sur la place de l'IA dans les études qualitatives, 2026.</li>
+    <li><a href="https://www.gladia.io/pricing" rel="nofollow noopener" target="_blank">Gladia</a> — fournisseur français de transcription : désactivation de l'entraînement des modèles dès le plan Growth, rétention nulle en Enterprise.</li>
+  </ul>
+  <p class="art-sources-note">Références relevées en août 2026.</p>
+</aside>
+
 <div class="wb-cta">
   <h3>Discuter d'un dispositif</h3>
   <p>Composez votre configuration et obtenez son calendrier en deux minutes, ou écrivez-nous votre question en trois lignes.</p>
@@ -892,6 +937,18 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
         anon = ('<p class="art-anon"><strong>Cas anonymisé.</strong> Le dispositif décrit est réel ; '
                 'le client n\'est pas nommé et aucun résultat chiffré n\'est publié. '
                 'La levée d\'anonymat suppose son accord écrit.</p>')
+    src = ""
+    if a.get("sources"):
+        # Citer des sources externes identifiables, en ligne dans le texte, est la
+        # tactique la mieux mesurée en GEO (+30 à 40 % de visibilité, et jusqu'à
+        # +115 % pour un site faiblement positionné). Elle sert aussi le lecteur.
+        items = "".join(
+            f'<li><a href="{u}" rel="nofollow noopener" target="_blank">{n}</a> — {q}</li>'
+            for n, q, u in a["sources"])
+        src = ('<aside class="art-sources"><h2>Sources</h2><ul>' + items + '</ul>'
+               '<p class="art-sources-note">Repères relevés en août 2026. Les tarifs de '
+               'marché évoluent&nbsp;: vérifiez la date de la source avant de vous en servir '
+               'comme référence.</p></aside>')
     body = f"""<article class="art">
   <header class="art-head">
     <div class="container art-w">
@@ -905,6 +962,7 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
   </header>
   <div class="container art-w art-body" lang="fr">
 {a['body']}
+{src}
   </div>
   <div class="container art-w">
     <div class="art-foot">
@@ -939,6 +997,17 @@ def render_faq():
   <div class="container">
     <nav class="faq-nav" aria-label="Rubriques">{''.join(nav)}</nav>
     {''.join(secs)}
+    <aside class="art-sources" style="max-width:860px;">
+      <h2>Sur quoi s'appuient ces réponses</h2>
+      <ul>
+        <li><a href="https://syntec-conseil.fr/" rel="nofollow noopener" target="_blank">Syntec Conseil</a> — engagements d'usage responsable de l'IA dans les études, mai 2025.</li>
+        <li><a href="https://esomar.org/" rel="nofollow noopener" target="_blank">ESOMAR</a> — cadre déontologique international.</li>
+        <li><a href="https://www.squarecocoon.fr/prix-d-un-focus-group/" rel="nofollow noopener" target="_blank">Square Cocoon</a> et <a href="https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/" rel="nofollow noopener" target="_blank">IntoTheMinds</a> — repères publics de budget, 2026.</li>
+        <li>Le reste vient de notre pratique de terrain. Quand une réponse relève de notre expérience et non d'une source publique, elle est formulée à la première personne.</li>
+      </ul>
+      <p class="art-sources-note">Réponses à jour au 25 août 2026.</p>
+    </aside>
+
     <div class="faq-cta">
       <h2 class="display">Votre question<br>n'y est pas ?</h2>
       <p class="lead">Écrivez-nous en trois lignes. Nous répondons sous 48 heures.</p>
@@ -946,7 +1015,7 @@ def render_faq():
     </div>
   </div>
 </section>"""
-    return page("faq.html", "FAQ — études qualitatives, délais, budget et données | ACMÉ Consultants",
+    return page("faq.html", "FAQ — étude qualitative : méthode, délais, budget, données",
                 "Combien coûte une étude qualitative, combien de temps prend-elle, qui recrute, où sont les données : 22 réponses directes aux questions les plus fréquentes.",
                 body, extra_jsonld=faq_jsonld(), current="ct",
                 breadcrumbs=[("Accueil", ""), ("Contenus", "contenus.html"), ("FAQ", "faq.html")])
@@ -1068,7 +1137,7 @@ def render_hub():
         "hasPart": [article_jsonld(a) for a in ARTICLES + CAS],
     }
     return page("contenus.html",
-                "Contenus — articles, études de cas et livre blanc | ACMÉ Consultants",
+                "Contenus — articles, études de cas et livre blanc",
                 "Articles de praticiens sur les études qualitatives, études de cas anonymisées, livre blanc sur l'analyse de verbatim traçable et FAQ complète.",
                 body, extra_jsonld=ld, current="ct",
                 breadcrumbs=[("Accueil", ""), ("Contenus", "contenus.html")])
@@ -1093,5 +1162,204 @@ def main():
         print("  ", s, "%6.1f Ko" % ((ROOT / s).stat().st_size / 1024))
 
 
+# ═══════════════════════════════════════════════════════════════════════
+#  ARTICLES ISSUS DU TEST DE PROMPTS GEO
+#  Trois angles repérés en interrogeant les moteurs sur le corpus :
+#  - « peut-on remplacer les répondants par l'IA » : occupé par deux
+#    concurrents, sur un sujet où Acmé a une position tranchée à opposer ;
+#  - « car clinic » : quasiment personne ne l'explique en français, alors
+#    que c'est la signature du cabinet ;
+#  - « brief d'étude qualitative » : personne ne l'occupe, et l'intention
+#    est exactement celle d'un acheteur en train de cadrer.
+# ═══════════════════════════════════════════════════════════════════════
+
+ARTICLES += [
+{
+ "slug": "article-repondants-synthetiques.html",
+ "cat": "Point de vue",
+ "date": "2026-08-25",
+ "read": "7 min",
+ "title": "Peut-on remplacer les répondants par de l'IA ?",
+ "h1": "Peut-on remplacer<br>les répondants<br>par de l'IA ?",
+ "desc": "Répondants synthétiques, personas génératifs, panels simulés : ce qu'ils savent faire, ce qu'ils ne feront pas, et le seul usage que nous leur reconnaissons.",
+ "kw": "répondants synthétiques, personas IA, panel synthétique, IA remplacer participants étude",
+ "sources": [
+  ("Agalma Études — données synthétiques et panels", "un institut français reconnaît l'utilité de pré-test tout en constatant l'échec sur l'émotion et l'hésitation", "https://agalma-etudes.com/blog/insights-ia/donnees-synthetiques-panels/"),
+  ("IntoTheMinds — peut-on remplacer les répondants par l'IA ?", "l'état du débat côté institut", "https://www.intotheminds.com/blog/en/qualitative-interviews-ai/"),
+  ("Syntec Conseil", "sept engagements d'usage responsable de l'IA dans les études, mai 2025", "https://syntec-conseil.fr/"),
+  ("Market Research News", "dossier professionnel sur la place de l'IA dans les études qualitatives, 2026", "https://www.mrnews.fr/2026/03/09/dossier-quelle-place-donner-a-l-ia-dans-les-etudes-qualitatives-volet-2/"),
+ ],
+ "chapo": "La question revient à chaque cadrage depuis dix-huit mois, et elle est légitime : si un modèle sait imiter un consommateur, pourquoi payer pour en interroger de vrais ? Voici la réponse honnête, y compris sur ce que ces outils savent faire.",
+ "body": """
+<h2>Qu'appelle-t-on un répondant synthétique ?</h2>
+<p><strong>Un profil simulé par un modèle de langage, à qui l'on pose les questions d'un guide d'entretien comme s'il s'agissait d'une personne.</strong> On le paramètre avec un âge, un métier, des habitudes de consommation, parfois des données de panel réelles, et il répond.</p>
+<p>Le produit final ressemble beaucoup à un corpus d'entretiens. C'est précisément ce qui rend la question difficile&nbsp;: le livrable est plausible, lisible, et il coûte presque rien.</p>
+
+<h2>Pourquoi ça ne remplace pas un terrain</h2>
+<p><strong>Parce qu'un modèle génère la réponse la plus probable, et qu'une étude qualitative existe pour trouver l'improbable.</strong> C'est l'argument central, et il n'est pas rhétorique&nbsp;: il décrit exactement ce que fait la machine.</p>
+<p>Un modèle produit la moyenne pondérée de ce qui a déjà été écrit sur un sujet. Or ce que vous cherchez en qualitatif, c'est la personne qui n'utilise pas votre produit comme prévu, celle qui a inventé un usage que personne n'avait imaginé, celle dont l'objection ne figure dans aucun article. Interroger un modèle revient à interroger le consensus — c'est-à-dire ce que vos équipes savent déjà, reformulé avec assurance.</p>
+<p>Trois manques précis, constatés en confrontant des corpus simulés à des corpus réels sur les mêmes guides&nbsp;:</p>
+<ul>
+  <li><strong>L'hésitation disparaît.</strong> Un vrai participant se reprend, se contredit à trois minutes d'intervalle, dit « enfin, non, en fait… ». C'est souvent là qu'est l'information. Le modèle, lui, est cohérent du début à la fin.</li>
+  <li><strong>Le silence n'existe pas.</strong> Les trois secondes après une question gênante ne se simulent pas, et elles portent une part du sens.</li>
+  <li><strong>L'écart entre le dit et le fait s'efface.</strong> Un participant explique rationnellement un choix, puis décrit trente secondes plus tard un comportement qui le contredit. Un analyste entend l'écart. Un modèle produit une version cohérente des deux.</li>
+</ul>
+<p>Ce constat n'est pas isolé&nbsp;: <a href="https://agalma-etudes.com/blog/insights-ia/donnees-synthetiques-panels/" rel="nofollow noopener" target="_blank">Agalma Études</a>, qui travaille pourtant activement le sujet, relève que ces dispositifs échouent à restituer les émotions authentiques, les hésitations, les contradictions involontaires et les silences significatifs. Et la profession française s'est dotée en mai 2025 d'un cadre — les engagements <a href="https://syntec-conseil.fr/" rel="nofollow noopener" target="_blank">Syntec Conseil</a> — qui impose une supervision humaine à chaque étape et la transparence sur les outils employés.</p>
+
+<h2>Le risque qu'on sous-estime : la boucle de confirmation</h2>
+<p>Un répondant synthétique est entraîné sur du contenu public. Votre marque, votre catégorie et vos concurrents y sont décrits par… du marketing. Vous interrogez donc un miroir de votre propre discours, et vous en ressortez conforté.</p>
+<p>C'est le pire résultat possible d'une étude&nbsp;: pas une erreur visible, mais une confirmation confortable qui coûtera cher au lancement.</p>
+
+<h2>Alors, à quoi ça sert vraiment ?</h2>
+<p><strong>À une chose, et nous l'utilisons pour ça : pré-tester un guide d'entretien.</strong> Faire tourner un guide sur quelques profils simulés révèle en vingt minutes les questions mal formulées, les enchaînements qui ne tiennent pas, les termes ambigus. C'est du débogage de guide, avant d'engager du terrain réel qui, lui, coûte 200 à 300&nbsp;€ par personne.</p>
+<p>Deux autres usages nous paraissent défendables, avec réserve&nbsp;: préparer un animateur à des objections auxquelles il n'a pas pensé, et simuler un scénario extrême pour vérifier qu'un dispositif tiendrait. Dans les deux cas, ce sont des <em>outils de préparation</em>, jamais des sources de données.</p>
+
+<h2>Comment poser la question à un prestataire</h2>
+<p>Si un devis vous paraît anormalement bas, trois questions tranchent en une minute&nbsp;:</p>
+<ol>
+  <li><strong>« Combien de personnes réelles seront interrogées, et comment sont-elles recrutées ? »</strong> Une réponse en nombre de « répondants » sans précision de recrutement mérite une relance.</li>
+  <li><strong>« Y a-t-il de l'IA dans la production des réponses, et où exactement ? »</strong> La transparence sur ce point est un engagement professionnel, pas une faveur.</li>
+  <li><strong>« Cette phrase de synthèse, elle vient de quel verbatim, à quel horodatage ? »</strong> C'est la question à laquelle un corpus synthétique ne peut pas répondre autrement qu'en fabriquant.</li>
+</ol>
+
+<h2>Notre position, en une phrase</h2>
+<p>Nous utilisons l'IA sur tout ce qui est mécanique et vérifiable — transcription, structuration, premier balayage — et jamais pour produire de la parole client. Le terrain est le seul endroit où l'on apprend quelque chose qu'on ne savait pas, et c'est exactement pour ça qu'il est le socle de nos dispositifs, y compris les plus courts.</p>
+<p class="art-more">La répartition complète entre ce qui est automatisé et ce qui ne l'est jamais figure dans notre <a href="article-ia-etudes-qualitatives.html">article sur l'IA et les études qualitatives</a> et dans le <a href="livre-blanc.html">livre blanc</a>.</p>
+""",
+},
+{
+ "slug": "article-car-clinic.html",
+ "cat": "Méthode",
+ "date": "2026-08-25",
+ "read": "8 min",
+ "title": "Qu'est-ce qu'une car clinic et à quoi ça sert ?",
+ "h1": "Qu'est-ce qu'une<br>car clinic ?",
+ "desc": "Clinique statique ou dynamique, recrutement sur véhicule possédé, protocole de passage : comment se conduit un test produit automobile.",
+ "kw": "car clinic, clinique produit automobile, test véhicule consommateurs, clinique statique dynamique",
+ "sources": [
+  ("Square Cocoon — Prix d'un focus group", "repères de budget pour un dispositif en salle, 2026", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+  ("Espace Rhône", "exemple d'infrastructure qualitative équipée pour l'observation", "https://www.espacerhone.com/"),
+ ],
+ "chapo": "C'est le dispositif le plus coûteux du qualitatif automobile, et celui qui produit le plus d'écart entre ce que les gens disent et ce qu'ils font. Voici comment il se monte, et quand il ne faut pas le monter.",
+ "body": """
+<h2>Qu'est-ce qu'une car clinic ?</h2>
+<p><strong>Un dispositif d'étude où des participants recrutés sur critères évaluent un véhicule, un prototype ou des directions de design en présence physique de l'objet.</strong> Le principe tient en une phrase&nbsp;: on ne demande pas aux gens ce qu'ils pensent d'une voiture, on les met devant et on observe ce qu'ils font.</p>
+<p>Elle se pratique aussi hors automobile — sur de l'électroménager, du mobilier, de l'équipement professionnel. Le nom est resté attaché au secteur qui l'a inventé.</p>
+
+<h2>Statique ou dynamique : quelle différence ?</h2>
+<p><strong>La clinique statique évalue l'objet à l'arrêt ; la dynamique ajoute l'essai.</strong></p>
+<ul>
+  <li><strong>Statique</strong> — le véhicule est en salle ou sous hall. On travaille l'extérieur, les proportions, la posture, l'intérieur, l'ergonomie de poste, la perception de qualité. C'est la forme la plus fréquente parce qu'elle autorise le prototype non homologué et la comparaison directe entre plusieurs directions.</li>
+  <li><strong>Dynamique</strong> — le participant conduit. On accède au comportement routier perçu, au bruit, au confort réel, à l'usage des commandes en situation. Beaucoup plus lourd&nbsp;: homologation, assurance, circuit ou parcours, encadrement.</li>
+</ul>
+<p>Un dispositif mixte — statique le matin, essai l'après-midi — est fréquent quand le véhicule est roulant, et c'est celui qui produit le matériau le plus riche&nbsp;: la personne revient sur ses premiers jugements après avoir conduit, et cet écart-là vaut cher.</p>
+
+<h2>Qui faut-il recruter ?</h2>
+<p><strong>Des gens qui possèdent aujourd'hui un véhicule concurrent précis, pas des « intentionnistes » en général.</strong> C'est le critère qui coûte le plus à sourcer et qui change tout.</p>
+<p>L'avis d'un conducteur qui ne possède pas la catégorie porte sur ses représentations. Celui d'un possesseur porte sur l'usage réel — l'ouverture du coffre les bras chargés, la place de recharge, le siège enfant, la visibilité trois-quarts arrière. C'est opérant pour arbitrer&nbsp;; l'autre ne l'est pas.</p>
+<p>Sur un véhicule électrique, la règle est encore plus nette&nbsp;: n'interroger que des possesseurs d'électrique, sous peine de recueillir des craintes d'autonomie fantasmées plutôt que des contraintes vécues.</p>
+
+<h2>Comment se déroule un passage ?</h2>
+<p>Un protocole de clinique s'écrit à la minute, parce que l'ordre des expositions détermine les résultats.</p>
+<ol>
+  <li><strong>Approche libre, sans consigne.</strong> Les trente premières secondes sont les plus informatives de la journée&nbsp;: par où la personne entre, ce qu'elle touche, ce qu'elle contourne. On observe, on ne parle pas.</li>
+  <li><strong>Réaction à chaud</strong>, avant toute question orientée.</li>
+  <li><strong>Parcours guidé</strong> — extérieur, ouvrants, poste de conduite, places arrière, coffre. Chaque station a ses relances écrites.</li>
+  <li><strong>Comparaison</strong> avec une ou deux références concurrentes présentes. C'est là que la hiérarchie réelle des critères apparaît.</li>
+  <li><strong>Entretien individuel</strong> en fin de passage, hors du regard des autres participants, pour revenir sur ce qu'un consensus de salle a lissé.</li>
+</ol>
+
+<h2>Ce que la clinique révèle et que rien d'autre ne révèle</h2>
+<p><strong>L'écart entre la hiérarchie déclarée et la hiérarchie observée.</strong> Interrogés en amont, les participants classent en tête des critères rationnels d'usage — coût, autonomie, volume de coffre. Devant l'objet, leurs premiers gestes et leurs premières réactions portent régulièrement sur d'autres registres.</p>
+<p>Aucun questionnaire ne fait apparaître cet écart, parce qu'un questionnaire n'a que le déclaratif. C'est la raison d'être du dispositif, et c'est ce qui justifie son coût.</p>
+
+<h2>Combien ça coûte, et pourquoi c'est cher</h2>
+<p>Trois postes s'additionnent&nbsp;: le recrutement sur critère de possession (le plus difficile à sourcer, 200 à 300&nbsp;€ par personne et souvent davantage), la logistique de l'objet (transport, hall, gardiennage, confidentialité), et le temps de consultants seniors sur plusieurs jours consécutifs. À titre de repère, un dispositif en salle se situe déjà entre <a href="https://www.squarecocoon.fr/prix-d-un-focus-group/" rel="nofollow noopener" target="_blank">3 000 et 10 000&nbsp;€ par groupe</a> sans contrainte produit&nbsp;; une clinique ajoute la logistique par-dessus.</p>
+<p>Le calendrier suit&nbsp;: comptez une semaine de préparation supplémentaire pour la logistique produit, ce qui porte un dispositif complet autour de huit à dix semaines.</p>
+
+<h2>Quand il ne faut PAS faire de clinique</h2>
+<p>Nous le disons en cadrage plutôt qu'en fin de mission&nbsp;:</p>
+<ul>
+  <li><strong>Quand l'objet n'existe pas encore sous une forme montrable.</strong> Une clinique sur des planches ne vaut pas une clinique&nbsp;: c'est un test de concept, moins cher, et il faut l'appeler ainsi.</li>
+  <li><strong>Quand la question porte sur l'usage dans la durée.</strong> Une clinique capte la première rencontre. Pour l'usage, il faut du terrain chez les gens.</li>
+  <li><strong>Quand la confidentialité interdit de sortir l'objet.</strong> Mieux vaut un dispositif adapté qu'une clinique amputée.</li>
+</ul>
+<p class="art-more">Un exemple de dispositif réel, anonymisé&nbsp;: <a href="cas-clinique-electrique.html">arbitrer un design par les conducteurs de la concurrence</a>.</p>
+""",
+},
+{
+ "slug": "article-brief-etude-qualitative.html",
+ "cat": "Repères",
+ "date": "2026-08-25",
+ "read": "7 min",
+ "title": "Comment rédiger un brief d'étude qualitative",
+ "h1": "Comment rédiger<br>un brief d'étude<br>qualitative.",
+ "desc": "Les huit rubriques d'un brief qui permet de comparer des devis, les erreurs qui font dériver le budget, et les questions qu'un bon prestataire vous posera en retour.",
+ "kw": "brief étude qualitative, cahier des charges étude de marché, appel d'offres institut études, rédiger un brief",
+ "sources": [
+  ("IntoTheMinds — Combien coûte une étude de marché", "les ordres de grandeur à connaître avant de briefer", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
+  ("ESOMAR", "cadre déontologique international : ce qu'un prestataire s'engage à respecter", "https://esomar.org/"),
+ ],
+ "chapo": "Un brief flou ne produit pas des devis flous : il produit des devis incomparables. Voici ce qu'il faut y mettre pour que trois propositions se lisent côte à côte — et ce qu'il vaut mieux ne pas y mettre.",
+ "body": """
+<h2>À quoi sert vraiment un brief ?</h2>
+<p><strong>À rendre trois devis comparables, et à faire remonter les désaccords internes avant de dépenser.</strong> La seconde fonction est la plus utile et la moins recherchée&nbsp;: écrire la décision à prendre oblige à constater que le marketing et le produit n'attendent pas la même chose de l'étude.</p>
+
+<h2>Les huit rubriques</h2>
+
+<h3>1. La décision, pas le sujet</h3>
+<p>Écrivez ce que vous allez décider et quand. « Comprendre les attentes des 25-35 ans » n'est pas une décision&nbsp;: « choisir entre deux directions de packaging avant le comité du 15 novembre » en est une. Cette seule ligne change le dispositif proposé.</p>
+
+<h3>2. Ce que vous savez déjà</h3>
+<p>Études antérieures, données de vente, retours SAV, hypothèses internes. C'est contre-intuitif de le donner — beaucoup craignent d'orienter le prestataire — mais l'effet inverse est bien plus coûteux&nbsp;: sans ce contexte, vous financez la redécouverte de ce que vous saviez.</p>
+
+<h3>3. Les hypothèses concurrentes à départager</h3>
+<p>La rubrique qui manque presque toujours, et la plus utile. Listez les deux ou trois explications que vos équipes défendent. Une étude qui doit départager des hypothèses écrites revient rarement confirmer l'opinion du plus gradé.</p>
+
+<h3>4. La cible, avec ses critères durs et ses critères souples</h3>
+<p>Distinguez explicitement ce qui est indispensable de ce qui est souhaitable. Chaque critère dur renchérit le recrutement&nbsp;; un critère souple mal signalé se paie au prix d'un critère dur.</p>
+<p>Et signalez tout de suite si vous disposez d'une base client exploitable&nbsp;: c'est le levier de coût le plus puissant du dispositif.</p>
+
+<h3>5. Le matériel à faire réagir</h3>
+<p>Rien, des stimuli papier ou écran, un produit physique, un prototype confidentiel&nbsp;? Précisez aussi la date à laquelle il sera disponible — un matériel qui glisse de deux semaines décale tout le terrain.</p>
+
+<h3>6. Les livrables attendus, séparément</h3>
+<p>Demandez le chiffrage <strong>ligne par ligne</strong>&nbsp;: terrain seul, transcripts, top lines, rapport complet, typologies, atelier de restitution. Un prix global vous empêche d'arbitrer, et empêche aussi de comparer deux propositions qui ne contiennent pas la même chose.</p>
+
+<h3>7. Le calendrier, avec la date qui ne bouge pas</h3>
+<p>Donnez la date de décision, pas la date de restitution souhaitée. Un prestataire honnête vous dira si elle est tenable, et ce qu'il faut retirer pour qu'elle le devienne.</p>
+
+<h3>8. Les contraintes</h3>
+<p>Confidentialité, données sensibles, langues, pays, secteur réglementé, obligation de passer par un référencement achats. Ce sont les points qui font exploser un budget quand ils arrivent en cours de mission.</p>
+
+<h2>Faut-il annoncer son budget ?</h2>
+<p><strong>Oui, au moins une fourchette.</strong> C'est le point sur lequel les acheteurs hésitent le plus, et à tort. Sans ordre de grandeur, vous recevrez trois propositions calibrées sur trois hypothèses différentes, dont aucune ne correspondra à ce que vous pouviez dépenser.</p>
+<p>Annoncer une fourchette ne vous fait pas payer plus&nbsp;: ça vous fait recevoir des dispositifs adaptés, et ça déplace la discussion sur ce que vous obtenez plutôt que sur ce que ça coûte. À titre de repère avant de fixer cette fourchette&nbsp;: <a href="https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/" rel="nofollow noopener" target="_blank">les ordres de grandeur publiés</a> situent un entretien individuel autour de 600&nbsp;€ en B2C et 750&nbsp;€ en B2B.</p>
+
+<h2>Les quatre erreurs qui coûtent le plus cher</h2>
+<ol>
+  <li><strong>Empiler les questions.</strong> Un brief qui pose sept questions produit une étude qui en traite sept superficiellement. Une question par étude, les autres attendront.</li>
+  <li><strong>Sur-spécifier la cible.</strong> Chaque critère ajouté multiplie le coût de sourcing. Demandez-vous, critère par critère&nbsp;: est-ce que ça changera l'analyse&nbsp;?</li>
+  <li><strong>Imposer la méthode.</strong> « Nous voulons quatre focus groups » ferme la discussion. Décrivez la décision et laissez le prestataire proposer&nbsp;; s'il propose la même chose que vous, tant mieux.</li>
+  <li><strong>Oublier qui décidera.</strong> Si les décideurs n'assistent ni au terrain ni à la restitution, l'étude sera reformulée par un tiers avant d'arriver jusqu'à eux — et elle perdra en route ce qui la rendait utile.</li>
+</ol>
+
+<h2>Les questions qu'un bon prestataire vous posera</h2>
+<p>Elles sont un bon test. Si personne ne vous demande&nbsp;:</p>
+<ul>
+  <li>ce que vous ferez du résultat si l'étude dit l'inverse de ce que vous espérez,</li>
+  <li>qui, nommément, sera dans la salle au moment de décider,</li>
+  <li>si vous avez une base client exploitable,</li>
+  <li>et quelle est la seule question à laquelle il faut absolument répondre,</li>
+</ul>
+<p>…c'est que la proposition que vous recevrez sera un catalogue, pas un dispositif.</p>
+<p class="art-more">Vous pouvez esquisser un dispositif et son calendrier en deux minutes sur notre <a href="decision-rapide.html#configurateur">configurateur</a>, puis nous l'envoyer comme base de discussion.</p>
+""",
+},
+]
+
+
+# Le point d'entrée reste EN DERNIER : tout ce qui est déclaré après ne serait
+# pas encore défini au moment où main() s'exécute.
 if __name__ == "__main__":
     main()

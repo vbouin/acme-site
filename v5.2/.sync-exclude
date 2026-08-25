@@ -1,0 +1,5 @@
+# Fichiers propres à v5.2 : à exclure de toute synchro depuis acme-site-live/,
+# sinon le README de la maquette de Louis les écrase.
+#   rsync -a --delete --exclude-from=v5.2/.sync-exclude ...
+README.md
+.sync-exclude

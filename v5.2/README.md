@@ -13,7 +13,7 @@ Le bouton **FR / EN** en haut à droite bascule tout le site en anglais
 |---|---|
 | **Décision rapide** — l'offre courte, avec un configurateur de dispositif | [/v5.2/decision-rapide.html](decision-rapide.html) |
 | **Contenus** — hub blog, études de cas, livre blanc, FAQ | [/v5.2/contenus.html](contenus.html) |
-| 5 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) |
+| 8 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
 | 3 études de cas anonymisées | [utilitaire & artisans](cas-utilitaire-artisans.html) · [clinique électrique](cas-clinique-electrique.html) · [fichier client](cas-fichier-client-materiaux.html) |
 | Livre blanc, 7 chapitres | [/v5.2/livre-blanc.html](livre-blanc.html) |
 | FAQ, 22 questions | [/v5.2/faq.html](faq.html) |
@@ -55,10 +55,28 @@ Open Graph et le JSON-LD. Corriger un article = éditer le script, puis :
 python3 build_contenus.py
 ```
 
-Balisage en place sur les 11 nouvelles pages : `Organization` + `ProfessionalService`
-partout, plus `Article`, `FAQPage`, `CollectionPage` et `BreadcrumbList` selon le type
-— le site n'avait aucune donnée structurée, ce qui pénalisait le SEO local comme la
-citation par les moteurs génératifs.
+## SEO / GEO
+
+Balisage en place sur **les 25 pages** : `Organization` + `ProfessionalService` partout
+(posé sur les pages préexistantes par `build_head_seo.py`), plus `Article`, `FAQPage`,
+`CollectionPage`, `Service` et `BreadcrumbList` selon le type. Open Graph et `canonical`
+partout. Le site n'avait aucune donnée structurée.
+
+Les articles **citent leurs sources en ligne et en pied de page**. C'est la tactique la
+mieux mesurée en GEO : le travail fondateur sur le sujet (arXiv:2311.09735) situe à
+**+30 à 40 %** le gain des trois méthodes « citer des sources », « ajouter des citations »
+et « ajouter des statistiques », là où la mise en forme seule a un effet faible.
+
+Deux outils tiennent la qualité, dans les skills `geo-seo` et `redac-fr` :
+
+```bash
+python3 ~/.claude/skills/geo-seo/scripts/audit.py .
+python3 ~/.claude/skills/redac-fr/scripts/tics.py . --html --strict
+```
+
+⚠️ **Toutes les pages sont en `noindex` et `robots.txt` porte `Disallow: /`.** C'est
+délibéré tant que c'est une maquette — mais rien ne peut se positionner tant que ce
+verrou est en place. C'est une date à fixer, pas une option.
 
 Les études de cas sont **anonymisées** : dispositif réel, client jamais nommé, aucun
 résultat chiffré. Les nommer suppose l'accord écrit du client.
