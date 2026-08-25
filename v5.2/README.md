@@ -60,10 +60,18 @@ python3 build_contenus.py
 
 Chaque article porte désormais, en plus du corps de texte :
 
-- **Des figures en SVG inline** — barres comparées, matrices 2×2, chaînes de maillons,
-  jauges. Strictement monochrome, générées par `fig_barres()`, `fig_matrice()`,
+- **Une à deux figures en SVG inline** par article, soit 14 au total — barres comparées,
+  matrices 2×2, chaînes de maillons, jauges. Strictement monochrome, générées par `fig_barres()`, `fig_matrice()`,
   `fig_chaine()` et `fig_jauge()` dans `build_contenus.py`. Chacune porte un `<title>`
   (lu par les lecteurs d'écran, extrait par les moteurs) et une ancre `#fig-N`.
+
+  ⚠️ Ces fonctions sont appelées **à la définition** des articles : elles doivent rester
+  déclarées **avant** les listes `ARTICLES`, et le bloc `if __name__` **après**. Un corps
+  d'article qui insère une figure doit fermer et rouvrir son triple guillemet
+  (`""" + fig_chaine(…) + """`), sinon l'appel devient du texte littéral.
+
+  Pour les vérifier sans navigateur (le pane se bloque au scroll) : extraire le `<svg>`,
+  y inliner les valeurs de couleur, puis `qlmanage -t -s 1200 -o . fig.svg`.
 - **Des bandeaux de chiffres sourcés** (`stats()`) — valeur, libellé, source datée.
 - **Une FAQ de 3 à 5 questions**, balisée `FAQPage` et fusionnée avec l'`Article` dans
   un `@graph` : la page est une entité qui est à la fois un article et une FAQ.

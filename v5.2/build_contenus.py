@@ -223,6 +223,131 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
 """
 
 
+
+# ═══════════════════════════════════════════════════════════════════════
+#  FIGURES — schémas et infographies en SVG inline
+#  Strictement monochrome, comme le reste de l'identité : l'accent est un
+#  aplat d'encre ou un trait plus épais, jamais une couleur. Le SVG est
+#  inline (pas de fichier) pour rester dans le flux du texte, hériter des
+#  tokens CSS et suivre le thème.
+#  Chaque figure porte un <title> : c'est ce que lit un lecteur d'écran, et
+#  c'est aussi ce qu'un moteur extrait quand il ne rend pas l'image.
+# ═══════════════════════════════════════════════════════════════════════
+
+_FIG_N = [0]
+
+
+def fig(titre, legende, contenu, h=260):
+    _FIG_N[0] += 1
+    i = _FIG_N[0]
+    return (
+        # Une ancre par figure : elle permet un lien profond vers un schéma
+        # précis, ce qui sert autant en rendez-vous qu'en partage social.
+        f'<figure class="fg" id="fig-{i}">\n'
+        f'  <svg viewBox="0 0 720 {h}" role="img" aria-labelledby="figt{i}" class="fg-svg">\n'
+        f'    <title id="figt{i}">{titre}</title>\n'
+        f'{contenu}\n'
+        '  </svg>\n'
+        f'  <figcaption>{legende}</figcaption>\n'
+        '</figure>')
+
+
+def fig_barres(titre, legende, series, max_val=None):
+    """Barres horizontales comparées. series = [(label, valeur, note), ...]"""
+    max_val = max_val or max(v for _, v, _ in series)
+    out, y = [], 26
+    for lab, val, note in series:
+        # 340 et non 400 : au-delà, une valeur longue en bout de barre
+        # (« ≈ 7 sur 10 ») déborde du viewBox.
+        w = 0 if not max_val else (val / max_val) * 340
+        out.append(f'<text x="0" y="{y+12}" class="fg-lab">{lab}</text>')
+        out.append(f'<rect x="230" y="{y}" width="{w:.1f}" height="17" class="fg-bar"/>')
+        out.append(f'<text x="{230+w+10:.1f}" y="{y+13}" class="fg-val">{note}</text>')
+        y += 40
+    return fig(titre, legende, "\n".join(out), h=y)
+
+
+def fig_chaine(titre, legende, etapes, pleines=0):
+    """Chaîne de maillons. `pleines` = nombre de maillons pleins en tête."""
+    n = len(etapes)
+    w = (700 - (n - 1) * 12) / n
+    # La taille du titre suit la largeur disponible : à cinq maillons, une
+    # boîte fait ~132 px et un titre en 13,5 px déborde de son cadre.
+    ft = 13.5 if n <= 4 else 12
+    fs = 11.5 if n <= 4 else 10.5
+    out = []
+    for i, (nom, sous) in enumerate(etapes):
+        x = i * (w + 12)
+        plein = i < pleines
+        cls = "fg-box is-full" if plein else "fg-box is-dash"
+        tc = "fg-in" if plein else "fg-on"
+        sc = "fg-in-s" if plein else "fg-on-s"
+        out.append(f'<rect x="{x:.1f}" y="30" width="{w:.1f}" height="94" class="{cls}"/>')
+        out.append(f'<text x="{x+14:.1f}" y="54" class="fg-n {tc}">0{i+1}</text>')
+        out.append(f'<text x="{x+14:.1f}" y="80" class="{tc} fg-t" style="font-size:{ft}px">{nom}</text>')
+        out.append(f'<text x="{x+14:.1f}" y="100" class="{sc} fg-s" style="font-size:{fs}px">{sous}</text>')
+        if i:
+            out.append(f'<line x1="{x-12:.1f}" y1="77" x2="{x:.1f}" y2="77" class="fg-link"/>')
+    return fig(titre, legende, "\n".join(out), h=150)
+
+
+def _wrap(txt, n=40, lignes=3):
+    mots, out, buf = txt.split(), [], ""
+    for m in mots:
+        if len(buf + " " + m) > n:
+            out.append(buf)
+            buf = m
+        else:
+            buf = (buf + " " + m).strip()
+    out.append(buf)
+    return out[:lignes]
+
+
+def fig_matrice(titre, legende, axe_x, axe_y, cases):
+    """Matrice 2x2. cases = [(col, ligne, titre, texte), ...], col/ligne dans {0,1}"""
+    out = [f'<text x="0" y="14" class="fg-ax">{axe_y}</text>',
+           f'<text x="716" y="252" class="fg-ax" text-anchor="end">{axe_x}</text>']
+    for col, lig, t, txt in cases:
+        x, y = 24 + col * 348, 24 + lig * 106
+        out.append(f'<rect x="{x}" y="{y}" width="338" height="96" class="fg-box is-dash"/>')
+        out.append(f'<text x="{x+16}" y="{y+26}" class="fg-on fg-t">{t}</text>')
+        for k, l in enumerate(_wrap(txt, 42, 3)):
+            out.append(f'<text x="{x+16}" y="{y+48+k*17}" class="fg-on-s fg-s">{l}</text>')
+    out.append('<line x1="18" y1="130" x2="702" y2="130" class="fg-axis"/>')
+    out.append('<line x1="360" y1="16" x2="360" y2="234" class="fg-axis"/>')
+    return fig(titre, legende, "\n".join(out), h=262)
+
+
+def fig_jauge(titre, legende, part, texte_dedans, texte_dehors):
+    """Une proportion, en un seul trait segmenté de 10 carrés."""
+    out = []
+    pleins = round(part * 10)
+    for i in range(10):
+        x = i * 40
+        cls = "fg-bar" if i < pleins else "fg-box is-dash"
+        out.append(f'<rect x="{x}" y="24" width="30" height="30" class="{cls}"/>')
+    out.append(f'<text x="0" y="82" class="fg-on fg-t">{texte_dedans}</text>')
+    out.append(f'<text x="0" y="104" class="fg-on-s fg-s">{texte_dehors}</text>')
+    return fig(titre, legende, "\n".join(out), h=120)
+
+
+def stats(items):
+    """Bandeau de chiffres sourcés. items = [(valeur, libellé, source), ...]
+    Ajouter des statistiques attribuées est l'une des trois tactiques les
+    mieux mesurées pour être cité par un moteur génératif."""
+    return '<div class="stat-row">' + "".join(
+        f'<div><span class="stat-v">{v}</span><span class="stat-l">{l}</span>'
+        f'<span class="stat-s">{s}</span></div>' for v, l, s in items) + '</div>'
+
+# ═══════════════════════════════════════════════════════════════════════
+#  ARTICLES DE MARCHÉ
+#  Le format au meilleur rendement selon l'étude concurrentielle : il
+#  produit des reprises, il donne un prétexte de reprise de contact sur
+#  tout le portefeuille, et il se cite. Trois secteurs de prédilection.
+#  Tous les chiffres sont datés et attribués — c'est la condition pour
+#  être repris, par un journaliste comme par un moteur génératif.
+# ═══════════════════════════════════════════════════════════════════════
+
 # ═══════════════════════════════════════════════════════════════════════
 #  ARTICLES
 #  Angles choisis d'après l'étude concurrentielle : local Lyon (priorité 1),
@@ -301,7 +426,12 @@ ARTICLES = [
 <p>Un animateur expérimenté ne se reconnaît pas au nombre de questions posées mais au nombre de silences tenus. Les trois secondes qui suivent une réponse convenue sont l'endroit où le participant se reprend et dit la chose intéressante. Un modérateur pressé — ou une relance automatique — comble ce silence et perd la phrase.</p>
 <p>C'est aussi pourquoi nous confions l'animation à des consultants seniors&nbsp;: sur un groupe de deux heures, la différence entre un animateur qui suit son guide et un animateur qui suit le groupe représente à peu près la moitié du matériau exploitable.</p>
 
-<h2>Le calendrier réaliste</h2>
+""" + fig_chaine(
+  "Calendrier type d'un dispositif de quatre focus groups",
+  "Cinq à sept semaines entre le brief et la restitution. Le recrutement est le seul poste qui se comprime vraiment — et uniquement si vous fournissez le fichier.",
+  [("Cadrage", "1 semaine"), ("Recrutement", "2 semaines"),
+   ("Terrain", "1 semaine"), ("Analyse et restitution", "1 à 2 semaines")],
+  pleines=0) + """<h2>Le calendrier réaliste</h2>
 <p><strong>Comptez cinq à sept semaines entre le brief et la restitution</strong> pour un dispositif de quatre groupes&nbsp;: une semaine de cadrage et d'écriture du guide, deux semaines de recrutement, une semaine de terrain, une à deux semaines d'analyse et de restitution. Le recrutement est le seul poste qui se comprime vraiment — et uniquement si vous fournissez le fichier.</p>
 <p class="art-more">Vous pouvez composer un dispositif et obtenir son calendrier sur notre <a href="decision-rapide.html#configurateur">configurateur Décision rapide</a>.</p>
 """,
@@ -372,7 +502,13 @@ ARTICLES = [
 <p>La raison est simple&nbsp;: un modèle génère la réponse la plus probable. Une étude qualitative sert à trouver l'improbable — la personne qui n'utilise pas votre produit comme prévu, celle qui a un usage que personne n'avait imaginé. Interroger un modèle revient à interroger la moyenne de ce qui a déjà été écrit, c'est-à-dire exactement ce que vous savez déjà.</p>
 <p>Les répondants synthétiques ont un usage honnête et étroit&nbsp;: pré-tester un guide d'entretien, repérer une question mal formulée avant d'engager du terrain réel. Nous les utilisons pour ça, et pour rien d'autre.</p>
 
-<h2>Notre règle : ce que l'IA fait, ce qu'elle ne fait jamais</h2>
+""" + fig_chaine(
+  "Où l'automatisation mord réellement, maillon par maillon",
+  "Les maillons pleins sont ceux que l'IA traite chez nous, parce qu'ils sont mécaniques et vérifiables. Les maillons en pointillé restent humains — non par principe, mais parce que ce sont ceux où il faut arbitrer.",
+  [("Transcription", "automatisée"), ("Structuration", "automatisée"),
+   ("Premier balayage", "assisté"), ("Analyse", "humaine"),
+   ("Recommandation", "humaine")],
+  pleines=2) + """<h2>Notre règle : ce que l'IA fait, ce qu'elle ne fait jamais</h2>
 <div class="tw">
 <table>
 <thead><tr><th>Étape</th><th>Ce que l'IA fait chez nous</th><th>Ce qu'elle ne fait jamais</th></tr></thead>
@@ -438,7 +574,14 @@ ARTICLES += [
 <p><strong>Parce qu'une étude qualitative n'est pas un produit, et que les instituts facturent le même dispositif à des niveaux différents selon le client.</strong> C'est une convention de marché, pas une conspiration&nbsp;: le coût réel dépend de la difficulté de recrutement, du nombre de pays, du matériel à manipuler et du livrable attendu, qui varient d'un facteur cinq.</p>
 <p>Cette opacité a toutefois un effet pervers documenté&nbsp;: elle fait renoncer les acheteurs qui n'ont aucune idée de l'ordre de grandeur, et elle laisse le champ libre au premier acteur qui affiche un prix — même s'il ne vend pas la même chose.</p>
 
-<h2>Les cinq postes qui font le prix</h2>
+""" + fig_barres(
+  "Poids relatif des postes dans une étude qualitative resserrée",
+  "Ordres de grandeur pour un dispositif de douze entretiens avec livrables intermédiaires. Le recrutement domine, et c'est le seul poste qu'un fichier client fait tomber franchement.",
+  [("Recrutement", 34, "le premier poste"),
+   ("Terrain", 28, "conduite et captation"),
+   ("Analyse et livrables", 26, "selon ce que vous prenez"),
+   ("Cadrage", 10, "le plus déterminant"),
+   ("Transcription", 2, "devenu marginal")]) + """<h2>Les cinq postes qui font le prix</h2>
 <h3>1. Le recrutement — souvent le premier poste</h3>
 <p><strong>200 à 300&nbsp;€ par participant</strong> pour un recrutement complet sur critères, indemnisation comprise. Sur douze entretiens, c'est déjà 2 500 à 3 500&nbsp;€ avant qu'un seul mot n'ait été prononcé. Sur une cible rare — un dirigeant, un professionnel de santé, un possesseur d'un équipement précis —, ce montant peut doubler.</p>
 <p>C'est le seul poste que vous pouvez faire tomber franchement&nbsp;: si vous fournissez votre fichier client, il ne reste que la qualification et la prise de rendez-vous.</p>
@@ -540,7 +683,14 @@ ARTICLES += [
   <li><strong>Suivre un usage dans la durée</strong>, ou revenir sur un même profil après un test.</li>
 </ul>
 
-<h2>La grille de décision</h2>
+""" + fig_matrice(
+  "Ce que révèle chaque dispositif",
+  "Le groupe et l'entretien ne donnent pas accès à la même chose. Choisir, c'est d'abord décider si l'on cherche une norme collective ou un écart individuel.",
+  "Nature de la question", "Ce que vous obtenez",
+  [(0, 0, "Focus group", "La norme d'un milieu : ce qui se valorise, ce qui se moque, le vocabulaire spontané."),
+   (1, 0, "Entretien individuel", "L'écart individuel : le parcours réel, les hésitations, ce qui a failli se passer autrement."),
+   (0, 1, "À prendre pour", "Concept, packaging, discours de marque, positionnement."),
+   (1, 1, "À prendre pour", "Prix, parcours d'achat, sujet sensible, décision B2B complexe.")]) + """<h2>La grille de décision</h2>
 <div class="tw">
 <table>
 <thead><tr><th>Si votre question porte sur…</th><th>Dispositif</th><th>Pourquoi</th></tr></thead>
@@ -629,7 +779,13 @@ ARTICLES += [
 </ul>
 <p>Et la liste de ce qu'il ne faut pas retirer&nbsp;: le recrutement sur critères vérifiés, le nombre minimal de voix pour que le corpus se lise (deux groupes par segment, ou une douzaine d'entretiens), et le cadrage — qui prend une semaine et qui détermine la valeur de tout le reste.</p>
 
-<h2>À quoi ressemble un dispositif court qui tient</h2>
+""" + fig_chaine(
+  "Ce qui se comprime, et ce qui ne se comprime pas",
+  "Les maillons pleins se compriment sans dommage. Les maillons en pointillé dépendent de disponibilités humaines et de jugement : les raccourcir, c'est retirer de la validité, pas du délai.",
+  [("Transcription", "quasi instantanée"), ("Structuration", "automatisée"),
+   ("Recrutement", "incompressible"), ("Terrain", "incompressible"),
+   ("Arbitrage", "incompressible")],
+  pleines=2) + """<h2>À quoi ressemble un dispositif court qui tient</h2>
 <p><strong>Quatre à sept semaines, une seule question, un terrain réel, des livrables choisis.</strong> Le calendrier type&nbsp;:</p>
 <div class="tw">
 <table>
@@ -1494,7 +1650,14 @@ ARTICLES += [
 <p>Un répondant synthétique est entraîné sur du contenu public. Votre marque, votre catégorie et vos concurrents y sont décrits par… du marketing. Vous interrogez donc un miroir de votre propre discours, et vous en ressortez conforté.</p>
 <p>C'est le pire résultat possible d'une étude&nbsp;: pas une erreur visible, mais une confirmation confortable qui coûtera cher au lancement.</p>
 
-<h2>Alors, à quoi ça sert vraiment ?</h2>
+""" + fig_matrice(
+  "Répondants synthétiques : le seul usage défendable",
+  "Un modèle génère la réponse la plus probable ; une étude qualitative existe pour trouver l'improbable. D'où une zone d'usage étroite — la préparation — et une zone interdite : la production de données.",
+  "Statut de la sortie", "Moment du projet",
+  [(0, 0, "Avant le terrain — utile", "Pré-tester un guide, repérer une question mal formulée, préparer un animateur à des objections."),
+   (1, 0, "Pendant le terrain — jamais", "Aucune réponse générée n'entre dans un corpus. Pas d'enregistrement, pas d'horodatage, pas de source."),
+   (0, 1, "Ce que ça produit", "Du débogage de dispositif, en vingt minutes, avant d'engager 200 à 300 € par personne recrutée."),
+   (1, 1, "Ce que ça produirait", "Une confirmation confortable de ce que vous saviez déjà — le pire résultat possible d'une étude.")]) + """<h2>Alors, à quoi ça sert vraiment ?</h2>
 <p><strong>À une chose, et nous l'utilisons pour ça : pré-tester un guide d'entretien.</strong> Faire tourner un guide sur quelques profils simulés révèle en vingt minutes les questions mal formulées, les enchaînements qui ne tiennent pas, les termes ambigus. C'est du débogage de guide, avant d'engager du terrain réel qui, lui, coûte 200 à 300&nbsp;€ par personne.</p>
 <p>Deux autres usages nous paraissent défendables, avec réserve&nbsp;: préparer un animateur à des objections auxquelles il n'a pas pensé, et simuler un scénario extrême pour vérifier qu'un dispositif tiendrait. Dans les deux cas, ce sont des <em>outils de préparation</em>, jamais des sources de données.</p>
 
@@ -1563,7 +1726,13 @@ ARTICLES += [
 <p>L'avis d'un conducteur qui ne possède pas la catégorie porte sur ses représentations. Celui d'un possesseur porte sur l'usage réel — l'ouverture du coffre les bras chargés, la place de recharge, le siège enfant, la visibilité trois-quarts arrière. C'est opérant pour arbitrer&nbsp;; l'autre ne l'est pas.</p>
 <p>Sur un véhicule électrique, la règle est encore plus nette&nbsp;: n'interroger que des possesseurs d'électrique, sous peine de recueillir des craintes d'autonomie fantasmées plutôt que des contraintes vécues.</p>
 
-<h2>Comment se déroule un passage ?</h2>
+""" + fig_chaine(
+  "Le protocole de passage d'une clinique produit",
+  "L'ordre des expositions détermine les résultats, d'où un protocole écrit à la minute. Le premier maillon est plein parce que c'est le plus informatif de la journée : on observe, on ne parle pas.",
+  [("Approche libre", "sans consigne"), ("Réaction à chaud", "avant toute question"),
+   ("Parcours guidé", "relances par station"), ("Comparaison", "concurrents présents"),
+   ("Entretien", "hors du groupe")],
+  pleines=1) + """<h2>Comment se déroule un passage ?</h2>
 <p>Un protocole de clinique s'écrit à la minute, parce que l'ordre des expositions détermine les résultats.</p>
 <ol>
   <li><strong>Approche libre, sans consigne.</strong> Les trente premières secondes sont les plus informatives de la journée&nbsp;: par où la personne entre, ce qu'elle touche, ce qu'elle contourne. On observe, on ne parle pas.</li>
@@ -1660,7 +1829,14 @@ ARTICLES += [
 <p><strong>Oui, au moins une fourchette.</strong> C'est le point sur lequel les acheteurs hésitent le plus, et à tort. Sans ordre de grandeur, vous recevrez trois propositions calibrées sur trois hypothèses différentes, dont aucune ne correspondra à ce que vous pouviez dépenser.</p>
 <p>Annoncer une fourchette ne vous fait pas payer plus&nbsp;: ça vous fait recevoir des dispositifs adaptés, et ça déplace la discussion sur ce que vous obtenez plutôt que sur ce que ça coûte. À titre de repère avant de fixer cette fourchette&nbsp;: <a href="https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/" rel="nofollow noopener" target="_blank">les ordres de grandeur publiés</a> situent un entretien individuel autour de 600&nbsp;€ en B2C et 750&nbsp;€ en B2B.</p>
 
-<h2>Les quatre erreurs qui coûtent le plus cher</h2>
+""" + fig_barres(
+  "Ce qui fait le plus varier un devis d'étude qualitative",
+  "Avant de raboter un budget, il vaut mieux savoir sur quoi on agit. La difficulté de recrutement domine largement les autres leviers.",
+  [("Difficulté de recrutement", 100, "jusqu'à x3 sur le sourcing"),
+   ("Modalité de terrain", 55, "déplacement, salle, intendance"),
+   ("Périmètre des livrables", 45, "ce que vous prenez"),
+   ("Nombre de marchés", 40, "guides et échantillons à doubler"),
+   ("Matériel à manipuler", 25, "logistique et confidentialité")]) + """<h2>Les quatre erreurs qui coûtent le plus cher</h2>
 <ol>
   <li><strong>Empiler les questions.</strong> Un brief qui pose sept questions produit une étude qui en traite sept superficiellement. Une question par étude, les autres attendront.</li>
   <li><strong>Sur-spécifier la cible.</strong> Chaque critère ajouté multiplie le coût de sourcing. Demandez-vous, critère par critère&nbsp;: est-ce que ça changera l'analyse&nbsp;?</li>
@@ -1682,129 +1858,6 @@ ARTICLES += [
 },
 ]
 
-# ═══════════════════════════════════════════════════════════════════════
-#  FIGURES — schémas et infographies en SVG inline
-#  Strictement monochrome, comme le reste de l'identité : l'accent est un
-#  aplat d'encre ou un trait plus épais, jamais une couleur. Le SVG est
-#  inline (pas de fichier) pour rester dans le flux du texte, hériter des
-#  tokens CSS et suivre le thème.
-#  Chaque figure porte un <title> : c'est ce que lit un lecteur d'écran, et
-#  c'est aussi ce qu'un moteur extrait quand il ne rend pas l'image.
-# ═══════════════════════════════════════════════════════════════════════
-
-_FIG_N = [0]
-
-
-def fig(titre, legende, contenu, h=260):
-    _FIG_N[0] += 1
-    i = _FIG_N[0]
-    return (
-        # Une ancre par figure : elle permet un lien profond vers un schéma
-        # précis, ce qui sert autant en rendez-vous qu'en partage social.
-        f'<figure class="fg" id="fig-{i}">\n'
-        f'  <svg viewBox="0 0 720 {h}" role="img" aria-labelledby="figt{i}" class="fg-svg">\n'
-        f'    <title id="figt{i}">{titre}</title>\n'
-        f'{contenu}\n'
-        '  </svg>\n'
-        f'  <figcaption>{legende}</figcaption>\n'
-        '</figure>')
-
-
-def fig_barres(titre, legende, series, max_val=None):
-    """Barres horizontales comparées. series = [(label, valeur, note), ...]"""
-    max_val = max_val or max(v for _, v, _ in series)
-    out, y = [], 26
-    for lab, val, note in series:
-        # 340 et non 400 : au-delà, une valeur longue en bout de barre
-        # (« ≈ 7 sur 10 ») déborde du viewBox.
-        w = 0 if not max_val else (val / max_val) * 340
-        out.append(f'<text x="0" y="{y+12}" class="fg-lab">{lab}</text>')
-        out.append(f'<rect x="230" y="{y}" width="{w:.1f}" height="17" class="fg-bar"/>')
-        out.append(f'<text x="{230+w+10:.1f}" y="{y+13}" class="fg-val">{note}</text>')
-        y += 40
-    return fig(titre, legende, "\n".join(out), h=y)
-
-
-def fig_chaine(titre, legende, etapes, pleines=0):
-    """Chaîne de maillons. `pleines` = nombre de maillons pleins en tête."""
-    n = len(etapes)
-    w = (700 - (n - 1) * 12) / n
-    # La taille du titre suit la largeur disponible : à cinq maillons, une
-    # boîte fait ~132 px et un titre en 13,5 px déborde de son cadre.
-    ft = 13.5 if n <= 4 else 12
-    fs = 11.5 if n <= 4 else 10.5
-    out = []
-    for i, (nom, sous) in enumerate(etapes):
-        x = i * (w + 12)
-        plein = i < pleines
-        cls = "fg-box is-full" if plein else "fg-box is-dash"
-        tc = "fg-in" if plein else "fg-on"
-        sc = "fg-in-s" if plein else "fg-on-s"
-        out.append(f'<rect x="{x:.1f}" y="30" width="{w:.1f}" height="94" class="{cls}"/>')
-        out.append(f'<text x="{x+14:.1f}" y="54" class="fg-n {tc}">0{i+1}</text>')
-        out.append(f'<text x="{x+14:.1f}" y="80" class="{tc} fg-t" style="font-size:{ft}px">{nom}</text>')
-        out.append(f'<text x="{x+14:.1f}" y="100" class="{sc} fg-s" style="font-size:{fs}px">{sous}</text>')
-        if i:
-            out.append(f'<line x1="{x-12:.1f}" y1="77" x2="{x:.1f}" y2="77" class="fg-link"/>')
-    return fig(titre, legende, "\n".join(out), h=150)
-
-
-def _wrap(txt, n=40, lignes=3):
-    mots, out, buf = txt.split(), [], ""
-    for m in mots:
-        if len(buf + " " + m) > n:
-            out.append(buf)
-            buf = m
-        else:
-            buf = (buf + " " + m).strip()
-    out.append(buf)
-    return out[:lignes]
-
-
-def fig_matrice(titre, legende, axe_x, axe_y, cases):
-    """Matrice 2x2. cases = [(col, ligne, titre, texte), ...], col/ligne dans {0,1}"""
-    out = [f'<text x="0" y="14" class="fg-ax">{axe_y}</text>',
-           f'<text x="716" y="252" class="fg-ax" text-anchor="end">{axe_x}</text>']
-    for col, lig, t, txt in cases:
-        x, y = 24 + col * 348, 24 + lig * 106
-        out.append(f'<rect x="{x}" y="{y}" width="338" height="96" class="fg-box is-dash"/>')
-        out.append(f'<text x="{x+16}" y="{y+26}" class="fg-on fg-t">{t}</text>')
-        for k, l in enumerate(_wrap(txt, 42, 3)):
-            out.append(f'<text x="{x+16}" y="{y+48+k*17}" class="fg-on-s fg-s">{l}</text>')
-    out.append('<line x1="18" y1="130" x2="702" y2="130" class="fg-axis"/>')
-    out.append('<line x1="360" y1="16" x2="360" y2="234" class="fg-axis"/>')
-    return fig(titre, legende, "\n".join(out), h=262)
-
-
-def fig_jauge(titre, legende, part, texte_dedans, texte_dehors):
-    """Une proportion, en un seul trait segmenté de 10 carrés."""
-    out = []
-    pleins = round(part * 10)
-    for i in range(10):
-        x = i * 40
-        cls = "fg-bar" if i < pleins else "fg-box is-dash"
-        out.append(f'<rect x="{x}" y="24" width="30" height="30" class="{cls}"/>')
-    out.append(f'<text x="0" y="82" class="fg-on fg-t">{texte_dedans}</text>')
-    out.append(f'<text x="0" y="104" class="fg-on-s fg-s">{texte_dehors}</text>')
-    return fig(titre, legende, "\n".join(out), h=120)
-
-
-def stats(items):
-    """Bandeau de chiffres sourcés. items = [(valeur, libellé, source), ...]
-    Ajouter des statistiques attribuées est l'une des trois tactiques les
-    mieux mesurées pour être cité par un moteur génératif."""
-    return '<div class="stat-row">' + "".join(
-        f'<div><span class="stat-v">{v}</span><span class="stat-l">{l}</span>'
-        f'<span class="stat-s">{s}</span></div>' for v, l, s in items) + '</div>'
-
-# ═══════════════════════════════════════════════════════════════════════
-#  ARTICLES DE MARCHÉ
-#  Le format au meilleur rendement selon l'étude concurrentielle : il
-#  produit des reprises, il donne un prétexte de reprise de contact sur
-#  tout le portefeuille, et il se cite. Trois secteurs de prédilection.
-#  Tous les chiffres sont datés et attribués — c'est la condition pour
-#  être repris, par un journaliste comme par un moteur génératif.
-# ═══════════════════════════════════════════════════════════════════════
 
 ARTICLES += [
 {
@@ -1836,7 +1889,7 @@ ARTICLES += [
 <h2>Ce qui structure vraiment le choix en France : le prix affiché</h2>
 <p><strong>Le seuil des 20 000 € est devenu le vrai découpage du marché.</strong> Dacia Sandero Stepway autour de 17 900 €, Citroën C3 autour de 18 900 €, Peugeot 208 autour de 19 500 € : la catégorie la plus vivace du marché français se joue en dessous d'un chiffre rond, et cela n'a rien d'un hasard.</p>
 <p>Ce que nous entendons en entretien depuis plusieurs années, c'est que ce seuil ne fonctionne pas comme un calcul mais comme une <em>frontière morale</em>. Au-dessus, l'achat change de nature : il devient une décision qu'il faut justifier — devant son conjoint, devant soi-même. En dessous, il reste un achat raisonnable.</p>
-""" + fig_barres(
+""""" + fig_barres(
   "Prix d'entrée des principales citadines françaises, 2026",
   "Les prix d'entrée se concentrent juste sous le seuil des 20 000 €, qui structure la catégorie la plus dynamique du marché français. Prix d'appel constructeurs relevés en 2026.",
   [("Dacia Sandero Stepway", 17900, "≈ 17 900 €"),
@@ -1855,7 +1908,7 @@ ARTICLES += [
 <p>Second écart, plus structurant encore : le supermini britannique vit largement sur le marché de l'occasion. Il représente 648 229 transactions au premier trimestre 2026, soit 32,2 % de l'occasion — de loin la catégorie la plus achetée. En neuf, les superminis dépassent désormais régulièrement 20 000 £.</p>
 
 <h2>Deux mécaniques opposées, résumées</h2>
-""" + fig_matrice(
+""""" + fig_matrice(
   "France et Royaume-Uni : deux mécaniques de marché d'entrée de gamme",
   "Le même segment, deux façons opposées de rendre une voiture accessible. La conséquence porte moins sur le produit que sur la manière d'en parler.",
   "Comment l'accessibilité se fabrique", "Ce que l'acheteur regarde",
@@ -1930,7 +1983,7 @@ ARTICLES += [
 <p>Les dépenses mondiales de luxe ont atteint 1 443 milliards d'euros en 2025 et devraient se tenir entre 1 440 et 1 470 milliards en 2026. Les biens personnels — maroquinerie, mode, joaillerie, beauté — sont attendus entre 365 et 373 milliards d'euros, en progression de 2 à 4 % après un recul de 2 % en 2025.</p>
 <p>Autrement dit : <strong>la valeur tient parce que ceux qui restent dépensent davantage.</strong> C'est une stabilisation par concentration, pas par recrutement.</p>
 
-""" + fig_jauge(
+""""" + fig_jauge(
   "Érosion de la clientèle mondiale du luxe en trois ans",
   "Environ un client sur six a quitté la catégorie en trois ans, alors que la valeur du marché se maintient. La croissance vient de la dépense des clients restants, pas de nouveaux entrants.",
   0.82,
@@ -1954,7 +2007,7 @@ ARTICLES += [
 <h2>Le point de bascule européen</h2>
 <p>L'Europe est le point faible du marché, avec un recul d'environ 20 % des dépenses des touristes internationaux relevé en février, tandis que les Amériques redeviennent le principal moteur du luxe personnel. Pour une maison européenne, cela déplace la question : <strong>la clientèle locale, longtemps considérée comme un socle, redevient un enjeu de conquête.</strong></p>
 
-""" + fig_chaine(
+""""" + fig_chaine(
   "Le parcours de recrutement d'un client de maison de luxe",
   "Une maison ne recrute pas ses clients patrimoniaux directement : elle les fait monter. Quand la première marche devient trop haute, c'est la cohorte de dans quinze ans qui manque, pas seulement le chiffre d'affaires de l'année.",
   [("Premier achat", "accessoire, parfum"),
@@ -2027,7 +2080,7 @@ ARTICLES += [
 <p><strong>Les Français n'ont pas arrêté de bricoler : ils ont changé de projets.</strong> La baisse du pouvoir d'achat et le ralentissement immobilier ont déplacé la demande de la rénovation lourde vers l'entretien courant et la réparation économique.</p>
 <p>Pour une enseigne, ce n'est pas un ralentissement — c'est un changement de métier. On ne vend pas de la même façon un chantier de salle de bains et un joint à refaire. Le panier baisse, la fréquence peut monter, et le conseil demandé n'est plus du tout le même.</p>
 
-""" + fig_matrice(
+""""" + fig_matrice(
   "Deux marchés du bricolage dans un seul chiffre d'affaires",
   "Le recul global masque une bascule : moins de projets de transformation, davantage d'entretien et de réparation. Les deux ne se vendent, ne se conseillent et ne s'équipent pas de la même manière.",
   "Type de projet", "Ce que le client attend",
@@ -2046,7 +2099,7 @@ ARTICLES += [
   <li><strong>La peur du jugement</strong> — devoir demander, montrer qu'on ne sait pas. Elle est très présente chez les publics qui bricolent peu, et elle explique une partie du basculement vers le e-commerce, où l'on peut chercher sans être vu.</li>
 </ul>
 
-""" + fig_barres(
+""""" + fig_barres(
   "Ce qui freine le passage à l'acte, en fréquence de citation",
   "La hiérarchie déclarée place la peur de mal faire au premier rang, devant le budget. C'est un frein qui se traite par le conseil et la conception, pas par la promotion. Proportions issues des études sectorielles 2026.",
   [("Peur de mal faire", 70, "≈ 7 sur 10"),
@@ -2090,7 +2143,6 @@ ARTICLES += [
           ("Comment rédiger un brief d'étude qualitative", "article-brief-etude-qualitative.html")],
 },
 ]
-
 
 # Le point d'entrée reste EN DERNIER : tout ce qui est déclaré après ne serait
 # pas encore défini au moment où main() s'exécute.
