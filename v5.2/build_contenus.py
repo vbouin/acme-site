@@ -1715,7 +1715,9 @@ def fig_barres(titre, legende, series, max_val=None):
     max_val = max_val or max(v for _, v, _ in series)
     out, y = [], 26
     for lab, val, note in series:
-        w = 0 if not max_val else (val / max_val) * 400
+        # 340 et non 400 : au-delà, une valeur longue en bout de barre
+        # (« ≈ 7 sur 10 ») déborde du viewBox.
+        w = 0 if not max_val else (val / max_val) * 340
         out.append(f'<text x="0" y="{y+12}" class="fg-lab">{lab}</text>')
         out.append(f'<rect x="230" y="{y}" width="{w:.1f}" height="17" class="fg-bar"/>')
         out.append(f'<text x="{230+w+10:.1f}" y="{y+13}" class="fg-val">{note}</text>')
@@ -1727,6 +1729,10 @@ def fig_chaine(titre, legende, etapes, pleines=0):
     """Chaîne de maillons. `pleines` = nombre de maillons pleins en tête."""
     n = len(etapes)
     w = (700 - (n - 1) * 12) / n
+    # La taille du titre suit la largeur disponible : à cinq maillons, une
+    # boîte fait ~132 px et un titre en 13,5 px déborde de son cadre.
+    ft = 13.5 if n <= 4 else 12
+    fs = 11.5 if n <= 4 else 10.5
     out = []
     for i, (nom, sous) in enumerate(etapes):
         x = i * (w + 12)
@@ -1736,8 +1742,8 @@ def fig_chaine(titre, legende, etapes, pleines=0):
         sc = "fg-in-s" if plein else "fg-on-s"
         out.append(f'<rect x="{x:.1f}" y="30" width="{w:.1f}" height="94" class="{cls}"/>')
         out.append(f'<text x="{x+14:.1f}" y="54" class="fg-n {tc}">0{i+1}</text>')
-        out.append(f'<text x="{x+14:.1f}" y="80" class="{tc} fg-t">{nom}</text>')
-        out.append(f'<text x="{x+14:.1f}" y="100" class="{sc} fg-s">{sous}</text>')
+        out.append(f'<text x="{x+14:.1f}" y="80" class="{tc} fg-t" style="font-size:{ft}px">{nom}</text>')
+        out.append(f'<text x="{x+14:.1f}" y="100" class="{sc} fg-s" style="font-size:{fs}px">{sous}</text>')
         if i:
             out.append(f'<line x1="{x-12:.1f}" y1="77" x2="{x:.1f}" y2="77" class="fg-link"/>')
     return fig(titre, legende, "\n".join(out), h=150)
@@ -1953,9 +1959,9 @@ ARTICLES += [
   "Une maison ne recrute pas ses clients patrimoniaux directement : elle les fait monter. Quand la première marche devient trop haute, c'est la cohorte de dans quinze ans qui manque, pas seulement le chiffre d'affaires de l'année.",
   [("Premier achat", "accessoire, parfum"),
    ("Répétition", "un achat par an"),
-   ("Attachement", "la maison devient un choix"),
-   ("Clientèle installée", "plusieurs catégories"),
-   ("Client patrimonial", "relation de long terme")],
+   ("Attachement", "la maison est un choix"),
+   ("Clientèle installée", "plusieurs univers"),
+   ("Client patrimonial", "relation longue")],
   pleines=1) + """
 
 <h2>Ce qu'il faut aller chercher sur le terrain</h2>
