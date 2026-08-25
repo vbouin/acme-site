@@ -236,6 +236,26 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
 ARTICLES = [
 {
  "slug": "article-focus-group-lyon.html",
+ "faq_titre": 'Questions fréquentes sur les focus groups',
+ "faq": [
+  ('Combien de temps dure un focus group ?', "Deux heures, rarement plus. Au-delà, l'attention baisse et les participants commencent à répéter ce qu'ils ont déjà dit. Un groupe d'une heure trente bien mené produit davantage qu'un groupe de trois heures."),
+  ('Peut-on assister à un focus group en tant que client ?', "Oui, et c'est vivement recommandé — mais derrière une glace sans tain ou par retour vidéo, jamais dans la salle. Cinq personnes en costume au fond de la pièce transforment un groupe en présentation."),
+  ('Faut-il enregistrer les groupes ?', "Systématiquement, en audio au minimum, avec le consentement écrit des participants. Sans enregistrement horodaté, aucune conclusion n'est vérifiable — et c'est le premier reproche qu'un comité fera à votre restitution."),
+  ("Combien coûte l'organisation d'un focus group à Lyon ?", 'Les repères publics situent un groupe entre 3 000 et 10 000 € tout compris pour 6 à 10 participants, selon la difficulté de recrutement et le niveau de livrable attendu. Le recrutement en représente souvent le premier poste.'),
+  ('Peut-on faire un focus group en visioconférence ?', "Oui, et ça fonctionne bien sur des publics dispersés ou difficiles à réunir. Mais l'interaction est plus pauvre&nbsp;: les participants se coupent moins, se relancent moins, et le non-verbal disparaît presque entièrement. À éviter dès qu'il y a du matériel à manipuler."),
+ ],
+ "aide": {"titre": 'Organiser vos groupes, sans les organiser vous-même', "chapo": "Nous animons des focus groups depuis quarante ans, à Lyon et ailleurs. Le terrain est notre socle&nbsp;: c'est ce qui ne se délègue pas, et c'est ce que nous ne déléguons jamais.", "points": [
+   'Recrutement sur critères vérifiés un à un, ou qualification dans votre propre fichier client',
+   'Animation par un consultant senior, jamais par un vacataire ni un dispositif automatisé',
+   'Salle équipée avec observation, à Lyon comme dans les autres villes de terrain',
+   'Transcripts intégraux horodatés, qui vous appartiennent — le reste est à la carte',
+ ]},
+ "loin": [
+  ('Entretiens individuels ou focus groups : comment choisir', 'article-entretiens-ou-groupes.html'),
+  ('Combien coûte une étude qualitative ?', 'article-prix-etude-qualitative.html'),
+  ("Comment rédiger un brief d'étude qualitative", 'article-brief-etude-qualitative.html'),
+ ],
+
  "sources": [
   ("Espace Rhône", "salles qualitatives lyonnaises équipées (glace sans tain, retour vidéo), en presqu'île depuis 2003", "https://www.espacerhone.com/"),
   ("Lyon Marketing Services", "coordination de terrains qualitatifs à Lyon, en présentiel comme à distance", "https://lyon-marketing-services.fr/etudes-qualitatives/"),
@@ -288,6 +308,26 @@ ARTICLES = [
 },
 {
  "slug": "article-ia-etudes-qualitatives.html",
+ "faq_titre": "Questions fréquentes sur l'IA dans les études",
+ "faq": [
+  ("L'IA va-t-elle remplacer les instituts d'études ?", "Elle remplace des tâches, pas un métier. La transcription, la structuration et le premier balayage thématique ont basculé pour de bon. Le cadrage, la conduite du terrain et l'arbitrage entre interprétations concurrentes ne montrent aucun signe de bascule."),
+  ("Comment savoir si mon prestataire utilise de l'IA ?", 'Demandez-le, par écrit. La transparence sur les outils employés est un engagement professionnel en France depuis 2025, pas une faveur. Une réponse vague sur ce point est en soi une réponse.'),
+  ("L'IA fait-elle baisser le prix d'une étude ?", "Sur certains postes, oui — la transcription ne coûte plus rien. Mais ces postes ne représentaient pas l'essentiel du budget&nbsp;: le recrutement et le temps de consultant, eux, n'ont pas bougé. Une baisse de 80&nbsp;% suppose qu'on a retiré autre chose."),
+  ('Mes verbatims servent-ils à entraîner des modèles ?', "Chez nous, non&nbsp;: la transcription passe par un fournisseur français, avec l'entraînement désactivé et sans rétention au-delà du traitement. C'est une question à poser systématiquement, surtout si votre corpus contient des données sensibles."),
+  ("Que dit la réglementation sur l'IA en études ?", "Le cadre professionnel français impose une supervision humaine à chaque étape et la transparence sur les outils. S'y ajoutent le RGPD pour les données personnelles des participants et, progressivement, les obligations européennes sur l'IA."),
+ ],
+ "aide": {"titre": "L'IA chez nous : ce qu'elle fait, par écrit", "chapo": "Nous remettons en avant-vente la répartition exacte entre ce qui est automatisé et ce qui ne l'est jamais. C'est vérifiable, et c'est fait pour l'être.", "points": [
+   "Une note écrite sur nos outils, leur rôle et l'endroit où sont vos données",
+   "Chaque conclusion remontable jusqu'au verbatim source, horodaté et attribué",
+   'Transcription par un fournisseur français, sans entraînement ni rétention',
+   'Aucun répondant synthétique dans un corpus livré — jamais',
+ ]},
+ "loin": [
+  ("Peut-on remplacer les répondants par de l'IA ?", 'article-repondants-synthetiques.html'),
+  ("Le livre blanc : la parole client jusqu'à la décision", 'livre-blanc.html'),
+  ('Décider vite sans décider mal', 'article-decider-vite.html'),
+ ],
+
  "sources": [
   ("Syntec Conseil", "sept engagements pour un usage responsable de l'IA dans les études, mai 2025 — supervision humaine et transparence sur les outils", "https://syntec-conseil.fr/"),
   ("Ipsos — Interviews qualitatives : la révolution IA entre opportunités et limites", "le point de vue d'un grand institut sur l'entretien modéré par IA", "https://www.ipsos.com/fr-fr/interviews-qualitatives-la-revolution-ia-entre-opportunites-et-limites"),
@@ -358,6 +398,26 @@ ARTICLES = [
 ARTICLES += [
 {
  "slug": "article-prix-etude-qualitative.html",
+ "faq_titre": "Questions fréquentes sur le budget d'une étude",
+ "faq": [
+  ('Quel est le budget minimum pour une étude qualitative sérieuse ?', "En dessous de six entretiens ou de deux groupes, le corpus ne se lit plus&nbsp;: vous ne pouvez pas distinguer ce qui tient au public de ce qui tient à la personne. C'est le vrai plancher, et il est méthodologique avant d'être financier."),
+  ('Le recrutement peut-il vraiment coûter plus cher que le terrain ?', "Oui, régulièrement. À 200-300 € par participant recruté sur critères, douze entretiens représentent déjà 2 500 à 3 500 € avant qu'un mot n'ait été prononcé. Sur une cible rare, ce montant double."),
+  ("Pourquoi les instituts n'affichent-ils pas leurs prix ?", "Parce qu'une étude n'est pas un produit&nbsp;: le même dispositif varie d'un facteur cinq selon la difficulté de recrutement, le nombre de pays et le livrable. C'est une convention de marché — avec l'effet pervers de faire renoncer les acheteurs qui n'ont aucun ordre de grandeur."),
+  ('Une étude moins chère est-elle forcément moins bonne ?', "Non, si ce qu'on enlève, ce sont des livrables. Oui, si ce qu'on enlève, c'est le recrutement sur critères ou le nombre de voix. La question à poser n'est pas «&nbsp;pourquoi est-ce moins cher&nbsp;» mais «&nbsp;qu'est-ce qui a été retiré&nbsp;»."),
+  ('Faut-il annoncer son budget à un institut ?', 'Oui, au moins une fourchette. Sans elle, vous recevrez trois propositions calibrées sur trois hypothèses différentes, dont aucune ne correspondra à ce que vous pouviez dépenser.'),
+ ],
+ "aide": {"titre": 'Un chiffrage sous 48 heures, sans engagement', "chapo": "Nous ne pratiquons pas de barème, parce qu'il n'y en a pas d'honnête. Nous chiffrons sur votre question réelle, et nous disons ce que nous retirons quand le budget est contraint.", "points": [
+   'Chiffrage ligne par ligne — terrain, transcripts, analyse, atelier — pour que vous puissiez arbitrer',
+   'Le levier du fichier client identifié dès le cadrage, quand vous en avez un',
+   'Un dispositif alternatif proposé si votre budget ne permet pas celui que vous imaginiez',
+   "Et un « passez votre tour » assumé si la question ne justifie pas l'étude",
+ ]},
+ "loin": [
+  ('Décider vite sans décider mal', 'article-decider-vite.html'),
+  ("Comment rédiger un brief d'étude qualitative", 'article-brief-etude-qualitative.html'),
+  ('Notre offre Décision rapide', 'decision-rapide.html'),
+ ],
+
  "sources": [
   ("Square Cocoon — Prix d'un focus group", "budget moyen 3 000 à 10 000 € par groupe de 6 à 10 personnes (2026)", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
   ("IntoTheMinds — Combien coûte une étude de marché", "entretien individuel : environ 600 € en B2C, 750 € en B2B", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
@@ -427,6 +487,25 @@ ARTICLES += [
 },
 {
  "slug": "article-entretiens-ou-groupes.html",
+ "faq_titre": 'Questions fréquentes',
+ "faq": [
+  ("Combien d'entretiens faut-il pour atteindre la saturation ?", "Entre douze et dix-huit sur une cible homogène. La saturation est le moment où un entretien supplémentaire n'apporte plus d'information neuve&nbsp;; elle arrive plus tard dès qu'on croise deux profils ou deux marchés."),
+  ('Peut-on mélanger des profils différents dans un même groupe ?', "C'est risqué. Un écart de statut, d'expertise ou d'âge crée une hiérarchie de parole en quelques minutes, et le groupe s'aligne sur le plus assuré. Mieux vaut deux groupes homogènes qu'un groupe mixte."),
+  ('Les entretiens en ligne valent-ils les entretiens en face-à-face ?', "Sur un sujet sans matériel, oui, et ils permettent d'atteindre des professionnels qui ne se déplaceraient jamais. Sur un objet à manipuler ou un sujet où le non-verbal porte du sens, non."),
+  ('Combien de groupes pour comparer deux cibles ?', "Quatre, soit deux par cible. Avec un seul groupe par cible, vous ne pouvez pas savoir si l'écart observé tient à la cible ou à la dynamique de cette salle-là."),
+ ],
+ "aide": {"titre": 'Choisir le dispositif avec vous, pas à votre place', "chapo": "Le choix se fait au cadrage, à partir de votre décision — pas à partir d'un catalogue. Il nous arrive de proposer moins que ce qui était demandé.", "points": [
+   'Un cadrage qui traduit votre décision en question de terrain avant de choisir la méthode',
+   'Le volume calé sur la saturation attendue, pas sur un chiffre rond',
+   'Un dispositif mixte quand la question le demande, et seulement dans ce cas',
+   'Le calendrier et les livrables arrêtés avec vous, ligne par ligne',
+ ]},
+ "loin": [
+  ("Organiser un focus group : le guide d'un praticien", 'article-focus-group-lyon.html'),
+  ("Qu'est-ce qu'une car clinic ?", 'article-car-clinic.html'),
+  ('Composer votre dispositif', 'decision-rapide.html#configurateur'),
+ ],
+
  "sources": [
   ("IntoTheMinds — Études qualitatives : aperçu de 3 types d'interviews", "une typologie complémentaire, côté institut belge", "https://www.intotheminds.com/blog/etudes-qualitatives-3-types-interviews/"),
   ("IntoTheMinds — Combien coûte une étude de marché", "les ordres de grandeur par méthode", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
@@ -491,6 +570,25 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "article-decider-vite.html",
+ "faq_titre": 'Questions fréquentes sur les dispositifs courts',
+ "faq": [
+  ('Quel est le délai minimum réaliste pour une étude qualitative ?', "Quatre semaines, à trois conditions&nbsp;: une question unique, un recrutement dans votre propre base client, et un terrain à distance. En dessous, ce qu'on gagne se prend sur le recrutement ou sur le nombre de voix, c'est-à-dire sur la validité."),
+  ('Un dispositif court est-il moins fiable ?', "Pas s'il retire des livrables plutôt que du terrain. Un dispositif court honnête garde le recrutement sur critères et le nombre minimal de voix&nbsp;; il enlève le rapport complet, les typologies ou la restitution formelle."),
+  ("Peut-on démarrer un terrain sans guide d'entretien finalisé ?", "Non. La semaine de cadrage est la seule qu'il ne faut jamais comprimer&nbsp;: c'est elle qui détermine la valeur de tout ce qui suit. Un terrain lancé sur un guide bâclé produit vite un matériau inexploitable."),
+  ("Comment vérifier qu'un prestataire rapide ne bâcle pas ?", 'Trois questions&nbsp;: qui a recruté les participants et sur quels critères vérifiés&nbsp;; qui était dans la pièce&nbsp;; et cette conclusion précise, elle remonte à quel verbatim, à quel horodatage.'),
+ ],
+ "aide": {"titre": 'Décision rapide : un socle, des options', "chapo": 'Notre offre courte est construite exactement sur ce principe&nbsp;: le terrain ne bouge pas, les livrables se choisissent. Vous ne payez que ce dont vous avez besoin pour décider.', "points": [
+   'Cadrage, recrutement, terrain et transcripts intégraux : toujours inclus',
+   'Plateforme verbatim, top lines, analyse complète, typologies, atelier : à la carte',
+   'Le configurateur vous donne le calendrier et les livrables en deux minutes',
+   'Chiffrage sous 48 heures, sans engagement',
+ ]},
+ "loin": [
+  ('Notre offre Décision rapide', 'decision-rapide.html'),
+  ('Combien coûte une étude qualitative ?', 'article-prix-etude-qualitative.html'),
+  ("Peut-on remplacer les répondants par de l'IA ?", 'article-repondants-synthetiques.html'),
+ ],
+
  "sources": [
   ("Market Research News", "dossiers professionnels sur l'automatisation de la chaîne d'étude", "https://www.mrnews.fr/"),
   ("IntoTheMinds — Peut-on remplacer les répondants par l'IA ?", "l'état du débat côté institut", "https://www.intotheminds.com/blog/en/qualitative-interviews-ai/"),
@@ -569,6 +667,33 @@ ARTICLES += [
 CAS = [
 {
  "slug": "cas-utilitaire-artisans.html",
+ "sources": [
+  ('Marché automobile français S1 2026', "le contexte de marché dans lequel s'inscrit ce type d'arbitrage produit", 'https://www.cartegrise.com/blog/2026/07/marche-automobile-francais-s1-2026-le-grand-bilan-dun-semestre-de-bascule'),
+ ],
+
+ "impact": {"titre": 'Ce que ça a changé', "chapo": "Une étude ne vaut que par les décisions qu'elle permet. Voici où celle-ci a pesé, et à quel moment.", "note": "Les effets décrits sont ceux constatés avec les équipes du client. Aucun chiffre d'affaires ni indicateur commercial n'est publié ici — ils appartiennent au client.", "cartes": [
+   ('Décision engagée', "Les arbitrages d'aménagement intérieur ont été repris avant le gel du cahier des charges — donc avant que la modification ne coûte un outillage."),
+   ('Ce qui a été évité', 'Une hiérarchie de fonctions établie sur des remontées après-vente plates, qui ne signalaient aucune insatisfaction alors que les parts de marché bougeaient.'),
+   ('Ce qui a été gagné', "Un vocabulaire d'usage réutilisable en brief créatif et en argumentaire réseau, dans les mots des artisans plutôt que dans ceux du marketing."),
+   ('Effet de levier', "Le troisième groupe, composé de participants réinvités, n'a coûté aucun recrutement supplémentaire et a produit la matière la plus dense du dispositif."),
+ ]},
+ "faq": [
+  ('Pourquoi réinviter un groupe déjà interrogé ?', "Parce que le premier passage sensibilise. Entre les deux séances, les participants portent attention à des choses qu'ils ne remarquaient plus, et reviennent avec des observations précises. Le coût est marginal — pas de nouveau recrutement — et le rendement est le meilleur du dispositif."),
+  ('Comment interroger des professionnels qui ne se plaignent jamais ?', "En ne posant aucune question de satisfaction. On fait raconter une journée type, minute par minute&nbsp;: le chargement, le trajet, la recherche d'un outil, l'arrivée chez le client. Les contraintes apparaissent d'elles-mêmes, hiérarchisées par la fréquence à laquelle elles reviennent."),
+  ('Faut-il faire du terrain dans plusieurs pays ?', "Dès que la décision porte sur plusieurs marchés, oui. C'est le seul moyen de séparer ce qui relève d'un usage professionnel universel de ce qui relève d'habitudes locales — et les arbitrages produit dépendent directement de cette distinction."),
+ ],
+ "aide": {"titre": 'Interroger des professionnels difficiles à faire parler', "chapo": "Artisans, TPE, prescripteurs, chefs de chantier : ce sont des publics qui n'ont ni le temps ni l'habitude de l'étude. C'est une part importante de notre terrain.", "points": [
+   'Recrutement sur activité réelle, vérifié, ou qualification dans votre fichier client',
+   "Guides construits sur le récit d'usage plutôt que sur l'évaluation",
+   'Terrain en présentiel comme à distance, selon la disponibilité de la cible',
+   "Restitution en atelier avec vos équipes produit et marketing, jusqu'à l'arbitrage",
+ ]},
+ "loin": [
+  ("Qu'est-ce qu'une car clinic ?", 'article-car-clinic.html'),
+  ('Citadines : France et Royaume-Uni', 'marche-citadines-france-uk.html'),
+  ('Notre secteur Mobilité & Automobile', 'secteur-mobilite.html'),
+ ],
+
  "cat": "Mobilité & Automobile",
  "date": "2026-08-25",
  "read": "5 min",
@@ -599,12 +724,39 @@ CAS = [
   <li>Un atelier de travail avec les équipes produit et marketing pour transformer les constats en arbitrages.</li>
 </ul>
 
-<h2>Ce qu'on en retient pour d'autres missions</h2>
+<h2>Que retenir pour d'autres missions ?</h2>
 <p>Sur un public professionnel, la question « êtes-vous satisfait » ne produit rien. La question « racontez-moi votre mardi » produit tout. Et le réinvitation d'un groupe est le meilleur rapport qualité-prix d'un dispositif qualitatif&nbsp;: pas de nouveau recrutement, un matériau nettement plus profond.</p>
 """,
 },
 {
  "slug": "cas-clinique-electrique.html",
+ "sources": [
+  ("Atlas Automobiles — marché français, record pour l'électrique", "la dynamique de l'électrique sur le marché français en 2026", 'https://atlas-automobiles.com/articles/aamarche-automobile-france-mai-2026-3-7-d-immatriculations-et-record-historique-pour-l-electrique'),
+ ],
+
+ "impact": {"titre": 'Ce que ça a changé', "chapo": "La clinique existe pour un usage précis : rendre visible l'écart entre ce qui se dit et ce qui se fait, au moment où l'on peut encore corriger.", "note": "Les effets décrits sont ceux constatés avec les équipes du client. Aucune donnée produit ni commerciale n'est publiée ici.", "cartes": [
+   ('Décision engagée', "L'arbitrage entre les directions a été rendu avant le gel du projet, avec les verbatims sources à l'appui de chaque recommandation."),
+   ('Ce qui a été évité', "Un choix fondé sur la hiérarchie déclarée des critères — qui ne coïncidait pas avec la hiérarchie observée devant l'objet."),
+   ('Ce qui a été gagné', "Une lecture séparée du déclaré et de l'observé, poste par poste, que les équipes design ont pu opposer aux convictions internes."),
+   ('Effet de levier', 'Le recrutement sur véhicule concurrent réellement possédé — le critère le plus coûteux à sourcer, et celui qui a rendu les avis opérants.'),
+ ]},
+ "faq": [
+  ("Pourquoi n'interroger que des possesseurs de véhicules concurrents ?", "Parce que l'avis d'un conducteur qui ne possède pas la catégorie porte sur ses représentations — l'autonomie fantasmée, la recharge redoutée. Celui d'un possesseur porte sur l'usage réel, et c'est le seul qui permette d'arbitrer un design ou une interface."),
+  ("Le présentiel est-il indispensable pour ce type d'étude ?", "Oui, sans exception. Les réactions les plus utiles ont lieu pendant les déplacements autour du véhicule, pas pendant les questions. Aucun dispositif à distance ne restitue les trente secondes où quelqu'un tourne autour d'une voiture."),
+  ('À quoi servent les entretiens individuels après une clinique ?', "À revenir, hors du regard des autres participants, sur les points où la dynamique de salle a produit un consensus trop rapide. C'est souvent là que l'on récupère les objections que personne n'a osé formuler devant les autres."),
+ ],
+ "aide": {"titre": 'Monter une clinique produit', "chapo": "C'est notre dispositif de signature, sur le secteur le plus exigeant que nous connaissions. Nous en animons depuis quarante ans.", "points": [
+   'Recrutement sur véhicule réellement possédé, vérifié un à un',
+   'Protocole de passage écrit à la minute, avec les relances par station',
+   'Logistique produit, confidentialité et gardiennage pris en charge',
+   "Analyse qui sépare explicitement le déclaré de l'observé",
+ ]},
+ "loin": [
+  ("Qu'est-ce qu'une car clinic ?", 'article-car-clinic.html'),
+  ('Citadines : France et Royaume-Uni', 'marche-citadines-france-uk.html'),
+  ('Composer votre dispositif', 'decision-rapide.html#configurateur'),
+ ],
+
  "cat": "Mobilité & Automobile",
  "date": "2026-08-25",
  "read": "5 min",
@@ -635,12 +787,39 @@ CAS = [
   <li>Une restitution animée avec les équipes design et produit, avant décision.</li>
 </ul>
 
-<h2>Ce qu'on en retient pour d'autres missions</h2>
+<h2>Que retenir pour d'autres missions ?</h2>
 <p>Quand il y a un objet, il faut être devant l'objet&nbsp;: aucun dispositif à distance ne restitue ce qui se joue dans les trente secondes où quelqu'un tourne autour d'une voiture. Et le critère de recrutement le plus rentable est souvent le plus contraignant à sourcer.</p>
 """,
 },
 {
  "slug": "cas-fichier-client-materiaux.html",
+ "sources": [
+  ('Points de Vente — marché du bricolage', "21,8 Mds € de chiffre d'affaires GSB en 2025, troisième année de recul", 'https://pointsdevente.fr/fil-info/2026-06-15-le-marche-du-bricolage-toujours-en-recul-malgre-le-rebond-de-limmobilier/'),
+ ],
+
+ "impact": {"titre": 'Ce que ça a changé', "chapo": "Un levier de coût qui améliore la qualité au passage — c'est assez rare pour être signalé.", "note": "Les effets décrits sont ceux constatés avec les équipes du client. Aucun montant ni indicateur commercial n'est publié ici.", "cartes": [
+   ('Décision engagée', "Les priorités d'aménagement des agences ont été arbitrées sur des motifs de retour exprimés par de vrais clients, avec un historique d'achat vérifiable."),
+   ('Ce qui a été évité', "Un sourcing en panel généraliste, qui aurait produit des gens ressemblant à la cible plutôt que de vrais clients de l'enseigne."),
+   ('Ce qui a été gagné', "Une à deux semaines de calendrier, et un budget réinvesti dans le nombre d'entretiens plutôt que rendu."),
+   ('Limite assumée', "La base ne contient que des clients actifs. Sur une question d'attrition, il faut compléter par un sourcing externe — nous le disons au cadrage, pas à la restitution."),
+ ]},
+ "faq": [
+  ('Comment se passe le recrutement dans un fichier client ?', "Le client transmet une liste de contacts&nbsp;; nous qualifions sur les critères d'étude, prenons les rendez-vous et conduisons les entretiens. Le poste passe d'un sourcing complet à une qualification, ce qui divise son coût et raccourcit le calendrier."),
+  ('Quelles précautions RGPD faut-il prendre ?', "Une base légale claire pour la transmission, une information des personnes contactées, un consentement recueilli avant l'entretien, et une anonymisation du corpus livré. Ces points se règlent au cadrage&nbsp;; ils ne se rattrapent pas après."),
+  ('Le fichier client biaise-t-il les résultats ?', "Il oriente, et il faut le savoir&nbsp;: une base client ne contient que des clients actifs. Les partants et les perdus n'y sont pas. Sur une question de fidélité ou d'attrition, il faut impérativement compléter par un sourcing externe."),
+ ],
+ "aide": {"titre": 'Exploiter votre base client comme terrain', "chapo": "C'est la première question que nous posons en cadrage, parce que la réponse change le budget, le calendrier et la qualité du matériau dans le même mouvement.", "points": [
+   "Qualification sur vos critères d'étude et prise de rendez-vous prises en charge",
+   'Cadre RGPD réglé au cadrage : base légale, information, consentement, anonymisation',
+   'Complément par sourcing externe quand la question porte sur les partants',
+   "Corpus interrogeable remis à vos équipes, pour qu'elles y reviennent sur leurs propres angles",
+ ]},
+ "loin": [
+  ('Bricolage : neuf Français sur dix, sept ont peur', 'marche-bricolage-peur-de-mal-faire.html'),
+  ('Combien coûte une étude qualitative ?', 'article-prix-etude-qualitative.html'),
+  ('Notre secteur Bâtiment', 'secteur-batiment.html'),
+ ],
+
  "cat": "Bâtiment",
  "date": "2026-08-25",
  "read": "4 min",
@@ -672,7 +851,7 @@ CAS = [
   <li>Des top lines courtes, orientées décision.</li>
 </ul>
 
-<h2>Ce qu'on en retient pour d'autres missions</h2>
+<h2>Que retenir pour d'autres missions ?</h2>
 <p>C'est la première question que nous posons désormais en cadrage&nbsp;: « avez-vous une base client exploitable&nbsp;? » Quand la réponse est oui, elle change le budget, le calendrier et la qualité du matériau — dans le même mouvement.</p>
 """,
 },
@@ -949,6 +1128,56 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
                '<p class="art-sources-note">Repères relevés en août 2026. Les tarifs de '
                'marché évoluent&nbsp;: vérifiez la date de la source avant de vous en servir '
                'comme référence.</p></aside>')
+    # Impact : une étude de cas qui n'énonce pas ce qui a changé reste une
+    # description de dispositif. C'est la section que lit un décideur.
+    impact = ""
+    if a.get("impact"):
+        cartes = "".join(
+            f'<div><span class="imp-k">{k}</span><p>{v}</p></div>' for k, v in a["impact"]["cartes"])
+        impact = (f'<section class="art-impact"><h2>{a["impact"]["titre"]}</h2>'
+                  f'<p class="imp-lede">{a["impact"]["chapo"]}</p>'
+                  f'<div class="imp-g">{cartes}</div>'
+                  f'<p class="imp-note">{a["impact"]["note"]}</p></section>')
+
+    # FAQ d'article : elle répond aux questions qui restent après la lecture,
+    # et son balisage FAQPage est ce que les moteurs génératifs reprennent le
+    # plus volontiers — une question, une réponse directe.
+    faq = ""
+    if a.get("faq"):
+        items = "".join(
+            f'<details class="faq-i"><summary><h3>{q}</h3></summary>'
+            f'<div class="faq-a"><p>{r}</p></div></details>' for q, r in a["faq"])
+        faq = (f'<section class="art-faq"><h2>{a.get("faq_titre", "Questions fréquentes")}</h2>'
+               f'{items}</section>')
+
+    # Bloc d'activation : un article qui explique sans dire ce qu'on peut en
+    # faire ensemble laisse le lecteur au milieu du gué.
+    act = ""
+    if a.get("aide"):
+        puces = "".join(f"<li>{x}</li>" for x in a["aide"]["points"])
+        act = f'''<section class="art-help">
+  <div class="art-help-in">
+    <div class="eyebrow">— Comment ACMÉ peut vous aider</div>
+    <h2>{a["aide"]["titre"]}</h2>
+    <p class="lead">{a["aide"]["chapo"]}</p>
+    <ul class="art-help-list">{puces}</ul>
+    <div class="ctas">
+      <a href="decision-rapide.html#configurateur" class="btn btn-primary-light"><span>Composer un dispositif</span><svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>
+      <a href="contact.html" class="btn btn-outline-light">Parler de votre question</a>
+    </div>
+  </div>
+</section>'''
+
+    # Aller plus loin : le maillage interne fait circuler l'autorité entre les
+    # pages et retient le lecteur sur le site.
+    loin = ""
+    if a.get("loin"):
+        liens = "".join(f'<a href="{u}"><span>{t}</span>'
+                        f'<svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none">'
+                        f'<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>'
+                        for t, u in a["loin"])
+        loin = f'<section class="art-loin"><h2>Aller plus loin</h2><div class="art-loin-g">{liens}</div></section>'
+
     body = f"""<article class="art">
   <header class="art-head">
     <div class="container art-w">
@@ -962,8 +1191,14 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
   </header>
   <div class="container art-w art-body" lang="fr">
 {a['body']}
+{impact}
+{faq}
 {src}
+{loin}
   </div>
+</article>
+{act}
+<article class="art art-tail">
   <div class="container art-w">
     <div class="art-foot">
       <a href="{back[0]}" class="btn btn-outline-dark">{back[1]}</a>
@@ -971,8 +1206,19 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
     </div>
   </div>
 </article>"""
+    ld = article_jsonld(a, kind)
+    if a.get("faq"):
+        # Un @graph plutôt que deux blocs : la page est UNE entité qui est à la
+        # fois un article et une FAQ, et le lien entre les deux reste explicite.
+        ld = {"@context": "https://schema.org", "@graph": [
+            {k: v for k, v in ld.items() if k != "@context"},
+            {"@type": "FAQPage", "mainEntity": [
+                {"@type": "Question", "name": q,
+                 "acceptedAnswer": {"@type": "Answer",
+                                    "text": re.sub(r"<[^>]+>", "", r).replace("&nbsp;", " ")}}
+                for q, r in a["faq"]]}]}
     return page(a["slug"], a["title"], a["desc"], body,
-                extra_jsonld=article_jsonld(a, kind), current="ct", og_type="article",
+                extra_jsonld=ld, current="ct", og_type="article",
                 breadcrumbs=[("Accueil", ""), ("Contenus", "contenus.html"),
                              (re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ").strip(), a["slug"])])
 
@@ -1062,7 +1308,13 @@ def card(a, tag):
 
 
 def render_hub():
-    arts = "".join(card(a, "article") for a in ARTICLES)
+    # Les articles d'observatoire sont mis à part : c'est le format au meilleur
+    # rendement (reprises presse, prétexte de reprise de contact), et il ne se
+    # lit pas comme un article de méthode.
+    obs = [a for a in ARTICLES if a["cat"].startswith("Observatoire")]
+    autres = [a for a in ARTICLES if not a["cat"].startswith("Observatoire")]
+    arts = "".join(card(a, "article") for a in autres)
+    obss = "".join(card(a, "obs") for a in obs)
     cass = "".join(card(c, "cas") for c in CAS)
     body = f"""<section class="hero-compact">
   <div class="container hero-compact-inner">
@@ -1094,6 +1346,17 @@ def render_hub():
       <h2 class="display" data-i18n="content.art.h2">Des praticiens,<br>pas des définitions.</h2>
     </div>
     <div class="ct-grid reveal">{arts}</div>
+  </div>
+</section>
+
+<section class="section-pad" id="observatoire">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;" data-i18n="content.obs.eyebrow">— Observatoire</div>
+      <h2 class="display" data-i18n="content.obs.h2">L'état de nos<br>marchés.</h2>
+      <p class="lead" style="margin-top:20px;" data-i18n="content.obs.lead">Des chiffres datés et attribués sur les secteurs que nous travaillons — et, en dessous des chiffres, ce que le terrain dit et qu'aucune donnée de marché ne montre.</p>
+    </div>
+    <div class="ct-grid reveal">{obss}</div>
   </div>
 </section>
 
@@ -1135,6 +1398,7 @@ def render_hub():
         "@context": "https://schema.org", "@type": "CollectionPage",
         "name": "Contenus — ACMÉ Consultants",
         "hasPart": [article_jsonld(a) for a in ARTICLES + CAS],
+        "description": "Articles de praticiens, observatoire de marchés, études de cas anonymisées, livre blanc et FAQ.",
     }
     return page("contenus.html",
                 "Contenus — articles, études de cas et livre blanc",
@@ -1176,6 +1440,26 @@ def main():
 ARTICLES += [
 {
  "slug": "article-repondants-synthetiques.html",
+ "faq_titre": 'Questions fréquentes sur les répondants synthétiques',
+ "faq": [
+  ("Un répondant synthétique, est-ce la même chose qu'un persona ?", "Non. Un persona est une synthèse de terrain réel, construite pour représenter un segment observé. Un répondant synthétique génère des réponses nouvelles à partir d'un modèle&nbsp;: il produit de la donnée qui n'a jamais été recueillie."),
+  ('Peut-on les utiliser pour compléter un échantillon trop petit ?', "Non, et c'est l'usage le plus tentant. Compléter douze entretiens réels par vingt entretiens simulés ne donne pas trente-deux entretiens&nbsp;: ça donne douze entretiens noyés dans du consensus."),
+  ('Comment savoir si un corpus contient des réponses générées ?', "Demandez les enregistrements sources et les horodatages. Une réponse synthétique n'a ni l'un ni l'autre. C'est le contrôle le plus simple et le plus efficace."),
+  ('Y a-t-il des cas où ils sont utiles ?', "Un seul, solide&nbsp;: pré-tester un guide d'entretien avant d'engager du terrain réel. Deux autres, avec réserve&nbsp;: préparer un animateur à des objections imprévues, et simuler un scénario extrême pour vérifier qu'un dispositif tiendrait."),
+  ('Que dit la profession française à ce sujet ?', "Le cadre professionnel publié en 2025 impose la supervision humaine à chaque étape et la transparence sur les outils. Plusieurs dirigeants d'instituts ont publiquement écarté l'usage des entretiens synthétiques comme source de données."),
+ ],
+ "aide": {"titre": "Du terrain réel, et la preuve que c'en est", "chapo": "Notre socle est le terrain, et il est vérifiable. C'est ce qui distingue un corpus qu'on peut défendre en comité d'une synthèse qu'on peut seulement croire.", "points": [
+   'Participants recrutés sur critères et vérifiés un à un, jamais un panel auto-administré',
+   'Entretiens et groupes conduits par un consultant senior',
+   'Enregistrements horodatés et transcripts intégraux remis, sans exception',
+   "Chaque phrase de synthèse remontable jusqu'à sa source",
+ ]},
+ "loin": [
+  ("IA et études qualitatives : ce qu'elle rate encore", 'article-ia-etudes-qualitatives.html'),
+  ("Le livre blanc : la parole client jusqu'à la décision", 'livre-blanc.html'),
+  ("Comment rédiger un brief d'étude qualitative", 'article-brief-etude-qualitative.html'),
+ ],
+
  "cat": "Point de vue",
  "date": "2026-08-25",
  "read": "7 min",
@@ -1229,6 +1513,26 @@ ARTICLES += [
 },
 {
  "slug": "article-car-clinic.html",
+ "faq_titre": 'Questions fréquentes sur les cliniques produit',
+ "faq": [
+  ('Combien de participants pour une car clinic ?', "Entre trente et soixante selon le nombre de directions à arbitrer et de segments à comparer. C'est plus qu'un dispositif qualitatif classique, parce qu'on cherche aussi à hiérarchiser des préférences, pas seulement à comprendre."),
+  ('Combien de temps dure un passage ?', "Quarante-cinq minutes à une heure trente selon qu'il y a essai ou non. Le protocole s'écrit à la minute&nbsp;: l'ordre des expositions détermine les résultats."),
+  ('Peut-on faire une clinique sur un prototype confidentiel ?', "Oui, c'est même le cas le plus fréquent. Cela suppose un lieu fermé, des accords de confidentialité signés, la confiscation des téléphones et un protocole de gardiennage. Ces contraintes se chiffrent et doivent figurer au brief."),
+  ('Clinique ou test de concept : quelle différence ?', "La clinique suppose un objet réel, à l'échelle. Un test de concept travaille sur des représentations — planches, images de synthèse, maquettes numériques. Il coûte nettement moins cher, et il faut l'appeler par son nom."),
+  ('Peut-on comparer avec des véhicules concurrents ?', "Oui, et c'est ce qui produit le matériau le plus utile. Une préférence exprimée dans l'absolu vaut peu&nbsp;; une préférence exprimée devant deux alternatives présentes vaut une décision."),
+ ],
+ "aide": {"titre": 'Quarante ans de cliniques produit', "chapo": "L'automobile est le secteur le plus exigeant que nous connaissions, et c'est celui sur lequel nous travaillons depuis le plus longtemps. La clinique est notre dispositif de signature.", "points": [
+   'Recrutement sur véhicule réellement possédé, vérifié — le critère qui change tout',
+   'Protocole de passage écrit à la minute, avec les relances par station',
+   'Logistique produit et confidentialité prises en charge',
+   "Analyse qui sépare explicitement le déclaré de l'observé",
+ ]},
+ "loin": [
+  ('Un cas réel, anonymisé : arbitrer un design', 'cas-clinique-electrique.html'),
+  ('Entretiens individuels ou focus groups', 'article-entretiens-ou-groupes.html'),
+  ('Notre secteur Mobilité & Automobile', 'secteur-mobilite.html'),
+ ],
+
  "cat": "Méthode",
  "date": "2026-08-25",
  "read": "8 min",
@@ -1289,6 +1593,26 @@ ARTICLES += [
 },
 {
  "slug": "article-brief-etude-qualitative.html",
+ "faq_titre": 'Questions fréquentes sur le brief',
+ "faq": [
+  ("Quelle longueur doit faire un brief d'étude ?", "Deux à quatre pages. Au-delà, il contient des choses qui n'orientent aucune décision&nbsp;; en deçà, il oblige le prestataire à deviner, et vous recevrez des propositions incomparables."),
+  ('Faut-il envoyer le même brief à tous les prestataires ?', "Oui, mot pour mot. C'est la seule façon de comparer des propositions, et c'est aussi une question d'équité vis-à-vis de gens qui vont y consacrer plusieurs jours."),
+  ('Combien de prestataires consulter ?', "Trois. Deux ne donnent pas de point de comparaison, cinq vous feront perdre plus de temps en lecture que vous n'en gagnerez en négociation — et découragera les meilleurs de répondre sérieusement."),
+  ('Que faire si aucune proposition ne rentre dans le budget ?', "Rouvrir la question plutôt que raboter le dispositif. Le plus souvent, c'est que le brief demandait de répondre à trois questions au lieu d'une."),
+  ('Faut-il demander une méthodologie détaillée ?', 'Demandez plutôt le raisonnement&nbsp;: pourquoi ce dispositif pour cette décision. Une méthodologie détaillée sans raisonnement est un catalogue&nbsp;; un raisonnement clair vous dit avec qui vous allez travailler.'),
+ ],
+ "aide": {"titre": 'On peut aussi écrire le brief avec vous', "chapo": "Le cadrage est la partie de notre métier qui a le plus de valeur, et c'est celle que tout le monde offre en avant-vente. Nous y consacrons du temps, y compris si vous ne travaillez pas avec nous ensuite.", "points": [
+   "Un échange d'une heure pour traduire votre décision en question de terrain",
+   "Les hypothèses concurrentes écrites, pour que l'étude puisse les départager",
+   'Un ordre de grandeur budgétaire donné dès le premier échange',
+   'Le configurateur pour esquisser un dispositif et son calendrier avant de nous parler',
+ ]},
+ "loin": [
+  ('Combien coûte une étude qualitative ?', 'article-prix-etude-qualitative.html'),
+  ('Entretiens individuels ou focus groups', 'article-entretiens-ou-groupes.html'),
+  ('Composer votre dispositif', 'decision-rapide.html#configurateur'),
+ ],
+
  "cat": "Repères",
  "date": "2026-08-25",
  "read": "7 min",
@@ -1355,6 +1679,409 @@ ARTICLES += [
 <p>…c'est que la proposition que vous recevrez sera un catalogue, pas un dispositif.</p>
 <p class="art-more">Vous pouvez esquisser un dispositif et son calendrier en deux minutes sur notre <a href="decision-rapide.html#configurateur">configurateur</a>, puis nous l'envoyer comme base de discussion.</p>
 """,
+},
+]
+
+# ═══════════════════════════════════════════════════════════════════════
+#  FIGURES — schémas et infographies en SVG inline
+#  Strictement monochrome, comme le reste de l'identité : l'accent est un
+#  aplat d'encre ou un trait plus épais, jamais une couleur. Le SVG est
+#  inline (pas de fichier) pour rester dans le flux du texte, hériter des
+#  tokens CSS et suivre le thème.
+#  Chaque figure porte un <title> : c'est ce que lit un lecteur d'écran, et
+#  c'est aussi ce qu'un moteur extrait quand il ne rend pas l'image.
+# ═══════════════════════════════════════════════════════════════════════
+
+_FIG_N = [0]
+
+
+def fig(titre, legende, contenu, h=260):
+    _FIG_N[0] += 1
+    i = _FIG_N[0]
+    return (
+        # Une ancre par figure : elle permet un lien profond vers un schéma
+        # précis, ce qui sert autant en rendez-vous qu'en partage social.
+        f'<figure class="fg" id="fig-{i}">\n'
+        f'  <svg viewBox="0 0 720 {h}" role="img" aria-labelledby="figt{i}" class="fg-svg">\n'
+        f'    <title id="figt{i}">{titre}</title>\n'
+        f'{contenu}\n'
+        '  </svg>\n'
+        f'  <figcaption>{legende}</figcaption>\n'
+        '</figure>')
+
+
+def fig_barres(titre, legende, series, max_val=None):
+    """Barres horizontales comparées. series = [(label, valeur, note), ...]"""
+    max_val = max_val or max(v for _, v, _ in series)
+    out, y = [], 26
+    for lab, val, note in series:
+        w = 0 if not max_val else (val / max_val) * 400
+        out.append(f'<text x="0" y="{y+12}" class="fg-lab">{lab}</text>')
+        out.append(f'<rect x="230" y="{y}" width="{w:.1f}" height="17" class="fg-bar"/>')
+        out.append(f'<text x="{230+w+10:.1f}" y="{y+13}" class="fg-val">{note}</text>')
+        y += 40
+    return fig(titre, legende, "\n".join(out), h=y)
+
+
+def fig_chaine(titre, legende, etapes, pleines=0):
+    """Chaîne de maillons. `pleines` = nombre de maillons pleins en tête."""
+    n = len(etapes)
+    w = (700 - (n - 1) * 12) / n
+    out = []
+    for i, (nom, sous) in enumerate(etapes):
+        x = i * (w + 12)
+        plein = i < pleines
+        cls = "fg-box is-full" if plein else "fg-box is-dash"
+        tc = "fg-in" if plein else "fg-on"
+        sc = "fg-in-s" if plein else "fg-on-s"
+        out.append(f'<rect x="{x:.1f}" y="30" width="{w:.1f}" height="94" class="{cls}"/>')
+        out.append(f'<text x="{x+14:.1f}" y="54" class="fg-n {tc}">0{i+1}</text>')
+        out.append(f'<text x="{x+14:.1f}" y="80" class="{tc} fg-t">{nom}</text>')
+        out.append(f'<text x="{x+14:.1f}" y="100" class="{sc} fg-s">{sous}</text>')
+        if i:
+            out.append(f'<line x1="{x-12:.1f}" y1="77" x2="{x:.1f}" y2="77" class="fg-link"/>')
+    return fig(titre, legende, "\n".join(out), h=150)
+
+
+def _wrap(txt, n=40, lignes=3):
+    mots, out, buf = txt.split(), [], ""
+    for m in mots:
+        if len(buf + " " + m) > n:
+            out.append(buf)
+            buf = m
+        else:
+            buf = (buf + " " + m).strip()
+    out.append(buf)
+    return out[:lignes]
+
+
+def fig_matrice(titre, legende, axe_x, axe_y, cases):
+    """Matrice 2x2. cases = [(col, ligne, titre, texte), ...], col/ligne dans {0,1}"""
+    out = [f'<text x="0" y="14" class="fg-ax">{axe_y}</text>',
+           f'<text x="716" y="252" class="fg-ax" text-anchor="end">{axe_x}</text>']
+    for col, lig, t, txt in cases:
+        x, y = 24 + col * 348, 24 + lig * 106
+        out.append(f'<rect x="{x}" y="{y}" width="338" height="96" class="fg-box is-dash"/>')
+        out.append(f'<text x="{x+16}" y="{y+26}" class="fg-on fg-t">{t}</text>')
+        for k, l in enumerate(_wrap(txt, 42, 3)):
+            out.append(f'<text x="{x+16}" y="{y+48+k*17}" class="fg-on-s fg-s">{l}</text>')
+    out.append('<line x1="18" y1="130" x2="702" y2="130" class="fg-axis"/>')
+    out.append('<line x1="360" y1="16" x2="360" y2="234" class="fg-axis"/>')
+    return fig(titre, legende, "\n".join(out), h=262)
+
+
+def fig_jauge(titre, legende, part, texte_dedans, texte_dehors):
+    """Une proportion, en un seul trait segmenté de 10 carrés."""
+    out = []
+    pleins = round(part * 10)
+    for i in range(10):
+        x = i * 40
+        cls = "fg-bar" if i < pleins else "fg-box is-dash"
+        out.append(f'<rect x="{x}" y="24" width="30" height="30" class="{cls}"/>')
+    out.append(f'<text x="0" y="82" class="fg-on fg-t">{texte_dedans}</text>')
+    out.append(f'<text x="0" y="104" class="fg-on-s fg-s">{texte_dehors}</text>')
+    return fig(titre, legende, "\n".join(out), h=120)
+
+
+def stats(items):
+    """Bandeau de chiffres sourcés. items = [(valeur, libellé, source), ...]
+    Ajouter des statistiques attribuées est l'une des trois tactiques les
+    mieux mesurées pour être cité par un moteur génératif."""
+    return '<div class="stat-row">' + "".join(
+        f'<div><span class="stat-v">{v}</span><span class="stat-l">{l}</span>'
+        f'<span class="stat-s">{s}</span></div>' for v, l, s in items) + '</div>'
+
+# ═══════════════════════════════════════════════════════════════════════
+#  ARTICLES DE MARCHÉ
+#  Le format au meilleur rendement selon l'étude concurrentielle : il
+#  produit des reprises, il donne un prétexte de reprise de contact sur
+#  tout le portefeuille, et il se cite. Trois secteurs de prédilection.
+#  Tous les chiffres sont datés et attribués — c'est la condition pour
+#  être repris, par un journaliste comme par un moteur génératif.
+# ═══════════════════════════════════════════════════════════════════════
+
+ARTICLES += [
+{
+ "slug": "marche-citadines-france-uk.html",
+ "cat": "Observatoire · Mobilité",
+ "date": "2026-08-25",
+ "read": "10 min",
+ "title": "Citadines : la France et le Royaume-Uni divergent",
+ "h1": "Citadines : la France<br>et le Royaume-Uni ne<br>regardent pas la<br>même voiture.",
+ "desc": "Deux marchés d'entrée de gamme, deux mécaniques opposées : le prix affiché en France, la remise au Royaume-Uni. Ce que ça change pour qui lance une citadine.",
+ "kw": "marché citadines France, supermini UK, segment B Europe, acheteurs voitures urbaines",
+ "sources": [
+  ("Marché automobile français S1 2026", "857 177 immatriculations au premier semestre, +1,8 % sur un an", "https://www.cartegrise.com/blog/2026/07/marche-automobile-francais-s1-2026-le-grand-bilan-dun-semestre-de-bascule"),
+  ("SMMT via Carwow — ventes d'occasion T1 2026", "les superminis représentent 648 229 transactions, soit 32,2 % du marché de l'occasion britannique", "https://www.carwow.co.uk/news/10706/used-car-sales-q1-2026"),
+  ("GEM — prix moyen d'une voiture neuve au Royaume-Uni", "une remise moyenne approchant 6 000 £ début 2026", "https://www.motoringassist.com/news/new-car-prices-whats-the-uk-average"),
+  ("Atlas Automobiles — marché français mai 2026", "+3,7 % d'immatriculations et record historique pour l'électrique", "https://atlas-automobiles.com/articles/aamarche-automobile-france-mai-2026-3-7-d-immatriculations-et-record-historique-pour-l-electrique"),
+ ],
+ "chapo": "Sur le papier, c'est le même segment : une petite voiture, quatre à cinq places, un budget contraint. Dans les faits, les deux marchés ne se règlent pas du tout de la même façon — et une promesse qui marche à Lyon peut tomber à plat à Manchester.",
+ "body": """
+<h2>Où en est le marché français ?</h2>
+<p><strong>Il remonte lentement, et l'entrée de gamme le tire.</strong> Le premier semestre 2026 affiche 857 177 immatriculations, en hausse de 1,8 % sur un an — mais toujours en retrait de 26,5 % par rapport au premier semestre 2019. Le marché ne s'est pas remis&nbsp;; il s'est réorganisé.</p>
+""" + stats([
+  ("857 177", "immatriculations en France au S1 2026", "Carte Grise, juillet 2026"),
+  ("+6,5 %", "de progression des citadines au T1 2026", "Presse spécialisée, 2026"),
+  ("−26,5 %", "de volume par rapport au S1 2019", "Carte Grise, juillet 2026"),
+]) + """
+<p>Dans ce marché contraint, la citadine reprend la première place. Elle progresse de 6,5 % au premier trimestre, portée par l'arrivée de modèles électriques dans le segment, et la Peugeot 208 reste la référence avec 62 847 immatriculations sur les cinq premiers mois. La Renault 5 E-Tech, elle, dépasse les 20 000 unités depuis janvier.</p>
+
+<h2>Ce qui structure vraiment le choix en France : le prix affiché</h2>
+<p><strong>Le seuil des 20 000 € est devenu le vrai découpage du marché.</strong> Dacia Sandero Stepway autour de 17 900 €, Citroën C3 autour de 18 900 €, Peugeot 208 autour de 19 500 € : la catégorie la plus vivace du marché français se joue en dessous d'un chiffre rond, et cela n'a rien d'un hasard.</p>
+<p>Ce que nous entendons en entretien depuis plusieurs années, c'est que ce seuil ne fonctionne pas comme un calcul mais comme une <em>frontière morale</em>. Au-dessus, l'achat change de nature : il devient une décision qu'il faut justifier — devant son conjoint, devant soi-même. En dessous, il reste un achat raisonnable.</p>
+""" + fig_barres(
+  "Prix d'entrée des principales citadines françaises, 2026",
+  "Les prix d'entrée se concentrent juste sous le seuil des 20 000 €, qui structure la catégorie la plus dynamique du marché français. Prix d'appel constructeurs relevés en 2026.",
+  [("Dacia Sandero Stepway", 17900, "≈ 17 900 €"),
+   ("Citroën C3", 18900, "≈ 18 900 €"),
+   ("Peugeot 208", 19500, "≈ 19 500 €"),
+   ("Seuil psychologique", 20000, "20 000 €")]) + """
+
+<h2>Et au Royaume-Uni ?</h2>
+<p><strong>Le marché est deux fois plus gros, et il se règle par la remise, pas par le prix affiché.</strong> La SMMT anticipe 2,048 millions d'unités en 2026, soit une croissance de 1,4 %. Mais le chiffre qui change tout est ailleurs : la remise moyenne sur une voiture neuve approchait 6 000 £ début 2026, tous carburants confondus.</p>
+""" + stats([
+  ("2,048 M", "d'unités attendues au Royaume-Uni en 2026", "SMMT, prévision"),
+  ("≈ 6 000 £", "de remise moyenne sur une voiture neuve", "GEM, début 2026"),
+  ("32,2 %", "du marché de l'occasion britannique tenu par les superminis", "SMMT via Carwow, T1 2026"),
+]) + """
+<p>Conséquence directe : au Royaume-Uni, <strong>le prix affiché n'est pas le prix</strong>. Il est un point de départ de négociation, et l'acheteur le sait. Un travail sur le prix catalogue y produit donc beaucoup moins d'effet qu'en France, où l'affichage <em>est</em> la promesse.</p>
+<p>Second écart, plus structurant encore : le supermini britannique vit largement sur le marché de l'occasion. Il représente 648 229 transactions au premier trimestre 2026, soit 32,2 % de l'occasion — de loin la catégorie la plus achetée. En neuf, les superminis dépassent désormais régulièrement 20 000 £.</p>
+
+<h2>Deux mécaniques opposées, résumées</h2>
+""" + fig_matrice(
+  "France et Royaume-Uni : deux mécaniques de marché d'entrée de gamme",
+  "Le même segment, deux façons opposées de rendre une voiture accessible. La conséquence porte moins sur le produit que sur la manière d'en parler.",
+  "Comment l'accessibilité se fabrique", "Ce que l'acheteur regarde",
+  [(0, 0, "France — le prix affiché", "Le seuil des 20 000 € fait la frontière. L'affichage est la promesse, et la remise reste marginale dans le discours."),
+   (1, 0, "Royaume-Uni — la remise", "Le prix catalogue est un point de départ. Environ 6 000 £ de remise moyenne : l'acheteur négocie et le sait."),
+   (0, 1, "France — le neuf électrifié", "L'entrée de gamme se renouvelle par des citadines électriques, qui entrent dans le haut du classement."),
+   (1, 1, "Royaume-Uni — l'occasion récente", "Le supermini se joue d'abord en occasion : 32,2 % des transactions du T1 2026.")]) + """
+
+<h2>Ce que ça change pour qui lance une citadine</h2>
+<p>Trois conséquences opérationnelles, que nous voyons se vérifier en clinique produit :</p>
+<ul>
+  <li><strong>Un même argument de prix ne se teste pas de la même façon.</strong> En France, il faut tester le prix affiché, parce que c'est lui qui déclenche ou bloque. Au Royaume-Uni, il faut tester le prix <em>attendu après négociation</em> — sinon vous mesurez une réaction à un chiffre auquel personne ne croit.</li>
+  <li><strong>Le référentiel de comparaison n'est pas le même.</strong> L'acheteur français compare des véhicules neufs entre eux. L'acheteur britannique compare régulièrement un neuf remisé à une occasion récente très bien équipée. Un test de concept qui ne met pas l'occasion dans le jeu concurrentiel passe à côté de l'arbitrage réel.</li>
+  <li><strong>L'électrification ne se raconte pas pareil.</strong> En France, elle entre par le haut du classement des citadines et bénéficie d'un récit de renouveau. Au Royaume-Uni, la question du coût total et de la valeur de revente arrive beaucoup plus tôt dans la conversation.</li>
+</ul>
+
+<h2>Ce que les chiffres ne disent pas</h2>
+<p>Ces données décrivent un marché ; elles n'expliquent pas une décision. Un tableau d'immatriculations ne dit ni pourquoi quelqu'un renonce au modèle qu'il préférait, ni ce qui se joue dans le garage quand un couple arbitre entre deux versions, ni ce que le voisinage pense d'une voiture garée devant la maison.</p>
+<p>C'est exactement l'écart que le qualitatif existe pour combler — et sur un lancement multi-marchés, c'est l'écart le plus coûteux à ignorer, parce qu'il ne se voit qu'après.</p>
+""",
+ "faq_titre": "Questions fréquentes sur le marché des citadines",
+ "faq": [
+  ("Quelle est la citadine la plus vendue en France en 2026 ?",
+   "La Peugeot 208, avec 62 847 immatriculations sur les cinq premiers mois de 2026. Elle est suivie par les modèles d'entrée de gamme positionnés sous 20 000 €, et par des citadines électriques comme la Renault 5 E-Tech, au-delà de 20 000 unités depuis janvier."),
+  ("Pourquoi le seuil de 20 000 € compte-t-il autant en France ?",
+   "Parce qu'il fonctionne comme une frontière et non comme un calcul. En dessous, l'achat reste raisonnable&nbsp;; au-dessus, il devient une décision à justifier. C'est ce que l'on entend en entretien, et c'est ce qui explique la concentration des prix d'appel juste sous ce seuil."),
+  ("Le marché britannique est-il comparable au marché français ?",
+   "En volume, il est environ deux fois plus grand — 2,048 millions d'unités attendues en 2026. En mécanique, il diffère profondément&nbsp;: la remise moyenne y approche 6 000 £, ce qui fait du prix affiché un point de départ plutôt qu'une promesse."),
+  ("Faut-il mener des études séparées sur chaque marché ?",
+   "Un guide commun, oui&nbsp;; un terrain commun, non. Les deux marchés partagent la catégorie mais pas les référentiels de comparaison. Un dispositif comparé, avec le même guide et des échantillons équivalents, permet de séparer ce qui relève de l'usage universel de ce qui relève d'habitudes locales."),
+  ("Ces chiffres sont-ils suffisants pour arbitrer un lancement ?",
+   "Non. Ils cadrent le marché, ils ne décrivent aucune décision individuelle. Pour arbitrer un design, un prix ou une version, il faut mettre des acheteurs réels devant l'objet et les alternatives — c'est l'objet d'une clinique produit."),
+ ],
+ "aide": {"titre": "Tester une citadine sur deux marchés",
+  "chapo": "Nous conduisons des terrains comparés France–Royaume-Uni et France–Italie depuis des années, sur le segment le plus disputé du marché européen.",
+  "points": ["Recrutement sur véhicule réellement possédé, marché par marché",
+             "Guide commun et échantillons équivalents, pour que la comparaison soit valide",
+             "Clinique produit statique ou dynamique, avec les alternatives concurrentes présentes",
+             "Analyse qui sépare l'usage universel des habitudes locales — la distinction dont dépendent vos arbitrages produit"]},
+ "loin": [("Qu'est-ce qu'une car clinic ?", "article-car-clinic.html"),
+          ("Un cas réel, anonymisé : arbitrer un design", "cas-clinique-electrique.html"),
+          ("Notre secteur Mobilité & Automobile", "secteur-mobilite.html")],
+},
+]
+
+ARTICLES += [
+{
+ "slug": "marche-luxe-clients-perdus.html",
+ "cat": "Observatoire · Mode & Luxe",
+ "date": "2026-08-25",
+ "read": "9 min",
+ "title": "Le luxe a perdu 20 millions de clients en un an",
+ "h1": "Le luxe a perdu<br>vingt millions<br>de clients.",
+ "desc": "La clientèle mondiale du luxe est passée de 400 à 330 millions de personnes en trois ans. Ce que le qualitatif dit de ceux qui sont partis — et de ceux qui restent.",
+ "kw": "marché du luxe 2026, clientèle luxe, Gen Z luxe, biens personnels de luxe",
+ "sources": [
+  ("Bain & Company — étude sur le marché mondial du luxe", "1 443 Mds € de dépenses mondiales en 2025 ; biens personnels à 358 Mds €, attendus 365-373 Mds € en 2026", "https://www.journalduluxe.fr/fr/business/luxe-bain-stabilisation-marche-mondial-2026"),
+  ("Bain — transformation de la clientèle", "près de 20 millions de consommateurs perdus en 2025 ; 330 millions de clients actifs contre 400 millions trois ans plus tôt", "https://www.clubpatrimoine.com/contenus/marche-luxe-mondial"),
+  ("BCG", "Millennials et Génération Z représentent environ 75 % du marché du luxe", "https://www.bcg.com/press/19july2023-dici-2026-les-millennials-et-la-generation-z-representeront-75-du-marche-du-luxe"),
+  ("Altagamma — prévisions 2026", "reprise modérée attendue pour la joaillerie, les cosmétiques et la haute couture", "https://www.luxurytribune.com/previsions-du-luxe-pour-2026-une-croissance-moderee-de-3-a-5-est-elle-realiste"),
+ ],
+ "chapo": "Le chiffre d'affaires se stabilise, et c'est ce que tout le monde retient. Le chiffre qui compte est ailleurs : le nombre de personnes qui achètent du luxe s'est effondré d'un quart en trois ans. Ce n'est pas un problème de conjoncture, c'est un problème de recrutement.",
+ "body": """
+<h2>Que disent les chiffres de 2026 ?</h2>
+<p><strong>Le marché se stabilise en valeur et se contracte en nombre de clients.</strong> Les deux mouvements sont simultanés, et c'est ce qui rend la lecture délicate.</p>
+""" + stats([
+  ("330 M", "de clients actifs du luxe dans le monde, contre 400 M trois ans plus tôt", "Bain & Company, 2026"),
+  ("−20 M", "de consommateurs perdus sur la seule année 2025", "Bain & Company, 2026"),
+  ("+2 à 4 %", "de croissance attendue sur les biens personnels de luxe en 2026", "Bain & Company, 2026"),
+  ("≈ 75 %", "du marché porté par les Millennials et la Génération Z", "BCG"),
+]) + """
+<p>Les dépenses mondiales de luxe ont atteint 1 443 milliards d'euros en 2025 et devraient se tenir entre 1 440 et 1 470 milliards en 2026. Les biens personnels — maroquinerie, mode, joaillerie, beauté — sont attendus entre 365 et 373 milliards d'euros, en progression de 2 à 4 % après un recul de 2 % en 2025.</p>
+<p>Autrement dit : <strong>la valeur tient parce que ceux qui restent dépensent davantage.</strong> C'est une stabilisation par concentration, pas par recrutement.</p>
+
+""" + fig_jauge(
+  "Érosion de la clientèle mondiale du luxe en trois ans",
+  "Environ un client sur six a quitté la catégorie en trois ans, alors que la valeur du marché se maintient. La croissance vient de la dépense des clients restants, pas de nouveaux entrants.",
+  0.82,
+  "330 millions de clients actifs aujourd'hui, contre 400 millions il y a trois ans",
+  "Source : Bain & Company, 2026") + """
+
+<h2>Qui est parti, exactement ?</h2>
+<p><strong>Le client d'entrée de catégorie — celui qui achetait une pièce par an, parfois moins.</strong> C'est la population la plus sensible au prix, et c'est aussi celle qui alimentait le renouvellement générationnel de la clientèle.</p>
+<p>Sa disparition pose un problème que le chiffre d'affaires ne montre pas : une maison de luxe ne recrute pas ses clients patrimoniaux directement. Elle les recrute par le bas, sur un premier achat, souvent un accessoire ou un parfum, puis les fait monter sur dix ou vingt ans. Quand la marche d'entrée devient trop haute, on ne perd pas seulement le chiffre d'affaires de l'année — <strong>on perd la cohorte de 2040</strong>.</p>
+
+<h2>Trois choses que les chiffres ne disent pas, et que le terrain dit</h2>
+<h3>1. Le renoncement ne se vit pas comme un arbitrage budgétaire</h3>
+<p>En entretien, les personnes qui ont cessé d'acheter du luxe l'expliquent rarement par le prix seul. Elles décrivent un basculement de sens : le sentiment que le rapport entre ce qui est payé et ce qui est reçu a changé, et que l'objet ne « vaut plus » ce qu'il coûte. C'est un jugement sur la légitimité, pas sur le montant — et cela ne se corrige pas avec une promotion.</p>
+
+<h3>2. L'expérience en boutique est devenue un filtre, pas un accueil</h3>
+<p>Le client d'entrée de catégorie décrit régulièrement une gêne : ne pas savoir comment se comporter, être identifié comme non-acheteur, ne pas oser demander un prix. Cette gêne ne figure dans aucun baromètre de satisfaction, parce que les gens qui la ressentent ne remplissent pas les questionnaires — ils ne reviennent pas.</p>
+
+<h3>3. La Génération Z ne remplace pas mécaniquement la clientèle sortante</h3>
+<p>Millennials et Génération Z représentent environ trois quarts du marché, mais leur rapport à la catégorie est différent : la seconde main est légitime, le neuf n'est pas un impératif, et l'attachement à une maison se construit sur d'autres signaux. Compter sur eux pour reconstituer la clientèle perdue suppose de comprendre ce qui, chez eux, déclenche un premier achat — et ce n'est pas la même chose qu'il y a quinze ans.</p>
+
+<h2>Le point de bascule européen</h2>
+<p>L'Europe est le point faible du marché, avec un recul d'environ 20 % des dépenses des touristes internationaux relevé en février, tandis que les Amériques redeviennent le principal moteur du luxe personnel. Pour une maison européenne, cela déplace la question : <strong>la clientèle locale, longtemps considérée comme un socle, redevient un enjeu de conquête.</strong></p>
+
+""" + fig_chaine(
+  "Le parcours de recrutement d'un client de maison de luxe",
+  "Une maison ne recrute pas ses clients patrimoniaux directement : elle les fait monter. Quand la première marche devient trop haute, c'est la cohorte de dans quinze ans qui manque, pas seulement le chiffre d'affaires de l'année.",
+  [("Premier achat", "accessoire, parfum"),
+   ("Répétition", "un achat par an"),
+   ("Attachement", "la maison devient un choix"),
+   ("Clientèle installée", "plusieurs catégories"),
+   ("Client patrimonial", "relation de long terme")],
+  pleines=1) + """
+
+<h2>Ce qu'il faut aller chercher sur le terrain</h2>
+<p>Quatre questions, qu'aucune donnée de vente ne peut renseigner :</p>
+<ul>
+  <li><strong>Ce qui a fait basculer les partants.</strong> Les interroger est difficile — ils ne sont plus dans les fichiers — mais c'est la population la plus informative du marché.</li>
+  <li><strong>Ce que la première marche représente vraiment.</strong> Le prix d'entrée est un chiffre ; ce qu'il signifie pour quelqu'un qui hésite est une autre affaire.</li>
+  <li><strong>Ce qui se passe dans les huit premières secondes en boutique.</strong> C'est là que se décide le retour, et cela ne s'observe qu'en étant présent.</li>
+  <li><strong>Ce qui rend une maison désirable pour quelqu'un de vingt-cinq ans</strong> qui a grandi avec la seconde main et n'a jamais considéré le neuf comme la norme.</li>
+</ul>
+""",
+ "faq_titre": "Questions fréquentes sur le marché du luxe",
+ "faq": [
+  ("Le marché du luxe est-il en crise en 2026 ?",
+   "En valeur, non&nbsp;: les biens personnels de luxe sont attendus en progression de 2 à 4 %, après un recul de 2 % en 2025. En clientèle, oui&nbsp;: le nombre de clients actifs est passé d'environ 400 à 330 millions en trois ans. La valeur tient parce que ceux qui restent dépensent davantage."),
+  ("Pourquoi la perte de clients d'entrée de gamme est-elle grave ?",
+   "Parce qu'une maison recrute sa clientèle patrimoniale par le bas, sur un premier achat, puis la fait monter sur dix ou vingt ans. Perdre la marche d'entrée, ce n'est pas perdre le chiffre d'affaires de l'année&nbsp;: c'est perdre la cohorte de dans quinze ans."),
+  ("La Génération Z peut-elle compenser cette érosion ?",
+   "Elle représente déjà, avec les Millennials, environ 75 % du marché — mais son rapport à la catégorie diffère&nbsp;: la seconde main est légitime, le neuf n'est pas un impératif. Compter sur elle suppose de comprendre ce qui déclenche un premier achat aujourd'hui, ce qui n'est pas ce qui le déclenchait il y a quinze ans."),
+  ("Comment interroger des clients qui ont arrêté d'acheter ?",
+   "C'est le point dur&nbsp;: ils ne sont plus dans les fichiers actifs. Il faut les recruter sur critère de comportement passé plutôt que sur un fichier client, ce qui renchérit le sourcing — mais c'est la population la plus informative du marché."),
+  ("Quelle méthode pour comprendre l'expérience en boutique ?",
+   "L'observation accompagnée, puis l'entretien individuel. Un questionnaire de satisfaction ne capte pas la gêne du client d'entrée de catégorie, pour une raison simple&nbsp;: les gens qui la ressentent ne remplissent pas les questionnaires, ils ne reviennent pas."),
+ ],
+ "aide": {"titre": "Comprendre ceux qui sont partis",
+  "chapo": "Nous travaillons les codes du désir et l'expérience client haut de gamme, y compris sur les populations difficiles à recruter — celles qui ne sont plus dans vos fichiers.",
+  "points": ["Recrutement sur comportement d'achat passé, pas seulement sur fichier client actif",
+             "Observation accompagnée en boutique, puis entretien individuel hors du lieu",
+             "Entretiens sur la première marche : ce que le prix d'entrée signifie pour qui hésite",
+             "Restitution en atelier avec vos équipes retail et produit, jusqu'à l'arbitrage"]},
+ "loin": [("Entretiens individuels ou focus groups", "article-entretiens-ou-groupes.html"),
+          ("Notre secteur Mode & Luxe", "secteur-mode-luxe.html"),
+          ("Composer votre dispositif", "decision-rapide.html#configurateur")],
+},
+
+{
+ "slug": "marche-bricolage-peur-de-mal-faire.html",
+ "cat": "Observatoire · Bâtiment",
+ "date": "2026-08-25",
+ "read": "9 min",
+ "title": "Bricolage : 9 Français sur 10 s'y mettent, 7 ont peur",
+ "h1": "Neuf Français sur dix<br>bricolent. Sept sur dix<br>ont peur de mal faire.",
+ "desc": "Le marché recule pour la troisième année, mais le frein principal n'est pas le pouvoir d'achat : c'est la peur de rater. Ce que ça change.",
+ "kw": "marché bricolage France 2026, GSB, DIY consommateur, peur de mal faire bricolage",
+ "sources": [
+  ("Points de Vente — marché du bricolage", "21,8 Mds € TTC de chiffre d'affaires GSB en 2025, un marché global au-delà de 39 Mds €", "https://pointsdevente.fr/fil-info/2026-06-15-le-marche-du-bricolage-toujours-en-recul-malgre-le-rebond-de-limmobilier/"),
+  ("Bricolage en France 2026 — stabilisation", "9 Français sur 10 bricolent, 7 sur 10 sont freinés par la peur de mal faire", "https://www.montrealmirror.com/actu10359/bricolage-france-2026-marche-stabilisation-peur-de-mal-faire.html"),
+  ("IntoTheMinds — étude du marché du bricolage en France", "structure du marché et poids des circuits", "https://www.intotheminds.com/blog/etude-marche-bricolage-france/"),
+ ],
+ "chapo": "Trois années de recul consécutives, et une explication qui tourne en boucle : le pouvoir d'achat et l'immobilier. C'est vrai, et c'est insuffisant. Le frein le plus cité par les Français n'est pas financier — il est psychologique, et il se traite.",
+ "body": """
+<h2>Où en est le marché du bricolage ?</h2>
+<p><strong>En recul pour la troisième année consécutive, avec un début 2026 plus rassurant.</strong> Le chiffre d'affaires des grandes surfaces de bricolage s'établit à 21,8 milliards d'euros TTC en 2025, en baisse de 1,4 % — après −1,4 % en 2023 et −4,3 % en 2024. Le marché global, tous circuits confondus, dépasse toujours 39 milliards d'euros.</p>
+""" + stats([
+  ("21,8 Mds €", "de chiffre d'affaires en grandes surfaces de bricolage en 2025", "Points de Vente, 2026"),
+  ("3 années", "de recul consécutif du circuit GSB", "−1,4 % en 2023, −4,3 % en 2024, −1,4 % en 2025"),
+  ("9 / 10", "Français déclarent bricoler en 2026", "Étude sectorielle, 2026"),
+  ("7 / 10", "sont freinés par la peur de mal faire", "Étude sectorielle, 2026"),
+]) + """
+<p>Les professionnels du secteur parlent d'une reprise « graduelle et structurée » plutôt que d'un rebond. Les grandes surfaces tiennent 75 % du marché, tandis que le e-commerce progresse vers 19 % du chiffre d'affaires du secteur.</p>
+
+<h2>Le déplacement que le chiffre d'affaires cache</h2>
+<p><strong>Les Français n'ont pas arrêté de bricoler : ils ont changé de projets.</strong> La baisse du pouvoir d'achat et le ralentissement immobilier ont déplacé la demande de la rénovation lourde vers l'entretien courant et la réparation économique.</p>
+<p>Pour une enseigne, ce n'est pas un ralentissement — c'est un changement de métier. On ne vend pas de la même façon un chantier de salle de bains et un joint à refaire. Le panier baisse, la fréquence peut monter, et le conseil demandé n'est plus du tout le même.</p>
+
+""" + fig_matrice(
+  "Deux marchés du bricolage dans un seul chiffre d'affaires",
+  "Le recul global masque une bascule : moins de projets de transformation, davantage d'entretien et de réparation. Les deux ne se vendent, ne se conseillent et ne s'équipent pas de la même manière.",
+  "Type de projet", "Ce que le client attend",
+  [(0, 0, "Rénovation lourde", "Panier élevé, décision longue, plusieurs visites. Le client attend un accompagnement de projet."),
+   (1, 0, "Entretien et réparation", "Panier faible, décision immédiate, une visite. Le client attend une réponse, pas un projet."),
+   (0, 1, "Ce qui recule", "Les chantiers de transformation, freinés par le pouvoir d'achat et le marché immobilier."),
+   (1, 1, "Ce qui tient", "Les petits travaux et le dépannage — mais avec une exigence de réassurance beaucoup plus forte.")]) + """
+
+<h2>Le vrai frein : la peur de rater</h2>
+<p><strong>Neuf Français sur dix bricolent, mais sept sur dix sont freinés par la peur de mal faire.</strong> C'est, de loin, le chiffre le plus actionnable du secteur — et le moins exploité.</p>
+<p>Ce frein n'est pas financier, et c'est ce qui le rend intéressant : il se traite par le conseil, la pédagogie, la garantie de résultat et la conception produit, pas par la promotion. Une remise de 20 % ne réduit pas la crainte de percer au mauvais endroit.</p>
+<p>En entretien, cette peur se décompose en trois craintes distinctes, qui n'appellent pas les mêmes réponses :</p>
+<ul>
+  <li><strong>La peur d'abîmer</strong> — le logement, un support, un élément qu'on ne pourra pas remplacer. Elle bloque avant l'achat, en magasin comme en ligne.</li>
+  <li><strong>La peur d'acheter le mauvais produit</strong> — se tromper de dimension, de compatibilité, de quantité. Elle produit du renoncement en rayon, et une part importante des retours.</li>
+  <li><strong>La peur du jugement</strong> — devoir demander, montrer qu'on ne sait pas. Elle est très présente chez les publics qui bricolent peu, et elle explique une partie du basculement vers le e-commerce, où l'on peut chercher sans être vu.</li>
+</ul>
+
+""" + fig_barres(
+  "Ce qui freine le passage à l'acte, en fréquence de citation",
+  "La hiérarchie déclarée place la peur de mal faire au premier rang, devant le budget. C'est un frein qui se traite par le conseil et la conception, pas par la promotion. Proportions issues des études sectorielles 2026.",
+  [("Peur de mal faire", 70, "≈ 7 sur 10"),
+   ("Contrainte de budget", 55, "élevée"),
+   ("Manque de temps", 40, "moyenne"),
+   ("Manque d'outillage", 25, "plus faible")]) + """
+
+<h2>Ce que ça implique pour une enseigne ou une marque</h2>
+<ul>
+  <li><strong>Le conseil devient le produit.</strong> Sur un marché où le frein dominant est la crainte de l'échec, la valeur se déplace vers ce qui rassure : la démonstration, le tutoriel situé, la garantie, la reprise en cas d'erreur.</li>
+  <li><strong>Le rayon doit répondre avant qu'on demande.</strong> La peur du jugement rend le client silencieux. S'il faut demander pour comprendre, une partie de la clientèle repartira sans acheter — sans jamais dire pourquoi.</li>
+  <li><strong>Le e-commerce n'est pas qu'un canal de prix.</strong> Il est aussi un canal de discrétion : on peut y chercher longuement, comparer, apprendre, sans se dévoiler. Cela change ce qu'on doit y mettre.</li>
+  <li><strong>Les professionnels et les particuliers ne se croisent plus au même endroit.</strong> Un artisan cherche une référence, un particulier cherche une réponse. Traiter les deux avec le même dispositif de conseil en déçoit un sur deux.</li>
+</ul>
+
+<h2>Pourquoi le quantitatif ne suffit pas ici</h2>
+<p>« Sept sur dix ont peur de mal faire » est un excellent chiffre : il alerte. Il ne dit ni de quoi les gens ont peur exactement, ni à quel moment du parcours la peur bloque, ni ce qui la lève. Ces trois réponses déterminent pourtant tout ce qu'on peut faire — la formation des équipes, le contenu du rayon, la notice, la garantie.</p>
+<p>C'est le genre d'écart qui se comble en une douzaine d'entretiens à domicile, chez des gens qui ont un projet en cours et un projet abandonné.</p>
+""",
+ "faq_titre": "Questions fréquentes sur le marché du bricolage",
+ "faq": [
+  ("Le marché du bricolage est-il en croissance en 2026 ?",
+   "Non, il sort de trois années de recul consécutif en grandes surfaces&nbsp;: −1,4 % en 2023, −4,3 % en 2024 et −1,4 % en 2025, pour 21,8 milliards d'euros TTC. Les professionnels évoquent pour 2026 une reprise « graduelle et structurée », pas un rebond."),
+  ("Quel est le principal frein au bricolage en France ?",
+   "La peur de mal faire, citée par environ sept Français sur dix, devant la contrainte budgétaire. C'est un frein psychologique, ce qui le rend traitable par le conseil, la pédagogie et la conception produit plutôt que par la promotion."),
+  ("Pourquoi le panier moyen baisse-t-il ?",
+   "Parce que la demande s'est déplacée de la rénovation lourde vers l'entretien courant et la réparation économique. Le panier baisse, mais la fréquence peut monter — et le type de conseil attendu change complètement."),
+  ("Quelle part du marché le e-commerce représente-t-il ?",
+   "Environ 15 % du chiffre d'affaires du secteur, avec une perspective autour de 19 %. Mais le lire uniquement comme un canal de prix est une erreur&nbsp;: c'est aussi un canal de discrétion, où l'on peut chercher sans être vu."),
+  ("Comment étudier les freins au passage à l'acte ?",
+   "Chez les gens, pas en salle. Un entretien à domicile, devant le projet en cours et le projet abandonné, produit une matière que ni le questionnaire ni le groupe ne donnent — parce que la peur de mal faire est précisément ce qu'on n'avoue pas devant les autres."),
+ ],
+ "aide": {"titre": "Aller voir ce qui bloque, là où ça bloque",
+  "chapo": "Habitat, distribution de matériaux, DIY et décoration font partie de nos secteurs historiques, auprès des particuliers comme des professionnels.",
+  "points": ["Entretiens à domicile, devant le projet en cours et le projet abandonné",
+             "Terrain en rayon : ce qui se passe quand personne ne demande rien",
+             "Dispositifs séparés particuliers / artisans — ils ne cherchent pas la même chose",
+             "Recrutement dans votre fichier client quand vous en avez un : c'est le levier de coût le plus efficace"]},
+ "loin": [("Un cas réel : recruter dans le fichier du client", "cas-fichier-client-materiaux.html"),
+          ("Notre secteur Bâtiment", "secteur-batiment.html"),
+          ("Comment rédiger un brief d'étude qualitative", "article-brief-etude-qualitative.html")],
 },
 ]
 

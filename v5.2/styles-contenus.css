@@ -373,3 +373,137 @@
 /* Un lien sortant dans un tableau de repères reste discret */
 .tw td a { border-bottom: 1px solid var(--grey-300); }
 .tw td a:hover { border-bottom-color: var(--ink); }
+
+/* ---------------------------------------------------------
+   8. Figures — schémas et infographies
+   Strictement monochrome : l'accent est un aplat d'encre ou un trait plus
+   épais, jamais une couleur. Les libellés sont en mono, les valeurs en
+   display — même grammaire que le reste du site.
+   --------------------------------------------------------- */
+.fg { margin: 2.2em 0; }
+.fg-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.fg figcaption {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px solid var(--grey-200);
+  font-size: 13px; line-height: 1.55; color: var(--grey-500);
+}
+.fg-bar   { fill: var(--ink); }
+.fg-box   { fill: none; stroke: var(--grey-300); stroke-width: 1; }
+.fg-box.is-dash { stroke-dasharray: 4 4; }
+.fg-box.is-full { fill: var(--ink); stroke: var(--ink); }
+.fg-link  { stroke: var(--grey-300); stroke-width: 1; }
+.fg-axis  { stroke: var(--grey-200); stroke-width: 1; }
+.fg-lab   { font-family: var(--font-mono); font-size: 11px; fill: var(--grey-700); }
+.fg-val   { font-family: var(--font-display); font-weight: 700; font-size: 13px; fill: var(--ink); }
+.fg-ax    { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; fill: var(--grey-500); }
+.fg-n     { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .2em; }
+.fg-t     { font-family: var(--font-display); font-weight: 600; font-size: 13.5px; }
+.fg-s     { font-family: var(--font-body); font-size: 11.5px; }
+.fg-on    { fill: var(--ink); }
+.fg-on-s  { fill: var(--grey-500); }
+.fg-in    { fill: var(--white); }
+.fg-in-s  { fill: var(--grey-300); }
+
+/* Bandeau de chiffres sourcés */
+.stat-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px; background: var(--grey-200);
+  border: 1px solid var(--grey-200);
+  margin: 2em 0;
+}
+.stat-row > div { background: var(--white); padding: 22px 20px; }
+.stat-v {
+  display: block;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(26px, 3vw, 38px); line-height: 1;
+  letter-spacing: -.03em; margin-bottom: 10px;
+}
+.stat-l { display: block; font-size: 13.5px; line-height: 1.45; color: var(--grey-700); margin-bottom: 8px; }
+.stat-s { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--grey-500); }
+
+/* ---------------------------------------------------------
+   9. FAQ d'article, activation, aller plus loin
+   --------------------------------------------------------- */
+.art-faq { margin-top: clamp(48px, 6vw, 72px); padding-top: 34px; border-top: 1px solid var(--grey-200); }
+.art-faq > h2 {
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important; font-weight: 400 !important;
+  letter-spacing: .4em; text-transform: uppercase;
+  color: var(--grey-500); margin: 0 0 18px !important;
+}
+.art-faq .faq-i summary h3 { font-size: clamp(16px, 1.4vw, 19px); }
+
+/* L'article se referme, le bloc d'activation prend toute la largeur en noir */
+.art-tail { display: block; }
+.art-help { background: var(--ink); color: var(--white); padding: clamp(54px, 7vw, 92px) var(--gutter); }
+.art-help-in { max-width: 760px; margin: 0 auto; }
+.art-help .eyebrow { color: var(--grey-500); margin-bottom: 18px; }
+.art-help h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(26px, 3vw, 42px); line-height: 1.1; letter-spacing: -.02em;
+  margin: 0 0 20px;
+}
+.art-help .lead { color: var(--grey-300); margin-bottom: 28px; }
+.art-help-list { list-style: none; padding: 0; margin: 0 0 34px; border-top: 1px solid var(--grey-900); }
+.art-help-list li {
+  border-bottom: 1px solid var(--grey-900);
+  padding: 13px 0 13px 26px; position: relative;
+  font-size: 15px; line-height: 1.55; color: var(--grey-300);
+}
+.art-help-list li::before {
+  content: ''; position: absolute; left: 0; top: 21px;
+  width: 11px; height: 1px; background: var(--grey-500);
+}
+.art-help .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.art-loin { margin-top: clamp(44px, 5vw, 64px); padding-top: 30px; border-top: 1px solid var(--grey-200); }
+.art-loin > h2 {
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important; font-weight: 400 !important;
+  letter-spacing: .4em; text-transform: uppercase;
+  color: var(--grey-500); margin: 0 0 16px !important;
+}
+.art-loin-g { display: grid; gap: 1px; background: var(--grey-200); border: 1px solid var(--grey-200); }
+.art-loin-g a {
+  background: var(--white); padding: 17px 20px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-size: 15px; font-weight: 500;
+  transition: background .2s var(--ease-out);
+}
+.art-loin-g a:hover { background: var(--offwhite); }
+.art-loin-g a .arrow { flex: none; color: var(--grey-500); }
+.art-loin-g a:hover .arrow { color: var(--ink); }
+
+@media (max-width: 700px) {
+  .fg-lab { font-size: 13px; }
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------------------------------------------------------
+   10. Impact d'une étude de cas
+   La section que lit un décideur : ce que l'étude a permis de trancher,
+   ce qu'elle a évité, et ce que ça a coûté ou fait gagner.
+   --------------------------------------------------------- */
+.art-impact { margin-top: clamp(48px, 6vw, 72px); padding-top: 34px; border-top: 1px solid var(--grey-200); }
+.art-impact > h2 {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: clamp(24px, 2.5vw, 33px) !important;
+  letter-spacing: -.02em; line-height: 1.14;
+  margin: 0 0 .6em !important;
+}
+.imp-lede { font-size: clamp(16px, 1.4vw, 19px); color: var(--grey-700); margin-bottom: 1.6em; }
+.imp-g {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--grey-200); border: 1px solid var(--grey-200);
+}
+.imp-g > div { background: var(--white); padding: 24px 22px; }
+.imp-k {
+  display: block;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--grey-500); margin-bottom: 11px;
+}
+.imp-g p { font-size: 14.5px; line-height: 1.55; margin: 0; }
+.imp-note { font-size: 12.5px; line-height: 1.55; color: var(--grey-500); margin-top: 16px; }
+@media (max-width: 640px) { .imp-g { grid-template-columns: 1fr; } }

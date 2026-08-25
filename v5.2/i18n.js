@@ -797,6 +797,9 @@ window.I18N = {
     'content.cta.h2': "Une question<br>à éclairer ?",
     'content.cta.lead': "Composez un dispositif en deux minutes, ou écrivez-nous votre question en trois lignes.",
     'content.write': "Nous écrire",
+    'content.obs.eyebrow': "— Observatoire",
+    'content.obs.h2': "L'état de nos<br>marchés.",
+    'content.obs.lead': "Des chiffres datés et attribués sur les secteurs que nous travaillons — et, en dessous des chiffres, ce que le terrain dit et qu'aucune donnée de marché ne montre.",
   },
 
   en: {
@@ -1577,6 +1580,9 @@ window.I18N = {
     'content.cta.h2': "A question<br>to illuminate?",
     'content.cta.lead': "Build a study design in two minutes, or write us your question in three lines.",
     'content.write': "Write to us",
+    'content.obs.eyebrow': "— Market watch",
+    'content.obs.h2': "The state of<br>our markets.",
+    'content.obs.lead': "Dated, attributed figures on the sectors we work in — and, beneath the figures, what fieldwork says and no market data shows. Published in French.",
   }
 };
 

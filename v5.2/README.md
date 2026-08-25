@@ -13,8 +13,9 @@ Le bouton **FR / EN** en haut à droite bascule tout le site en anglais
 |---|---|
 | **Décision rapide** — l'offre courte, avec un configurateur de dispositif | [/v5.2/decision-rapide.html](decision-rapide.html) |
 | **Contenus** — hub blog, études de cas, livre blanc, FAQ | [/v5.2/contenus.html](contenus.html) |
-| 8 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
+| 11 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
 | 3 études de cas anonymisées | [utilitaire & artisans](cas-utilitaire-artisans.html) · [clinique électrique](cas-clinique-electrique.html) · [fichier client](cas-fichier-client-materiaux.html) |
+| **Observatoire de marchés** | [citadines France/UK](marche-citadines-france-uk.html) · [le luxe et ses 20 M de clients perdus](marche-luxe-clients-perdus.html) · [bricolage et peur de mal faire](marche-bricolage-peur-de-mal-faire.html) |
 | Livre blanc, 7 chapitres | [/v5.2/livre-blanc.html](livre-blanc.html) |
 | FAQ, 22 questions | [/v5.2/faq.html](faq.html) |
 
@@ -54,6 +55,27 @@ Open Graph et le JSON-LD. Corriger un article = éditer le script, puis :
 ```bash
 python3 build_contenus.py
 ```
+
+## Anatomie d'un article
+
+Chaque article porte désormais, en plus du corps de texte :
+
+- **Des figures en SVG inline** — barres comparées, matrices 2×2, chaînes de maillons,
+  jauges. Strictement monochrome, générées par `fig_barres()`, `fig_matrice()`,
+  `fig_chaine()` et `fig_jauge()` dans `build_contenus.py`. Chacune porte un `<title>`
+  (lu par les lecteurs d'écran, extrait par les moteurs) et une ancre `#fig-N`.
+- **Des bandeaux de chiffres sourcés** (`stats()`) — valeur, libellé, source datée.
+- **Une FAQ de 3 à 5 questions**, balisée `FAQPage` et fusionnée avec l'`Article` dans
+  un `@graph` : la page est une entité qui est à la fois un article et une FAQ.
+- **Un bloc « Comment ACMÉ peut vous aider »** en pleine largeur, qui transforme la
+  lecture en conversation — un article qui explique sans dire ce qu'on peut en faire
+  ensemble laisse le lecteur au milieu du gué.
+- **Un « Aller plus loin »** de trois liens internes.
+- **Un bloc « Sources »** en pied.
+
+Les trois études de cas portent en plus une section **« Ce que ça a changé »** :
+décision engagée, ce qui a été évité, ce qui a été gagné, effet de levier. Aucun
+chiffre d'affaires ni indicateur commercial n'y figure — ils appartiennent au client.
 
 ## SEO / GEO
 
