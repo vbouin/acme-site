@@ -154,7 +154,7 @@ def breadcrumb(items):
 
 
 def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
-         breadcrumbs=None, og_type="website"):
+         breadcrumbs=None, og_type="website", og_image="assets/v4/decision.jpg"):
     sect_nav = "\n".join(
         f'        <a href="{u}" data-i18n="sec5.{k}.title">{lbl}</a>'
         for (u, lbl), k in zip(SECTEURS, ["mob", "fmcg", "sante", "bat", "terr", "mode"]))
@@ -197,7 +197,7 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
 <meta property="og:title" content="{html.escape(title, quote=True)}" />
 <meta property="og:description" content="{html.escape(desc, quote=True)}" />
 <meta property="og:url" content="{SITE}/{slug}" />
-<meta property="og:image" content="{SITE}/assets/v4/decision.jpg" />
+<meta property="og:image" content="{SITE}/{og_image}" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -218,6 +218,39 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
 
 <script src="i18n.js"></script>
 <script src="main.js"></script>
+<script>
+/* Les boucles d'illustration sont décoratives : sous « mouvement réduit »,
+   elles s'arrêtent sur leur poster. `autoplay` ne se désactive pas en CSS,
+   d'où ces trois lignes. */
+(function () {{
+  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video');
+  if (!vids.length) return;
+
+  // Mouvement réduit : on s'arrête sur le poster. `autoplay` ne se désactive
+  // pas en CSS, d'où ces lignes.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {{
+    vids.forEach(function (v) {{ v.removeAttribute('autoplay'); v.autoplay = false; v.pause(); }});
+    return;
+  }}
+
+  // `autoplay` seul ne suffit pas toujours : selon le navigateur et l'état de
+  // l'onglet au chargement, la lecture reste en pause. On relance à l'entrée
+  // dans le viewport, et on met en pause hors champ — inutile de décoder une
+  // image qu'on ne voit pas.
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {{
+    entries.forEach(function (e) {{
+      if (e.isIntersecting) {{
+        var pr = e.target.play();
+        if (pr && pr.catch) pr.catch(function () {{}});
+      }} else {{
+        e.target.pause();
+      }}
+    }});
+  }}, {{ threshold: 0.15 }});
+  vids.forEach(function (v) {{ io.observe(v); }});
+}})();
+</script>
 </body>
 </html>
 """
@@ -361,6 +394,7 @@ def stats(items):
 ARTICLES = [
 {
  "slug": "article-focus-group-lyon.html",
+ "illus": "groupes.webp",
  "faq_titre": 'Questions fréquentes sur les focus groups',
  "faq": [
   ('Combien de temps dure un focus group ?', "Deux heures, rarement plus. Au-delà, l'attention baisse et les participants commencent à répéter ce qu'ils ont déjà dit. Un groupe d'une heure trente bien mené produit davantage qu'un groupe de trois heures."),
@@ -438,6 +472,7 @@ ARTICLES = [
 },
 {
  "slug": "article-ia-etudes-qualitatives.html",
+ "illus": "ia.webp",
  "faq_titre": "Questions fréquentes sur l'IA dans les études",
  "faq": [
   ("L'IA va-t-elle remplacer les instituts d'études ?", "Elle remplace des tâches, pas un métier. La transcription, la structuration et le premier balayage thématique ont basculé pour de bon. Le cadrage, la conduite du terrain et l'arbitrage entre interprétations concurrentes ne montrent aucun signe de bascule."),
@@ -534,6 +569,7 @@ ARTICLES = [
 ARTICLES += [
 {
  "slug": "article-prix-etude-qualitative.html",
+ "illus": "donnees.webp",
  "faq_titre": "Questions fréquentes sur le budget d'une étude",
  "faq": [
   ('Quel est le budget minimum pour une étude qualitative sérieuse ?', "En dessous de six entretiens ou de deux groupes, le corpus ne se lit plus&nbsp;: vous ne pouvez pas distinguer ce qui tient au public de ce qui tient à la personne. C'est le vrai plancher, et il est méthodologique avant d'être financier."),
@@ -630,6 +666,7 @@ ARTICLES += [
 },
 {
  "slug": "article-entretiens-ou-groupes.html",
+ "illus": "bulles.webp",
  "faq_titre": 'Questions fréquentes',
  "faq": [
   ("Combien d'entretiens faut-il pour atteindre la saturation ?", "Entre douze et dix-huit sur une cible homogène. La saturation est le moment où un entretien supplémentaire n'apporte plus d'information neuve&nbsp;; elle arrive plus tard dès qu'on croise deux profils ou deux marchés."),
@@ -720,6 +757,7 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "article-decider-vite.html",
+ "illus": "courbes.webp",
  "faq_titre": 'Questions fréquentes sur les dispositifs courts',
  "faq": [
   ('Quel est le délai minimum réaliste pour une étude qualitative ?', "Quatre semaines, à trois conditions&nbsp;: une question unique, un recrutement dans votre propre base client, et un terrain à distance. En dessous, ce qu'on gagne se prend sur le recrutement ou sur le nombre de voix, c'est-à-dire sur la validité."),
@@ -823,6 +861,7 @@ ARTICLES += [
 CAS = [
 {
  "slug": "cas-utilitaire-artisans.html",
+ "illus": "terrain.webp",
  "sources": [
   ('Marché automobile français S1 2026', "le contexte de marché dans lequel s'inscrit ce type d'arbitrage produit", 'https://www.cartegrise.com/blog/2026/07/marche-automobile-francais-s1-2026-le-grand-bilan-dun-semestre-de-bascule'),
  ],
@@ -886,6 +925,7 @@ CAS = [
 },
 {
  "slug": "cas-clinique-electrique.html",
+ "illus": "objet.webp",
  "sources": [
   ("Atlas Automobiles — marché français, record pour l'électrique", "la dynamique de l'électrique sur le marché français en 2026", 'https://atlas-automobiles.com/articles/aamarche-automobile-france-mai-2026-3-7-d-immatriculations-et-record-historique-pour-l-electrique'),
  ],
@@ -949,6 +989,7 @@ CAS = [
 },
 {
  "slug": "cas-fichier-client-materiaux.html",
+ "illus": "ecriture-band.webp",
  "sources": [
   ('Points de Vente — marché du bricolage', "21,8 Mds € de chiffre d'affaires GSB en 2025, troisième année de recul", 'https://pointsdevente.fr/fil-info/2026-06-15-le-marche-du-bricolage-toujours-en-recul-malgre-le-rebond-de-limmobilier/'),
  ],
@@ -1334,6 +1375,13 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
                         for t, u in a["loin"])
         loin = f'<section class="art-loin"><h2>Aller plus loin</h2><div class="art-loin-g">{liens}</div></section>'
 
+    # Bandeau d'illustration. Décoratif : alt vide plutôt qu'une description
+    # redondante avec le titre — un lecteur d'écran n'a rien à y gagner.
+    illus = ""
+    if a.get("illus"):
+        illus = (f'<div class="art-illus"><img src="assets/illus/{a["illus"]}" alt="" '
+                 f'width="1600" height="600" loading="lazy" decoding="async"></div>')
+
     body = f"""<article class="art">
   <header class="art-head">
     <div class="container art-w">
@@ -1345,6 +1393,7 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
       {anon}
     </div>
   </header>
+  {illus}
   <div class="container art-w art-body" lang="fr">
 {a['body']}
 {impact}
@@ -1375,6 +1424,7 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
                 for q, r in a["faq"]]}]}
     return page(a["slug"], a["title"], a["desc"], body,
                 extra_jsonld=ld, current="ct", og_type="article",
+                og_image=f'assets/illus/{a["illus"]}' if a.get("illus") else "assets/v4/decision.jpg",
                 breadcrumbs=[("Accueil", ""), ("Contenus", "contenus.html"),
                              (re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ").strip(), a["slug"])])
 
@@ -1436,6 +1486,11 @@ def render_livre_blanc():
       <p class="art-chapo">{wb['chapo']}</p>
       <div class="art-meta"><time datetime="2026-08-25">25 août 2026</time><span>·</span><span>20 min de lecture</span></div>
     </div>
+    <div class="container wb-media">
+      <video src="assets/illus/stylos.mp4" poster="assets/illus/stylos.webp"
+             muted loop playsinline autoplay preload="metadata" disablepictureinpicture
+             aria-label="Plusieurs mains annotent le même corpus, chacune avec son stylo" tabindex="-1"></video>
+    </div>
   </header>
   <div class="container wb-grid">
     <nav class="wb-rail" aria-label="Sommaire">{rail}</nav>
@@ -1490,7 +1545,10 @@ def render_hub():
         <p class="lead" data-i18n="content.wp.lead">Un protocole d'analyse de verbatim traçable, où l'IA fait le travail mécanique et où chaque conclusion reste remontable jusqu'à sa source. Sept chapitres, vingt minutes.</p>
         <span class="btn btn-primary-dark"><span data-i18n="content.wp.cta">Lire le livre blanc</span> <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></span>
       </div>
-      <div class="ct-feature-mark" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+      <div class="ct-feature-media" aria-hidden="true">
+        <video src="assets/illus/ecriture.mp4" poster="assets/illus/ecriture.webp"
+               muted loop playsinline autoplay preload="metadata" disablepictureinpicture tabindex="-1"></video>
+      </div>
     </a>
   </div>
 </section>
@@ -1596,6 +1654,7 @@ def main():
 ARTICLES += [
 {
  "slug": "article-repondants-synthetiques.html",
+ "illus": "conversation.webp",
  "faq_titre": 'Questions fréquentes sur les répondants synthétiques',
  "faq": [
   ("Un répondant synthétique, est-ce la même chose qu'un persona ?", "Non. Un persona est une synthèse de terrain réel, construite pour représenter un segment observé. Un répondant synthétique génère des réponses nouvelles à partir d'un modèle&nbsp;: il produit de la donnée qui n'a jamais été recueillie."),
@@ -1676,6 +1735,7 @@ ARTICLES += [
 },
 {
  "slug": "article-car-clinic.html",
+ "illus": "demontage.webp",
  "faq_titre": 'Questions fréquentes sur les cliniques produit',
  "faq": [
   ('Combien de participants pour une car clinic ?', "Entre trente et soixante selon le nombre de directions à arbitrer et de segments à comparer. C'est plus qu'un dispositif qualitatif classique, parce qu'on cherche aussi à hiérarchiser des préférences, pas seulement à comprendre."),
@@ -1762,6 +1822,7 @@ ARTICLES += [
 },
 {
  "slug": "article-brief-etude-qualitative.html",
+ "illus": "brief.webp",
  "faq_titre": 'Questions fréquentes sur le brief',
  "faq": [
   ("Quelle longueur doit faire un brief d'étude ?", "Deux à quatre pages. Au-delà, il contient des choses qui n'orientent aucune décision&nbsp;; en deçà, il oblige le prestataire à deviner, et vous recevrez des propositions incomparables."),
@@ -1862,6 +1923,7 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "marche-citadines-france-uk.html",
+ "illus": "voiture.webp",
  "cat": "Observatoire · Mobilité",
  "date": "2026-08-25",
  "read": "10 min",
@@ -1957,6 +2019,7 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "marche-luxe-clients-perdus.html",
+ "illus": "fuite.webp",
  "cat": "Observatoire · Mode & Luxe",
  "date": "2026-08-25",
  "read": "9 min",
@@ -2052,6 +2115,7 @@ ARTICLES += [
 
 {
  "slug": "marche-bricolage-peur-de-mal-faire.html",
+ "illus": "stylos.webp",
  "cat": "Observatoire · Bâtiment",
  "date": "2026-08-25",
  "read": "9 min",

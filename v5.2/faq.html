@@ -143,5 +143,38 @@
 
 <script src="i18n.js"></script>
 <script src="main.js"></script>
+<script>
+/* Les boucles d'illustration sont décoratives : sous « mouvement réduit »,
+   elles s'arrêtent sur leur poster. `autoplay` ne se désactive pas en CSS,
+   d'où ces trois lignes. */
+(function () {
+  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video');
+  if (!vids.length) return;
+
+  // Mouvement réduit : on s'arrête sur le poster. `autoplay` ne se désactive
+  // pas en CSS, d'où ces lignes.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vids.forEach(function (v) { v.removeAttribute('autoplay'); v.autoplay = false; v.pause(); });
+    return;
+  }
+
+  // `autoplay` seul ne suffit pas toujours : selon le navigateur et l'état de
+  // l'onglet au chargement, la lecture reste en pause. On relance à l'entrée
+  // dans le viewport, et on met en pause hors champ — inutile de décoder une
+  // image qu'on ne voit pas.
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var pr = e.target.play();
+        if (pr && pr.catch) pr.catch(function () {});
+      } else {
+        e.target.pause();
+      }
+    });
+  }, { threshold: 0.15 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
+</script>
 </body>
 </html>

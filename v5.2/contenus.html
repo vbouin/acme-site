@@ -83,7 +83,10 @@
         <p class="lead" data-i18n="content.wp.lead">Un protocole d'analyse de verbatim traçable, où l'IA fait le travail mécanique et où chaque conclusion reste remontable jusqu'à sa source. Sept chapitres, vingt minutes.</p>
         <span class="btn btn-primary-dark"><span data-i18n="content.wp.cta">Lire le livre blanc</span> <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></span>
       </div>
-      <div class="ct-feature-mark" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+      <div class="ct-feature-media" aria-hidden="true">
+        <video src="assets/illus/ecriture.mp4" poster="assets/illus/ecriture.webp"
+               muted loop playsinline autoplay preload="metadata" disablepictureinpicture tabindex="-1"></video>
+      </div>
     </a>
   </div>
 </section>
@@ -262,5 +265,38 @@
 
 <script src="i18n.js"></script>
 <script src="main.js"></script>
+<script>
+/* Les boucles d'illustration sont décoratives : sous « mouvement réduit »,
+   elles s'arrêtent sur leur poster. `autoplay` ne se désactive pas en CSS,
+   d'où ces trois lignes. */
+(function () {
+  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video');
+  if (!vids.length) return;
+
+  // Mouvement réduit : on s'arrête sur le poster. `autoplay` ne se désactive
+  // pas en CSS, d'où ces lignes.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vids.forEach(function (v) { v.removeAttribute('autoplay'); v.autoplay = false; v.pause(); });
+    return;
+  }
+
+  // `autoplay` seul ne suffit pas toujours : selon le navigateur et l'état de
+  // l'onglet au chargement, la lecture reste en pause. On relance à l'entrée
+  // dans le viewport, et on met en pause hors champ — inutile de décoder une
+  // image qu'on ne voit pas.
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var pr = e.target.play();
+        if (pr && pr.catch) pr.catch(function () {});
+      } else {
+        e.target.pause();
+      }
+    });
+  }, { threshold: 0.15 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
+</script>
 </body>
 </html>

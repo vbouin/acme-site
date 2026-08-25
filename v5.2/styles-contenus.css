@@ -507,3 +507,64 @@
 .imp-g p { font-size: 14.5px; line-height: 1.55; margin: 0; }
 .imp-note { font-size: 12.5px; line-height: 1.55; color: var(--grey-500); margin-top: 16px; }
 @media (max-width: 640px) { .imp-g { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------
+   11. Illustrations
+   Bandeaux pleine largeur entre l'en-tête et le corps, et deux boucles
+   vidéo sur les pages qui les portent. Les visuels sont en gris baké à
+   l'encodage (comme les vidéos du hero d'accueil) : l'identité est
+   monochrome, et un filtre CSS sortirait chaque image du chemin rapide
+   du compositeur.
+   --------------------------------------------------------- */
+.art-illus {
+  margin-top: clamp(36px, 4.5vw, 56px);
+  background: var(--offwhite);
+  overflow: hidden;
+}
+.art-illus img {
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 8 / 3; object-fit: cover;
+}
+
+/* Le média du bloc mis en avant, côté hub */
+.ct-feature-media {
+  border-left: 1px solid var(--grey-900);
+  overflow: hidden;
+  min-height: 240px;
+  position: relative;
+}
+.ct-feature-media video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Le plan est clair et la colonne est noire : on le fond dans le bord
+     intérieur plutôt que de laisser une vignette rapportée. */
+  mask-image: linear-gradient(90deg, transparent 0%, #000 34%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%);
+  opacity: .9;
+}
+
+/* Le média du livre blanc, sous le titre */
+.wb-media {
+  margin-top: clamp(34px, 4vw, 52px);
+  overflow: hidden;
+}
+.wb-media video {
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 16 / 7; object-fit: cover;
+}
+
+/* Mouvement réduit : les boucles s'arrêtent sur leur poster.
+   `autoplay` ne se désactive pas en CSS — c'est le JS de page qui met en
+   pause (cf. main-illus dans le pied de page des gabarits). */
+@media (prefers-reduced-motion: reduce) {
+  .ct-feature-media video, .wb-media video { animation: none; }
+}
+
+@media (max-width: 1040px) {
+  .ct-feature-media { min-height: 200px; }
+  .ct-feature-media video {
+    mask-image: linear-gradient(180deg, transparent 0%, #000 40%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 40%);
+  }
+}

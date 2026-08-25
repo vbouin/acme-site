@@ -85,6 +85,32 @@ Les trois études de cas portent en plus une section **« Ce que ça a changé �
 décision engagée, ce qui a été évité, ce qui a été gagné, effet de levier. Aucun
 chiffre d'affaires ni indicateur commercial n'y figure — ils appartiennent au client.
 
+## Illustrations
+
+`assets/illus/` — 15 bandeaux WebP et 2 boucles vidéo, ~1,7 Mo au total, tirés des
+rushes ACMÉ (cassette, magnétophone, terminal, dessins annotés).
+
+- **Le gris est baké à l'encodage** (`hue=s=0`), comme les vidéos du hero d'accueil :
+  l'identité est monochrome, et un `filter: grayscale()` en CSS sortirait chaque image
+  du chemin rapide du compositeur.
+- **Un bandeau 1600×600 par article**, entre l'en-tête et le corps, en `loading="lazy"`
+  avec `alt=""` — il est décoratif, une description redondante avec le titre n'apporte
+  rien à un lecteur d'écran.
+- **L'image Open Graph de chaque page est son propre bandeau** : un article partagé sur
+  LinkedIn montre son visuel, pas le même pour tous.
+- **Deux boucles vidéo** : le terminal qui écrit (hub Contenus) et les stylos qui
+  annotent le corpus (livre blanc). Muettes, sans audio dans le fichier, relancées à
+  l'entrée dans le viewport et **mises en pause hors champ** — inutile de décoder une
+  image qu'on ne voit pas. Sous `prefers-reduced-motion`, elles s'arrêtent sur leur
+  poster.
+
+⚠️ **Ces rushes sont générés : le texte qui apparaît à l'écran est du charabia.** Il
+faut choisir les plans où il n'est pas lisible — la première boucle du hub montrait un
+gros plan parfaitement déchiffrable, elle a été retaillée sur le plan large de fin, en
+aller-retour pour boucler sans raccord.
+
+`ffmpeg` d'ici **n'a pas d'encodeur WebP** : extraire en PNG puis convertir avec `cwebp`.
+
 ## SEO / GEO
 
 Balisage en place sur **les 25 pages** : `Organization` + `ProfessionalService` partout

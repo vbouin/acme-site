@@ -73,6 +73,11 @@
       <p class="art-chapo">Comment passer de quarante heures d'enregistrement à une décision que l'on peut défendre — sans perdre en route ce qui rendait le corpus intéressant.</p>
       <div class="art-meta"><time datetime="2026-08-25">25 août 2026</time><span>·</span><span>20 min de lecture</span></div>
     </div>
+    <div class="container wb-media">
+      <video src="assets/illus/stylos.mp4" poster="assets/illus/stylos.webp"
+             muted loop playsinline autoplay preload="metadata" disablepictureinpicture
+             aria-label="Plusieurs mains annotent le même corpus, chacune avec son stylo" tabindex="-1"></video>
+    </div>
   </header>
   <div class="container wb-grid">
     <nav class="wb-rail" aria-label="Sommaire"><a href="#pb"><span class="n">01</span><span class="t">Pourquoi une conclusion devient invérifiable</span></a><a href="#principes"><span class="n">02</span><span class="t">Quatre principes</span></a><a href="#phases"><span class="n">03</span><span class="t">Le protocole, phase par phase</span></a><a href="#ia"><span class="n">04</span><span class="t">Ce que l'IA fait, et ne fait jamais</span></a><a href="#trace"><span class="n">05</span><span class="t">La traçabilité, concrètement</span></a><a href="#cadre"><span class="n">06</span><span class="t">Le cadre déontologique</span></a><a href="#vous"><span class="n">07</span><span class="t">Ce que ça change pour vous</span></a></nav>
@@ -244,5 +249,38 @@
 
 <script src="i18n.js"></script>
 <script src="main.js"></script>
+<script>
+/* Les boucles d'illustration sont décoratives : sous « mouvement réduit »,
+   elles s'arrêtent sur leur poster. `autoplay` ne se désactive pas en CSS,
+   d'où ces trois lignes. */
+(function () {
+  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video');
+  if (!vids.length) return;
+
+  // Mouvement réduit : on s'arrête sur le poster. `autoplay` ne se désactive
+  // pas en CSS, d'où ces lignes.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vids.forEach(function (v) { v.removeAttribute('autoplay'); v.autoplay = false; v.pause(); });
+    return;
+  }
+
+  // `autoplay` seul ne suffit pas toujours : selon le navigateur et l'état de
+  // l'onglet au chargement, la lecture reste en pause. On relance à l'entrée
+  // dans le viewport, et on met en pause hors champ — inutile de décoder une
+  // image qu'on ne voit pas.
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var pr = e.target.play();
+        if (pr && pr.catch) pr.catch(function () {});
+      } else {
+        e.target.pause();
+      }
+    });
+  }, { threshold: 0.15 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
+</script>
 </body>
 </html>
