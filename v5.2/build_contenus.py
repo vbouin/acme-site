@@ -2207,6 +2207,764 @@ ARTICLES += [
 },
 ]
 
+# ═══════════════════════════════════════════════════════════════════════
+#  PRODUCTION — les plans validés en veille éditoriale
+#  Chaque article traite un sujet que les concurrents occupent, avec ce
+#  qu'eux n'ont pas : quarante ans de terrain, la clinique produit, et le
+#  droit de dire ce qui ne marche pas.
+# ═══════════════════════════════════════════════════════════════════════
+
+ARTICLES += [
+{
+ "slug": "article-declare-observe.html",
+ "cat": "Point de vue",
+ "date": "2026-08-26",
+ "read": "9 min",
+ "illus": "objet.webp",
+ "title": "Ce que les gens disent, ce qu'ils font : l'écart",
+ "h1": "Ce que les gens disent,<br>ce qu'ils font.",
+ "desc": "Le déclaratif ne ment pas, il reconstruit. Trois écarts qu'on mesure sur le terrain, et ce que ça change sur un arbitrage produit.",
+ "kw": "biais déclaratif, écart déclaré observé, comportement consommateur réel, clinique produit",
+ "sources": [
+  ("Agalma Études — au-delà du déclaratif", "un institut français sur le même constat, côté sciences comportementales", "https://agalma-etudes.com/blog/"),
+  ("Square Cocoon — Prix d'un focus group", "repères de budget pour un dispositif en salle, 2026", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+  ("IntoTheMinds — Combien coûte une étude de marché", "les ordres de grandeur par méthode", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
+ ],
+ "chapo": "« Est-ce que ce prix vous paraît acceptable ? » — oui. Trois mois plus tard, personne n'achète. Le participant n'a pas menti : on lui a posé une question à laquelle un être humain ne sait pas répondre.",
+ "body": """
+<h2>Pourquoi le déclaratif ment sans mentir</h2>
+<p><strong>Parce qu'une décision se prend avant d'être expliquée, et que l'explication se fabrique après.</strong> Quand vous demandez à quelqu'un pourquoi il a choisi une voiture, il ne vous restitue pas son processus de décision&nbsp;: il en construit un, cohérent, présentable, et sincèrement cru.</p>
+<p>Ce n'est pas de la mauvaise foi, c'est le fonctionnement normal de la mémoire. Le participant vous donne une reconstruction rationnelle d'un arbitrage qui ne l'était qu'en partie. Et cette reconstruction a une propriété gênante&nbsp;: elle est <em>plus rationnelle que la décision réelle</em>, parce qu'elle a été fabriquée pour être racontable.</p>
+<p>D'où la règle qui organise tout notre travail de terrain&nbsp;: <strong>on ne demande pas aux gens d'expliquer, on leur demande de raconter, et on regarde ce qu'ils font.</strong></p>
+
+<h2>Quels écarts mesure-t-on, et où se logent-ils&nbsp;?</h2>
+
+<h3>1. La hiérarchie déclarée n'est pas la hiérarchie observée</h3>
+<p>Interrogés en amont, les participants classent en tête des critères rationnels d'usage&nbsp;: coût, volume, autonomie, praticité. Devant l'objet, leurs premiers gestes et leurs premières réactions portent régulièrement sur d'autres registres — la posture, la matière, ce que l'objet dit d'eux.</p>
+<p>Aucun questionnaire ne fait apparaître cet écart, parce qu'un questionnaire n'a accès qu'au déclaratif. C'est précisément la raison d'être d'une clinique produit.</p>
+
+<h3>2. La préférence exprimée n'est pas le geste réel</h3>
+<p>Sur trois directions présentées, une majorité peut désigner la même préférée — et se diriger, quelques minutes plus tard et sans consigne, vers une autre. L'écart est instructif à deux titres&nbsp;: il indique laquelle emporte l'adhésion, et il indique laquelle emporte le <em>choix</em>. Ce ne sont pas toujours les mêmes, et ce n'est pas la même décision qu'on prend selon celle qu'on écoute.</p>
+
+<h3>3. L'usage raconté n'est pas l'usage constaté</h3>
+<p>C'est l'écart le plus large, et il se voit chez les gens plutôt qu'en salle. Un artisan explique qu'il range ses outils «&nbsp;comme il faut&nbsp;». Un entretien à domicile devant le véhicule montre un rangement adapté à sa journée réelle, avec des contraintes qu'il n'aurait jamais énoncées parce qu'elles lui paraissent évidentes.</p>
+""" + fig_matrice(
+  "Ce que chaque registre donne, et ce qu'il cache",
+  "Le déclaratif et l'observé ne sont pas en concurrence : ils répondent à deux questions différentes. L'erreur n'est pas d'écouter le déclaratif, c'est de croire qu'il décrit le comportement.",
+  "Ce qu'on en fait", "Registre",
+  [(0, 0, "Le déclaratif", "Ce que la personne pense de son choix, et comment elle le justifierait devant un tiers."),
+   (1, 0, "L'observé", "Ce que la personne fait quand personne ne lui demande rien. Trente secondes suffisent."),
+   (0, 1, "Utile pour", "Comprendre les représentations, le vocabulaire, ce qui est acceptable de dire."),
+   (1, 1, "Utile pour", "Arbitrer un design, une ergonomie, un rayon — tout ce qui se joue avant la parole.")]) + """
+
+<h2>Comment on rend l'écart visible</h2>
+<p><strong>En observant avant de questionner, systématiquement.</strong> Sur une clinique produit, les trente premières secondes sont les plus informatives de la journée&nbsp;: par où la personne entre, ce qu'elle touche, ce qu'elle contourne, ce à quoi elle revient. Pendant ce temps, l'animateur ne dit rien.</p>
+<p>Ce silence coûte cher à tenir. C'est aussi la différence la plus mesurable entre un animateur expérimenté et un animateur pressé — et l'un des rares points où l'automatisation ne peut rien&nbsp;: un dispositif sans humain dans la pièce n'observe pas, il enregistre des réponses.</p>
+<p>Le protocole s'écrit ensuite à la minute, parce que <strong>l'ordre des expositions détermine les résultats</strong>. Faire réagir avant de faire comparer ne donne pas la même chose que l'inverse.</p>
+
+<h2>Ce que ça change sur un arbitrage</h2>
+<p>Sur une clinique auprès de possesseurs de véhicules électriques concurrents, la hiérarchie déclarée des critères plaçait en tête des arguments d'usage. Devant l'objet, les premières réactions et les premiers gestes portaient sur d'autres registres — et c'est cet écart, documenté poste par poste, qui a orienté l'arbitrage avant le gel du projet.</p>
+<p>L'analyse livrée séparait explicitement les deux lectures. C'est un choix de restitution, pas de méthode&nbsp;: présenter une synthèse unique aurait obligé à trancher entre les deux registres à la place du client.</p>
+<p class="art-more">Le dispositif complet, anonymisé&nbsp;: <a href="cas-clinique-electrique.html">arbitrer un design par les conducteurs de la concurrence</a>.</p>
+
+<h2>Les trois questions qui font sortir le fait plutôt que l'opinion</h2>
+<ol>
+  <li><strong>« Racontez-moi votre mardi. »</strong> Pas votre semaine type — un mardi précis, celui de la semaine dernière. Le récit daté résiste beaucoup mieux à la reconstruction que le récit général.</li>
+  <li><strong>« Montrez-moi. »</strong> Dès qu'un objet, un écran ou un lieu est disponible, faire faire plutôt que faire dire. La main sait des choses que la mémoire a oubliées.</li>
+  <li><strong>« La dernière fois que ça ne s'est pas passé comme prévu ? »</strong> L'incident est le seul moment dont les gens se souviennent précisément, et il révèle la contrainte réelle mieux que dix questions de satisfaction.</li>
+</ol>
+<p>Et une question à ne jamais poser en ouverture&nbsp;: <em>«&nbsp;êtes-vous satisfait&nbsp;?&nbsp;»</em>. Sur un public professionnel, elle produit «&nbsp;ça fait le job&nbsp;» — et rien d'autre pendant vingt minutes.</p>
+
+<h2>Pourquoi une IA ne voit pas cet écart</h2>
+<p><strong>Parce qu'elle reçoit un texte, et que l'écart n'est pas dans le texte.</strong> Un modèle qui lit une transcription voit deux affirmations&nbsp;: l'explication rationnelle, puis, trente secondes plus tard, la description d'un comportement qui la contredit. Il en produit une version cohérente — c'est exactement ce qu'on lui demande de faire.</p>
+<p>Un analyste, lui, entend la contradiction et la garde. C'est cette contradiction qui vaut le prix de l'étude.</p>
+<p class="art-more">Le partage précis entre ce que nous automatisons et ce que nous n'automatisons jamais&nbsp;: <a href="article-ia-etudes-qualitatives.html">IA et études qualitatives</a>.</p>
+""",
+ "faq_titre": "Questions fréquentes",
+ "faq": [
+  ("Le déclaratif est-il inutile ?",
+   "Non, il répond à une autre question. Le déclaratif dit ce que la personne pense de son choix et comment elle le justifierait&nbsp;; l'observé dit ce qu'elle fait. L'erreur n'est pas d'écouter le déclaratif, c'est de croire qu'il décrit le comportement."),
+  ("Peut-on mesurer cet écart sans clinique produit ?",
+   "En partie, par l'entretien à domicile devant l'objet ou le lieu d'usage. Ce qu'on perd, c'est la comparaison directe entre plusieurs alternatives présentes — et c'est souvent là que la hiérarchie réelle apparaît."),
+  ("Combien de participants faut-il pour que l'écart soit lisible ?",
+   "Une trentaine sur une clinique, une douzaine en entretiens à domicile. En dessous, un écart observé sur deux personnes ne se distingue pas d'une particularité individuelle."),
+  ("Comment restituer deux lectures contradictoires à un comité ?",
+   "En les séparant explicitement, poste par poste, avec les verbatims et les observations sources. Présenter une synthèse unique reviendrait à trancher entre les deux registres à la place du client — ce n'est pas notre rôle."),
+  ("Un questionnaire quantitatif peut-il corriger ce biais ?",
+   "Il l'amplifie, parce qu'il ne recueille que du déclaratif et sur un volume plus grand. Un écart massif et bien mesuré reste un écart. Le quantitatif dit combien&nbsp;; il ne dit pas ce que les gens font."),
+ ],
+ "aide": {"titre": "Aller voir plutôt que demander",
+  "chapo": "Nous conduisons des cliniques produit depuis quarante ans, sur le secteur le plus exigeant que nous connaissions. Le principe vaut bien au-delà de l'automobile.",
+  "points": ["Observation avant questionnement, avec un protocole écrit à la minute",
+             "Entretiens à domicile ou sur le lieu d'usage, devant l'objet réel",
+             "Analyse qui sépare explicitement le déclaré de l'observé, poste par poste",
+             "Restitution en atelier, pour que l'écart soit discuté par ceux qui décident"]},
+ "loin": [("Qu'est-ce qu'une car clinic ?", "article-car-clinic.html"),
+          ("Un cas réel, anonymisé : arbitrer un design", "cas-clinique-electrique.html"),
+          ("Entretiens individuels ou focus groups", "article-entretiens-ou-groupes.html")],
+},
+
+{
+ "slug": "article-verbatims-donnees-personnelles.html",
+ "cat": "Repères",
+ "date": "2026-08-26",
+ "read": "8 min",
+ "illus": "bulles.webp",
+ "title": "Vos verbatims sont des données personnelles",
+ "h1": "Vos verbatims sont<br>des données<br>personnelles.",
+ "desc": "Base légale, consentement, durée de conservation, sous-traitance IA : ce qu'un enregistrement d'entretien vous impose, et les questions à poser à votre prestataire.",
+ "kw": "RGPD étude qualitative, verbatim données personnelles, consentement participant étude, IA sous-traitance données",
+ "sources": [
+  ("Syntec Conseil", "sept engagements pour un usage responsable de l'IA dans les études, mai 2025 : supervision humaine et transparence sur les outils", "https://syntec-conseil.fr/"),
+  ("ESOMAR", "cadre déontologique international des études de marché et de l'opinion", "https://esomar.org/"),
+  ("CNIL", "l'autorité française de référence sur le traitement des données personnelles", "https://www.cnil.fr/"),
+  ("Gladia — tarifs et politique de données", "fournisseur français : désactivation de l'entraînement dès le plan Growth, rétention nulle en Enterprise", "https://www.gladia.io/pricing"),
+ ],
+ "chapo": "Un enregistrement d'entretien contient une voix, un prénom, un métier, parfois un état de santé ou une situation familiale. Juridiquement, ce n'est pas un « corpus » : c'est un traitement de données personnelles, avec tout ce que ça implique.",
+ "body": """
+<h2>Un enregistrement d'entretien, c'est quoi juridiquement ?</h2>
+<p><strong>Une donnée personnelle, et parfois une donnée sensible.</strong> La voix identifie une personne. Le contenu peut révéler une opinion, un état de santé, une situation économique — trois catégories qui appellent des précautions renforcées.</p>
+<p>Ça ne rend pas l'étude qualitative compliquée. Ça la rend <em>cadrée</em>, et le cadre se règle en une heure au moment du cadrage. Ce qui coûte cher, c'est de s'en apercevoir à la restitution.</p>
+
+<h2>Les quatre obligations qui s'appliquent à toute étude</h2>
+<ol>
+  <li><strong>Une base légale.</strong> Pour une étude de marché, c'est presque toujours l'intérêt légitime ou le consentement. Le choix n'est pas indifférent&nbsp;: sur des données sensibles, le consentement explicite devient nécessaire.</li>
+  <li><strong>Une information claire des participants.</strong> Qui traite, pourquoi, combien de temps, quels droits. Elle se donne avant l'entretien, pas au moment de lancer l'enregistrement.</li>
+  <li><strong>Un consentement recueilli et conservé.</strong> À l'enregistrement, à la captation vidéo si elle a lieu, et à l'observation par un tiers derrière une glace sans tain — ce dernier point est le plus souvent oublié.</li>
+  <li><strong>Une durée de conservation définie.</strong> Pas «&nbsp;jusqu'à nouvel ordre&nbsp;». Une durée écrite, appliquée, et distincte pour l'enregistrement brut et pour le corpus anonymisé.</li>
+</ol>
+
+<h2>Ce que change le passage par une IA</h2>
+<p><strong>Chaque outil ajouté à la chaîne est un sous-traitant de plus, et parfois un transfert hors d'Europe.</strong> C'est le point où beaucoup de dispositifs se fragilisent sans que personne ne l'ait décidé&nbsp;: un outil de transcription pratique, essayé une fois, devenu habituel.</p>
+""" + fig_chaine(
+  "Le statut de vos données, maillon par maillon",
+  "Les maillons pleins sont ceux où un tiers traite vos données. Chacun doit être identifié, contractualisé, et sa localisation connue — c'est la première question d'un service juridique.",
+  [("Captation", "vous et nous"), ("Transcription", "sous-traitant"),
+   ("Structuration", "sous-traitant"), ("Analyse", "nous"),
+   ("Corpus livré", "vous")],
+  pleines=0) + """
+<p>Trois questions décident de la solidité de la chaîne&nbsp;:</p>
+<ul>
+  <li><strong>Où sont traitées les données&nbsp;?</strong> Un fournisseur européen évite la question du transfert. Un fournisseur français la ferme.</li>
+  <li><strong>Servent-elles à entraîner un modèle&nbsp;?</strong> C'est une option, souvent activée par défaut, souvent désactivable. Il faut la désactiver et pouvoir le prouver.</li>
+  <li><strong>Combien de temps sont-elles conservées chez le sous-traitant&nbsp;?</strong> Une rétention «&nbsp;pour amélioration du service&nbsp;» est une conservation.</li>
+</ul>
+
+<h2>Les questions à poser à votre prestataire</h2>
+<p>Elles tiennent en cinq lignes, et une réponse évasive sur l'une d'elles est en soi une réponse&nbsp;:</p>
+<div class="tw">
+<table>
+<thead><tr><th>Question</th><th>Ce qu'une bonne réponse contient</th></tr></thead>
+<tbody>
+<tr><td>Quels outils interviennent dans la chaîne&nbsp;?</td><td>Une liste nommée, pas une catégorie. «&nbsp;Un outil de transcription&nbsp;» n'est pas une réponse.</td></tr>
+<tr><td>Où sont hébergées les données&nbsp;?</td><td>Un pays, et le cas échéant le mécanisme de transfert.</td></tr>
+<tr><td>Entraînent-elles des modèles&nbsp;?</td><td>Non, avec la mention du plan contractuel qui le garantit.</td></tr>
+<tr><td>Combien de temps sont-elles conservées&nbsp;?</td><td>Deux durées&nbsp;: enregistrement brut, corpus anonymisé.</td></tr>
+<tr><td>Que contient le corpus livré&nbsp;?</td><td>Anonymisé ou pseudonymisé, et selon quelle règle.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Ce que nous faisons, et pourquoi c'est écrit</h2>
+<p>La transcription passe par un <strong>fournisseur français</strong>, avec l'entraînement des modèles désactivé et sans rétention au-delà du traitement. Les corpus livrés sont anonymisés, avec la règle d'anonymisation indiquée. Les enregistrements bruts ont une durée de conservation distincte, arrêtée au cadrage.</p>
+<p>Nous remettons cette chaîne par écrit en avant-vente, avant qu'on nous la demande. Ce n'est pas une précaution commerciale&nbsp;: c'est la transparence sur les outils que demande le cadre professionnel français depuis 2025, et c'est la seule façon pour un service juridique de valider un dispositif sans y passer trois semaines.</p>
+
+<h2>Le cadre professionnel, au-delà de la loi</h2>
+<p>Deux textes structurent la pratique française et vont plus loin que le strict minimum réglementaire&nbsp;:</p>
+<ul>
+  <li>Les <strong>engagements Syntec Conseil</strong> publiés en mai 2025&nbsp;: supervision humaine à chaque étape et transparence complète sur les outils employés.</li>
+  <li>Le <strong>cadre ESOMAR</strong>, international, sur le consentement, l'indemnisation et la non-réutilisation des données des participants à d'autres fins.</li>
+</ul>
+<p>Les deux disent la même chose sous deux angles&nbsp;: un participant a accepté de parler pour une étude, pas pour alimenter un système.</p>
+""",
+ "faq_titre": "Questions fréquentes sur les données d'une étude",
+ "faq": [
+  ("Faut-il l'accord écrit des participants pour enregistrer ?",
+   "Oui, et il doit couvrir séparément l'enregistrement, la captation vidéo si elle a lieu, et l'observation par un tiers. Ce dernier point — les observateurs derrière une glace sans tain — est le plus souvent omis."),
+  ("Peut-on réutiliser un corpus pour une autre étude ?",
+   "Pas sans base légale nouvelle et sans information des personnes. Un participant a consenti à une finalité précise&nbsp;; la réutilisation en est une autre. En pratique, on repart d'un corpus anonymisé quand c'est possible."),
+  ("Combien de temps garder les enregistrements ?",
+   "Une durée définie au cadrage et respectée, distincte pour l'enregistrement brut et pour le corpus anonymisé. «&nbsp;Jusqu'à nouvel ordre&nbsp;» n'est pas une durée."),
+  ("Un outil de transcription américain pose-t-il problème ?",
+   "Il ajoute une question de transfert hors Union européenne, qui se traite mais qui se traite <em>avant</em>. Passer par un fournisseur français supprime la question — c'est le choix que nous faisons."),
+  ("Que doit contenir le corpus qu'on me livre ?",
+   "Les transcripts intégraux et horodatés, anonymisés selon une règle explicite, avec les consignes de non-diffusion des matériaux nominatifs. Ils vous appartiennent, y compris si vous ne prenez pas l'analyse."),
+ ],
+ "aide": {"titre": "Un dispositif que votre juridique valide",
+  "chapo": "Le cadre se règle au cadrage, en une heure, et il ne se rattrape pas après. Nous le remettons par écrit avant qu'on nous le demande.",
+  "points": ["Chaîne de traitement écrite : quels outils, où, combien de temps",
+             "Transcription par un fournisseur français, sans entraînement ni rétention",
+             "Consentements couvrant enregistrement, vidéo et observation par un tiers",
+             "Corpus livré anonymisé, avec la règle d'anonymisation indiquée"]},
+ "loin": [("IA et études qualitatives : ce qu'elle rate encore", "article-ia-etudes-qualitatives.html"),
+          ("Peut-on remplacer les répondants par de l'IA ?", "article-repondants-synthetiques.html"),
+          ("Le livre blanc : la parole client jusqu'à la décision", "livre-blanc.html")],
+},
+]
+
+ARTICLES += [
+{
+ "slug": "article-biais-etude.html",
+ "cat": "Méthode",
+ "date": "2026-08-26",
+ "read": "9 min",
+ "illus": "groupes.webp",
+ "title": "Huit biais qui faussent une étude qualitative",
+ "h1": "Huit biais qui faussent<br>une étude — dont trois<br>de votre côté.",
+ "desc": "Désirabilité, dominance, relance orientée : les biais du terrain sont connus. Ceux du commanditaire le sont moins, et ils coûtent plus cher.",
+ "kw": "biais étude qualitative, désirabilité sociale, biais confirmation étude marché, biais animateur",
+ "sources": [
+  ("Agalma Études — biais cognitifs et décisions d'achat", "un traitement complémentaire, côté sciences comportementales", "https://agalma-etudes.com/blog/"),
+  ("ESOMAR", "cadre déontologique : indemnisation, consentement, non-réutilisation", "https://esomar.org/"),
+  ("Syntec Conseil", "supervision humaine à chaque étape et transparence sur les outils, mai 2025", "https://syntec-conseil.fr/"),
+ ],
+ "chapo": "Tout le monde connaît la désirabilité sociale. Presque personne n'écrit sur les trois biais qui viennent de celui qui commande l'étude — parce que ça se dit mal quand on veut vendre. Ce sont pourtant les plus coûteux.",
+ "body": """
+<h2>Côté participant : quatre biais bien documentés</h2>
+<p><strong>Ils sont connus, et ils se traitent par la conception du dispositif plutôt que par la vigilance de l'animateur.</strong></p>
+<ul>
+  <li><strong>La désirabilité sociale.</strong> On répond ce qu'il est acceptable de répondre. Elle s'aggrave en groupe, sur tout ce qui touche à l'argent, à la santé et à la compétence professionnelle. <em>Correctif&nbsp;:</em> l'entretien individuel sur ces sujets, sans exception.</li>
+  <li><strong>La rationalisation a posteriori.</strong> Le participant reconstruit une décision plus rationnelle qu'elle ne l'a été. <em>Correctif&nbsp;:</em> faire raconter un épisode daté plutôt que demander d'expliquer.</li>
+  <li><strong>L'effet de dominance.</strong> En quelques minutes, un groupe s'aligne sur le plus assuré. <em>Correctif&nbsp;:</em> des groupes homogènes en statut et en expertise, et un tour de table écrit avant la discussion ouverte.</li>
+  <li><strong>Le répondant professionnel.</strong> Il connaît les codes, il donne de bonnes réponses. <em>Correctif&nbsp;:</em> deux filtres au recrutement — une question sur les participations récentes, une question ouverte à rédiger.</li>
+</ul>
+
+<h2>Côté animateur : deux biais qui ne se voient pas à la relecture</h2>
+<ul>
+  <li><strong>La relance qui oriente.</strong> «&nbsp;Donc c'est plutôt le prix qui vous a arrêté&nbsp;?&nbsp;» ferme le champ et produit une confirmation. Dans la transcription, la réponse paraîtra spontanée. <em>Correctif&nbsp;:</em> relancer sur le dernier mot du participant, pas sur une hypothèse.</li>
+  <li><strong>Le silence non tenu.</strong> Les trois secondes après une réponse convenue sont l'endroit où la personne se reprend. Un animateur pressé les comble et perd la phrase. C'est la différence la plus mesurable entre un consultant senior et un vacataire.</li>
+</ul>
+
+<h2>Et les trois biais qui viennent de vous&nbsp;?</h2>
+<p class="art-more" style="border-left-color:var(--ink);color:var(--grey-700)">Cette section est la seule raison d'écrire cet article. Les six biais précédents figurent dans tous les manuels&nbsp;; ceux-ci coûtent plus cher et n'apparaissent nulle part, parce qu'un prestataire les évoque rarement avec son client.</p>
+
+<h3>7. Le brief qui contient déjà sa réponse</h3>
+<p>«&nbsp;Comprendre pourquoi nos clients apprécient notre nouveau service&nbsp;» n'est pas une question d'étude&nbsp;: c'est une conclusion déguisée. Le dispositif construit dessus la confirmera, et il aura raison de le faire — c'est ce qu'on lui a demandé.</p>
+<p><em>Correctif&nbsp;:</em> reformuler en question ouverte, et écrire les hypothèses concurrentes avant le terrain.</p>
+
+<h3>8. L'échantillon choisi pour confirmer</h3>
+<p>Recruter dans sa base client est excellent pour le coût et la justesse du profil — et biaise vers les clients actifs. Les partants et les perdus n'y sont pas. Sur une question de fidélité ou d'attrition, l'étude conclura à la satisfaction générale, ce qui sera vrai de l'échantillon et faux du marché.</p>
+<p><em>Correctif&nbsp;:</em> annoncer la limite au cadrage, et compléter par un sourcing externe quand la question porte sur ceux qui sont partis.</p>
+
+<h3>9. La restitution écoutée en cherchant l'accord</h3>
+<p>Le biais le plus difficile à traiter, parce qu'il arrive quand tout est fini. Une salle qui écoute une restitution retient ce qui confirme la direction déjà prise et range le reste dans «&nbsp;cas particuliers&nbsp;». Le rapport est excellent, la décision est inchangée.</p>
+<p><em>Correctif&nbsp;:</em> l'atelier plutôt que la présentation. On ne sort pas de la salle sans arbitrage écrit, ce qui oblige à traiter les constats gênants au lieu de les absorber.</p>
+""" + fig_barres(
+  "Où se logent les biais, et ce qu'ils coûtent",
+  "Les biais du commanditaire arrivent plus tôt dans la chaîne et se corrigent moins tard : un brief mal posé fausse tout ce qui suit, alors qu'une relance orientée ne fausse qu'un passage. Estimation d'impact issue de notre pratique.",
+  [("Brief orienté", 100, "fausse tout le dispositif"),
+   ("Échantillon confirmant", 80, "fausse la conclusion"),
+   ("Restitution filtrée", 70, "annule le bénéfice"),
+   ("Dominance en groupe", 45, "fausse un groupe"),
+   ("Relance orientée", 30, "fausse un passage")]) + """
+
+<h2>Le seul antidote qui marche vraiment</h2>
+<p><strong>Écrire les hypothèses concurrentes avant le terrain, et demander à l'étude de les départager.</strong> Pas «&nbsp;valider&nbsp;» l'une d'elles — les départager.</p>
+<p>C'est une rubrique de trois lignes dans un brief, et c'est celle qui manque presque toujours. Son effet est mécanique&nbsp;: une étude qui doit trancher entre deux explications écrites ne peut pas revenir confirmer l'opinion du plus gradé, parce que les deux explications sont sur la table depuis le début et que chacun les a vues.</p>
+<p>Deuxième effet, moins attendu&nbsp;: l'exercice fait remonter les désaccords internes <em>avant</em> de dépenser. Il arrive qu'on découvre à ce moment-là que le marketing et le produit n'attendaient pas la même chose de l'étude. C'est une heure très rentable.</p>
+<p class="art-more">La rubrique et sa place dans un brief&nbsp;: <a href="article-brief-etude-qualitative.html">comment rédiger un brief d'étude qualitative</a>.</p>
+
+<h2>Ce qu'un dispositif court aggrave — et ce qu'il n'aggrave pas</h2>
+<p><strong>Il n'aggrave aucun des biais de terrain, à condition de ne pas toucher au recrutement.</strong> Un dispositif de quatre semaines avec un recrutement sur critères vérifiés et un consultant senior produit exactement la même qualité de matière qu'un dispositif de dix semaines.</p>
+<p>Il aggrave en revanche deux choses&nbsp;: la tentation de sauter la semaine de cadrage — donc le biais 7 —, et la restitution expédiée en visioconférence de quarante-cinq minutes — donc le biais 9. Les deux se règlent en refusant de comprimer ces deux postes-là.</p>
+<p class="art-more">Ce qui se comprime et ce qui ne se comprime pas&nbsp;: <a href="article-decider-vite.html">décider vite sans décider mal</a>.</p>
+""",
+ "faq_titre": "Questions fréquentes sur les biais",
+ "faq": [
+  ("Peut-on supprimer complètement les biais d'une étude qualitative ?",
+   "Non, et ce n'est pas l'objectif. On les rend visibles et on les compense par la conception&nbsp;: composition des groupes, ordre des expositions, formulation des relances, hypothèses écrites. Un dispositif sans biais n'existe pas&nbsp;; un dispositif dont on connaît les biais se lit."),
+  ("Comment savoir si mon brief est orienté ?",
+   "Un test simple&nbsp;: si vous ne pouvez pas écrire l'hypothèse inverse sans qu'elle paraisse absurde, le brief contient déjà sa réponse. «&nbsp;Comprendre pourquoi ils apprécient&nbsp;» ne passe pas ce test&nbsp;; «&nbsp;comprendre ce qui les fait revenir ou partir&nbsp;» le passe."),
+  ("Le recrutement en base client est-il à éviter ?",
+   "Non, c'est le meilleur levier de coût et il améliore la justesse du profil. Il faut simplement savoir qu'il ne contient que des clients actifs, et compléter par un sourcing externe si la question porte sur l'attrition."),
+  ("Une IA d'analyse réduit-elle les biais ?",
+   "Elle en supprime un — la fatigue de l'analyste sur un gros corpus — et en ajoute un autre&nbsp;: elle produit la lecture la plus consensuelle et lisse les signaux minoritaires, qui sont souvent l'information neuve."),
+  ("Faut-il que le client assiste au terrain ?",
+   "Oui, derrière une glace sans tain ou en retour vidéo, jamais dans la salle. Assister réduit fortement le biais 9&nbsp;: on filtre beaucoup moins une restitution quand on a entendu les gens soi-même."),
+ ],
+ "aide": {"titre": "Un dispositif conçu contre ses propres biais",
+  "chapo": "La partie la plus utile de notre travail se joue avant le terrain, au moment où l'on écrit ce que l'étude doit départager.",
+  "points": ["Un cadrage qui reformule le brief en question ouverte, et écrit les hypothèses concurrentes",
+             "Composition des groupes et ordre des expositions arrêtés contre les biais connus",
+             "Animation par un consultant senior — les silences tenus ne s'automatisent pas",
+             "Restitution en atelier plutôt qu'en présentation, jusqu'à l'arbitrage écrit"]},
+ "loin": [("Comment rédiger un brief d'étude qualitative", "article-brief-etude-qualitative.html"),
+          ("Ce que les gens disent, ce qu'ils font", "article-declare-observe.html"),
+          ("Entretiens individuels ou focus groups", "article-entretiens-ou-groupes.html")],
+},
+
+{
+ "slug": "article-packaging-avant-lecture.html",
+ "cat": "Méthode",
+ "date": "2026-08-26",
+ "read": "8 min",
+ "illus": "terrain.webp",
+ "title": "Ce qu'un packaging dit avant qu'on l'ait lu",
+ "h1": "Ce qu'un packaging dit<br>avant qu'on l'ait lu.",
+ "desc": "En rayon, la reconnaissance de catégorie précède la lecture. Pourquoi un test de packaging en salle se trompe souvent, et la consigne qui change tout.",
+ "kw": "test packaging, sémiologie packaging, codes de catégorie rayon, test concept emballage",
+ "sources": [
+  ("Agalma Études — sémiologie appliquée au marketing", "un traitement complémentaire de la méthode", "https://agalma-etudes.com/blog/"),
+  ("Square Cocoon — Prix d'un focus group", "repères de budget pour un dispositif en salle, 2026", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+ ],
+ "chapo": "Un consommateur passe moins de trois secondes devant un produit qu'il n'achète pas. Dans ces trois secondes, il n'a rien lu — et il a pourtant décidé si le produit fait partie de son monde.",
+ "body": """
+<h2>Les trois secondes qui décident en rayon</h2>
+<p><strong>La reconnaissance de catégorie précède la lecture, et elle se joue sur la forme, la couleur et la densité — jamais sur le texte.</strong> Avant de savoir ce qu'est un produit, on sait s'il appartient au rayon qu'on cherche. Cette reconnaissance est si rapide qu'elle n'est pas consciente&nbsp;: interrogé, un client vous parlera du prix et des ingrédients, c'est-à-dire de ce qu'il a lu <em>après</em> avoir décidé de regarder.</p>
+<p>C'est le premier écart que le terrain rend visible, et c'est celui qui coûte le plus cher à ignorer&nbsp;: un packaging qui rate la reconnaissance de catégorie n'est jamais lu, donc jamais évalué, donc jamais testé par le marché.</p>
+
+<h2>Que lit-on sans le savoir&nbsp;?</h2>
+<p>Quatre registres portent l'essentiel du message avant tout mot&nbsp;:</p>
+<ul>
+  <li><strong>La couleur comme code de catégorie</strong> — elle dit d'abord «&nbsp;je suis un yaourt&nbsp;», ensuite seulement «&nbsp;je suis cette marque&nbsp;». S'en écarter est une décision stratégique, pas graphique.</li>
+  <li><strong>La densité d'information</strong> — un packaging chargé signale le fonctionnel et le rapport qualité-prix&nbsp;; un packaging vide signale le premium ou le naturel. Le contenu du texte compte moins que sa quantité.</li>
+  <li><strong>La matière et le rendu</strong> — mat contre brillant, papier contre plastique&nbsp;: le registre se lit à distance, avant la main.</li>
+  <li><strong>La silhouette</strong> — le contour reconnaissable à un mètre. C'est ce qui survit à la vision périphérique, et c'est ce qu'on teste en dernier.</li>
+</ul>
+""" + fig_matrice(
+  "Les deux tensions d'un packaging, et l'arbitrage qu'elles imposent",
+  "Un packaging doit ressembler assez à sa catégorie pour être trouvé, et s'en écarter assez pour être choisi. Les deux exigences se contredisent, et c'est l'arbitrage réel d'une refonte.",
+  "Distance de lecture", "Fonction du signe",
+  [(0, 0, "Code de catégorie", "Ce qui permet d'être trouvé dans le rayon. Se lit à un mètre, en vision périphérique."),
+   (1, 0, "Signature de marque", "Ce qui permet d'être choisi plutôt qu'un autre. Se lit à trente centimètres."),
+   (0, 1, "Ce qu'on ne bouge pas", "Trop s'écarter du code de catégorie, c'est sortir du rayon dans la tête du client."),
+   (1, 1, "Ce qu'on peut bouger", "La signature, si le code tient. C'est là que se gagne la préférence.")]) + """
+
+<h2>Pourquoi un test de packaging en salle se trompe souvent</h2>
+<p><strong>Parce qu'il fait lire ce que personne ne lit.</strong> Posez un packaging sur une table devant six personnes attentives, demandez ce qu'elles en pensent&nbsp;: elles vont le prendre en main, le retourner, lire la composition, commenter la typographie. Aucun de ces gestes n'a lieu en rayon.</p>
+<p>Le test produit alors un matériau sincère et inutilisable&nbsp;: des avis sur un objet examiné, alors que la décision réelle se prend sur un objet aperçu.</p>
+<p>Deux dispositifs corrigent cela&nbsp;:</p>
+<ul>
+  <li><strong>Le rayon simulé</strong> — le produit est présenté au milieu de ses concurrents, à distance de rayon, avec un temps d'exposition limité. On mesure d'abord ce qui est vu, ensuite ce qui est compris.</li>
+  <li><strong>L'observation en magasin</strong> — plus lourde, mais c'est la seule qui donne accès au parcours réel&nbsp;: par où on entre dans le rayon, ce qu'on prend en main, ce qu'on repose.</li>
+</ul>
+
+<h2>La méthode : faire décrire avant de faire juger</h2>
+<p><strong>La consigne d'ouverture détermine tout ce qui suit.</strong> «&nbsp;Qu'en pensez-vous&nbsp;?&nbsp;» déclenche l'évaluation, donc le registre de l'opinion, donc la justification. «&nbsp;Décrivez-moi ce que vous voyez&nbsp;» déclenche la description, donc l'accès aux signes.</p>
+<p>Concrètement, l'ordre qui fonctionne&nbsp;:</p>
+<ol>
+  <li><strong>Exposition brève, sans consigne.</strong> Ce qui est vu en trois secondes, et dans quel ordre.</li>
+  <li><strong>Description libre.</strong> «&nbsp;Qu'est-ce que c'est&nbsp;?&nbsp;» avant «&nbsp;est-ce que ça vous plaît&nbsp;?&nbsp;»</li>
+  <li><strong>Attribution.</strong> «&nbsp;Ça pourrait être quelle marque&nbsp;? Ça coûte combien, à votre avis&nbsp;?&nbsp;» — la réponse au prix estimé est l'un des indicateurs les plus fiables du registre perçu.</li>
+  <li><strong>Comparaison.</strong> Seulement à ce moment, et avec les concurrents réels présents.</li>
+  <li><strong>Jugement.</strong> En dernier, quand il ne peut plus contaminer le reste.</li>
+</ol>
+
+<h2>Ce que ça donne sur une refonte de gamme</h2>
+<p>La question opérationnelle d'une refonte n'est jamais «&nbsp;est-ce que le nouveau packaging plaît&nbsp;?&nbsp;» mais «&nbsp;qu'est-ce qu'on garde&nbsp;?&nbsp;». Le terrain répond en séparant deux inventaires&nbsp;:</p>
+<ul>
+  <li><strong>Ce qui appartient à la catégorie</strong> et qu'on ne peut pas abandonner sans sortir du rayon.</li>
+  <li><strong>Ce qui appartient à la marque</strong> et que les clients reconnaissent — souvent des détails que l'entreprise juge secondaires, et parfois pas ceux qu'elle croyait.</li>
+</ul>
+<p>C'est l'inventaire le plus utile qu'une étude de packaging puisse produire, et il ne s'obtient pas en demandant aux gens ce qu'ils préfèrent.</p>
+""",
+ "faq_titre": "Questions fréquentes sur les tests de packaging",
+ "faq": [
+  ("Combien de participants pour un test de packaging ?",
+   "Deux groupes par segment à comparer, ou une vingtaine de passages en rayon simulé. Le volume compte moins que les conditions d'exposition&nbsp;: mieux vaut douze personnes en rayon simulé que trente autour d'une table."),
+  ("Faut-il montrer les concurrents ?",
+   "Toujours, et réels. Une préférence exprimée dans l'absolu vaut peu&nbsp;; une préférence exprimée devant les alternatives que le client rencontrera vraiment vaut une décision."),
+  ("Peut-on tester un packaging en ligne ?",
+   "Pour la reconnaissance de catégorie et la lisibilité à distance, oui, avec un temps d'exposition contrôlé. Pour la matière, le poids et le geste d'ouverture, non — et ces trois-là portent une part du positionnement."),
+  ("Le prix estimé par les participants est-il fiable ?",
+   "Pas comme prévision de prix acceptable, mais oui comme <em>indicateur de registre perçu</em>. Un écart important entre le prix estimé et le prix réel signale un problème de positionnement visuel, pas de tarif."),
+  ("À quel stade du projet tester ?",
+   "Deux fois. Une fois tôt, sur des directions encore ouvertes, en test de concept peu coûteux. Une fois tard, sur les maquettes réelles en rayon simulé. Le test unique en fin de parcours n'arbitre plus rien&nbsp;: il valide ou il inquiète."),
+ ],
+ "aide": {"titre": "Tester un packaging dans les conditions du rayon",
+  "chapo": "Retail, grande consommation, cosmétique et parfumerie font partie de nos secteurs historiques, du test de concept au rayon simulé.",
+  "points": ["Rayon simulé avec les concurrents réels et un temps d'exposition contrôlé",
+             "Protocole qui fait décrire avant de faire juger — la consigne détermine le matériau",
+             "Observation en magasin quand la question porte sur le parcours réel",
+             "Restitution qui sépare le code de catégorie de la signature de marque"]},
+ "loin": [("Ce que les gens disent, ce qu'ils font", "article-declare-observe.html"),
+          ("Notre secteur Retail et FMCG", "secteur-retail-fmcg.html"),
+          ("Composer votre dispositif", "decision-rapide.html#configurateur")],
+},
+]
+
+# ═══════════════════════════════════════════════════════════════════════
+#  GABARIT SECTORIEL — « où se joue vraiment la décision »
+#  Écrit une fois, décliné six fois. Chaque déclinaison apporte ses
+#  chiffres datés et son « moment sous-estimé » — c'est ce moment qui
+#  fait l'article ; le reste est une charpente commune.
+# ═══════════════════════════════════════════════════════════════════════
+
+SECTEURS_PARCOURS = [
+{
+ "slug": "parcours-mobilite.html",
+ "h2_ou": 'À quel moment la liste courte se ferme-t-elle&nbsp;?',
+ "faq": [
+  ("Combien de temps dure un parcours d'achat automobile ?", "Six à neuf mois entre le déclencheur et la signature, dont l'essentiel se passe hors de votre vue. Ce qui compte n'est pas la durée mais le moment où la liste courte se ferme&nbsp;: après, tout ce que vous direz arrive trop tard."),
+  ("Peut-on étudier un véhicule qui n'existe pas encore ?", "Oui, sur maquette à l'échelle ou en clinique statique avec des directions de design. Ce qu'on perd par rapport à un prototype roulant&nbsp;: le comportement routier perçu, le bruit et l'ergonomie en situation. Ce qu'on garde&nbsp;: l'arbitrage sur les proportions et la posture, qui se joue à l'arrêt."),
+  ('Faut-il interroger les possesseurs de la marque ou ceux de la concurrence ?', "Ceux de la concurrence, sur le modèle précis qu'ils possèdent. L'avis d'un client fidèle porte sur ce qu'il connaît déjà&nbsp;; celui d'un conducteur d'un modèle rival porte sur ce qui l'a fait choisir autre chose — l'information que vous n'avez pas."),
+  ("Le parcours est-il le même sur l'électrique ?", "Non&nbsp;: la phase de repérage s'allonge, la question du coût total et de la valeur de revente arrive beaucoup plus tôt, et l'entourage pèse davantage. Interroger des conducteurs thermiques sur un véhicule électrique recueille des craintes fantasmées plutôt que des contraintes vécues."),
+ ],
+ "secteur": "l'automobile", "cat": "Parcours · Mobilité",
+ "illus": "voiture.webp", "page_secteur": "secteur-mobilite.html",
+ "titre_court": "automobile", "read": "8 min",
+ "chapo": "Entre le moment où quelqu'un se dit qu'il va changer de voiture et celui où il signe, il se passe six à neuf mois. La concession n'intervient que sur les trois dernières semaines.",
+ "chiffres": [("857 177", "immatriculations en France au premier semestre 2026", "Carte Grise, juillet 2026"),
+              ("−26,5 %", "de volume par rapport au premier semestre 2019", "Carte Grise, juillet 2026"),
+              ("20 000 €", "le seuil qui structure l'entrée de gamme", "Prix d'appel constructeurs, 2026")],
+ "etapes": [("Déclencheur", "une panne, un enfant"), ("Repérage", "en ligne, seul"),
+            ("Comparaison", "deux ou trois modèles"), ("Décision", "en concession"),
+            ("Usage", "les six premiers mois")],
+ "plein": 1,
+ "ou": "Le repérage, qui dure des mois et se fait entièrement hors de votre vue. Quand le client entre en concession, la liste courte est déjà écrite.",
+ "sous_estime": ("Le passage sous le porche", """<p>Sur les utilitaires et les citadines, une contrainte physique décide plus souvent qu'un argument commercial&nbsp;: la hauteur d'un porche, la largeur d'une place de parking résidentielle, l'accès à un parking souterrain d'immeuble.</p>
+<p>Personne ne la mentionne spontanément, parce qu'elle paraît trop banale pour être dite. Elle apparaît dès qu'on fait raconter une journée plutôt qu'évaluer un véhicule — et elle élimine des modèles entiers avant tout essai.</p>"""),
+ "dispositif": "Clinique produit avec les concurrents réels présents, complétée d'entretiens à domicile devant le véhicule actuel. Le recrutement se fait sur véhicule possédé, vérifié — c'est le critère le plus coûteux à sourcer et celui qui rend les avis opérants.",
+ "questions": ["Combien de vos acheteurs avaient déjà arrêté leur modèle avant le premier contact&nbsp;?",
+               "Que savez-vous de ceux qui ont configuré en ligne sans jamais venir&nbsp;?",
+               "Vos remontées après-vente signalent-elles des contraintes d'usage, ou seulement des défauts&nbsp;?"],
+ "sources": [("Marché automobile français S1 2026", "857 177 immatriculations, +1,8 % sur un an", "https://www.cartegrise.com/blog/2026/07/marche-automobile-francais-s1-2026-le-grand-bilan-dun-semestre-de-bascule"),
+             ("Atlas Automobiles — marché français", "record historique pour l'électrique en 2026", "https://atlas-automobiles.com/articles/aamarche-automobile-france-mai-2026-3-7-d-immatriculations-et-record-historique-pour-l-electrique")],
+ "loin": [("Citadines : la France et le Royaume-Uni divergent", "marche-citadines-france-uk.html"),
+          ("Qu'est-ce qu'une car clinic ?", "article-car-clinic.html")],
+},
+{
+ "slug": "parcours-retail-fmcg.html",
+ "h2_ou": 'Que se passe-t-il dans les trois secondes du rayon&nbsp;?',
+ "faq": [
+  ('Combien de temps dure un arbitrage en rayon ?', "Moins de trois secondes sur un produit qu'on n'achète pas. Dans ce laps de temps, rien n'a été lu&nbsp;: la reconnaissance de catégorie s'est faite sur la forme, la couleur et la densité d'information."),
+  ('Les données de caisse suffisent-elles à comprendre le rayon ?', "Elles décrivent ce qui a été acheté. Elles ne voient ni le produit pris puis reposé, ni le client qui n'est jamais entré dans le rayon — et ces deux populations expliquent l'essentiel de l'écart entre le trafic et le chiffre d'affaires."),
+  ('Faut-il tester en rayon simulé ou en magasin réel ?', "Le rayon simulé pour arbitrer entre des directions, parce qu'on contrôle l'exposition et les concurrents présents. Le magasin réel quand la question porte sur le parcours, c'est-à-dire sur ce qui se passe avant d'arriver devant le produit."),
+  ('Les acheteurs drive et les acheteurs magasin se comportent-ils pareil ?', "Non, et souvent ce ne sont même pas les mêmes personnes selon les catégories. Le drive supprime l'arbitrage de rayon et le remplace par une liste et un moteur de recherche&nbsp;: ce qui se gagne en linéaire ne se gagne pas de la même façon en ligne."),
+ ],
+ "secteur": "la grande consommation", "cat": "Parcours · Retail & FMCG",
+ "illus": "donnees.webp", "page_secteur": "secteur-retail-fmcg.html",
+ "titre_court": "grande consommation", "read": "8 min",
+ "chapo": "Un arbitrage de rayon dure moins de trois secondes et se prend sur des signes, pas sur des arguments. Tout ce qui précède — la marque, la publicité, le prix — sert à entrer dans la liste courte, pas à gagner l'arbitrage.",
+ "chiffres": [("13,3 %", "des dépenses PGC passent par l'e-commerce alimentaire en France", "Presse spécialisée, 2026"),
+              ("~125 €", "de panier moyen, après +22 % d'inflation cumulée depuis 2021", "Presse spécialisée, 2026"),
+              ("+2 pts", "de part de marché captés par les cinq premiers distributeurs entre 2023 et 2025", "Presse spécialisée, 2026")],
+ "etapes": [("Déclencheur", "la liste, l'habitude"), ("Repérage", "le rayon, le drive"),
+            ("Comparaison", "trois secondes"), ("Décision", "la main"),
+            ("Usage", "le réachat")],
+ "plein": 2,
+ "ou": "Dans le rayon, sur des signes lus avant tout texte. La comparaison réelle porte sur trois références, pas sur la catégorie entière.",
+ "sous_estime": ("Le produit qu'on repose", """<p>Le geste le plus informatif d'un parcours d'achat n'est pas la prise en main&nbsp;: c'est le fait de reposer. Quelqu'un qui prend un produit puis le repose a hésité, comparé, tranché contre vous — en trois secondes, et sans jamais pouvoir vous dire pourquoi.</p>
+<p>Aucune donnée de caisse ne le voit, puisqu'il n'y a pas eu de transaction. C'est l'angle mort le plus large de la connaissance client en grande consommation, et il ne se comble que par l'observation.</p>"""),
+ "dispositif": "Rayon simulé avec les concurrents réels et un temps d'exposition contrôlé, complété d'observation en magasin quand la question porte sur le parcours. La consigne d'ouverture fait décrire avant de faire juger — sinon on recueille des opinions sur un objet examiné, pas des réactions à un objet aperçu.",
+ "questions": ["Que savez-vous de ceux qui ont pris votre produit puis l'ont reposé&nbsp;?",
+               "Vos acheteurs drive et vos acheteurs magasin sont-ils les mêmes personnes&nbsp;?",
+               "Votre code de catégorie a-t-il bougé sans que vous l'ayez décidé&nbsp;?"],
+ "sources": [("Parts de marché de la grande distribution en France", "bilan 2025 et perspectives 2026", "https://www.catalog-prospectus.fr/articles/parts-de-marche-grande-distribution-france-bilan-2025-et-perspectives-2026-leclerc-resiste-carrefour-et-u-progressent"),
+             ("LSA Conso — négociations commerciales 2026", "une quasi-stabilité des prix en magasin", "https://www.lsa-conso.fr/grande-distribution-les-negos-2026-se-concluent-sur-une-quasi-stabilite-des-prix-en-magasins-mais-de-fortes-tensions-avec-les-industriels,464749")],
+ "loin": [("Ce qu'un packaging dit avant qu'on l'ait lu", "article-packaging-avant-lecture.html"),
+          ("Ce que les gens disent, ce qu'ils font", "article-declare-observe.html")],
+},
+{
+ "slug": "parcours-sante-cosmetiques.html",
+ "h2_ou": "Pourquoi un produit acheté n'est-il pas réacheté&nbsp;?",
+ "faq": [
+  ('Comment étudier une routine cosmétique ?', "À domicile, devant l'étagère réelle, avec un test en usage sur plusieurs semaines. En salle, un participant décrit une routine idéale&nbsp;; devant son étagère, il montre les trois produits achetés et jamais finis, et il explique pourquoi."),
+  ("Peut-on interroger en groupe sur des sujets de peau ou d'âge ?", "Nous l'évitons. Sur tout ce qui touche au corps, à l'âge ou à la santé, le groupe produit une vérité collective très propre et très fausse&nbsp;: chacun se cale sur ce qu'il est acceptable de dire. L'entretien individuel est le seul dispositif honnête."),
+  ("Comment savoir pourquoi un produit n'est pas réacheté ?", "En allant voir ce qu'il devait remplacer. Un produit qui ne trouve pas sa place dans un enchaînement de gestes existant n'est jamais réacheté, et le client ne le formulera jamais ainsi&nbsp;: il dira qu'il « n'a pas accroché »."),
+  ("Le conseil en pharmacie influence-t-il vraiment l'achat ?", "Le circuit pharmacie et parapharmacie capte environ 45 % des volumes en valeur, ce qui en fait le premier canal du marché français. La question utile n'est pas s'il influence, mais ce qu'il dit réellement de votre produit — et ça, seul le terrain le montre."),
+ ],
+ "secteur": "la cosmétique", "cat": "Parcours · Santé & Cosmétiques",
+ "illus": "conversation.webp", "page_secteur": "secteur-sante-cosmetiques.html",
+ "titre_court": "cosmétique", "read": "8 min",
+ "chapo": "En cosmétique, la décision d'achat n'est presque jamais isolée : elle s'insère dans une routine existante, qu'il faut déplacer. C'est ce déplacement qui coûte, pas le produit.",
+ "chiffres": [("~68 Mds €", "de chiffre d'affaires pour le marché cosmétique français", "Sources sectorielles 2026 — l'année de référence varie selon les publications"),
+              ("45 %", "des volumes en valeur captés par pharmacies et parapharmacies", "Sources sectorielles, 2026"),
+              ("23 %", "du secteur pour la cosmétique biologique", "Sources sectorielles, 2026")],
+ "etapes": [("Déclencheur", "un changement de peau"), ("Repérage", "conseil, avis, réseaux"),
+            ("Comparaison", "la composition"), ("Décision", "l'essai"),
+            ("Usage", "la routine, ou pas")],
+ "plein": 4,
+ "ou": "Dans l'usage, pas à l'achat. Un produit acheté qui ne trouve pas sa place dans une routine existante n'est jamais réacheté — et personne ne vous le dira.",
+ "sous_estime": ("La place sur l'étagère", """<p>Une routine cosmétique est un enchaînement physique&nbsp;: un ordre de gestes, une place dans la salle de bains, un moment de la journée. Un produit nouveau doit s'y insérer, ce qui veut dire en déplacer un autre.</p>
+<p>C'est là que se joue le réachat, et ça ne s'observe qu'à domicile. En salle, un participant vous décrira une routine idéale&nbsp;; devant son étagère, il vous montrera les trois produits achetés et jamais finis, et il vous dira pourquoi.</p>"""),
+ "dispositif": "Entretiens à domicile devant l'étagère réelle, avec test produit en usage sur plusieurs semaines. Sur les sujets sensibles — peau, âge, corps — l'entretien individuel est le seul dispositif honnête : le groupe produit une vérité collective très propre et très fausse.",
+ "questions": ["Vos acheteurs de premier flacon reviennent-ils, et au bout de combien de temps&nbsp;?",
+               "Que remplace votre produit dans la routine de vos clients&nbsp;?",
+               "Le conseil en pharmacie dit-il de votre produit ce que vous croyez qu'il en dit&nbsp;?"],
+ "sources": [("Marché des cosmétiques — chiffres et tendances", "repères de marché français, 2026", "https://independant.io/tendances-chiffres-marche-cosmetiques/"),
+             ("Analyse du marché de la cosmétique en France", "structure du marché et canaux de distribution", "https://modelesdebusinessplan.com/blogs/infos/marche-cosmetique-france")],
+ "loin": [("Entretiens individuels ou focus groups", "article-entretiens-ou-groupes.html"),
+          ("Vos verbatims sont des données personnelles", "article-verbatims-donnees-personnelles.html")],
+},
+{
+ "slug": "parcours-batiment.html",
+ "h2_ou": "Où se perd le client d'une grande surface de bricolage&nbsp;?",
+ "faq": [
+  ("Comment interroger quelqu'un qui a renoncé à son projet ?", "En le faisant parler du projet en cours d'abord, du projet abandonné ensuite. La comparaison des deux, chez lui, produit une matière que la question directe ne donne jamais&nbsp;: on n'aime pas raconter un renoncement, mais on accepte de le comparer."),
+  ('Les particuliers et les artisans demandent-ils la même chose ?', 'Non, et les traiter ensemble en déçoit un sur deux. Un artisan cherche une référence précise et un délai&nbsp;; un particulier cherche une réponse et une réassurance. Deux dispositifs séparés, deux guides différents.'),
+  ('Comment mesurer ceux qui repartent sans rien acheter ?', "Par l'observation en rayon, parce qu'ils n'apparaissent dans aucun indicateur — ni vente, ni retour, ni réclamation. C'est l'angle mort le plus large de la distribution de matériaux, et il est entièrement observable."),
+  ('La peur de mal faire se traite-t-elle par la promotion ?', "Non, et c'est ce qui rend le sujet intéressant. Une remise de 20 % ne réduit pas la crainte de percer au mauvais endroit. Ce frein se traite par le conseil, la pédagogie, la garantie de résultat et la conception du produit."),
+ ],
+ "secteur": "le bâtiment", "cat": "Parcours · Bâtiment",
+ "illus": "brief.webp", "page_secteur": "secteur-batiment.html",
+ "titre_court": "bâtiment et matériaux", "read": "8 min",
+ "chapo": "Un particulier qui entre dans une grande surface de bricolage ne cherche pas un produit : il cherche l'assurance de ne pas se tromper. Sept sur dix ne l'obtiennent pas.",
+ "chiffres": [("21,8 Mds €", "de chiffre d'affaires en grandes surfaces de bricolage en 2025", "Points de Vente, 2026"),
+              ("9 / 10", "Français déclarent bricoler", "Étude sectorielle, 2026"),
+              ("7 / 10", "sont freinés par la peur de mal faire", "Étude sectorielle, 2026")],
+ "etapes": [("Déclencheur", "une panne, un projet"), ("Repérage", "tutoriels, entourage"),
+            ("Comparaison", "en rayon, seul"), ("Décision", "ou renoncement"),
+            ("Usage", "et retour éventuel")],
+ "plein": 3,
+ "ou": "En rayon, au moment où il faudrait demander — et où beaucoup ne demandent pas. Le renoncement silencieux est la moitié de l'histoire.",
+ "sous_estime": ("Celui qui repart sans rien", """<p>La peur de mal faire produit un comportement précis&nbsp;: on entre, on regarde longtemps, on ne demande pas, on repart. Ce client-là n'apparaît dans aucun indicateur — ni vente, ni retour, ni réclamation.</p>
+<p>Il explique une part importante de l'écart entre le trafic en magasin et le chiffre d'affaires, et il est aussi celui qui bascule le plus facilement vers le e-commerce, où l'on peut chercher longtemps sans être vu.</p>"""),
+ "dispositif": "Entretiens à domicile devant le projet en cours et le projet abandonné — c'est la comparaison des deux qui produit la matière. Complétés d'observation en rayon : ce qui se passe quand personne ne demande rien. Les particuliers et les artisans demandent des dispositifs séparés, ils ne cherchent pas la même chose.",
+ "questions": ["Que savez-vous de ceux qui sont venus, ont regardé, et sont repartis&nbsp;?",
+               "Vos vendeurs sont-ils sollicités par les clients qui en ont le plus besoin&nbsp;?",
+               "Vos retours produits signalent-ils une erreur d'achat ou un défaut&nbsp;?"],
+ "sources": [("Points de Vente — marché du bricolage", "21,8 Mds € en 2025, troisième année de recul", "https://pointsdevente.fr/fil-info/2026-06-15-le-marche-du-bricolage-toujours-en-recul-malgre-le-rebond-de-limmobilier/"),
+             ("Bricolage en France 2026", "9 Français sur 10 bricolent, 7 sur 10 freinés par la peur de mal faire", "https://www.montrealmirror.com/actu10359/bricolage-france-2026-marche-stabilisation-peur-de-mal-faire.html")],
+ "loin": [("Bricolage : neuf sur dix bricolent, sept ont peur", "marche-bricolage-peur-de-mal-faire.html"),
+          ("Un cas réel : recruter dans le fichier du client", "cas-fichier-client-materiaux.html")],
+},
+{
+ "slug": "parcours-mode-luxe.html",
+ "h2_ou": "Qu'est-ce qui se joue sur le seuil d'une boutique&nbsp;?",
+ "faq": [
+  ("Comment interroger des clients qui ont cessé d'acheter ?", "En les recrutant sur comportement d'achat passé plutôt que sur fichier client&nbsp;: ils n'y sont plus. Le sourcing coûte davantage, et c'est la population la plus informative du marché — celle dont la disparition explique vingt millions de clients perdus en un an."),
+  ("Peut-on étudier l'expérience en boutique sans y être ?", "Non. La gêne du client d'entrée de catégorie ne figure dans aucun baromètre, pour une raison mécanique&nbsp;: ceux qui la ressentent ne remplissent pas les questionnaires, ils ne reviennent pas. Il faut être là, puis les interroger à la sortie."),
+  ('La seconde main change-t-elle le parcours ?', "Profondément, et surtout chez les moins de trente-cinq ans&nbsp;: le neuf cesse d'être la norme et devient une option parmi d'autres. Un dispositif qui ne met pas la seconde main dans le jeu concurrentiel passe à côté de l'arbitrage réel."),
+  ("Qu'est-ce qui déclenche un premier achat de luxe aujourd'hui ?", "Ce n'est plus ce que c'était il y a quinze ans, et c'est précisément ce qu'il faut aller chercher. La première marche n'est pas un prix&nbsp;: c'est un franchissement, et ce qui s'y joue décide de vingt ans de relation ou de son absence."),
+ ],
+ "secteur": "le luxe", "cat": "Parcours · Mode & Luxe",
+ "illus": "fuite.webp", "page_secteur": "secteur-mode-luxe.html",
+ "titre_court": "mode et luxe", "read": "8 min",
+ "chapo": "Le premier achat de luxe n'est pas un achat : c'est un franchissement. Ce qui se joue à ce moment-là décide de vingt ans de relation — ou de son absence.",
+ "chiffres": [("330 M", "de clients actifs du luxe dans le monde, contre 400 M trois ans plus tôt", "Bain & Company, 2026"),
+              ("−20 M", "de consommateurs perdus sur la seule année 2025", "Bain & Company, 2026"),
+              ("~75 %", "du marché porté par les Millennials et la Génération Z", "BCG")],
+ "etapes": [("Déclencheur", "une occasion, un statut"), ("Repérage", "seconde main comprise"),
+            ("Décision", "franchir la porte"), ("Achat", "ou renoncement"),
+            ("Relation", "sur vingt ans")],
+ "plein": 2,
+ "ou": "Sur le seuil de la boutique, avant tout contact commercial. Les huit premières secondes décident du retour.",
+ "sous_estime": ("La gêne de celui qui n'ose pas demander", """<p>Le client d'entrée de catégorie décrit régulièrement une gêne précise&nbsp;: ne pas savoir comment se comporter, être identifié comme non-acheteur, ne pas oser demander un prix.</p>
+<p>Cette gêne ne figure dans aucun baromètre de satisfaction, pour une raison mécanique&nbsp;: les gens qui la ressentent ne remplissent pas les questionnaires. Ils ne reviennent pas. C'est exactement la population dont la disparition explique les vingt millions de clients perdus en un an.</p>"""),
+ "dispositif": "Observation accompagnée en boutique, puis entretien individuel hors du lieu — la parole se libère à la sortie, pas sur place. Le recrutement se fait sur comportement d'achat passé plutôt que sur fichier client actif : ceux qui sont partis ne sont plus dans vos bases, et ce sont eux qui portent l'information.",
+ "questions": ["Que savez-vous de vos clients d'il y a trois ans qui ne sont pas revenus&nbsp;?",
+               "Combien de visiteurs entrent en boutique sans qu'un conseiller les aborde&nbsp;?",
+               "Votre première marche de prix a-t-elle bougé, et qu'a-t-elle déplacé&nbsp;?"],
+ "sources": [("Bain & Company — marché mondial du luxe", "stabilisation en valeur, contraction de la clientèle", "https://www.journalduluxe.fr/fr/business/luxe-bain-stabilisation-marche-mondial-2026"),
+             ("Bain — transformation de la clientèle", "330 millions de clients actifs contre 400 millions trois ans plus tôt", "https://www.clubpatrimoine.com/contenus/marche-luxe-mondial")],
+ "loin": [("Le luxe a perdu vingt millions de clients", "marche-luxe-clients-perdus.html"),
+          ("Ce que les gens disent, ce qu'ils font", "article-declare-observe.html")],
+},
+{
+ "slug": "parcours-territoires.html",
+ "h2_ou": 'Qui parle vraiment dans une concertation&nbsp;?',
+ "faq": [
+  ('Comment toucher ceux qui ne viennent pas aux réunions publiques ?', "En allant les chercher là où ils sont&nbsp;: sur leur lieu de travail, à domicile, ou à distance en horaires décalés. C'est un choix de dispositif et de budget, pas une intention — et c'est lui qui rend une concertation opposable."),
+  ('Une concertation réussie se mesure-t-elle au nombre de participants ?', "Non, à la présence de ceux qui ne viennent jamais. Une réunion publique recueille l'avis des riverains concernés, des militants organisés et des personnes disponibles en soirée&nbsp;: trois avis légitimes qui ne composent pas un territoire."),
+  ('Faut-il interroger les opposants à un projet ?', "Impérativement, et en amont. Une opposition qui n'a pas été entendue avant l'arbitrage réapparaît après, avec plus de force et moins de marge de manœuvre. C'est la question à poser sur le dernier projet contesté&nbsp;: l'opposition était-elle représentée en amont&nbsp;?"),
+  ("Quelle différence entre concertation et étude d'opinion ?", "L'étude d'opinion mesure un état à un instant&nbsp;; la concertation construit une décision avec ceux qu'elle concerne. La seconde suppose que quelque chose puisse encore changer — sinon c'est de l'information, et il vaut mieux l'appeler ainsi."),
+ ],
+ "secteur": "un territoire", "cat": "Parcours · Territoires & RSE",
+ "illus": "stylos.webp", "page_secteur": "secteur-territoires.html",
+ "titre_court": "concertation territoriale", "read": "8 min",
+ "chapo": "Une concertation réussie ne se mesure pas au nombre de participants mais à la présence de ceux qui ne viennent jamais. Ce sont eux qui décideront de l'acceptabilité du projet.",
+ "chiffres": None,
+ "etapes": [("Annonce", "du projet"), ("Information", "réunion publique"),
+            ("Expression", "ceux qui viennent"), ("Arbitrage", "la collectivité"),
+            ("Acceptation", "ou contestation")],
+ "plein": 2,
+ "ou": "Chez ceux qui ne se déplacent pas. Une réunion publique recueille l'avis des disponibles et des mobilisés — deux populations qui ne représentent pas le territoire.",
+ "sous_estime": ("L'absent structurel", """<p>Les réunions publiques attirent trois profils&nbsp;: les riverains directement concernés, les militants organisés, et les retraités disponibles en soirée. Ce sont des avis légitimes, et ils ne composent pas le territoire.</p>
+<p>Les actifs avec enfants, les travailleurs en horaires décalés et les publics éloignés des institutions n'y sont pas — et ce sont souvent eux qui subiront ou porteront le projet au quotidien. Aller les chercher là où ils sont est un choix de dispositif, pas une intention.</p>"""),
+ "dispositif": "Groupes en salle pour la dynamique collective, complétés d'entretiens individuels sur les publics qui ne se déplacent pas — sur leur lieu de travail, à domicile, ou à distance en horaires décalés. La composition de l'échantillon est ici le cœur du dispositif : c'est elle qui rend la concertation opposable.",
+ "questions": ["Qui n'est jamais venu à vos réunions publiques, et le savez-vous&nbsp;?",
+               "Vos contributions écrites viennent-elles des mêmes personnes que la salle&nbsp;?",
+               "Sur le dernier projet contesté, l'opposition était-elle représentée en amont&nbsp;?"],
+ "sources": [("ESOMAR", "cadre déontologique international, applicable aux études d'opinion", "https://esomar.org/"),
+             ("Syntec Conseil", "engagements professionnels sur la conduite des études, mai 2025", "https://syntec-conseil.fr/")],
+ "loin": [("Entretiens individuels ou focus groups", "article-entretiens-ou-groupes.html"),
+          ("Huit biais qui faussent une étude", "article-biais-etude.html")],
+},
+]
+
+
+def _parcours(d):
+    """Le gabarit : cinq moments, un chiffre daté, le moment sous-estimé, le
+    dispositif, trois questions aux données existantes. Seul le contenu change."""
+    titre_ss, corps_ss = d["sous_estime"]
+    blocs = []
+    if d["chiffres"]:
+        blocs.append(stats(d["chiffres"]))
+    blocs.append(fig_chaine(
+        f"Les cinq moments du parcours — {d['titre_court']}",
+        f"Le maillon plein est celui où la décision se prend réellement. C'est rarement celui où l'on met le plus de moyens.",
+        d["etapes"], pleines=d["plein"]))
+    questions = "".join(f"<li>{q}</li>" for q in d["questions"])
+    body = f"""
+<h2>{d['h2_ou']}</h2>
+<p><strong>{d['ou']}</strong></p>
+{''.join(blocs)}
+
+<h2>Le moment que tout le monde sous-estime&nbsp;: {titre_ss.lower()}</h2>
+{corps_ss}
+
+<h2>Ce qu'il faut aller observer, et comment</h2>
+<p>{d['dispositif']}</p>
+<p class="art-more">Le détail des dispositifs et de leur calendrier&nbsp;: <a href="decision-rapide.html#configurateur">composez le vôtre en deux minutes</a>.</p>
+
+<h2>Trois questions à poser à vos données existantes</h2>
+<p>Avant d'engager du terrain, ces trois questions disent ce que vous savez déjà et où commence l'angle mort. Si vous n'avez de réponse à aucune, vous savez où commence le terrain.</p>
+<ol>{questions}</ol>
+<p>Un CRM sait ce qui s'est passé. Il ne sait jamais ce qui a failli se passer autrement — et c'est précisément ce qui décide.</p>
+"""
+    return {
+        "slug": d["slug"], "cat": d["cat"], "date": "2026-08-26", "read": d["read"],
+        "illus": d["illus"],
+        "title": f"Parcours {d['titre_court']} : où se joue la décision",
+        "h1": f"Parcours {d['titre_court']}&nbsp;:<br>où se joue<br>vraiment la décision.",
+        "desc": f"Les cinq moments du parcours {d['titre_court']}, celui que tout le monde sous-estime, et ce qu'il faut aller observer pour le comprendre.",
+        "kw": f"parcours client {d['titre_court']}, étude qualitative {d['titre_court']}, décision achat {d['titre_court']}",
+        "chapo": d["chapo"], "body": body, "sources": d["sources"],
+        "faq_titre": "Questions fréquentes",
+        # Les questions sont propres au secteur : six pages qui répondent aux
+        # mêmes quatre questions se disputeraient la même intention.
+        "faq": d["faq"],
+        "aide": {"titre": f"Cartographier votre parcours sur {d['secteur']}",
+                 "chapo": "Nous travaillons ce secteur depuis des années, auprès des acheteurs comme des prescripteurs. Le parcours se reconstitue en écoutant, pas en modélisant.",
+                 "points": ["Recrutement sur comportement réel, y compris chez ceux qui ont renoncé",
+                            "Terrain là où se prend la décision — domicile, rayon, boutique, chantier",
+                            "Analyse qui distingue le moment déclaré du moment observé",
+                            "Restitution en atelier, jusqu'à l'arbitrage sur les points de contact à revoir"]},
+        "loin": d["loin"] + [("Notre secteur dédié", d["page_secteur"])],
+    }
+
+
+ARTICLES += [_parcours(d) for d in SECTEURS_PARCOURS]
+
+# ═══════════════════════════════════════════════════════════════════════
+#  PAGE PILIER
+#  Pas pour gagner « étude qualitative définition » — c'est le piège 01 de
+#  la veille, la SERP est tenue par les sites pédagogiques. Pour donner au
+#  cluster un point d'ancrage qui redistribue vers les vingt articles, et
+#  un objet unique que les moteurs génératifs peuvent citer.
+#  Sans millésime dans le titre : une date de mise à jour, pas une date de
+#  péremption.
+# ═══════════════════════════════════════════════════════════════════════
+
+ARTICLES += [
+{
+ "slug": "etude-qualitative.html",
+ "cat": "Guide",
+ "date": "2026-08-26",
+ "read": "14 min",
+ "illus": "demontage.webp",
+ "title": "L'étude qualitative, du cadrage à la décision",
+ "h1": "L'étude qualitative,<br>du cadrage<br>à la décision.",
+ "desc": "À quoi elle sert, quand elle ne sert à rien, les six dispositifs et lequel choisir, combien de temps, combien ça coûte, et ce que vous recevez.",
+ "kw": "étude qualitative, méthode qualitative, focus group entretien, institut études qualitatives",
+ "sources": [
+  ("Square Cocoon — Prix d'un focus group", "3 000 à 10 000 € par groupe de 6 à 10 participants, 2026", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+  ("IntoTheMinds — Combien coûte une étude de marché", "environ 600 € l'entretien en B2C, 750 € en B2B", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
+  ("Syntec Conseil", "sept engagements pour un usage responsable de l'IA dans les études, mai 2025", "https://syntec-conseil.fr/"),
+  ("ESOMAR", "cadre déontologique international des études de marché et de l'opinion", "https://esomar.org/"),
+ ],
+ "chapo": "Ce guide rassemble ce qu'on nous demande le plus souvent, avec les chiffres publics quand ils existent. Il commence par la question qu'on pose rarement : dans quels cas une étude qualitative ne sert à rien.",
+ "body": """
+<h2>À quoi sert une étude qualitative&nbsp;?</h2>
+<p><strong>À comprendre pourquoi les gens font ce qu'ils font, quand la question n'est pas encore assez claire pour être posée en questionnaire.</strong> Elle repose sur un petit nombre d'entretiens ou de groupes conduits en profondeur, dont on analyse le contenu — les mots employés, les hésitations, les contradictions — plutôt que des scores.</p>
+<p>Le quantitatif dit combien. Le qualitatif dit pourquoi, et surtout&nbsp;: <em>ce à quoi vous n'aviez pas pensé</em>. C'est sa vraie valeur, et c'est ce qui explique qu'un échantillon de douze personnes puisse orienter une décision à plusieurs millions.</p>
+
+<h3>Et quand elle ne sert à rien</h3>
+<p>Trois cas, que nous disons au cadrage plutôt qu'en fin de mission&nbsp;:</p>
+<ul>
+  <li><strong>Quand la décision est déjà prise.</strong> Une étude commandée pour confirmer produira une confirmation — c'est le premier biais du commanditaire, et il fausse tout ce qui suit.</li>
+  <li><strong>Quand il faut mesurer une proportion.</strong> «&nbsp;Combien de nos clients sont concernés&nbsp;?&nbsp;» est une question quantitative. Y répondre en qualitatif donne un chiffre faux avec de belles citations.</li>
+  <li><strong>Quand personne n'écoutera la réponse.</strong> Si les décideurs n'assistent ni au terrain ni à la restitution, l'étude sera reformulée par un tiers avant de leur parvenir, et elle perdra en route ce qui la rendait utile.</li>
+</ul>
+<p class="art-more">Le détail des biais, y compris ceux qui viennent du commanditaire&nbsp;: <a href="article-biais-etude.html">huit biais qui faussent une étude</a>.</p>
+
+<h2>Les six dispositifs, et lequel pour quelle question</h2>
+<p><strong>Le choix se fait sur la question, jamais sur le catalogue.</strong> La ligne de partage la plus utile&nbsp;: le groupe révèle les normes d'un milieu, l'entretien révèle les écarts individuels.</p>
+<div class="tw">
+<table>
+<thead><tr><th>Dispositif</th><th>Ce qu'il donne</th><th>Pour quelle question</th></tr></thead>
+<tbody>
+<tr><td><strong>Entretien individuel</strong></td><td>Le parcours réel, les hésitations, ce qui a failli se passer autrement</td><td>Prix, parcours d'achat, sujet sensible, décision B2B</td></tr>
+<tr><td><strong>Focus group</strong></td><td>La norme d'un milieu, le vocabulaire spontané, la confrontation</td><td>Concept, packaging, discours de marque, positionnement</td></tr>
+<tr><td><strong>Clinique produit</strong></td><td>L'écart entre ce qu'on déclare préférer et ce vers quoi on va</td><td>Design, ergonomie, arbitrage entre directions</td></tr>
+<tr><td><strong>Observation</strong></td><td>Ce que les gens font quand on ne leur demande rien</td><td>Parcours en magasin, usage à domicile, poste de travail</td></tr>
+<tr><td><strong>Rayon simulé</strong></td><td>Ce qui est vu avant d'être lu</td><td>Packaging, planogramme, visibilité en linéaire</td></tr>
+<tr><td><strong>Journal d'usage</strong></td><td>L'usage dans la durée, pas la première rencontre</td><td>Adoption, routine, abandon après quelques semaines</td></tr>
+</tbody>
+</table>
+</div>
+<p class="art-more">L'arbitrage détaillé entre les deux dispositifs les plus fréquents&nbsp;: <a href="article-entretiens-ou-groupes.html">entretiens individuels ou focus groups</a>. Et pour le test produit&nbsp;: <a href="article-car-clinic.html">qu'est-ce qu'une car clinic</a>.</p>
+
+<h2>Combien de personnes&nbsp;?</h2>
+<p><strong>Douze à dix-huit entretiens sur une cible homogène, ou deux groupes de six à huit personnes par segment à comparer.</strong> Le seuil qui compte est la saturation&nbsp;: le moment où un entretien supplémentaire n'apporte plus rien de neuf. Il arrive plus tard dès qu'on croise deux profils ou deux marchés.</p>
+<p>Une règle qui ne se négocie pas&nbsp;: <strong>jamais un seul groupe par segment</strong>. Avec un groupe unique, vous ne pouvez pas distinguer ce qui tient au public de ce qui tient à la dynamique de cette salle-là.</p>
+
+<h2>Combien de temps&nbsp;?</h2>
+<p><strong>Quatre à sept semaines pour un dispositif resserré, huit à douze pour une étude complète multi-cibles.</strong></p>
+""" + fig_chaine(
+  "Le calendrier d'une étude qualitative, phase par phase",
+  "Le recrutement est le poste le plus long et le seul qui se raccourcisse vraiment — si vous fournissez votre fichier client. Le cadrage, lui, ne se comprime jamais : c'est lui qui détermine la valeur de tout le reste.",
+  [("Cadrage", "1 semaine"), ("Recrutement", "1 à 3 semaines"),
+   ("Terrain", "1 à 2 semaines"), ("Analyse", "1 à 2 semaines"),
+   ("Restitution", "1 semaine")],
+  pleines=1) + """
+<p class="art-more">Ce qui se comprime et ce qui ne se comprime pas&nbsp;: <a href="article-decider-vite.html">décider vite sans décider mal</a>.</p>
+
+<h2>Combien ça coûte&nbsp;?</h2>
+<p><strong>Le recrutement domine — 200 à 300&nbsp;€ par participant sur critères — puis la modalité de terrain, puis le périmètre des livrables.</strong> Les repères publics du marché français situent un focus group entre 3 000 et 10 000&nbsp;€ tout compris, et un entretien individuel autour de 600&nbsp;€ en B2C, 750&nbsp;€ en B2B.</p>
+<p>Le levier le plus efficace pour faire baisser un budget&nbsp;: fournir votre propre fichier client. Il supprime le sourcing, raccourcit le calendrier d'une à deux semaines, et améliore la justesse du profil au passage.</p>
+<p class="art-more">La structure de coût poste par poste&nbsp;: <a href="article-prix-etude-qualitative.html">combien coûte une étude qualitative</a>.</p>
+
+<h2>Ce que vous recevez</h2>
+<p><strong>Au minimum les transcripts intégraux horodatés — ils vous appartiennent, sans exception.</strong> Le reste se choisit&nbsp;:</p>
+<ul>
+  <li><strong>Un corpus interrogeable</strong>, pour que vos équipes y reviennent sur leurs propres angles.</li>
+  <li><strong>Des top lines</strong> de cinq à huit pages, orientées décision.</li>
+  <li><strong>Une analyse complète</strong>, structurée et argumentée, avec ses verbatims à l'appui.</li>
+  <li><strong>Des typologies</strong> réutilisables en ciblage comme en conception.</li>
+  <li><strong>Un atelier de décision animé</strong>, où l'on travaille les constats jusqu'à un arbitrage écrit.</li>
+</ul>
+<p>C'est le principe de notre offre <a href="decision-rapide.html">Décision rapide</a>&nbsp;: un socle qui ne bouge jamais — cadrage, recrutement, terrain, transcripts — et des livrables à la carte.</p>
+
+<h2>Ce qui a changé en dix ans, et ce qui n'a pas bougé</h2>
+<p><strong>Ce qui a changé&nbsp;:</strong> la transcription ne coûte plus rien, la structuration d'un corpus prend des minutes, et un premier balayage thématique sur trente entretiens se fait pendant qu'on prend un café. Ces gains sont réels et nous les prenons — ils libèrent du temps d'analyse.</p>
+<p><strong>Ce qui n'a pas bougé&nbsp;:</strong> trouver les bonnes personnes coûte toujours 200 à 300&nbsp;€ pièce, un entretien dure toujours une heure, et arbitrer entre deux lectures d'un même passage reste un jugement. La profession française a d'ailleurs posé un cadre en 2025&nbsp;: supervision humaine à chaque étape et transparence sur les outils employés.</p>
+<p>Il y a une chose qu'on entend moins qu'il y a dix ans, et c'est peut-être le vrai changement&nbsp;: personne ne demande plus si le qualitatif «&nbsp;est représentatif&nbsp;». La question est enfin comprise pour ce qu'elle est — un malentendu de catégorie. Une étude qualitative ne mesure pas, elle explique.</p>
+<p class="art-more">Notre position complète sur l'automatisation&nbsp;: <a href="article-ia-etudes-qualitatives.html">IA et études qualitatives</a>, et <a href="article-repondants-synthetiques.html">peut-on remplacer les répondants par de l'IA</a>.</p>
+
+<h2>Par où commencer</h2>
+<p>Si vous n'avez encore rien écrit&nbsp;: <a href="article-brief-etude-qualitative.html">les huit rubriques d'un brief</a>, dont celle que tout le monde oublie — les hypothèses concurrentes à départager.</p>
+<p>Si vous voulez une idée du dispositif et du calendrier avant de nous parler&nbsp;: le <a href="decision-rapide.html#configurateur">configurateur</a> vous les donne en deux minutes.</p>
+""",
+ "faq_titre": "Les questions qu'on nous pose le plus",
+ "faq": [
+  ("Une étude qualitative est-elle représentative ?",
+   "Non, et elle ne cherche pas à l'être — c'est un malentendu de catégorie. Elle n'estime aucune proportion&nbsp;: elle identifie des mécanismes, des motivations et des freins. Pour savoir <em>combien</em>, il faut un questionnaire&nbsp;; pour savoir <em>quoi mettre dans le questionnaire</em>, il faut du qualitatif."),
+  ("Peut-on faire du qualitatif et du quantitatif sur le même projet ?",
+   "Oui, et l'ordre compte. Le qualitatif d'abord pour découvrir les hypothèses et le vocabulaire, le quantitatif ensuite pour les mesurer. L'inverse — du qualitatif pour «&nbsp;expliquer&nbsp;» des résultats quantitatifs — fonctionne aussi, mais il enferme dans les catégories déjà posées."),
+  ("Quelle est la différence entre un institut et un freelance ?",
+   "Le terrain organisé. Un freelance senior conduit d'excellents entretiens&nbsp;; ce qu'il n'a pas, c'est le recrutement sur critères vérifiés, la logistique multi-villes, la continuité sur plusieurs années et l'assurance d'un dispositif qui tient si quelqu'un tombe malade."),
+  ("Peut-on assister au terrain ?",
+   "Oui, et c'est recommandé — derrière une glace sans tain ou en retour vidéo, jamais dans la salle. Assister change la façon dont on écoute la restitution&nbsp;: on filtre beaucoup moins ce qui dérange quand on a entendu les gens soi-même."),
+  ("Combien de temps garde-t-on les enregistrements ?",
+   "Une durée définie au cadrage et respectée, distincte pour l'enregistrement brut et pour le corpus anonymisé. Ce sont des données personnelles, avec tout ce que ça implique&nbsp;: base légale, information, consentement."),
+  ("Comment comparer deux marchés dans une même étude ?",
+   "Par l'équivalence, pas par la traduction&nbsp;: mêmes guides, échantillons comparables, et une analyse qui sépare explicitement l'usage universel des habitudes locales. C'est cette distinction dont dépendent les arbitrages produit — le détail figure dans notre article <a href=\"marche-citadines-france-uk.html\">sur les citadines France et Royaume-Uni</a>."),
+ ],
+ "aide": {"titre": "Une question à éclairer ?",
+  "chapo": "Nous conduisons des études qualitatives depuis quarante ans, du cadrage à l'atelier de décision. Le premier échange sert à savoir si une étude est la bonne réponse — parfois, elle ne l'est pas.",
+  "points": ["Une heure de cadrage pour traduire votre décision en question de terrain",
+             "Un ordre de grandeur budgétaire donné dès ce premier échange",
+             "Un chiffrage sous 48 heures, ligne par ligne, pour que vous puissiez arbitrer",
+             "Et un « passez votre tour » assumé si la question ne justifie pas l'étude"]},
+ "loin": [("Composer votre dispositif en deux minutes", "decision-rapide.html#configurateur"),
+          ("Comment rédiger un brief d'étude qualitative", "article-brief-etude-qualitative.html"),
+          ("Tous nos contenus", "contenus.html")],
+},
+]
+
+
 # Le point d'entrée reste EN DERNIER : tout ce qui est déclaré après ne serait
 # pas encore défini au moment où main() s'exécute.
 if __name__ == "__main__":

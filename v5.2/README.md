@@ -13,9 +13,11 @@ Le bouton **FR / EN** en haut à droite bascule tout le site en anglais
 |---|---|
 | **Décision rapide** — l'offre courte, avec un configurateur de dispositif | [/v5.2/decision-rapide.html](decision-rapide.html) |
 | **Contenus** — hub blog, études de cas, livre blanc, FAQ | [/v5.2/contenus.html](contenus.html) |
-| 11 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
+| 22 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
 | 3 études de cas anonymisées | [utilitaire & artisans](cas-utilitaire-artisans.html) · [clinique électrique](cas-clinique-electrique.html) · [fichier client](cas-fichier-client-materiaux.html) |
 | **Observatoire de marchés** | [citadines France/UK](marche-citadines-france-uk.html) · [le luxe et ses 20 M de clients perdus](marche-luxe-clients-perdus.html) · [bricolage et peur de mal faire](marche-bricolage-peur-de-mal-faire.html) |
+| **Parcours sectoriels** (gabarit ×6) | [mobilité](parcours-mobilite.html) · [retail & FMCG](parcours-retail-fmcg.html) · [cosmétique](parcours-sante-cosmetiques.html) · [bâtiment](parcours-batiment.html) · [mode & luxe](parcours-mode-luxe.html) · [territoires](parcours-territoires.html) |
+| **Page pilier** | [L'étude qualitative, du cadrage à la décision](etude-qualitative.html) |
 | Livre blanc, 7 chapitres | [/v5.2/livre-blanc.html](livre-blanc.html) |
 | FAQ, 22 questions | [/v5.2/faq.html](faq.html) |
 
@@ -110,6 +112,29 @@ gros plan parfaitement déchiffrable, elle a été retaillée sur le plan large 
 aller-retour pour boucler sans raccord.
 
 `ffmpeg` d'ici **n'a pas d'encodeur WebP** : extraire en PNG puis convertir avec `cwebp`.
+
+## Le gabarit sectoriel
+
+Les six articles `parcours-*.html` sont produits par une seule fonction,
+`_parcours()`, à partir de la table `SECTEURS_PARCOURS`. Charpente commune,
+contenu propre à chaque secteur.
+
+⚠️ **Un gabarit amplifie tout, les faiblesses comprises.** Trois pièges payés
+en le construisant :
+
+- Les six pages partageaient **quatre questions de FAQ identiques** — six pages
+  qui se disputent la même intention. Chaque secteur a désormais ses propres
+  questions, dans la table.
+- Le **premier titre de section** était le même partout (« Où se prend
+  réellement la décision ? »). Il est maintenant paramétré (`h2_ou`).
+- Une tournure faible dans le gabarit est répétée autant de fois qu'il y a de
+  déclinaisons : un seul « c'est là que » y est devenu six.
+
+Le contrôle à passer après toute modification du gabarit :
+
+```bash
+python3 ~/.claude/skills/redac-fr/scripts/tics.py . --html --strict
+```
 
 ## SEO / GEO
 

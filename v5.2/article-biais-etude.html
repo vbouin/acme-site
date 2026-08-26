@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<title>Huit biais qui faussent une étude qualitative</title>
+<meta name="description" content="Désirabilité, dominance, relance orientée : les biais du terrain sont connus. Ceux du commanditaire le sont moins, et ils coûtent plus cher." />
+<link rel="canonical" href="https://acmeconsultants.fr/article-biais-etude.html" />
+<!-- Open Graph : absent du site aujourd'hui, chaque lien partagé sur LinkedIn
+     s'affichait dégradé — or LinkedIn est le premier levier d'acquisition. -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="ACMÉ Consultants" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Huit biais qui faussent une étude qualitative" />
+<meta property="og:description" content="Désirabilité, dominance, relance orientée : les biais du terrain sont connus. Ceux du commanditaire le sont moins, et ils coûtent plus cher." />
+<meta property="og:url" content="https://acmeconsultants.fr/article-biais-etude.html" />
+<meta property="og:image" content="https://acmeconsultants.fr/assets/illus/groupes.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-v3.css" />
+<link rel="stylesheet" href="styles-contenus.css" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","ProfessionalService"],"name":"ACMÉ Consultants","url":"https://acmeconsultants.fr/","telephone":"+33 1 72 76 26 53","foundingDate":"1985","description":"Cabinet d'études qualitatives à Lyon : focus groups, entretiens individuels et analyse de verbatim, du cadrage jusqu'à la décision.","address":{"@type":"PostalAddress","streetAddress":"24 rue Turbil","postalCode":"69003","addressLocality":"Lyon","addressCountry":"FR"},"areaServed":["FR","EU"],"knowsAbout":["étude qualitative","focus group","entretien individuel","analyse de verbatim","car clinic","test de concept"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://acmeconsultants.fr/"},{"@type":"ListItem","position":2,"name":"Contenus","item":"https://acmeconsultants.fr/contenus.html"},{"@type":"ListItem","position":3,"name":"Huit biais qui faussent une étude — dont trois de votre côté.","item":"https://acmeconsultants.fr/article-biais-etude.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Huit biais qui faussent une étude — dont trois de votre côté.","description":"Désirabilité, dominance, relance orientée : les biais du terrain sont connus. Ceux du commanditaire le sont moins, et ils coûtent plus cher.","datePublished":"2026-08-26","dateModified":"2026-08-26","inLanguage":"fr-FR","keywords":"biais étude qualitative, désirabilité sociale, biais confirmation étude marché, biais animateur","author":{"@type":"Organization","name":"ACMÉ Consultants"},"publisher":{"@type":"Organization","name":"ACMÉ Consultants"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://acmeconsultants.fr/article-biais-etude.html"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Peut-on supprimer complètement les biais d'une étude qualitative ?","acceptedAnswer":{"@type":"Answer","text":"Non, et ce n'est pas l'objectif. On les rend visibles et on les compense par la conception : composition des groupes, ordre des expositions, formulation des relances, hypothèses écrites. Un dispositif sans biais n'existe pas ; un dispositif dont on connaît les biais se lit."}},{"@type":"Question","name":"Comment savoir si mon brief est orienté ?","acceptedAnswer":{"@type":"Answer","text":"Un test simple : si vous ne pouvez pas écrire l'hypothèse inverse sans qu'elle paraisse absurde, le brief contient déjà sa réponse. « Comprendre pourquoi ils apprécient » ne passe pas ce test ; « comprendre ce qui les fait revenir ou partir » le passe."}},{"@type":"Question","name":"Le recrutement en base client est-il à éviter ?","acceptedAnswer":{"@type":"Answer","text":"Non, c'est le meilleur levier de coût et il améliore la justesse du profil. Il faut simplement savoir qu'il ne contient que des clients actifs, et compléter par un sourcing externe si la question porte sur l'attrition."}},{"@type":"Question","name":"Une IA d'analyse réduit-elle les biais ?","acceptedAnswer":{"@type":"Answer","text":"Elle en supprime un — la fatigue de l'analyste sur un gros corpus — et en ajoute un autre : elle produit la lecture la plus consensuelle et lisse les signaux minoritaires, qui sont souvent l'information neuve."}},{"@type":"Question","name":"Faut-il que le client assiste au terrain ?","acceptedAnswer":{"@type":"Answer","text":"Oui, derrière une glace sans tain ou en retour vidéo, jamais dans la salle. Assister réduit fortement le biais 9 : on filtre beaucoup moins une restitution quand on a entendu les gens soi-même."}}]}]}</script>
+</head>
+<body class="v3 v3-1">
+<script src="variant.js"></script>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo/logo-noir.png" alt="ACMÉ" /></a>
+    <nav class="nav-menu">
+      <div class="nav-dd">
+      <a href="index.html#sectors" class="nav-dd-trigger"><span data-i18n="nav.sectors">Secteurs</span><span class="nav-dd-caret" aria-hidden="true">&#9662;</span></a>
+      <div class="nav-dd-menu">
+        <a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité &amp; Automobile</a>
+        <a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a>
+        <a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé &amp; Cosmétiques</a>
+        <a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a>
+        <a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme &amp; RSE</a>
+        <a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode &amp; Luxe</a>
+      </div>
+    </div>
+      <a href="decision-rapide.html" data-i18n="nav.quick">Décision rapide</a>
+      <a href="contenus.html" class="current" data-i18n="nav.content">Contenus</a>
+      <a href="etudes-et-ia.html" data-i18n="nav.ia">Études &amp; IA</a>
+      <a href="qui-sommes-nous.html" data-i18n="nav.about">Qui sommes-nous</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="fr" type="button">FR</button>
+        <span class="lang-sep">/</span>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <a href="contact.html" class="btn btn-primary-dark" style="padding: 12px 20px;">
+        <span data-i18n="nav.cta">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<article class="art">
+  <header class="art-head">
+    <div class="container art-w">
+      <div class="art-kicker"><a href="contenus.html">Tous les contenus</a><span>·</span><span>Méthode</span></div>
+      <h1 class="display">Huit biais qui faussent<br>une étude — dont trois<br>de votre côté.</h1>
+      <p class="art-chapo">Tout le monde connaît la désirabilité sociale. Presque personne n'écrit sur les trois biais qui viennent de celui qui commande l'étude — parce que ça se dit mal quand on veut vendre. Ce sont pourtant les plus coûteux.</p>
+      <div class="art-meta"><time datetime="2026-08-26">26 août 2026</time><span>·</span><span>9 min de lecture</span></div>
+      
+      
+    </div>
+  </header>
+  <div class="art-illus"><img src="assets/illus/groupes.webp" alt="" width="1600" height="600" loading="lazy" decoding="async"></div>
+  <div class="container art-w art-body" lang="fr">
+
+<h2>Côté participant : quatre biais bien documentés</h2>
+<p><strong>Ils sont connus, et ils se traitent par la conception du dispositif plutôt que par la vigilance de l'animateur.</strong></p>
+<ul>
+  <li><strong>La désirabilité sociale.</strong> On répond ce qu'il est acceptable de répondre. Elle s'aggrave en groupe, sur tout ce qui touche à l'argent, à la santé et à la compétence professionnelle. <em>Correctif&nbsp;:</em> l'entretien individuel sur ces sujets, sans exception.</li>
+  <li><strong>La rationalisation a posteriori.</strong> Le participant reconstruit une décision plus rationnelle qu'elle ne l'a été. <em>Correctif&nbsp;:</em> faire raconter un épisode daté plutôt que demander d'expliquer.</li>
+  <li><strong>L'effet de dominance.</strong> En quelques minutes, un groupe s'aligne sur le plus assuré. <em>Correctif&nbsp;:</em> des groupes homogènes en statut et en expertise, et un tour de table écrit avant la discussion ouverte.</li>
+  <li><strong>Le répondant professionnel.</strong> Il connaît les codes, il donne de bonnes réponses. <em>Correctif&nbsp;:</em> deux filtres au recrutement — une question sur les participations récentes, une question ouverte à rédiger.</li>
+</ul>
+
+<h2>Côté animateur : deux biais qui ne se voient pas à la relecture</h2>
+<ul>
+  <li><strong>La relance qui oriente.</strong> «&nbsp;Donc c'est plutôt le prix qui vous a arrêté&nbsp;?&nbsp;» ferme le champ et produit une confirmation. Dans la transcription, la réponse paraîtra spontanée. <em>Correctif&nbsp;:</em> relancer sur le dernier mot du participant, pas sur une hypothèse.</li>
+  <li><strong>Le silence non tenu.</strong> Les trois secondes après une réponse convenue sont l'endroit où la personne se reprend. Un animateur pressé les comble et perd la phrase. C'est la différence la plus mesurable entre un consultant senior et un vacataire.</li>
+</ul>
+
+<h2>Et les trois biais qui viennent de vous&nbsp;?</h2>
+<p class="art-more" style="border-left-color:var(--ink);color:var(--grey-700)">Cette section est la seule raison d'écrire cet article. Les six biais précédents figurent dans tous les manuels&nbsp;; ceux-ci coûtent plus cher et n'apparaissent nulle part, parce qu'un prestataire les évoque rarement avec son client.</p>
+
+<h3>7. Le brief qui contient déjà sa réponse</h3>
+<p>«&nbsp;Comprendre pourquoi nos clients apprécient notre nouveau service&nbsp;» n'est pas une question d'étude&nbsp;: c'est une conclusion déguisée. Le dispositif construit dessus la confirmera, et il aura raison de le faire — c'est ce qu'on lui a demandé.</p>
+<p><em>Correctif&nbsp;:</em> reformuler en question ouverte, et écrire les hypothèses concurrentes avant le terrain.</p>
+
+<h3>8. L'échantillon choisi pour confirmer</h3>
+<p>Recruter dans sa base client est excellent pour le coût et la justesse du profil — et biaise vers les clients actifs. Les partants et les perdus n'y sont pas. Sur une question de fidélité ou d'attrition, l'étude conclura à la satisfaction générale, ce qui sera vrai de l'échantillon et faux du marché.</p>
+<p><em>Correctif&nbsp;:</em> annoncer la limite au cadrage, et compléter par un sourcing externe quand la question porte sur ceux qui sont partis.</p>
+
+<h3>9. La restitution écoutée en cherchant l'accord</h3>
+<p>Le biais le plus difficile à traiter, parce qu'il arrive quand tout est fini. Une salle qui écoute une restitution retient ce qui confirme la direction déjà prise et range le reste dans «&nbsp;cas particuliers&nbsp;». Le rapport est excellent, la décision est inchangée.</p>
+<p><em>Correctif&nbsp;:</em> l'atelier plutôt que la présentation. On ne sort pas de la salle sans arbitrage écrit, ce qui oblige à traiter les constats gênants au lieu de les absorber.</p>
+<figure class="fg" id="fig-17">
+  <svg viewBox="0 0 720 226" role="img" aria-labelledby="figt17" class="fg-svg">
+    <title id="figt17">Où se logent les biais, et ce qu'ils coûtent</title>
+<text x="0" y="38" class="fg-lab">Brief orienté</text>
+<rect x="230" y="26" width="340.0" height="17" class="fg-bar"/>
+<text x="580.0" y="39" class="fg-val">fausse tout le dispositif</text>
+<text x="0" y="78" class="fg-lab">Échantillon confirmant</text>
+<rect x="230" y="66" width="272.0" height="17" class="fg-bar"/>
+<text x="512.0" y="79" class="fg-val">fausse la conclusion</text>
+<text x="0" y="118" class="fg-lab">Restitution filtrée</text>
+<rect x="230" y="106" width="238.0" height="17" class="fg-bar"/>
+<text x="478.0" y="119" class="fg-val">annule le bénéfice</text>
+<text x="0" y="158" class="fg-lab">Dominance en groupe</text>
+<rect x="230" y="146" width="153.0" height="17" class="fg-bar"/>
+<text x="393.0" y="159" class="fg-val">fausse un groupe</text>
+<text x="0" y="198" class="fg-lab">Relance orientée</text>
+<rect x="230" y="186" width="102.0" height="17" class="fg-bar"/>
+<text x="342.0" y="199" class="fg-val">fausse un passage</text>
+  </svg>
+  <figcaption>Les biais du commanditaire arrivent plus tôt dans la chaîne et se corrigent moins tard : un brief mal posé fausse tout ce qui suit, alors qu'une relance orientée ne fausse qu'un passage. Estimation d'impact issue de notre pratique.</figcaption>
+</figure>
+
+<h2>Le seul antidote qui marche vraiment</h2>
+<p><strong>Écrire les hypothèses concurrentes avant le terrain, et demander à l'étude de les départager.</strong> Pas «&nbsp;valider&nbsp;» l'une d'elles — les départager.</p>
+<p>C'est une rubrique de trois lignes dans un brief, et c'est celle qui manque presque toujours. Son effet est mécanique&nbsp;: une étude qui doit trancher entre deux explications écrites ne peut pas revenir confirmer l'opinion du plus gradé, parce que les deux explications sont sur la table depuis le début et que chacun les a vues.</p>
+<p>Deuxième effet, moins attendu&nbsp;: l'exercice fait remonter les désaccords internes <em>avant</em> de dépenser. Il arrive qu'on découvre à ce moment-là que le marketing et le produit n'attendaient pas la même chose de l'étude. C'est une heure très rentable.</p>
+<p class="art-more">La rubrique et sa place dans un brief&nbsp;: <a href="article-brief-etude-qualitative.html">comment rédiger un brief d'étude qualitative</a>.</p>
+
+<h2>Ce qu'un dispositif court aggrave — et ce qu'il n'aggrave pas</h2>
+<p><strong>Il n'aggrave aucun des biais de terrain, à condition de ne pas toucher au recrutement.</strong> Un dispositif de quatre semaines avec un recrutement sur critères vérifiés et un consultant senior produit exactement la même qualité de matière qu'un dispositif de dix semaines.</p>
+<p>Il aggrave en revanche deux choses&nbsp;: la tentation de sauter la semaine de cadrage — donc le biais 7 —, et la restitution expédiée en visioconférence de quarante-cinq minutes — donc le biais 9. Les deux se règlent en refusant de comprimer ces deux postes-là.</p>
+<p class="art-more">Ce qui se comprime et ce qui ne se comprime pas&nbsp;: <a href="article-decider-vite.html">décider vite sans décider mal</a>.</p>
+
+
+<section class="art-faq"><h2>Questions fréquentes sur les biais</h2><details class="faq-i"><summary><h3>Peut-on supprimer complètement les biais d'une étude qualitative ?</h3></summary><div class="faq-a"><p>Non, et ce n'est pas l'objectif. On les rend visibles et on les compense par la conception&nbsp;: composition des groupes, ordre des expositions, formulation des relances, hypothèses écrites. Un dispositif sans biais n'existe pas&nbsp;; un dispositif dont on connaît les biais se lit.</p></div></details><details class="faq-i"><summary><h3>Comment savoir si mon brief est orienté ?</h3></summary><div class="faq-a"><p>Un test simple&nbsp;: si vous ne pouvez pas écrire l'hypothèse inverse sans qu'elle paraisse absurde, le brief contient déjà sa réponse. «&nbsp;Comprendre pourquoi ils apprécient&nbsp;» ne passe pas ce test&nbsp;; «&nbsp;comprendre ce qui les fait revenir ou partir&nbsp;» le passe.</p></div></details><details class="faq-i"><summary><h3>Le recrutement en base client est-il à éviter ?</h3></summary><div class="faq-a"><p>Non, c'est le meilleur levier de coût et il améliore la justesse du profil. Il faut simplement savoir qu'il ne contient que des clients actifs, et compléter par un sourcing externe si la question porte sur l'attrition.</p></div></details><details class="faq-i"><summary><h3>Une IA d'analyse réduit-elle les biais ?</h3></summary><div class="faq-a"><p>Elle en supprime un — la fatigue de l'analyste sur un gros corpus — et en ajoute un autre&nbsp;: elle produit la lecture la plus consensuelle et lisse les signaux minoritaires, qui sont souvent l'information neuve.</p></div></details><details class="faq-i"><summary><h3>Faut-il que le client assiste au terrain ?</h3></summary><div class="faq-a"><p>Oui, derrière une glace sans tain ou en retour vidéo, jamais dans la salle. Assister réduit fortement le biais 9&nbsp;: on filtre beaucoup moins une restitution quand on a entendu les gens soi-même.</p></div></details></section>
+<aside class="art-sources"><h2>Sources</h2><ul><li><a href="https://agalma-etudes.com/blog/" rel="nofollow noopener" target="_blank">Agalma Études — biais cognitifs et décisions d'achat</a> — un traitement complémentaire, côté sciences comportementales</li><li><a href="https://esomar.org/" rel="nofollow noopener" target="_blank">ESOMAR</a> — cadre déontologique : indemnisation, consentement, non-réutilisation</li><li><a href="https://syntec-conseil.fr/" rel="nofollow noopener" target="_blank">Syntec Conseil</a> — supervision humaine à chaque étape et transparence sur les outils, mai 2025</li></ul><p class="art-sources-note">Repères relevés en août 2026. Les tarifs de marché évoluent&nbsp;: vérifiez la date de la source avant de vous en servir comme référence.</p></aside>
+<section class="art-loin"><h2>Aller plus loin</h2><div class="art-loin-g"><a href="article-brief-etude-qualitative.html"><span>Comment rédiger un brief d'étude qualitative</span><svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a><a href="article-declare-observe.html"><span>Ce que les gens disent, ce qu'ils font</span><svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a><a href="article-entretiens-ou-groupes.html"><span>Entretiens individuels ou focus groups</span><svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a></div></section>
+  </div>
+</article>
+<section class="art-help">
+  <div class="art-help-in">
+    <div class="eyebrow">— Comment ACMÉ peut vous aider</div>
+    <h2>Un dispositif conçu contre ses propres biais</h2>
+    <p class="lead">La partie la plus utile de notre travail se joue avant le terrain, au moment où l'on écrit ce que l'étude doit départager.</p>
+    <ul class="art-help-list"><li>Un cadrage qui reformule le brief en question ouverte, et écrit les hypothèses concurrentes</li><li>Composition des groupes et ordre des expositions arrêtés contre les biais connus</li><li>Animation par un consultant senior — les silences tenus ne s'automatisent pas</li><li>Restitution en atelier plutôt qu'en présentation, jusqu'à l'arbitrage écrit</li></ul>
+    <div class="ctas">
+      <a href="decision-rapide.html#configurateur" class="btn btn-primary-light"><span>Composer un dispositif</span><svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>
+      <a href="contact.html" class="btn btn-outline-light">Parler de votre question</a>
+    </div>
+  </div>
+</section>
+<article class="art art-tail">
+  <div class="container art-w">
+    <div class="art-foot">
+      <a href="contenus.html" class="btn btn-outline-dark">Tous les contenus</a>
+      <a href="contact.html" class="btn btn-primary-dark"><span data-i18n="nav.cta">Démarrer un projet</span><svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; letter-spacing: 0.22em; font-size: 18px; margin-bottom: 20px;">ACMÉ</div>
+        <p data-i18n="footer.about">50 ans d'expertise dans la connaissance client. Siège : 24 rue Turbil, 69003 Lyon, France.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.sectors">Secteurs</h4>
+        <ul>
+          <li><a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité &amp; Automobile</a></li>
+          <li><a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a></li>
+          <li><a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé &amp; Cosmétiques</a></li>
+          <li><a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a></li>
+          <li><a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme &amp; RSE</a></li>
+          <li><a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode &amp; Luxe</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.content">Contenus</h4>
+        <ul>
+          <li><a href="contenus.html" data-i18n="content.nav.articles">Articles</a></li>
+          <li><a href="contenus.html#cas" data-i18n="content.nav.cases">Études de cas</a></li>
+          <li><a href="livre-blanc.html" data-i18n="content.nav.wp">Livre blanc</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@acme-consultant.fr">contact@acme-consultant.fr</a></li>
+          <li><a href="contact.html" data-i18n="footer.form">Formulaire</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-esomar">
+      <span data-i18n="esomar.member">Membre corporate</span>
+      <img src="assets/logos/esomar.png" alt="ESOMAR" loading="lazy">
+    </div>
+    <div class="footer-legal">
+      <div>© <span data-year></span> ACMÉ Consultants · <span data-i18n="footer.legal">Tous droits réservés</span></div>
+      <div data-i18n="footer.offices">Lyon · Paris · Munich · Milan</div>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+/* Les boucles d'illustration sont décoratives : sous « mouvement réduit »,
+   elles s'arrêtent sur leur poster. `autoplay` ne se désactive pas en CSS,
+   d'où ces trois lignes. */
+(function () {
+  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video');
+  if (!vids.length) return;
+
+  // Mouvement réduit : on s'arrête sur le poster. `autoplay` ne se désactive
+  // pas en CSS, d'où ces lignes.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vids.forEach(function (v) { v.removeAttribute('autoplay'); v.autoplay = false; v.pause(); });
+    return;
+  }
+
+  // `autoplay` seul ne suffit pas toujours : selon le navigateur et l'état de
+  // l'onglet au chargement, la lecture reste en pause. On relance à l'entrée
+  // dans le viewport, et on met en pause hors champ — inutile de décoder une
+  // image qu'on ne voit pas.
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var pr = e.target.play();
+        if (pr && pr.catch) pr.catch(function () {});
+      } else {
+        e.target.pause();
+      }
+    });
+  }, { threshold: 0.15 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
+</script>
+</body>
+</html>
