@@ -136,6 +136,30 @@ Le contrôle à passer après toute modification du gabarit :
 python3 ~/.claude/skills/redac-fr/scripts/tics.py . --html --strict
 ```
 
+## La version anglaise
+
+`en/` — quatre pages sur des **URL distinctes**, avec des `hreflang` réciproques
+dans les deux sens.
+
+⚠️ **Deux langues sur une même URL annuleraient tout le travail SEO** : un moteur
+a besoin d'une URL par langue, et un moteur génératif qui cite une page a besoin
+qu'elle soit dans une seule langue. La bascule FR/EN du chrome (i18n.js) reste
+valable pour la nav et les pages d'offre ; elle ne convient pas au contenu
+éditorial.
+
+**Le périmètre est délibérément restreint.** Tout le terrain gagnable en
+référencement est francophone — « focus group Lyon », « prix étude qualitative ».
+Traduire les vingt-sept pages produirait un miroir que personne ne cherche. On
+traduit ce qu'un prospect international lit vraiment : les trois articles
+d'observatoire, qui sont les seuls à voyager par nature, plus leur index.
+
+Les pages `en/` n'utilisent **aucun `data-i18n`** : leur texte est anglais en dur.
+Elles alignent simplement `acme-lang` dans le `localStorage` pour que la bascule du
+reste du site suive.
+
+Ajouter une page anglaise : une entrée dans `ARTICLES_EN`, plus une ligne dans
+`EN_ALTERNATES` pour que la page française la déclare.
+
 ## SEO / GEO
 
 Balisage en place sur **les 25 pages** : `Organization` + `ProfessionalService` partout

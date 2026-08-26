@@ -153,6 +153,15 @@ def breadcrumb(items):
     }
 
 
+# Les pages qui existent dans les deux langues : chacune déclare l'autre.
+EN_ALTERNATES = {
+    "marche-citadines-france-uk.html": "city-cars-france-uk.html",
+    "marche-luxe-clients-perdus.html": "luxury-lost-customers.html",
+    "marche-bricolage-peur-de-mal-faire.html": "diy-fear-of-getting-it-wrong.html",
+    "contenus.html": "index.html",
+}
+
+
 def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
          breadcrumbs=None, og_type="website", og_image="assets/v4/decision.jpg"):
     sect_nav = "\n".join(
@@ -180,6 +189,13 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
         '<script type="application/ld+json">%s</script>' %
         json.dumps(b, ensure_ascii=False, separators=(",", ":")) for b in blocks)
 
+    alternates = ""
+    if slug in EN_ALTERNATES:
+        alternates = (
+            f'\n<link rel="alternate" hreflang="fr" href="{SITE}/{slug}" />'
+            f'\n<link rel="alternate" hreflang="en" href="{SITE}/en/{EN_ALTERNATES[slug]}" />'
+            f'\n<link rel="alternate" hreflang="x-default" href="{SITE}/{slug}" />')
+
     return f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -188,7 +204,7 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <title>{title}</title>
 <meta name="description" content="{html.escape(desc, quote=True)}" />
-<link rel="canonical" href="{SITE}/{slug}" />
+<link rel="canonical" href="{SITE}/{slug}" />{alternates}
 <!-- Open Graph : absent du site aujourd'hui, chaque lien partagé sur LinkedIn
      s'affichait dégradé — or LinkedIn est le premier levier d'acquisition. -->
 <meta property="og:type" content="{og_type}" />
@@ -1532,6 +1548,7 @@ def render_hub():
     <h1 class="display" data-i18n="content.h1">Ce qu'on a appris,<br>et qu'on peut écrire.</h1>
     <p class="lead" data-i18n="content.lead">Des articles de praticiens plutôt que des définitions, des études de cas anonymisées plutôt que des logos, et les réponses aux questions qu'on nous pose vraiment.</p>
     <p class="ct-frnote" data-i18n="content.frnote"></p>
+    <p class="ct-frnote"><a href="en/index.html" style="border-bottom:1px solid currentColor" data-i18n="content.enlink">Market watch, in English →</a></p>
   </div>
 </section>
 
@@ -1622,6 +1639,14 @@ def render_hub():
 
 def main():
     out = []
+    # Version anglaise, sous en/, sur des URL distinctes.
+    en = ROOT / "en"
+    en.mkdir(exist_ok=True)
+    for a in ARTICLES_EN:
+        (en / a["slug"]).write_text(render_article_en(a), encoding="utf-8")
+        out.append("en/" + a["slug"])
+    (en / "index.html").write_text(render_index_en(), encoding="utf-8")
+    out.append("en/index.html")
     for a in ARTICLES:
         (ROOT / a["slug"]).write_text(render_article(a), encoding="utf-8")
         out.append(a["slug"])
@@ -2963,6 +2988,545 @@ ARTICLES += [
           ("Tous nos contenus", "contenus.html")],
 },
 ]
+
+# ═══════════════════════════════════════════════════════════════════════
+#  VERSION ANGLAISE
+#  Sur des URL distinctes, sous en/, avec des alternates hreflang dans les
+#  deux sens. Servir deux langues sur une même URL annulerait le travail
+#  SEO : un moteur a besoin d'une URL par langue, et un moteur génératif
+#  qui cite une page a besoin qu'elle soit dans UNE langue.
+#
+#  Le périmètre est délibérément restreint. Tout le terrain gagnable en
+#  référencement est francophone (« focus group Lyon », « prix étude
+#  qualitative ») : traduire les vingt-sept pages produirait un miroir que
+#  personne ne cherche. On traduit ce qu'un prospect international lit
+#  vraiment — ce que fait le cabinet, et les articles d'observatoire, qui
+#  sont les seuls à voyager par nature.
+# ═══════════════════════════════════════════════════════════════════════
+
+NAV_EN = """<header class="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo"><img src="../assets/logo/logo-noir.png" alt="ACMÉ" /></a>
+    <nav class="nav-menu">
+      <div class="nav-dd">
+      <a href="../index.html#sectors" class="nav-dd-trigger"><span>Sectors</span><span class="nav-dd-caret" aria-hidden="true">&#9662;</span></a>
+      <div class="nav-dd-menu">
+        <a href="../secteur-mobilite.html">Mobility &amp; Automotive</a>
+        <a href="../secteur-retail-fmcg.html">Retail and FMCG</a>
+        <a href="../secteur-sante-cosmetiques.html">Health &amp; Cosmetics</a>
+        <a href="../secteur-batiment.html">Construction</a>
+        <a href="../secteur-territoires.html">Regions, Tourism &amp; CSR</a>
+        <a href="../secteur-mode-luxe.html">Fashion &amp; Luxury</a>
+      </div>
+    </div>
+      <a href="../decision-rapide.html">Quick Decision</a>
+      <a href="index.html"{cur}>Insights</a>
+      <a href="../etudes-et-ia.html">Studies &amp; AI</a>
+      <a href="../qui-sommes-nous.html">About us</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <a href="{fr}" class="lang-link">FR</a>
+        <span class="lang-sep">/</span>
+        <button data-lang="en" type="button" class="active">EN</button>
+      </div>
+      <a href="../contact.html" class="btn btn-primary-dark" style="padding: 12px 20px;">
+        <span>Start a project</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>"""
+
+FOOTER_EN = """<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; letter-spacing: 0.22em; font-size: 18px; margin-bottom: 20px;">ACMÉ</div>
+        <p>Four decades of qualitative research. Head office: 24 rue Turbil, 69003 Lyon, France.</p>
+      </div>
+      <div>
+        <h4>Sectors</h4>
+        <ul>
+          <li><a href="../secteur-mobilite.html">Mobility &amp; Automotive</a></li>
+          <li><a href="../secteur-retail-fmcg.html">Retail and FMCG</a></li>
+          <li><a href="../secteur-sante-cosmetiques.html">Health &amp; Cosmetics</a></li>
+          <li><a href="../secteur-batiment.html">Construction</a></li>
+          <li><a href="../secteur-territoires.html">Regions, Tourism &amp; CSR</a></li>
+          <li><a href="../secteur-mode-luxe.html">Fashion &amp; Luxury</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Insights</h4>
+        <ul>
+          <li><a href="index.html">In English</a></li>
+          <li><a href="../contenus.html">Tous les contenus (FR)</a></li>
+          <li><a href="../livre-blanc.html">Livre blanc (FR)</a></li>
+          <li><a href="../faq.html">FAQ (FR)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@acme-consultant.fr">contact@acme-consultant.fr</a></li>
+          <li><a href="../contact.html">Contact form</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-esomar">
+      <span>Corporate member</span>
+      <img src="../assets/logos/esomar.png" alt="ESOMAR" loading="lazy">
+    </div>
+    <div class="footer-legal">
+      <div>&copy; <span data-year></span> ACM&Eacute; Consultants &middot; All rights reserved</div>
+      <div>Lyon &middot; Paris &middot; Munich &middot; Milan</div>
+    </div>
+  </div>
+</footer>"""
+
+
+def page_en(slug, title, desc, body, fr_slug, extra_jsonld=None, current="",
+            og_image="assets/illus/courbes.webp", og_type="website"):
+    """Gabarit anglais. Les chemins remontent d'un cran (les pages vivent sous
+    en/) et les alternates hreflang pointent dans les deux sens."""
+    blocs = [dict(org_jsonld(), inLanguage="en")]
+    if extra_jsonld:
+        blocs.append(extra_jsonld)
+    ld = "\n".join(
+        '<script type="application/ld+json">%s</script>' %
+        json.dumps(b, ensure_ascii=False, separators=(",", ":")) for b in blocs)
+    nav = NAV_EN.format(cur=' class="current"' if current == "ct" else "", fr="../" + fr_slug)
+
+    head = (
+        '<!DOCTYPE html>\n<html lang="en">\n<head>\n'
+        '<meta charset="UTF-8" />\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n'
+        '<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />\n'
+        f'<title>{title}</title>\n'
+        f'<meta name="description" content="{html.escape(desc, quote=True)}" />\n'
+        f'<link rel="canonical" href="{SITE}/en/{slug}" />\n'
+        '<!-- Une URL par langue, et les deux se declarent l\'une l\'autre. Sans\n'
+        '     cela, les deux versions se font concurrence au lieu de se completer. -->\n'
+        f'<link rel="alternate" hreflang="fr" href="{SITE}/{fr_slug}" />\n'
+        f'<link rel="alternate" hreflang="en" href="{SITE}/en/{slug}" />\n'
+        f'<link rel="alternate" hreflang="x-default" href="{SITE}/{fr_slug}" />\n'
+        f'<meta property="og:type" content="{og_type}" />\n'
+        '<meta property="og:site_name" content="ACMÉ Consultants" />\n'
+        '<meta property="og:locale" content="en_GB" />\n'
+        '<meta property="og:locale:alternate" content="fr_FR" />\n'
+        f'<meta property="og:title" content="{html.escape(title, quote=True)}" />\n'
+        f'<meta property="og:description" content="{html.escape(desc, quote=True)}" />\n'
+        f'<meta property="og:url" content="{SITE}/en/{slug}" />\n'
+        f'<meta property="og:image" content="{SITE}/{og_image}" />\n'
+        '<meta name="twitter:card" content="summary_large_image" />\n'
+        '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+        '<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">\n'
+        '<link rel="stylesheet" href="../styles.css" />\n'
+        '<link rel="stylesheet" href="../styles-v3.css" />\n'
+        '<link rel="stylesheet" href="../styles-contenus.css" />\n'
+        + ld + '\n</head>\n<body class="v3 v3-1">\n\n')
+
+    tail = (
+        '\n\n<script src="../main.js"></script>\n<script>\n'
+        "/* La page est servie en anglais : on aligne la preference stockee pour que\n"
+        "   la bascule du reste du site suive. Ces pages ne portent aucun data-i18n,\n"
+        "   donc i18n.js ne repasse pas sur ce texte. */\n"
+        "try { localStorage.setItem('acme-lang', 'en'); } catch (e) {}\n"
+        "document.querySelectorAll('[data-year]').forEach(function (el) {\n"
+        "  el.textContent = new Date().getFullYear();\n"
+        "});\n</script>\n</body>\n</html>\n")
+
+    return head + nav + '\n\n' + body + '\n\n' + FOOTER_EN + tail
+
+
+def render_article_en(a):
+    """Meme anatomie que la version francaise : bandeau, corps, FAQ, bloc
+    d'activation, sources, maillage."""
+    illus = ""
+    if a.get("illus"):
+        illus = ('<div class="art-illus"><img src="../assets/illus/%s" alt="" '
+                 'width="1600" height="600" loading="lazy" decoding="async"></div>' % a["illus"])
+    faq = ""
+    if a.get("faq"):
+        items = "".join(
+            '<details class="faq-i"><summary><h3>%s</h3></summary>'
+            '<div class="faq-a"><p>%s</p></div></details>' % (q, r) for q, r in a["faq"])
+        faq = ('<section class="art-faq"><h2>%s</h2>%s</section>'
+               % (a.get("faq_titre", "Frequently asked questions"), items))
+    src = ""
+    if a.get("sources"):
+        items = "".join(
+            '<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a> — %s</li>'
+            % (u, n, q) for n, q, u in a["sources"])
+        src = ('<aside class="art-sources"><h2>Sources</h2><ul>' + items + '</ul>'
+               '<p class="art-sources-note">Figures gathered in August 2026. Market data '
+               'moves — check the date of a source before using it as a reference.</p></aside>')
+    loin = ""
+    if a.get("loin"):
+        liens = "".join(
+            '<a href="%s"><span>%s</span>'
+            '<svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none">'
+            '<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>'
+            % (u, t) for t, u in a["loin"])
+        loin = ('<section class="art-loin"><h2>Further reading</h2>'
+                '<div class="art-loin-g">%s</div></section>' % liens)
+    act = ""
+    if a.get("aide"):
+        puces = "".join("<li>%s</li>" % x for x in a["aide"]["points"])
+        act = (
+            '<section class="art-help">\n  <div class="art-help-in">\n'
+            '    <div class="eyebrow">&mdash; How ACM&Eacute; can help</div>\n'
+            '    <h2>%s</h2>\n    <p class="lead">%s</p>\n'
+            '    <ul class="art-help-list">%s</ul>\n'
+            '    <div class="ctas">\n'
+            '      <a href="../decision-rapide.html#configurateur" class="btn btn-primary-light">'
+            '<span>Build a study design</span>'
+            '<svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none">'
+            '<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>\n'
+            '      <a href="../contact.html" class="btn btn-outline-light">Talk to us</a>\n'
+            '    </div>\n  </div>\n</section>'
+            % (a["aide"]["titre"], a["aide"]["chapo"], puces))
+
+    body = (
+        '<article class="art">\n  <header class="art-head">\n'
+        '    <div class="container art-w">\n'
+        '      <div class="art-kicker"><a href="index.html">All insights</a>'
+        '<span>&middot;</span><span>%s</span></div>\n'
+        '      <h1 class="display">%s</h1>\n'
+        '      <p class="art-chapo">%s</p>\n'
+        '      <div class="art-meta"><time datetime="%s">%s</time>'
+        '<span>&middot;</span><span>%s read</span></div>\n'
+        '    </div>\n  </header>\n  %s\n'
+        '  <div class="container art-w art-body" lang="en">\n%s\n%s\n%s\n%s\n  </div>\n'
+        '</article>\n%s\n'
+        '<article class="art">\n  <div class="container art-w">\n'
+        '    <div class="art-foot">\n'
+        '      <a href="index.html" class="btn btn-outline-dark">All insights</a>\n'
+        '      <a href="../contact.html" class="btn btn-primary-dark"><span>Start a project</span>'
+        '<svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none">'
+        '<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>\n'
+        '    </div>\n  </div>\n</article>'
+        % (a["cat"], a["h1"], a["chapo"], a["date"], a["date_en"], a["read"],
+           illus, a["body"], faq, src, loin, act))
+
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "Article",
+         "headline": re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ").strip(),
+         "description": a["desc"], "datePublished": a["date"], "dateModified": a["date"],
+         "inLanguage": "en", "keywords": a["kw"],
+         "author": {"@type": "Organization", "name": ORG["name"]},
+         "publisher": {"@type": "Organization", "name": ORG["name"]},
+         "mainEntityOfPage": {"@type": "WebPage", "@id": "%s/en/%s" % (SITE, a["slug"])}}]}
+    if a.get("faq"):
+        ld["@graph"].append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer",
+                                "text": re.sub(r"<[^>]+>", "", r).replace("&nbsp;", " ")}}
+            for q, r in a["faq"]]})
+
+    return page_en(a["slug"], a["title"], a["desc"], body, a["fr"], extra_jsonld=ld,
+                   current="ct", og_type="article",
+                   og_image=("assets/illus/%s" % a["illus"]) if a.get("illus")
+                            else "assets/illus/courbes.webp")
+
+# ── Les articles anglais ────────────────────────────────────────────────
+ARTICLES_EN = [
+{
+ "slug": "city-cars-france-uk.html", "fr": "marche-citadines-france-uk.html",
+ "cat": "Market watch · Mobility", "date": "2026-08-26", "date_en": "26 August 2026",
+ "read": "9 min", "illus": "voiture.webp",
+ "title": "City cars: France and the UK diverge",
+ "h1": "City cars: France<br>and the UK don't look<br>at the same car.",
+ "desc": "Two entry-level markets, two opposite mechanics: the sticker price in France, the discount in the UK. What that changes for anyone launching a small car.",
+ "kw": "French city car market, UK supermini, B segment Europe, small car buyers",
+ "sources": [
+  ("French car market, H1 2026", "857,177 registrations in the first half, up 1.8% year on year", "https://www.cartegrise.com/blog/2026/07/marche-automobile-francais-s1-2026-le-grand-bilan-dun-semestre-de-bascule"),
+  ("SMMT via Carwow — used car sales Q1 2026", "superminis account for 648,229 transactions, 32.2% of the UK used market", "https://www.carwow.co.uk/news/10706/used-car-sales-q1-2026"),
+  ("GEM — average new car price in the UK", "average discounts approaching £6,000 in early 2026", "https://www.motoringassist.com/news/new-car-prices-whats-the-uk-average"),
+ ],
+ "chapo": "On paper it is the same segment: a small car, four or five seats, a tight budget. In practice the two markets clear in completely different ways — and a promise that lands in Lyon can fall flat in Manchester.",
+ "body": """
+<h2>Where does the French market stand?</h2>
+<p><strong>It is recovering slowly, and the entry level is pulling it.</strong> The first half of 2026 recorded 857,177 registrations, up 1.8% year on year — but still 26.5% below the first half of 2019. The market has not recovered&nbsp;; it has reorganised.</p>
+""" + stats([
+  ("857,177", "registrations in France, first half of 2026", "Carte Grise, July 2026"),
+  ("+6.5%", "growth for city cars in Q1 2026", "Trade press, 2026"),
+  ("−26.5%", "in volume against the first half of 2019", "Carte Grise, July 2026"),
+]) + """
+<p>Within that constrained market, the city car has taken back first place, carried by electric models entering the segment.</p>
+
+<h2>What really structures the French choice: the sticker price</h2>
+<p><strong>The €20,000 threshold has become the real dividing line of the market.</strong> Entry prices cluster just below a round number, and that is no accident.</p>
+<p>What we hear in interviews, year after year, is that this threshold does not work as a calculation but as a <em>moral boundary</em>. Above it, the purchase changes nature: it becomes a decision you have to justify — to a partner, and to yourself. Below it, it stays a reasonable purchase.</p>
+""" + fig_barres(
+  "Entry prices of the main French city cars, 2026",
+  "Entry prices cluster just under the €20,000 threshold, which structures the most dynamic category of the French market. Manufacturer entry prices, 2026.",
+  [("Dacia Sandero Stepway", 17900, "≈ €17,900"),
+   ("Citroën C3", 18900, "≈ €18,900"),
+   ("Peugeot 208", 19500, "≈ €19,500"),
+   ("Psychological threshold", 20000, "€20,000")]) + """
+
+<h2>And in the United Kingdom?</h2>
+<p><strong>The market is roughly twice the size, and it clears through discounting rather than through the sticker price.</strong> The SMMT expects 2.048 million units in 2026, up 1.4%. But the figure that changes everything sits elsewhere: average discounts on a new car approached £6,000 in early 2026, across all fuel types.</p>
+""" + stats([
+  ("2.048 M", "units expected in the UK in 2026", "SMMT forecast"),
+  ("≈ £6,000", "average discount on a new car", "GEM, early 2026"),
+  ("32.2%", "of the UK used market held by superminis", "SMMT via Carwow, Q1 2026"),
+]) + """
+<p>The direct consequence: in the UK, <strong>the advertised price is not the price</strong>. It is an opening position, and the buyer knows it. Work on the list price therefore produces far less effect than in France, where the sticker <em>is</em> the promise.</p>
+<p>A second, more structural gap: the British supermini lives largely on the used market. It accounts for 648,229 transactions in the first quarter of 2026 — 32.2% of used sales, by far the most bought category.</p>
+
+<h2>Two opposite mechanics, side by side</h2>
+""" + fig_matrice(
+  "France and the UK: two ways of making an entry-level car affordable",
+  "The same segment, two opposite mechanics. The consequence bears less on the product than on how you talk about it.",
+  "How affordability is built", "What the buyer looks at",
+  [(0, 0, "France — the sticker price", "The €20,000 threshold draws the line. The advertised price is the promise, and discounting stays marginal in the discourse."),
+   (1, 0, "United Kingdom — the discount", "The list price is an opening position. Around £6,000 of average discount: the buyer negotiates and knows it."),
+   (0, 1, "France — electrified new", "The entry level is renewing itself through electric city cars, which now enter the top of the rankings."),
+   (1, 1, "United Kingdom — recent used", "The supermini plays out first on the used market: 32.2% of Q1 2026 transactions.")]) + """
+
+<h2>What this changes for anyone launching a small car</h2>
+<ul>
+  <li><strong>The same price argument cannot be tested the same way.</strong> In France you test the sticker price, because that is what triggers or blocks. In the UK you test the <em>price expected after negotiation</em> — otherwise you are measuring a reaction to a number nobody believes.</li>
+  <li><strong>The comparison set is not the same.</strong> A French buyer compares new cars with each other. A British buyer regularly weighs a discounted new car against a well-equipped recent used one. A concept test that leaves used cars out of the competitive set misses the real trade-off.</li>
+  <li><strong>Electrification is not told the same story.</strong> In France it enters through the top of the city-car rankings and benefits from a narrative of renewal. In the UK, total cost of ownership and residual value come into the conversation far earlier.</li>
+</ul>
+
+<h2>What the figures do not say</h2>
+<p>This data describes a market&nbsp;; it explains no decision. A registration table tells you neither why someone gave up the model they preferred, nor what happens in the garage when a couple weighs two trim levels, nor what the neighbours make of a car parked outside the house.</p>
+<p>That is exactly the gap qualitative research exists to close — and on a multi-market launch, it is the most expensive gap to ignore, because it only becomes visible afterwards.</p>
+""",
+ "faq_titre": "Frequently asked questions",
+ "faq": [
+  ("Why does the €20,000 threshold matter so much in France?",
+   "Because it works as a boundary rather than a calculation. Below it, the purchase stays reasonable&nbsp;; above it, it becomes a decision you have to justify. That is what we hear in interviews, and it explains why entry prices cluster just underneath."),
+  ("Is the British market comparable to the French one?",
+   "In volume it is about twice the size — 2.048 million units expected in 2026. In mechanics it differs deeply: average discounts approach £6,000, which makes the advertised price an opening position rather than a promise."),
+  ("Should each market be studied separately?",
+   "A shared discussion guide, yes&nbsp;; shared fieldwork, no. The two markets share the category but not the comparison sets. A matched design — same guide, equivalent samples — is what lets you separate universal usage from local habit."),
+  ("Are these figures enough to arbitrate a launch?",
+   "No. They frame a market&nbsp;; they describe no individual decision. To arbitrate a design, a price or a trim level, you have to put real buyers in front of the object and its alternatives — which is what a product clinic is for."),
+ ],
+ "aide": {"titre": "Testing a small car across two markets",
+  "chapo": "We have run matched France–UK and France–Italy fieldwork for years, on the most contested segment of the European market.",
+  "points": ["Recruitment on the vehicle actually owned, market by market",
+             "Shared guide and equivalent samples, so the comparison holds",
+             "Static or dynamic product clinic, with real competitors present",
+             "Analysis that separates universal usage from local habit — the distinction your product decisions rest on"]},
+ "loin": [("Luxury has lost twenty million customers", "luxury-lost-customers.html"),
+          ("All insights", "index.html")],
+},
+
+{
+ "slug": "luxury-lost-customers.html", "fr": "marche-luxe-clients-perdus.html",
+ "cat": "Market watch · Fashion & Luxury", "date": "2026-08-26", "date_en": "26 August 2026",
+ "read": "8 min", "illus": "fuite.webp",
+ "title": "Luxury has lost twenty million customers",
+ "h1": "Luxury has lost<br>twenty million<br>customers.",
+ "desc": "The world's luxury customer base fell from 400 to 330 million in three years. What qualitative work says about those who left — and those who stayed.",
+ "kw": "luxury market 2026, luxury customer base, Gen Z luxury, personal luxury goods",
+ "sources": [
+  ("Bain & Company — global luxury market study", "€1,443bn in worldwide luxury spending in 2025; personal goods at €358bn, expected at €365–373bn in 2026", "https://www.journalduluxe.fr/fr/business/luxe-bain-stabilisation-marche-mondial-2026"),
+  ("Bain — the changing customer base", "close to 20 million consumers lost in 2025; 330 million active customers against 400 million three years earlier", "https://www.clubpatrimoine.com/contenus/marche-luxe-mondial"),
+  ("BCG", "Millennials and Generation Z account for around 75% of the luxury market", "https://www.bcg.com/press/19july2023-dici-2026-les-millennials-et-la-generation-z-representeront-75-du-marche-du-luxe"),
+ ],
+ "chapo": "Revenue is stabilising, and that is what everyone reports. The figure that matters sits elsewhere: the number of people who buy luxury has fallen by a quarter in three years. That is not a cyclical problem. It is a recruitment problem.",
+ "body": """
+<h2>What the 2026 figures say</h2>
+<p><strong>The market is stabilising in value and contracting in customers.</strong> Both movements are happening at once, which is what makes the reading tricky.</p>
+""" + stats([
+  ("330 M", "active luxury customers worldwide, against 400 M three years earlier", "Bain & Company, 2026"),
+  ("−20 M", "consumers lost in 2025 alone", "Bain & Company, 2026"),
+  ("+2 to 4%", "growth expected on personal luxury goods in 2026", "Bain & Company, 2026"),
+  ("≈ 75%", "of the market carried by Millennials and Generation Z", "BCG"),
+]) + """
+<p>Worldwide luxury spending reached €1,443bn in 2025 and is expected to hold between €1,440bn and €1,470bn in 2026. Personal goods — leather, fashion, jewellery, beauty — are expected between €365bn and €373bn, up 2 to 4% after a 2% decline in 2025.</p>
+<p>In other words: <strong>value holds because those who remain are spending more.</strong> That is stabilisation through concentration, not through recruitment.</p>
+
+<h2>Who left, exactly?</h2>
+<p><strong>The entry-level customer — the one who bought one piece a year, sometimes less.</strong> That is the most price-sensitive population, and it is also the one that fed the generational renewal of the customer base.</p>
+<p>Its disappearance creates a problem revenue does not show. A luxury house does not recruit its top-tier clients directly. It recruits them at the bottom, on a first purchase — often an accessory or a fragrance — and moves them up over ten or twenty years. When the entry step gets too high, you do not merely lose this year's revenue: <strong>you lose the 2040 cohort</strong>.</p>
+""" + fig_chaine(
+  "How a luxury house recruits a lifelong customer",
+  "A house does not recruit its top-tier clients directly: it moves them up. When the first step gets too high, what goes missing is the cohort of fifteen years from now, not this year's revenue.",
+  [("First purchase", "accessory, fragrance"), ("Repeat", "one purchase a year"),
+   ("Attachment", "the house is a choice"), ("Established", "several categories"),
+   ("Lifelong client", "a long relationship")],
+  pleines=1) + """
+
+<h2>Three things the figures do not say, and fieldwork does</h2>
+<h3>1. Giving up is not experienced as a budget trade-off</h3>
+<p>In interviews, people who stopped buying luxury rarely explain it by price alone. They describe a shift in meaning: the sense that the relationship between what is paid and what is received has changed, and that the object no longer «&nbsp;is worth&nbsp;» what it costs. That is a judgement about legitimacy, not about an amount — and it does not get corrected with a promotion.</p>
+
+<h3>2. The boutique has become a filter rather than a welcome</h3>
+<p>Entry-level customers regularly describe a specific discomfort: not knowing how to behave, being read as a non-buyer, not daring to ask a price. This discomfort appears in no satisfaction survey, for a mechanical reason — the people who feel it do not fill in questionnaires. They do not come back.</p>
+
+<h3>3. Generation Z does not mechanically replace the departing base</h3>
+<p>Millennials and Generation Z already account for around three quarters of the market, but their relationship to the category differs: second-hand is legitimate, new is not an imperative, and attachment to a house builds on other signals. Counting on them to rebuild the lost base means understanding what triggers a first purchase today — and it is not what triggered one fifteen years ago.</p>
+
+<h2>The European turning point</h2>
+<p>Europe is the weak point of the market, with international tourist spending down around 20% in February, while the Americas return as the main engine of personal luxury. For a European house, that shifts the question: <strong>the local customer base, long treated as a floor, becomes a conquest again.</strong></p>
+
+<h2>What to go and find on the ground</h2>
+<ul>
+  <li><strong>What tipped the leavers.</strong> Interviewing them is hard — they are no longer in the files — but they are the most informative population in the market.</li>
+  <li><strong>What the first step actually represents.</strong> The entry price is a number&nbsp;; what it means to someone hesitating is another matter.</li>
+  <li><strong>What happens in the first eight seconds in the boutique.</strong> That is where the return is decided, and it can only be observed by being there.</li>
+  <li><strong>What makes a house desirable to a twenty-five-year-old</strong> who grew up with second-hand and never treated new as the norm.</li>
+</ul>
+""",
+ "faq_titre": "Frequently asked questions",
+ "faq": [
+  ("Is the luxury market in crisis in 2026?",
+   "In value, no: personal luxury goods are expected to grow 2 to 4% after a 2% decline in 2025. In customers, yes: the active base fell from around 400 to 330 million in three years. Value holds because those who remain spend more."),
+  ("Why does losing entry-level customers matter so much?",
+   "Because a house recruits its lifelong clients from the bottom, on a first purchase, then moves them up over ten or twenty years. Losing the entry step is not losing this year's revenue — it is losing the cohort of fifteen years from now."),
+  ("How do you interview customers who have stopped buying?",
+   "That is the hard part: they are no longer in the active files. They have to be recruited on past purchase behaviour rather than from a client database, which makes sourcing more expensive — and they are the most informative population in the market."),
+  ("What method captures the boutique experience?",
+   "Accompanied observation, then a one-to-one interview away from the store. A satisfaction survey does not capture the entry-level customer's discomfort, for a simple reason: the people who feel it do not fill in questionnaires."),
+ ],
+ "aide": {"titre": "Understanding those who left",
+  "chapo": "We work on the codes of desire and on premium customer experience, including with populations that are hard to reach — the ones no longer in your files.",
+  "points": ["Recruitment on past purchase behaviour, not only from active client files",
+             "Accompanied observation in store, then one-to-one interviews away from it",
+             "Interviews on the first step: what the entry price means to someone hesitating",
+             "Findings worked through in a facilitated session with your retail and product teams"]},
+ "loin": [("City cars: France and the UK diverge", "city-cars-france-uk.html"),
+          ("All insights", "index.html")],
+},
+
+{
+ "slug": "diy-fear-of-getting-it-wrong.html", "fr": "marche-bricolage-peur-de-mal-faire.html",
+ "cat": "Market watch · Construction", "date": "2026-08-26", "date_en": "26 August 2026",
+ "read": "8 min", "illus": "stylos.webp",
+ "title": "Nine in ten French people DIY. Seven are afraid",
+ "h1": "Nine in ten French<br>people do DIY. Seven<br>are afraid of getting<br>it wrong.",
+ "desc": "The French DIY market is down for a third year, but the main brake is not purchasing power — it is the fear of botching the job. What that changes for retailers and brands.",
+ "kw": "French DIY market 2026, home improvement France, DIY consumer behaviour, builders merchants France",
+ "sources": [
+  ("Points de Vente — the DIY market", "€21.8bn in DIY superstore revenue in 2025, in a market above €39bn", "https://pointsdevente.fr/fil-info/2026-06-15-le-marche-du-bricolage-toujours-en-recul-malgre-le-rebond-de-limmobilier/"),
+  ("DIY in France 2026", "nine in ten French people do DIY, seven in ten are held back by the fear of getting it wrong", "https://www.montrealmirror.com/actu10359/bricolage-france-2026-marche-stabilisation-peur-de-mal-faire.html"),
+ ],
+ "chapo": "Three consecutive years of decline, and one explanation on repeat: purchasing power and the housing market. It is true, and it is not enough. The brake French people cite most is not financial — it is psychological, and it can be treated.",
+ "body": """
+<h2>Where does the DIY market stand?</h2>
+<p><strong>Down for a third consecutive year, with a more reassuring start to 2026.</strong> DIY superstore revenue stood at €21.8bn including tax in 2025, down 1.4% — after −1.4% in 2023 and −4.3% in 2024. The total market, all channels, still exceeds €39bn.</p>
+""" + stats([
+  ("€21.8bn", "in DIY superstore revenue in 2025", "Points de Vente, 2026"),
+  ("3 years", "of consecutive decline in the superstore channel", "−1.4% in 2023, −4.3% in 2024, −1.4% in 2025"),
+  ("9 in 10", "French people say they do DIY in 2026", "Sector study, 2026"),
+  ("7 in 10", "are held back by the fear of getting it wrong", "Sector study, 2026"),
+]) + """
+<p>Superstores hold 75% of the market, while e-commerce is moving towards 19% of sector revenue.</p>
+
+<h2>The shift the revenue figure hides</h2>
+<p><strong>French people have not stopped doing DIY: they have changed projects.</strong> Falling purchasing power and a slower housing market have moved demand from heavy renovation towards routine maintenance and economical repair.</p>
+<p>For a retailer this is not a slowdown — it is a change of trade. You do not sell a bathroom project the way you sell a joint that needs redoing. Basket size falls, frequency can rise, and the advice being asked for is not remotely the same.</p>
+""" + fig_matrice(
+  "Two DIY markets inside a single revenue figure",
+  "The overall decline masks a shift: fewer transformation projects, more maintenance and repair. The two are not sold, advised or stocked the same way.",
+  "Type of project", "What the customer expects",
+  [(0, 0, "Heavy renovation", "High basket, long decision, several visits. The customer expects project support."),
+   (1, 0, "Maintenance and repair", "Low basket, immediate decision, one visit. The customer expects an answer, not a project."),
+   (0, 1, "What is declining", "Transformation projects, held back by purchasing power and the housing market."),
+   (1, 1, "What is holding", "Small jobs and repairs — but with a far stronger demand for reassurance.")]) + """
+
+<h2>The real brake: the fear of botching it</h2>
+<p><strong>Nine in ten French people do DIY, but seven in ten are held back by the fear of getting it wrong.</strong> That is by far the most actionable figure in the sector, and the least exploited.</p>
+<p>The brake is not financial, and that is what makes it interesting: it is treated through advice, teaching, guarantee of outcome and product design — not through promotion. A 20% discount does not reduce the fear of drilling in the wrong place.</p>
+<p>In interviews, this fear breaks down into three distinct anxieties, which call for different answers:</p>
+<ul>
+  <li><strong>Fear of causing damage</strong> — to the home, to a surface, to something that cannot be replaced. It blocks before purchase, in store as much as online.</li>
+  <li><strong>Fear of buying the wrong thing</strong> — wrong size, wrong compatibility, wrong quantity. It produces abandonment at the shelf, and a large share of returns.</li>
+  <li><strong>Fear of being judged</strong> — having to ask, showing that you do not know. It is strong among people who rarely do DIY, and it explains part of the shift to e-commerce, where you can search without being seen.</li>
+</ul>
+""" + fig_barres(
+  "What holds people back, by frequency of mention",
+  "The declared hierarchy puts the fear of getting it wrong ahead of budget. It is a brake treated by advice and design, not by promotion. Proportions drawn from 2026 sector studies.",
+  [("Fear of getting it wrong", 70, "≈ 7 in 10"),
+   ("Budget constraint", 55, "high"),
+   ("Lack of time", 40, "medium"),
+   ("Lack of tools", 25, "lower")]) + """
+
+<h2>What it means for a retailer or a brand</h2>
+<ul>
+  <li><strong>Advice becomes the product.</strong> In a market where the dominant brake is fear of failure, value shifts towards whatever reassures: demonstration, situated tutorials, guarantees, take-back if it goes wrong.</li>
+  <li><strong>The aisle has to answer before being asked.</strong> Fear of judgement makes the customer silent. If understanding requires asking, part of your traffic will leave without buying — and without ever telling you why.</li>
+  <li><strong>E-commerce is not only a price channel.</strong> It is also a channel of discretion: you can browse at length, compare and learn without exposing yourself. That changes what belongs there.</li>
+  <li><strong>Trade and consumer customers no longer meet in the same place.</strong> A tradesperson wants a reference&nbsp;; a consumer wants an answer. Serving both with the same advice model disappoints one of the two.</li>
+</ul>
+
+<h2>Why quantitative data is not enough here</h2>
+<p>«&nbsp;Seven in ten fear getting it wrong&nbsp;» is an excellent figure: it raises the alarm. It does not say what exactly people fear, at which point in the journey the fear blocks, or what lifts it. Those three answers determine everything you can do about it — staff training, aisle content, instructions, guarantee.</p>
+<p>It is the kind of gap that closes with a dozen interviews at home, with people who have one project underway and one abandoned.</p>
+""",
+ "faq_titre": "Frequently asked questions",
+ "faq": [
+  ("Is the French DIY market growing in 2026?",
+   "No, it is emerging from three consecutive years of decline in the superstore channel: −1.4% in 2023, −4.3% in 2024 and −1.4% in 2025, for €21.8bn including tax. The trade describes 2026 as a gradual, structured recovery rather than a rebound."),
+  ("What is the main brake on DIY in France?",
+   "The fear of getting it wrong, cited by around seven in ten people, ahead of budget. Being psychological, it can be treated through advice, teaching and product design rather than through promotion."),
+  ("Why is average basket size falling?",
+   "Because demand has moved from heavy renovation towards routine maintenance and economical repair. Basket size falls, frequency can rise, and the kind of advice expected changes completely."),
+  ("How do you study what blocks the purchase?",
+   "At home, not in a facility. An interview in front of the project underway and the project abandoned produces material that neither a questionnaire nor a group gives — because fear of getting it wrong is precisely what people will not admit in front of others."),
+ ],
+ "aide": {"titre": "Going to see what blocks, where it blocks",
+  "chapo": "Housing, builders merchants, DIY and decoration are among our long-standing sectors, with consumers and trade customers alike.",
+  "points": ["Interviews at home, in front of the project underway and the one abandoned",
+             "Fieldwork in the aisle: what happens when nobody asks for anything",
+             "Separate designs for consumers and tradespeople — they are not looking for the same thing",
+             "Recruitment from your own customer file when you have one: the most effective cost lever there is"]},
+ "loin": [("City cars: France and the UK diverge", "city-cars-france-uk.html"),
+          ("Luxury has lost twenty million customers", "luxury-lost-customers.html")],
+},
+]
+
+
+def render_index_en():
+    cartes = "".join(
+        '<a class="ct-card" href="%s">'
+        '<div class="ct-card-top"><span class="ct-tag">%s</span><span class="ct-read">%s</span></div>'
+        '<h3>%s</h3><p>%s</p>'
+        '<div class="ct-card-foot"><time datetime="%s">%s</time>'
+        '<span class="ct-go">Read &rarr;</span></div></a>'
+        % (a["slug"], a["cat"], a["read"],
+           re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ")).strip(),
+           a["desc"], a["date"], a["date_en"])
+        for a in ARTICLES_EN)
+    body = (
+        '<section class="hero-compact">\n  <div class="container hero-compact-inner">\n'
+        '    <div class="eyebrow" style="margin-bottom:14px;">&mdash; Insights</div>\n'
+        '    <h1 class="display">The state of<br>our markets.</h1>\n'
+        '    <p class="lead">Dated, attributed figures on the sectors we work in — and, beneath '
+        'the figures, what fieldwork says and no market data shows.</p>\n'
+        '    <p class="ct-frnote">Our full editorial archive — method articles, anonymised case '
+        'studies, white paper and FAQ — is published in French. '
+        '<a href="../contenus.html" style="border-bottom:1px solid currentColor">See it here</a>.</p>\n'
+        '  </div>\n</section>\n\n'
+        '<section class="section-pad">\n  <div class="container">\n'
+        '    <div class="ct-grid">%s</div>\n  </div>\n</section>\n\n'
+        '<section class="cta-block dark">\n  <div class="container">\n'
+        '    <h2 class="display">A question<br>to illuminate?</h2>\n'
+        '    <p class="lead">Build a study design in two minutes, or write us your question in three lines.</p>\n'
+        '    <div class="ctas">\n'
+        '      <a href="../decision-rapide.html#configurateur" class="btn btn-primary-light">'
+        '<span>Build a study design</span>'
+        '<svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none">'
+        '<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>\n'
+        '      <a href="../contact.html" class="btn btn-outline-light">Write to us</a>\n'
+        '    </div>\n  </div>\n</section>' % cartes)
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage",
+          "name": "Insights — ACMÉ Consultants", "inLanguage": "en",
+          "description": "Market watch on the sectors ACMÉ works in, with dated and attributed figures."}
+    return page_en("index.html",
+                   "Insights — market watch | ACMÉ Consultants",
+                   "Dated, attributed figures on mobility, luxury and DIY in France — and what fieldwork says beneath the figures.",
+                   body, "contenus.html", extra_jsonld=ld, current="ct")
 
 
 # Le point d'entrée reste EN DERNIER : tout ce qui est déclaré après ne serait
