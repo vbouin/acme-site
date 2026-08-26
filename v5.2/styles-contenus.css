@@ -568,3 +568,75 @@
     -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 40%);
   }
 }
+
+/* ---------------------------------------------------------
+   12. Signature
+   Une prise de position vaut par celui qui la tient. Les initiales en
+   pastille reprennent la présentation de l'équipe sur « qui sommes-nous ».
+   --------------------------------------------------------- */
+.art-by {
+  display: flex; align-items: center; gap: 13px;
+  margin-top: 20px; padding-top: 20px;
+  border-top: 1px solid var(--grey-100);
+}
+.art-by-i {
+  flex: none;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border: 1px solid var(--grey-300);
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .06em;
+  color: var(--grey-700);
+}
+.art-by-t { font-size: 14px; line-height: 1.35; color: var(--grey-500); }
+.art-by-t a { color: var(--ink); border-bottom: 1px solid var(--grey-300); }
+.art-by-t a:hover { border-bottom-color: var(--ink); }
+.art-by-r {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--grey-500); margin-top: 3px;
+}
+
+/* ---------------------------------------------------------
+   13. Hero de la page Contenus
+   Texte à gauche, plan à fond perdu à droite. Pas de scrub : c'est une
+   page d'entrée, elle doit se lire immédiatement. Le bord intérieur du
+   plan est estompé pour qu'il se fonde dans la page plutôt que de
+   ressembler à une vignette rapportée.
+   --------------------------------------------------------- */
+.ct-hero {
+  position: relative;
+  padding: clamp(110px, 13vw, 180px) 0 clamp(60px, 7vw, 96px);
+  overflow: hidden;
+  background: var(--white);
+}
+.ct-hero-in { position: relative; z-index: 2; }
+.ct-hero-txt { max-width: min(52ch, 54%); }
+.ct-hero-media {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(46vw, 720px);
+  z-index: 1;
+  pointer-events: none;
+}
+.ct-hero-media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Le plan est clair et la page est blanche : seul le bord qui rencontre
+     la typographie a besoin de fondre. */
+  mask-image: linear-gradient(90deg, transparent 0%, #000 42%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 42%);
+}
+@media (max-width: 1000px) {
+  .ct-hero { padding-top: clamp(96px, 12vw, 140px); }
+  .ct-hero-txt { max-width: none; }
+  .ct-hero-media {
+    position: relative; width: auto; height: 42vw; max-height: 340px;
+    margin-top: 36px;
+  }
+  .ct-hero-media video {
+    mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 100%);
+  }
+}

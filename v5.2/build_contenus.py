@@ -239,7 +239,7 @@ def page(slug, title, desc, body, extra_jsonld=None, current="", css_extra="",
    elles s'arrêtent sur leur poster. `autoplay` ne se désactive pas en CSS,
    d'où ces trois lignes. */
 (function () {{
-  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video');
+  var vids = document.querySelectorAll('.ct-feature-media video, .wb-media video, .ct-hero-media video');
   if (!vids.length) return;
 
   // Mouvement réduit : on s'arrête sur le poster. `autoplay` ne se désactive
@@ -398,6 +398,127 @@ def stats(items):
 # ═══════════════════════════════════════════════════════════════════════
 
 # ═══════════════════════════════════════════════════════════════════════
+#  COCON SÉMANTIQUE
+#  Un arbre strict, et des règles de liage tenues par le code plutôt que
+#  par la discipline : une page cible en tête de silo, des pages
+#  intermédiaires, des feuilles. Chaque page lie SON parent et SES frères,
+#  jamais une page d'un autre silo.
+#
+#  C'est ce qui concentre l'autorité thématique sur la page cible, au lieu
+#  de la diluer sur vingt-huit pages qui se pointent toutes les unes les
+#  autres. Et c'est la même mécanique qui aide un moteur génératif à
+#  comprendre de quoi le site fait autorité.
+#
+#  Les liens en pleine prose restent libres : ils sont contextuels et un
+#  lecteur les suit. Ce qui est tenu, c'est le bloc structurel de fin.
+# ═══════════════════════════════════════════════════════════════════════
+
+COCONS = {
+ "quali": {
+   "titre": "L'étude qualitative",
+   "cible": "etude-qualitative.html",
+   "branches": {
+     "Choisir un dispositif": ["article-entretiens-ou-groupes.html",
+                               "article-car-clinic.html",
+                               "article-focus-group-lyon.html"],
+     "Cadrer et budgéter":    ["article-brief-etude-qualitative.html",
+                               "article-prix-etude-qualitative.html",
+                               "article-decider-vite.html"],
+     "Tenir la rigueur":      ["article-declare-observe.html",
+                               "article-biais-etude.html",
+                               "article-packaging-avant-lecture.html"],
+   }},
+ "ia": {
+   "titre": "L'IA et vos données",
+   "cible": "article-ia-etudes-qualitatives.html",
+   "branches": {
+     "Ce qu'on n'automatise pas": ["article-repondants-synthetiques.html",
+                                   "article-verbatims-donnees-personnelles.html",
+                                   "livre-blanc.html"],
+   }},
+ "mobilite": {
+   "titre": "Mobilité & Automobile", "cible": "secteur-mobilite.html",
+   "branches": {"Le secteur": ["parcours-mobilite.html",
+                               "marche-citadines-france-uk.html",
+                               "cas-clinique-electrique.html",
+                               "cas-utilitaire-artisans.html"]}},
+ "fmcg": {
+   "titre": "Retail & FMCG", "cible": "secteur-retail-fmcg.html",
+   "branches": {"Le secteur": ["parcours-retail-fmcg.html"]}},
+ "sante": {
+   "titre": "Santé & Cosmétiques", "cible": "secteur-sante-cosmetiques.html",
+   "branches": {"Le secteur": ["parcours-sante-cosmetiques.html"]}},
+ "batiment": {
+   "titre": "Bâtiment", "cible": "secteur-batiment.html",
+   "branches": {"Le secteur": ["parcours-batiment.html",
+                               "marche-bricolage-peur-de-mal-faire.html",
+                               "cas-fichier-client-materiaux.html"]}},
+ "luxe": {
+   "titre": "Mode & Luxe", "cible": "secteur-mode-luxe.html",
+   "branches": {"Le secteur": ["parcours-mode-luxe.html",
+                               "marche-luxe-clients-perdus.html"]}},
+ "territoires": {
+   "titre": "Territoires & RSE", "cible": "secteur-territoires.html",
+   "branches": {"Le secteur": ["parcours-territoires.html"]}},
+}
+
+# Index inverse : slug → (clé du cocon, nom de branche)
+_POS = {}
+for _k, _c in COCONS.items():
+    _POS[_c["cible"]] = (_k, None)
+    for _b, _pages in _c["branches"].items():
+        for _p in _pages:
+            _POS[_p] = (_k, _b)
+
+# Le titre lisible d'une page, pour construire les libellés de liens
+TITRES_COURTS = {}
+
+
+def cocon_de(slug):
+    return _POS.get(slug)
+
+
+def liens_cocon(slug):
+    """Le bloc structurel : le parent, puis les frères de la même branche.
+    Rien d'un autre silo — c'est toute la règle."""
+    pos = _POS.get(slug)
+    if not pos:
+        return []
+    cle, branche = pos
+    c = COCONS[cle]
+    liens = []
+    if branche is None:
+        # Une page cible lie ses enfants directs, branche par branche.
+        for pages in c["branches"].values():
+            liens += [(TITRES_COURTS.get(p, p), p) for p in pages]
+    else:
+        liens.append((TITRES_COURTS.get(c["cible"], c["cible"]), c["cible"]))
+        liens += [(TITRES_COURTS.get(p, p), p) for p in c["branches"][branche] if p != slug]
+    return liens
+
+# ═══════════════════════════════════════════════════════════════════════
+#  SIGNATURES
+#  Les bylines nommées sont l'un des rares usages d'Ipsos réellement
+#  transposables : une prise de position vaut par celui qui la tient.
+#  L'attribution suit la compétence réelle, telle que les bios de
+#  qui-sommes-nous.html la décrivent.
+#
+#  ⚠️ Chaque consultant doit relire et valider les articles qui portent sa
+#  signature avant publication. Une signature engage une personne.
+# ═══════════════════════════════════════════════════════════════════════
+
+AUTEURS = {
+ "VJ": {"nom": "Virginie Jost", "role": "Directrice Associée",
+        "role_en": "Associate Director", "note": "Quarante ans d'études qualitatives, spécialisée sur la mobilité et les enjeux industriels du secteur automobile."},
+ "CC": {"nom": "Céline Crété", "role": "Senior Qualitative Researcher",
+        "role_en": "Senior Qualitative Researcher", "note": "Double formation en philosophie et en journalisme. Vingt ans à saisir les attentes profondes au-delà des discours convenus."},
+ "TN": {"nom": "Thuy Nguyen", "role": "Project Director",
+        "role_en": "Project Director", "note": "Quinze ans de terrains d'études multi-pays. Rigueur d'organisation et accompagnement sur mesure."},
+ "VB": {"nom": "Victor Bouin", "role": "Président — Directeur Général",
+        "role_en": "Chairman & CEO", "note": "Toujours sur le terrain auprès des utilisateurs. Enseigne le design thinking et l'expérience client à l'emlyon business school."},
+}
+
+# ═══════════════════════════════════════════════════════════════════════
 #  ARTICLES
 #  Angles choisis d'après l'étude concurrentielle : local Lyon (priorité 1),
 #  quali + IA en français (priorité 3), et la posture « après N missions,
@@ -410,6 +531,7 @@ def stats(items):
 ARTICLES = [
 {
  "slug": "article-focus-group-lyon.html",
+ "auteur": "CC",
  "illus": "groupes.webp",
  "faq_titre": 'Questions fréquentes sur les focus groups',
  "faq": [
@@ -441,7 +563,7 @@ ARTICLES = [
  "date": "2026-08-25",
  "read": "7 min",
  "title": "Organiser un focus group à Lyon : le guide d'un praticien",
- "h1": "Organiser un focus group à&nbsp;Lyon :<br>ce qu'on a appris en quarante ans.",
+ "h1": 'Huit personnes, deux heures,<br>une salle. Et tout ce<br>qui peut mal tourner.',
  "desc": "Salle, recrutement, taille de groupe, animation : le guide pratique d'un cabinet d'études qualitatives lyonnais, fondé sur les erreurs qu'on a payées.",
  "kw": "focus group Lyon, institut d'études Lyon, étude qualitative Lyon, salle focus group",
  "chapo": "Un focus group raté ne se voit pas le jour même. Il se voit trois semaines plus tard, quand l'analyse ne dit rien qu'on ne savait déjà. Voici où ça se joue — et ce qui, à Lyon, change la donne.",
@@ -488,6 +610,7 @@ ARTICLES = [
 },
 {
  "slug": "article-ia-etudes-qualitatives.html",
+ "auteur": "VB",
  "illus": "ia.webp",
  "faq_titre": "Questions fréquentes sur l'IA dans les études",
  "faq": [
@@ -520,7 +643,7 @@ ARTICLES = [
  "date": "2026-08-25",
  "read": "9 min",
  "title": "IA et études qualitatives : ce qu'elle rate encore",
- "h1": "IA et études qualitatives :<br>ce qu'elle fait bien,<br>ce qu'elle rate encore.",
+ "h1": "La machine transcrit<br>en deux minutes. Elle<br>n'entend toujours pas<br>l'hésitation.",
  "desc": "Transcription, codage, entretien modéré par IA : ce que l'automatisation apporte vraiment à une étude qualitative, et où elle coûte plus qu'elle ne rapporte.",
  "kw": "IA études qualitatives, IA générative études qualitatives, analyse verbatim IA, répondants synthétiques",
  "chapo": "« Huit fois plus vite, quatre-vingts pour cent moins cher. » La promesse circule, et elle n'est pas entièrement fausse. Elle est vraie sur certains maillons de la chaîne, et franchement dangereuse sur d'autres. Voici lesquels.",
@@ -585,6 +708,7 @@ ARTICLES = [
 ARTICLES += [
 {
  "slug": "article-prix-etude-qualitative.html",
+ "auteur": "TN",
  "illus": "donnees.webp",
  "faq_titre": "Questions fréquentes sur le budget d'une étude",
  "faq": [
@@ -617,7 +741,7 @@ ARTICLES += [
  "date": "2026-08-25",
  "read": "8 min",
  "title": "Combien coûte une étude qualitative ? Les repères 2026",
- "h1": "Combien coûte<br>une étude qualitative ?",
+ "h1": "Le premier poste d'une<br>étude, c'est de trouver<br>les gens.",
  "desc": "Recrutement, terrain, analyse, restitution : ce qui fait réellement le prix d'une étude qualitative, avec les repères publics du marché français en 2026.",
  "kw": "prix étude qualitative, tarif focus group, budget étude qualitative, coût entretien qualitatif",
  "chapo": "Presque aucun institut n'affiche ses prix. Le résultat, c'est un acheteur qui ne sait pas s'il regarde un devis à 8 000 ou à 80 000 euros, et qui renonce à demander. Voici la structure de coût, poste par poste, et les repères publics qui existent.",
@@ -682,6 +806,7 @@ ARTICLES += [
 },
 {
  "slug": "article-entretiens-ou-groupes.html",
+ "auteur": "CC",
  "illus": "bulles.webp",
  "faq_titre": 'Questions fréquentes',
  "faq": [
@@ -711,7 +836,7 @@ ARTICLES += [
  "date": "2026-08-25",
  "read": "6 min",
  "title": "Entretiens individuels ou focus groups : comment choisir",
- "h1": "Entretiens individuels<br>ou focus groups ?",
+ "h1": "Le groupe révèle<br>une norme. L'entretien<br>révèle un écart.",
  "desc": "Le groupe révèle les normes, l'entretien révèle les écarts. La grille de décision pour choisir selon votre question, votre cible et votre budget.",
  "kw": "entretien individuel ou focus group, choisir méthode qualitative, focus group avantages inconvénients",
  "chapo": "La question revient à chaque cadrage, et la mauvaise réponse ne se paie pas tout de suite. Elle se paie à l'analyse, quand le corpus ne répond pas à la question posée.",
@@ -773,6 +898,7 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "article-decider-vite.html",
+ "auteur": "TN",
  "illus": "courbes.webp",
  "faq_titre": 'Questions fréquentes sur les dispositifs courts',
  "faq": [
@@ -803,7 +929,7 @@ ARTICLES += [
  "date": "2026-08-25",
  "read": "8 min",
  "title": "Décider vite sans décider mal : le dispositif court",
- "h1": "Décider vite<br>sans décider mal.",
+ "h1": "Six semaines, ce n'est pas<br>six mois compressés.",
  "desc": "« 8× plus vite, 80 % moins cher » : ce que ces promesses compressent, ce qu'elles sacrifient, et comment cadrer un dispositif court qui tienne.",
  "kw": "étude qualitative rapide, quick study, dispositif court étude, décision rapide étude marché",
  "chapo": "Le marché des études s'est mis à vendre de la vitesse. La question n'est pas de savoir si c'est possible — c'est de savoir ce qu'on enlève pour y arriver, et si ce qu'on enlève est ce dont on avait besoin.",
@@ -877,6 +1003,7 @@ ARTICLES += [
 CAS = [
 {
  "slug": "cas-utilitaire-artisans.html",
+ "auteur": "VJ",
  "illus": "terrain.webp",
  "sources": [
   ('Marché automobile français S1 2026', "le contexte de marché dans lequel s'inscrit ce type d'arbitrage produit", 'https://www.cartegrise.com/blog/2026/07/marche-automobile-francais-s1-2026-le-grand-bilan-dun-semestre-de-bascule'),
@@ -941,6 +1068,7 @@ CAS = [
 },
 {
  "slug": "cas-clinique-electrique.html",
+ "auteur": "VJ",
  "illus": "objet.webp",
  "sources": [
   ("Atlas Automobiles — marché français, record pour l'électrique", "la dynamique de l'électrique sur le marché français en 2026", 'https://atlas-automobiles.com/articles/aamarche-automobile-france-mai-2026-3-7-d-immatriculations-et-record-historique-pour-l-electrique'),
@@ -1005,6 +1133,7 @@ CAS = [
 },
 {
  "slug": "cas-fichier-client-materiaux.html",
+ "auteur": "TN",
  "illus": "ecriture-band.webp",
  "sources": [
   ('Points de Vente — marché du bricolage', "21,8 Mds € de chiffre d'affaires GSB en 2025, troisième année de recul", 'https://pointsdevente.fr/fil-info/2026-06-15-le-marche-du-bricolage-toujours-en-recul-malgre-le-rebond-de-limmobilier/'),
@@ -1299,7 +1428,10 @@ def article_jsonld(a, kind="Article"):
         "dateModified": a["date"],
         "inLanguage": "fr-FR",
         "keywords": a["kw"],
-        "author": {"@type": "Organization", "name": ORG["name"]},
+        "author": ({"@type": "Person", "name": AUTEURS[a["auteur"]]["nom"],
+                    "jobTitle": AUTEURS[a["auteur"]]["role"],
+                    "worksFor": {"@type": "Organization", "name": ORG["name"]}}
+                   if a.get("auteur") else {"@type": "Organization", "name": ORG["name"]}),
         "publisher": {"@type": "Organization", "name": ORG["name"]},
         "mainEntityOfPage": {"@type": "WebPage", "@id": SITE + "/" + a["slug"]},
     }
@@ -1316,6 +1448,19 @@ def faq_jsonld():
             for _, qs in FAQ for q, r in qs
         ],
     }
+
+
+def fil_ariane(a):
+    """Le fil d'Ariane dit la place de la page dans l'arbre. C'est le même
+    signal que le cocon, rendu explicite pour les moteurs."""
+    titre = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ")).strip()
+    pos = cocon_de(a["slug"])
+    fil = [("Accueil", ""), ("Contenus", "contenus.html")]
+    if pos:
+        c = COCONS[pos[0]]
+        fil.append((c["titre"], c["cible"]))
+    fil.append((titre, a["slug"]))
+    return fil
 
 
 def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus")):
@@ -1382,13 +1527,29 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
 
     # Aller plus loin : le maillage interne fait circuler l'autorité entre les
     # pages et retient le lecteur sur le site.
+    # Le bloc structurel suit le cocon, pas une liste écrite à la main :
+    # une règle tenue par le code ne dérive pas au fil des ajouts.
+    liste_loin = liens_cocon(a["slug"]) or a.get("loin") or []
     loin = ""
-    if a.get("loin"):
+    if liste_loin:
         liens = "".join(f'<a href="{u}"><span>{t}</span>'
                         f'<svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none">'
                         f'<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>'
-                        for t, u in a["loin"])
-        loin = f'<section class="art-loin"><h2>Aller plus loin</h2><div class="art-loin-g">{liens}</div></section>'
+                        for t, u in liste_loin)
+        pos = cocon_de(a["slug"])
+        titre_loin = ("Dans « %s »" % COCONS[pos[0]]["titre"]) if pos else "Aller plus loin"
+        loin = f'<section class="art-loin"><h2>{titre_loin}</h2><div class="art-loin-g">{liens}</div></section>'
+
+    # Signature. Une prise de position vaut par celui qui la tient — et une
+    # page signée est aussi ce qu'un moteur génératif reprend plus volontiers
+    # qu'une page anonyme.
+    byline = ""
+    if a.get("auteur"):
+        au = AUTEURS[a["auteur"]]
+        byline = (
+            f'<div class="art-by"><span class="art-by-i" aria-hidden="true">{a["auteur"]}</span>'
+            f'<span class="art-by-t">Par <a href="qui-sommes-nous.html"><strong>{au["nom"]}</strong></a>'
+            f'<span class="art-by-r">{au["role"]}</span></span></div>')
 
     # Bandeau d'illustration. Décoratif : alt vide plutôt qu'une description
     # redondante avec le titre — un lecteur d'écran n'a rien à y gagner.
@@ -1404,6 +1565,7 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
       <h1 class="display">{a['h1']}</h1>
       <p class="art-chapo">{a['chapo']}</p>
       <div class="art-meta"><time datetime="{a['date']}">{date_fr(a['date'])}</time><span>·</span><span>{a['read']} de lecture</span></div>
+      {byline}
       {meta}
       {anon}
     </div>
@@ -1440,8 +1602,7 @@ def render_article(a, kind="Article", back=("contenus.html", "Tous les contenus"
     return page(a["slug"], a["title"], a["desc"], body,
                 extra_jsonld=ld, current="ct", og_type="article",
                 og_image=f'assets/illus/{a["illus"]}' if a.get("illus") else "assets/v4/decision.jpg",
-                breadcrumbs=[("Accueil", ""), ("Contenus", "contenus.html"),
-                             (re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ").strip(), a["slug"])])
+                breadcrumbs=fil_ariane(a))
 
 
 def render_faq():
@@ -1542,13 +1703,22 @@ def render_hub():
     arts = "".join(card(a, "article") for a in autres)
     obss = "".join(card(a, "obs") for a in obs)
     cass = "".join(card(c, "cas") for c in CAS)
-    body = f"""<section class="hero-compact">
-  <div class="container hero-compact-inner">
-    <div class="eyebrow" style="margin-bottom:14px;" data-i18n="content.eyebrow">— Contenus</div>
-    <h1 class="display" data-i18n="content.h1">Ce qu'on a appris,<br>et qu'on peut écrire.</h1>
-    <p class="lead" data-i18n="content.lead">Des articles de praticiens plutôt que des définitions, des études de cas anonymisées plutôt que des logos, et les réponses aux questions qu'on nous pose vraiment.</p>
-    <p class="ct-frnote" data-i18n="content.frnote"></p>
-    <p class="ct-frnote"><a href="en/index.html" style="border-bottom:1px solid currentColor" data-i18n="content.enlink">Market watch, in English →</a></p>
+    # Hero simple : le texte à gauche, le plan à fond perdu à droite. Pas de
+    # machinerie de scroll — c'est une page d'entrée, elle doit se lire tout
+    # de suite. La vidéo se remplace en changeant le seul nom de fichier.
+    body = f"""<section class="ct-hero">
+  <div class="container ct-hero-in">
+    <div class="ct-hero-txt">
+      <div class="eyebrow" style="margin-bottom:14px;" data-i18n="content.eyebrow">— Contenus</div>
+      <h1 class="display" data-i18n="content.h1">Ce qu'on a appris,<br>et qu'on peut écrire.</h1>
+      <p class="lead" data-i18n="content.lead">Des articles de praticiens plutôt que des définitions, des études de cas anonymisées plutôt que des logos, et les réponses aux questions qu'on nous pose vraiment.</p>
+      <p class="ct-frnote" data-i18n="content.frnote"></p>
+      <p class="ct-frnote"><a href="en/index.html" style="border-bottom:1px solid currentColor" data-i18n="content.enlink">Market watch, in English →</a></p>
+    </div>
+  </div>
+  <div class="ct-hero-media" aria-hidden="true">
+    <video src="assets/illus/hero-contenus.mp4" poster="assets/illus/hero-contenus.webp"
+           muted loop playsinline autoplay preload="metadata" disablepictureinpicture tabindex="-1"></video>
   </div>
 </section>
 
@@ -1637,7 +1807,31 @@ def render_hub():
                 breadcrumbs=[("Accueil", ""), ("Contenus", "contenus.html")])
 
 
+def _remplir_titres_courts():
+    """Le libellé d'un lien de cocon : ni le slug, ni le h1 éditorial (trop
+    oblique hors contexte), mais un titre court et clair."""
+    for a in ARTICLES + CAS:
+        t = a.get("court") or a["title"]
+        # « Titre : sous-titre » → on garde la partie qui porte le sujet
+        if " : " in t and len(t) > 40:
+            g, d = t.split(" : ", 1)
+            t = g if len(g) >= 18 else t
+        TITRES_COURTS[a["slug"]] = t
+    TITRES_COURTS.update({
+        "livre-blanc.html": "Le livre blanc : la parole client jusqu'à la décision",
+        "secteur-mobilite.html": "Notre secteur Mobilité & Automobile",
+        "secteur-retail-fmcg.html": "Notre secteur Retail et FMCG",
+        "secteur-sante-cosmetiques.html": "Notre secteur Santé & Cosmétiques",
+        "secteur-batiment.html": "Notre secteur Bâtiment",
+        "secteur-mode-luxe.html": "Notre secteur Mode & Luxe",
+        "secteur-territoires.html": "Notre secteur Territoires, Tourisme & RSE",
+        "etude-qualitative.html": "L'étude qualitative, du cadrage à la décision",
+        "article-ia-etudes-qualitatives.html": "IA et études qualitatives : ce qu'elle rate encore",
+    })
+
+
 def main():
+    _remplir_titres_courts()
     out = []
     # Version anglaise, sous en/, sur des URL distinctes.
     en = ROOT / "en"
@@ -1678,6 +1872,7 @@ def main():
 ARTICLES += [
 {
  "slug": "article-repondants-synthetiques.html",
+ "auteur": "VB",
  "illus": "conversation.webp",
  "faq_titre": 'Questions fréquentes sur les répondants synthétiques',
  "faq": [
@@ -1703,7 +1898,7 @@ ARTICLES += [
  "date": "2026-08-25",
  "read": "7 min",
  "title": "Peut-on remplacer les répondants par de l'IA ?",
- "h1": "Peut-on remplacer<br>les répondants<br>par de l'IA ?",
+ "h1": "Un modèle donne la réponse<br>la plus probable. On cherche<br>l'improbable.",
  "desc": "Répondants synthétiques, personas génératifs, panels simulés : ce qu'ils savent faire, ce qu'ils ne feront pas, et le seul usage que nous leur reconnaissons.",
  "kw": "répondants synthétiques, personas IA, panel synthétique, IA remplacer participants étude",
  "sources": [
@@ -1759,6 +1954,7 @@ ARTICLES += [
 },
 {
  "slug": "article-car-clinic.html",
+ "auteur": "VJ",
  "illus": "demontage.webp",
  "faq_titre": 'Questions fréquentes sur les cliniques produit',
  "faq": [
@@ -1784,7 +1980,7 @@ ARTICLES += [
  "date": "2026-08-25",
  "read": "8 min",
  "title": "Qu'est-ce qu'une car clinic et à quoi ça sert ?",
- "h1": "Qu'est-ce qu'une<br>car clinic ?",
+ "h1": "Trente secondes autour<br>d'une voiture valent<br>une heure de questions.",
  "desc": "Clinique statique ou dynamique, recrutement sur véhicule possédé, protocole de passage : comment se conduit un test produit automobile.",
  "kw": "car clinic, clinique produit automobile, test véhicule consommateurs, clinique statique dynamique",
  "sources": [
@@ -1846,6 +2042,7 @@ ARTICLES += [
 },
 {
  "slug": "article-brief-etude-qualitative.html",
+ "auteur": "TN",
  "illus": "brief.webp",
  "faq_titre": 'Questions fréquentes sur le brief',
  "faq": [
@@ -1871,7 +2068,7 @@ ARTICLES += [
  "date": "2026-08-25",
  "read": "7 min",
  "title": "Comment rédiger un brief d'étude qualitative",
- "h1": "Comment rédiger<br>un brief d'étude<br>qualitative.",
+ "h1": 'Un brief flou ne donne pas<br>des devis flous. Il les<br>rend incomparables.',
  "desc": "Les huit rubriques d'un brief qui permet de comparer des devis, les erreurs qui font dériver le budget, et les questions qu'un bon prestataire vous posera en retour.",
  "kw": "brief étude qualitative, cahier des charges étude de marché, appel d'offres institut études, rédiger un brief",
  "sources": [
@@ -1947,12 +2144,13 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "marche-citadines-france-uk.html",
+ "auteur": "VJ",
  "illus": "voiture.webp",
  "cat": "Observatoire · Mobilité",
  "date": "2026-08-25",
  "read": "10 min",
  "title": "Citadines : la France et le Royaume-Uni divergent",
- "h1": "Citadines : la France<br>et le Royaume-Uni ne<br>regardent pas la<br>même voiture.",
+ "h1": 'Une promesse qui marche<br>à Lyon peut tomber<br>à plat à Manchester.',
  "desc": "Deux marchés d'entrée de gamme, deux mécaniques opposées : le prix affiché en France, la remise au Royaume-Uni. Ce que ça change pour qui lance une citadine.",
  "kw": "marché citadines France, supermini UK, segment B Europe, acheteurs voitures urbaines",
  "sources": [
@@ -2043,6 +2241,7 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "marche-luxe-clients-perdus.html",
+ "auteur": "CC",
  "illus": "fuite.webp",
  "cat": "Observatoire · Mode & Luxe",
  "date": "2026-08-25",
@@ -2139,6 +2338,7 @@ ARTICLES += [
 
 {
  "slug": "marche-bricolage-peur-de-mal-faire.html",
+ "auteur": "TN",
  "illus": "stylos.webp",
  "cat": "Observatoire · Bâtiment",
  "date": "2026-08-25",
@@ -2242,12 +2442,13 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "article-declare-observe.html",
+ "auteur": "VJ",
  "cat": "Point de vue",
  "date": "2026-08-26",
  "read": "9 min",
  "illus": "objet.webp",
  "title": "Ce que les gens disent, ce qu'ils font : l'écart",
- "h1": "Ce que les gens disent,<br>ce qu'ils font.",
+ "h1": 'Personne ne ment.<br>Tout le monde reconstruit.',
  "desc": "Le déclaratif ne ment pas, il reconstruit. Trois écarts qu'on mesure sur le terrain, et ce que ça change sur un arbitrage produit.",
  "kw": "biais déclaratif, écart déclaré observé, comportement consommateur réel, clinique produit",
  "sources": [
@@ -2331,12 +2532,13 @@ ARTICLES += [
 
 {
  "slug": "article-verbatims-donnees-personnelles.html",
+ "auteur": "VB",
  "cat": "Repères",
  "date": "2026-08-26",
  "read": "8 min",
  "illus": "bulles.webp",
  "title": "Vos verbatims sont des données personnelles",
- "h1": "Vos verbatims sont<br>des données<br>personnelles.",
+ "h1": "Une voix suffit<br>à identifier quelqu'un.",
  "desc": "Base légale, consentement, durée de conservation, sous-traitance IA : ce qu'un enregistrement d'entretien vous impose, et les questions à poser à votre prestataire.",
  "kw": "RGPD étude qualitative, verbatim données personnelles, consentement participant étude, IA sous-traitance données",
  "sources": [
@@ -2430,12 +2632,13 @@ ARTICLES += [
 ARTICLES += [
 {
  "slug": "article-biais-etude.html",
+ "auteur": "CC",
  "cat": "Méthode",
  "date": "2026-08-26",
  "read": "9 min",
  "illus": "groupes.webp",
  "title": "Huit biais qui faussent une étude qualitative",
- "h1": "Huit biais qui faussent<br>une étude — dont trois<br>de votre côté.",
+ "h1": 'Huit biais faussent<br>une étude. Trois<br>viennent de vous.',
  "desc": "Désirabilité, dominance, relance orientée : les biais du terrain sont connus. Ceux du commanditaire le sont moins, et ils coûtent plus cher.",
  "kw": "biais étude qualitative, désirabilité sociale, biais confirmation étude marché, biais animateur",
  "sources": [
@@ -2520,12 +2723,13 @@ ARTICLES += [
 
 {
  "slug": "article-packaging-avant-lecture.html",
+ "auteur": "CC",
  "cat": "Méthode",
  "date": "2026-08-26",
  "read": "8 min",
  "illus": "terrain.webp",
  "title": "Ce qu'un packaging dit avant qu'on l'ait lu",
- "h1": "Ce qu'un packaging dit<br>avant qu'on l'ait lu.",
+ "h1": "Trois secondes en rayon,<br>et rien n'a été lu.",
  "desc": "En rayon, la reconnaissance de catégorie précède la lecture. Pourquoi un test de packaging en salle se trompe souvent, et la consigne qui change tout.",
  "kw": "test packaging, sémiologie packaging, codes de catégorie rayon, test concept emballage",
  "sources": [
@@ -2618,6 +2822,8 @@ ARTICLES += [
 SECTEURS_PARCOURS = [
 {
  "slug": "parcours-mobilite.html",
+ "auteur": "VJ",
+ "h1": "Un porche trop bas élimine<br>plus de modèles<br>qu'un argumentaire.",
  "h2_ou": 'À quel moment la liste courte se ferme-t-elle&nbsp;?',
  "faq": [
   ("Combien de temps dure un parcours d'achat automobile ?", "Six à neuf mois entre le déclencheur et la signature, dont l'essentiel se passe hors de votre vue. Ce qui compte n'est pas la durée mais le moment où la liste courte se ferme&nbsp;: après, tout ce que vous direz arrive trop tard."),
@@ -2650,6 +2856,8 @@ SECTEURS_PARCOURS = [
 },
 {
  "slug": "parcours-retail-fmcg.html",
+ "auteur": "TN",
+ "h1": "Le geste qui vous coûte<br>le plus, c'est celui<br>de reposer.",
  "h2_ou": 'Que se passe-t-il dans les trois secondes du rayon&nbsp;?',
  "faq": [
   ('Combien de temps dure un arbitrage en rayon ?', "Moins de trois secondes sur un produit qu'on n'achète pas. Dans ce laps de temps, rien n'a été lu&nbsp;: la reconnaissance de catégorie s'est faite sur la forme, la couleur et la densité d'information."),
@@ -2682,6 +2890,8 @@ SECTEURS_PARCOURS = [
 },
 {
  "slug": "parcours-sante-cosmetiques.html",
+ "auteur": "CC",
+ "h1": "Un produit qui ne trouve<br>pas sa place sur l'étagère<br>ne revient pas.",
  "h2_ou": "Pourquoi un produit acheté n'est-il pas réacheté&nbsp;?",
  "faq": [
   ('Comment étudier une routine cosmétique ?', "À domicile, devant l'étagère réelle, avec un test en usage sur plusieurs semaines. En salle, un participant décrit une routine idéale&nbsp;; devant son étagère, il montre les trois produits achetés et jamais finis, et il explique pourquoi."),
@@ -2714,6 +2924,8 @@ SECTEURS_PARCOURS = [
 },
 {
  "slug": "parcours-batiment.html",
+ "auteur": "TN",
+ "h1": 'Il est entré, il a regardé,<br>il est reparti. Vous ne<br>le saurez jamais.',
  "h2_ou": "Où se perd le client d'une grande surface de bricolage&nbsp;?",
  "faq": [
   ("Comment interroger quelqu'un qui a renoncé à son projet ?", "En le faisant parler du projet en cours d'abord, du projet abandonné ensuite. La comparaison des deux, chez lui, produit une matière que la question directe ne donne jamais&nbsp;: on n'aime pas raconter un renoncement, mais on accepte de le comparer."),
@@ -2746,6 +2958,8 @@ SECTEURS_PARCOURS = [
 },
 {
  "slug": "parcours-mode-luxe.html",
+ "auteur": "CC",
+ "h1": 'Huit secondes sur le seuil<br>décident de vingt ans.',
  "h2_ou": "Qu'est-ce qui se joue sur le seuil d'une boutique&nbsp;?",
  "faq": [
   ("Comment interroger des clients qui ont cessé d'acheter ?", "En les recrutant sur comportement d'achat passé plutôt que sur fichier client&nbsp;: ils n'y sont plus. Le sourcing coûte davantage, et c'est la population la plus informative du marché — celle dont la disparition explique vingt millions de clients perdus en un an."),
@@ -2778,6 +2992,8 @@ SECTEURS_PARCOURS = [
 },
 {
  "slug": "parcours-territoires.html",
+ "auteur": "VB",
+ "h1": "Ceux qui décideront de<br>l'acceptabilité ne viennent<br>pas aux réunions.",
  "h2_ou": 'Qui parle vraiment dans une concertation&nbsp;?',
  "faq": [
   ('Comment toucher ceux qui ne viennent pas aux réunions publiques ?', "En allant les chercher là où ils sont&nbsp;: sur leur lieu de travail, à domicile, ou à distance en horaires décalés. C'est un choix de dispositif et de budget, pas une intention — et c'est lui qui rend une concertation opposable."),
@@ -2842,10 +3058,13 @@ def _parcours(d):
         "slug": d["slug"], "cat": d["cat"], "date": "2026-08-26", "read": d["read"],
         "illus": d["illus"],
         "title": f"Parcours {d['titre_court']} : où se joue la décision",
-        "h1": f"Parcours {d['titre_court']}&nbsp;:<br>où se joue<br>vraiment la décision.",
+        # Un h1 propre à chaque secteur, pas une formule déclinée six fois :
+        # six titres identiques ne donnent envie de lire aucun des six.
+        "h1": d["h1"],
         "desc": f"Les cinq moments du parcours {d['titre_court']}, celui que tout le monde sous-estime, et ce qu'il faut aller observer pour le comprendre.",
         "kw": f"parcours client {d['titre_court']}, étude qualitative {d['titre_court']}, décision achat {d['titre_court']}",
         "chapo": d["chapo"], "body": body, "sources": d["sources"],
+        "auteur": d.get("auteur"),
         "faq_titre": "Questions fréquentes",
         # Les questions sont propres au secteur : six pages qui répondent aux
         # mêmes quatre questions se disputeraient la même intention.
@@ -2875,12 +3094,13 @@ ARTICLES += [_parcours(d) for d in SECTEURS_PARCOURS]
 ARTICLES += [
 {
  "slug": "etude-qualitative.html",
+ "auteur": "VB",
  "cat": "Guide",
  "date": "2026-08-26",
  "read": "14 min",
  "illus": "demontage.webp",
  "title": "L'étude qualitative, du cadrage à la décision",
- "h1": "L'étude qualitative,<br>du cadrage<br>à la décision.",
+ "h1": 'Le chiffre dit combien.<br>Il ne dit jamais<br>pourquoi.',
  "desc": "À quoi elle sert, quand elle ne sert à rien, les six dispositifs et lequel choisir, combien de temps, combien ça coûte, et ce que vous recevez.",
  "kw": "étude qualitative, méthode qualitative, focus group entretien, institut études qualitatives",
  "sources": [
@@ -3144,6 +3364,13 @@ def page_en(slug, title, desc, body, fr_slug, extra_jsonld=None, current="",
 def render_article_en(a):
     """Meme anatomie que la version francaise : bandeau, corps, FAQ, bloc
     d'activation, sources, maillage."""
+    byline = ""
+    if a.get("auteur"):
+        au = AUTEURS[a["auteur"]]
+        byline = ('<div class="art-by"><span class="art-by-i" aria-hidden="true">%s</span>'
+                  '<span class="art-by-t">By <a href="../qui-sommes-nous.html">'
+                  '<strong>%s</strong></a><span class="art-by-r">%s</span></span></div>'
+                  % (a["auteur"], au["nom"], au["role_en"]))
     illus = ""
     if a.get("illus"):
         illus = ('<div class="art-illus"><img src="../assets/illus/%s" alt="" '
@@ -3197,7 +3424,7 @@ def render_article_en(a):
         '      <h1 class="display">%s</h1>\n'
         '      <p class="art-chapo">%s</p>\n'
         '      <div class="art-meta"><time datetime="%s">%s</time>'
-        '<span>&middot;</span><span>%s read</span></div>\n'
+        '<span>&middot;</span><span>%s read</span></div>\n      %s\n'
         '    </div>\n  </header>\n  %s\n'
         '  <div class="container art-w art-body" lang="en">\n%s\n%s\n%s\n%s\n  </div>\n'
         '</article>\n%s\n'
@@ -3209,14 +3436,17 @@ def render_article_en(a):
         '<path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg></a>\n'
         '    </div>\n  </div>\n</article>'
         % (a["cat"], a["h1"], a["chapo"], a["date"], a["date_en"], a["read"],
-           illus, a["body"], faq, src, loin, act))
+           byline, illus, a["body"], faq, src, loin, act))
 
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Article",
          "headline": re.sub(r"<[^>]+>", " ", a["h1"]).replace("&nbsp;", " ").strip(),
          "description": a["desc"], "datePublished": a["date"], "dateModified": a["date"],
          "inLanguage": "en", "keywords": a["kw"],
-         "author": {"@type": "Organization", "name": ORG["name"]},
+         "author": ({"@type": "Person", "name": AUTEURS[a["auteur"]]["nom"],
+                    "jobTitle": AUTEURS[a["auteur"]]["role"],
+                    "worksFor": {"@type": "Organization", "name": ORG["name"]}}
+                   if a.get("auteur") else {"@type": "Organization", "name": ORG["name"]}),
          "publisher": {"@type": "Organization", "name": ORG["name"]},
          "mainEntityOfPage": {"@type": "WebPage", "@id": "%s/en/%s" % (SITE, a["slug"])}}]}
     if a.get("faq"):
@@ -3234,7 +3464,7 @@ def render_article_en(a):
 # ── Les articles anglais ────────────────────────────────────────────────
 ARTICLES_EN = [
 {
- "slug": "city-cars-france-uk.html", "fr": "marche-citadines-france-uk.html",
+ "slug": "city-cars-france-uk.html", "auteur": "VJ", "fr": "marche-citadines-france-uk.html",
  "cat": "Market watch · Mobility", "date": "2026-08-26", "date_en": "26 August 2026",
  "read": "9 min", "illus": "voiture.webp",
  "title": "City cars: France and the UK diverge",
@@ -3321,7 +3551,7 @@ ARTICLES_EN = [
 },
 
 {
- "slug": "luxury-lost-customers.html", "fr": "marche-luxe-clients-perdus.html",
+ "slug": "luxury-lost-customers.html", "auteur": "CC", "fr": "marche-luxe-clients-perdus.html",
  "cat": "Market watch · Fashion & Luxury", "date": "2026-08-26", "date_en": "26 August 2026",
  "read": "8 min", "illus": "fuite.webp",
  "title": "Luxury has lost twenty million customers",
@@ -3400,7 +3630,7 @@ ARTICLES_EN = [
 },
 
 {
- "slug": "diy-fear-of-getting-it-wrong.html", "fr": "marche-bricolage-peur-de-mal-faire.html",
+ "slug": "diy-fear-of-getting-it-wrong.html", "auteur": "TN", "fr": "marche-bricolage-peur-de-mal-faire.html",
  "cat": "Market watch · Construction", "date": "2026-08-26", "date_en": "26 August 2026",
  "read": "8 min", "illus": "stylos.webp",
  "title": "Nine in ten French people DIY. Seven are afraid",

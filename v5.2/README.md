@@ -160,6 +160,46 @@ reste du site suive.
 Ajouter une page anglaise : une entrée dans `ARTICLES_EN`, plus une ligne dans
 `EN_ALTERNATES` pour que la page française la déclare.
 
+## Titres, signatures, cocon
+
+**Le `<title>` et le `<h1>` ne font pas le même travail.** Le premier est formulé
+comme la requête et travaille en SERP&nbsp;; le second s'adresse à quelqu'un qui vient
+d'arriver. Les deux sont désormais distincts sur les 22 articles — auparavant le h1
+répétait le titre, et les six parcours sectoriels portaient six fois la même formule.
+
+**Les articles sont signés.** Quatre consultants, attribués par compétence réelle
+d'après les bios de `qui-sommes-nous.html`, avec un `author: Person` dans le JSON-LD.
+⚠️ **Chaque consultant doit relire et valider les articles qui portent sa signature
+avant publication** — une signature engage une personne.
+
+**Le cocon sémantique est tenu par le code, pas par la discipline.** L'arbre vit dans
+`COCONS` : une page cible par silo, des branches, des feuilles. `liens_cocon()`
+construit le bloc « aller plus loin » à partir de l'arbre — le parent et les frères de
+la même branche, jamais une page d'un autre silo. Huit silos, 32 pages, deux niveaux
+sous la cible.
+
+Le contrôle, à passer après tout ajout de page :
+
+```python
+# liens structurels franchissant un silo — doit rester à 0
+python3 - <<'EOF'
+import re, glob, importlib.util
+spec = importlib.util.spec_from_file_location('bc', 'build_contenus.py')
+m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+for f in glob.glob('*.html'):
+    b = re.search(r'<section class="art-loin">.*?</section>', open(f, encoding='utf-8').read(), re.S)
+    if not b: continue
+    mine = m.cocon_de(f)
+    for u in re.findall(r'<a href="([^"#]+)"', b.group(0)):
+        o = m.cocon_de(u)
+        if mine and o and mine[0] != o[0]: print('HORS SILO', f, '->', u)
+EOF
+```
+
+Les liens **en pleine prose restent libres** : ils sont contextuels, un lecteur les
+suit, et les contraindre appauvrirait le texte. Ce qui est tenu, c'est le bloc
+structurel de fin — celui qui porte le signal.
+
 ## SEO / GEO
 
 Balisage en place sur **les 25 pages** : `Organization` + `ProfessionalService` partout
