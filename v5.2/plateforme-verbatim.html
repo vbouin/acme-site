@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- PAGE NON PUBLIÉE : aucun lien depuis la navigation, aucune entrée sitemap.
+     Contenu de démonstration — corpus anonymisé, marque commanditaire masquée. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<title>La plateforme de verbatims — ACMÉ Consultants</title>
+<meta name="description" content="Le corpus d'une étude qualitative, interrogeable par vos équipes après la restitution : filtrer par profil, chercher un mot, remonter au verbatim et à sa source." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-v3.css" />
+<style>
+/* ---- Note « page non publiée » (dans le hero : le header est en position fixed) ---- */
+.draftnote{display:inline-flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  border:1px solid #111;padding:10px 16px;margin-bottom:30px;max-width:78ch}
+.draftnote b{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:#111}
+.draftnote span{font-size:12.5px;line-height:1.5;color:#6e6e6e}
+
+/* ---- Bande vidéo ---- */
+.filmband{position:relative;background:#0d0d0d;overflow:hidden}
+.filmband video{display:block;width:100%;height:auto;max-height:62vh;object-fit:cover}
+.filmband-cap{padding:16px 0 26px;background:#0d0d0d;color:#8a8a8a;font-size:12.5px}
+.filmband-cap .container{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.filmband-cap b{color:#e8e8e8;font-family:var(--font-mono);font-size:10.5px;
+  letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+
+/* ---- Cadre de capture d'écran ---- */
+.shot{border:1px solid var(--g200,#e4e4e4);border-radius:3px;overflow:hidden;background:#fff}
+.shot-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--g100,#efefef);background:#fbfbfb}
+.shot-bar i{width:8px;height:8px;border-radius:50%;background:#dcdcdc;display:block}
+.shot-bar em{margin-left:8px;font-style:normal;font-family:var(--font-mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:#9a9a9a;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.shot img{display:block;width:100%;height:auto}
+.shot-miss{display:none;padding:52px 24px;text-align:center;color:#9a9a9a;background:
+  repeating-linear-gradient(45deg,#fafafa,#fafafa 10px,#f4f4f4 10px,#f4f4f4 20px)}
+.shot-miss code{font-family:var(--font-mono);font-size:11px;color:#6e6e6e}
+.shot.is-missing img{display:none}
+.shot.is-missing .shot-miss{display:block}
+.shot-cap{margin-top:12px;font-size:13px;line-height:1.55;color:#6e6e6e;max-width:62ch}
+
+/* ---- Usage : texte + captures ---- */
+.usecase{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:56px;
+  align-items:start;padding:64px 0;border-top:1px solid var(--g100,#efefef)}
+.usecase:first-of-type{border-top:0}
+.usecase-n{font-family:var(--font-mono);font-size:11px;letter-spacing:.4em;
+  text-transform:uppercase;color:#9a9a9a;margin-bottom:18px}
+.usecase h3{font-family:var(--font-display);font-weight:700;font-size:30px;
+  line-height:1.06;letter-spacing:-.02em;margin-bottom:18px}
+.usecase p{color:#4a4a4a;font-size:15px;line-height:1.66;margin-bottom:14px}
+.usecase .who{margin-top:22px;padding-top:18px;border-top:1px solid var(--g100,#efefef)}
+.usecase .who dt{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:#9a9a9a;margin-bottom:5px}
+.usecase .who dd{font-size:13.5px;line-height:1.6;color:#4a4a4a;margin-bottom:12px}
+.usecase-shots{display:grid;gap:34px}
+.usecase--flip{direction:rtl}
+.usecase--flip > *{direction:ltr}
+
+/* ---- Deux régimes d'identité, côte à côte ---- */
+.identgrid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:38px}
+.identgrid .lbl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.24em;
+  text-transform:uppercase;color:#111;margin-bottom:12px}
+.rulebox{margin-top:44px;border-left:2px solid #111;padding:4px 0 4px 24px;max-width:74ch}
+.rulebox p{font-size:15px;line-height:1.66;color:#4a4a4a}
+.rulebox p + p{margin-top:12px}
+
+/* ---- Ce qu'on livre ---- */
+.deliv{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g200,#e4e4e4);
+  border:1px solid var(--g200,#e4e4e4);margin-top:38px}
+.deliv > div{background:#fff;padding:30px 26px}
+.deliv h4{font-family:var(--font-display);font-weight:700;font-size:17px;margin-bottom:10px}
+.deliv p{font-size:13.5px;line-height:1.62;color:#6e6e6e}
+.deliv .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:#9a9a9a;margin-bottom:14px}
+
+@media (max-width:980px){
+  .usecase{grid-template-columns:1fr;gap:34px;padding:48px 0}
+  .usecase--flip{direction:ltr}
+  .identgrid,.deliv{grid-template-columns:1fr}
+  .usecase h3{font-size:25px}
+}
+</style>
+</head>
+<body class="v3 v3-1">
+<script src="variant.js"></script>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo/logo-noir.png" alt="ACMÉ" /></a>
+    <nav class="nav-menu">
+      <div class="nav-dd">
+      <a href="index.html#sectors" class="nav-dd-trigger"><span data-i18n="nav.sectors">Secteurs</span><span class="nav-dd-caret" aria-hidden="true">&#9662;</span></a>
+      <div class="nav-dd-menu">
+        <a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité & Automobile</a>
+        <a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a>
+        <a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé & Cosmétiques</a>
+        <a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a>
+        <a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme & RSE</a>
+        <a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode & Luxe</a>
+      </div>
+    </div>
+      <a href="decision-rapide.html" data-i18n="nav.quick">Décision rapide</a>
+      <a href="contenus.html" data-i18n="nav.content">Contenus</a>
+      <a href="etudes-et-ia.html" data-i18n="nav.ia">Études & IA</a>
+      <a href="qui-sommes-nous.html" data-i18n="nav.about">Qui sommes-nous</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="fr" type="button">FR</button>
+        <span class="lang-sep">/</span>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <a href="contact.html" class="btn btn-primary-dark" style="padding: 12px 20px;">
+        <span data-i18n="nav.cta">Démarrer un projet</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero-compact">
+  <div class="container hero-compact-inner">
+    <div class="draftnote">
+      <b>Brouillon interne</b>
+      <span>Page non publiée : absente de la navigation et des moteurs, française uniquement.
+        Démonstration sur un corpus anonymisé.</span>
+    </div>
+    <div class="eyebrow" style="margin-bottom:14px;">— Livrables augmentés</div>
+    <h1 class="display">L'étude ne s'arrête<br>plus à la restitution.</h1>
+    <p class="lead">Nous livrons le rapport, et avec lui le corpus qui le fonde — interrogeable par vos équipes,
+      profil par profil, mot par mot, jusqu'au tour de parole exact. Six mois après le terrain, la question
+      qui revient trouve encore sa réponse.</p>
+  </div>
+</section>
+
+<div class="filmband">
+  <video src="assets/concept/video-rotation.mp4" poster="assets/concept/poster-rotation.jpg"
+         autoplay muted loop playsinline aria-label="Verbatim incrusté sur le véhicule testé"></video>
+</div>
+<div class="filmband-cap">
+  <div class="container">
+    <b>— Démonstration</b>
+    <span>Concept NORD, véhicule fictif d'ACMÉ. Le corpus présenté ici provient d'un terrain réel de 53 entretiens,
+      dont la marque commanditaire et les prénoms ont été masqués.</span>
+  </div>
+</div>
+
+<!-- ═══════════════ LE CONSTAT ═══════════════ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;">— Le constat</div>
+      <h2 class="display">Ce qu'il reste<br>d'une étude, à six mois.</h2>
+      <p class="lead" style="margin-top:20px;">Une étude qualitative coûte cher à produire et se consomme
+        en une heure et demie de restitution. Ce n'est pas le rapport qui manque ensuite. C'est l'accès à
+        ce qu'il y avait derrière.</p>
+    </div>
+    <div class="missions-grid reveal">
+      <article class="mission-card">
+        <div class="mission-n">01</div>
+        <h3>La question arrive après</h3>
+        <p>Le designer qui reprend le hayon six semaines plus tard veut savoir ce qu'en disaient les femmes
+          de 35 à 44 ans en cœur de cible. Le rapport dit ce que disait le terrain, pas ce que disait ce
+          sous-groupe-là.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">02</div>
+        <h3>Le verbatim est cité, jamais situé</h3>
+        <p>Une citation en slide 22 arrive sans son contexte : qui parlait, à quel moment du guide, après
+          quelle relance. Deux lectures opposées de la même phrase restent possibles, et se défendent.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">03</div>
+        <h3>La source dort dans un dossier</h3>
+        <p>Cinquante-trois transcriptions existent. Personne ne rouvre cinquante-trois fichiers Word pour
+          vérifier une intuition un mardi après-midi.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">04</div>
+        <h3>Chaque équipe redemande la même chose</h3>
+        <p>Le marketing, le design, le produit et le juridique n'ont pas les mêmes questions. Ils reviennent
+          l'un après l'autre vers l'équipe d'étude, qui refait le travail à la main.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ LA PLATEFORME ═══════════════ -->
+<section class="section-pad" style="background:var(--offwhite);">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;">— Le livrable</div>
+      <h2 class="display">Le corpus,<br>rendu interrogeable.</h2>
+      <p class="lead" style="margin-top:20px;">Nous versons le terrain complet dans une application :
+        transcriptions intégrales, verbatims codés, profils, guide d'entretien, monographies. Chaque
+        élément affiché reste relié à sa source et s'ouvre d'un clic sur le tour de parole d'origine.
+        Rien n'est reformulé en chemin.</p>
+    </div>
+
+    <div class="shot reveal" style="margin-bottom:16px;">
+      <div class="shot-bar"><i></i><i></i><i></i><em>Vue d'ensemble — étude NORD</em></div>
+      <img src="assets/shots/vue-ensemble.png" alt="Vue d'ensemble de la plateforme : volumétrie du terrain, issue des entretiens, validation des données." loading="lazy">
+      <div class="shot-miss">Capture à ajouter — <code>assets/shots/vue-ensemble.png</code></div>
+    </div>
+    <p class="shot-cap reveal">L'état du terrain en un écran : volumétrie, issue des entretiens,
+      pré-segmentation, contrôle de fidélité des verbatims.</p>
+
+    <div class="stats-band reveal" style="margin-top:56px;">
+      <div class="stat"><div class="value counter" data-count-to="53">53</div><div class="label">entretiens individuels de 2 h, France et Allemagne</div></div>
+      <div class="stat"><div class="value counter" data-count-to="2027">2027</div><div class="label">verbatims rattachés à leur source</div></div>
+      <div class="stat"><div class="value counter" data-count-to="1503">1503</div><div class="label">vérifiés mot à mot dans la transcription</div></div>
+      <div class="stat"><div class="value counter" data-count-to="1174">1174</div><div class="label">localisés sur une zone du produit</div></div>
+    </div>
+    <p class="shot-cap reveal" style="margin-top:18px;max-width:80ch;">Sur ce terrain, 524 citations issues
+      des monographies n'ont pas été retrouvées telles quelles dans la transcription : elles sont signalées
+      comme reformulées plutôt que présentées comme des verbatims. Le contrôle est visible dans l'application.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ TROIS USAGES ═══════════════ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="missions-head reveal" style="margin-bottom:10px;">
+      <div class="eyebrow" style="margin-bottom:20px;">— Les usages</div>
+      <h2 class="display">Trois façons<br>de s'en servir.</h2>
+      <p class="lead" style="margin-top:20px;">Elles correspondent à trois moments : juste après le terrain,
+        pendant les arbitrages, et le jour où quelqu'un conteste une conclusion.</p>
+    </div>
+
+    <!-- USAGE 01 -->
+    <div class="usecase reveal">
+      <div>
+        <div class="usecase-n">Usage 01</div>
+        <h3>Un débriefing de terrain que chacun mène pour soi.</h3>
+        <p>La restitution s'adresse à tout le monde et donc à personne en particulier. Ici, chaque
+          bénéficiaire de l'étude filtre le corpus sur ce qui le concerne et lit les retours qui le
+          concernent — sans repasser par l'équipe d'étude.</p>
+        <p>Un designer ne cherche pas « les résultats ». Il cherche ce que les Cosmopolitan Elite ont dit
+          de l'ouverture du hayon, et il veut les phrases, pas la synthèse des phrases. La carte du produit
+          rattache chaque commentaire à la zone qu'il vise : un clic sur le hayon donne les 107 verbatims
+          qui en parlent, classés par polarité, chacun ouvrant son entretien.</p>
+        <dl class="who">
+          <dt>Pour qui</dt>
+          <dd>Design et produit — retours sur un élément précis, par type de cible.
+            Marketing — le vocabulaire réellement employé par segment.
+            Direction — les points où le terrain contredit l'hypothèse de départ.</dd>
+          <dt>Ce que ça remplace</dt>
+          <dd>Les demandes d'extraction adressées à l'équipe d'étude, une par service.</dd>
+        </dl>
+      </div>
+      <div class="usecase-shots">
+        <div>
+          <div class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><em>Profils — filtre : milieu Cosmopolitan Elite</em></div>
+            <img src="assets/shots/profils-persona.png" alt="Le corpus filtré sur un seul milieu : chaque carte de profil ouvre l'entretien." loading="lazy">
+            <div class="shot-miss">Capture à ajouter — <code>assets/shots/profils-persona.png</code></div>
+          </div>
+          <p class="shot-cap">Le corpus filtré sur un seul milieu. La carte porte l'issue, le statut de cible
+            et une citation signature qui ouvre le tour de parole exact.</p>
+        </div>
+        <div>
+          <div class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><em>Carte du véhicule — zone « coffre &amp; hayon »</em></div>
+            <img src="assets/shots/carte-vehicule-zone.png" alt="Carte du véhicule : les commentaires localisés par zone, avec les verbatims de la zone sélectionnée." loading="lazy">
+            <div class="shot-miss">Capture à ajouter — <code>assets/shots/carte-vehicule-zone.png</code></div>
+          </div>
+          <p class="shot-cap">Chaque commentaire est rattaché à la zone qu'il vise. Taille de la pastille :
+            volume. Couleur : polarité nette. Le clic ouvre les verbatims sources.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- USAGE 02 -->
+    <div class="usecase usecase--flip reveal">
+      <div>
+        <div class="usecase-n">Usage 02</div>
+        <h3>Ce que les gens attendent, et dans quel contexte ils le disent.</h3>
+        <p>Une attente exprimée sans son contexte se transforme vite en cahier des charges erroné.
+          « Il faut un grand coffre » ne veut pas dire la même chose chez un couple post-famille en zone
+          rurale et chez un urbain qui se gare en épi.</p>
+        <p>La recherche accepte des mots-clés et des facettes dans la même requête —
+          <em>coffre rejector</em>, <em>2G autonomie</em>, <em>femmes signal</em> — et renvoie les
+          passages avec leur profil, leur position dans le guide et leur polarité. L'atelier croise ensuite
+          un mot-clé avec la question du guide et le point de monographie. L'argumentaire qu'on pourra
+          défendre en comité se construit là.</p>
+        <dl class="who">
+          <dt>Pour qui</dt>
+          <dd>Les équipes qui doivent arbitrer — et justifier l'arbitrage devant quelqu'un qui n'était pas
+            à la restitution.</dd>
+          <dt>Ce que ça change</dt>
+          <dd>Une recommandation arrive avec ses preuves attachées, pas avec une citation choisie.</dd>
+        </dl>
+      </div>
+      <div class="usecase-shots">
+        <div>
+          <div class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><em>Recherche — mots-clés et facettes</em></div>
+            <img src="assets/shots/recherche.png" alt="Recherche par mots-clés et facettes sur l'intégralité du corpus." loading="lazy">
+            <div class="shot-miss">Capture à ajouter — <code>assets/shots/recherche.png</code></div>
+          </div>
+          <p class="shot-cap">Le moteur traduit la requête en facettes et en mots-clés. Tout se combine en ET,
+            et les filtres du haut s'appliquent aussi.</p>
+        </div>
+        <div>
+          <div class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><em>Atelier verbatims — mot-clé « coffre »</em></div>
+            <img src="assets/shots/atelier.png" alt="Atelier verbatims : croisement mot-clé, question du guide, point de monographie et profil." loading="lazy">
+            <div class="shot-miss">Capture à ajouter — <code>assets/shots/atelier.png</code></div>
+          </div>
+          <p class="shot-cap">Le croisement mot-clé × question du guide × point de monographie × profil.
+            Chaque bloc se copie tel quel dans un document de travail.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- USAGE 03 -->
+    <div class="usecase reveal">
+      <div>
+        <div class="usecase-n">Usage 03</div>
+        <h3>Revenir au guide, aux profils, aux transcriptions.</h3>
+        <p>Le jour où une conclusion est contestée, la seule réponse solide est la source. Le guide
+          d'entretien est présent tel qu'il a été administré : on ouvre une partie et on obtient les passages
+          correspondants dans les 53 entretiens. La question posée reste lisible à côté de la réponse
+          obtenue — c'est souvent là que se joue l'interprétation.</p>
+        <p>Chaque entretien s'ouvre en entier : transcription intégrale, phases du guide, verbatims codés,
+          monographie. Rien n'est tronqué, et l'on voit ce qui a été retenu comme ce qui ne l'a pas été.</p>
+        <dl class="who">
+          <dt>Pour qui</dt>
+          <dd>Les équipes d'étude côté client, qui doivent pouvoir vérifier. Les nouveaux arrivants sur le
+            projet, qui n'ont pas assisté au terrain.</dd>
+          <dt>Ce que ça permet</dt>
+          <dd>Réutiliser le corpus pour une question qui n'était pas dans le brief initial.</dd>
+        </dl>
+      </div>
+      <div class="usecase-shots">
+        <div>
+          <div class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><em>Guide d'entretien — 120 min</em></div>
+            <img src="assets/shots/guide.png" alt="Guide d'entretien : chaque partie donne accès aux passages correspondants dans les entretiens." loading="lazy">
+            <div class="shot-miss">Capture à ajouter — <code>assets/shots/guide.png</code></div>
+          </div>
+          <p class="shot-cap">La trame réelle du terrain, séquence par séquence, reliée aux réponses qu'elle
+            a produites.</p>
+        </div>
+        <div>
+          <div class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><em>Entretien F12 — transcription intégrale</em></div>
+            <img src="assets/shots/entretien.png" alt="Entretien complet : transcription intégrale, phases du guide, verbatims codés, monographie." loading="lazy">
+            <div class="shot-miss">Capture à ajouter — <code>assets/shots/entretien.png</code></div>
+          </div>
+          <p class="shot-cap">L'entretien complet, avec ses phases et ses codages. La source, jamais résumée.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="filmband">
+  <video src="assets/concept/video-commentaires.mp4" poster="assets/concept/poster-commentaires.jpg"
+         autoplay muted loop playsinline aria-label="Commentaires localisés sur les trois vues du véhicule"></video>
+</div>
+<div class="filmband-cap">
+  <div class="container">
+    <b>— Retours localisés</b>
+    <span>Face, profil, arrière : chaque commentaire se rattache à l'élément qu'il vise.</span>
+  </div>
+</div>
+
+<!-- ═══════════════ ANONYME / PSEUDONYME ═══════════════ -->
+<section class="section-pad" style="background:var(--offwhite);">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;">— Données personnelles</div>
+      <h2 class="display">Anonyme<br>ou pseudonyme.</h2>
+      <p class="lead" style="margin-top:20px;">Une transcription d'entretien contient un prénom, un métier,
+        une situation familiale, parfois une opinion politique ou un état de santé. C'est un traitement de
+        données personnelles, et la règle appliquée au corpus doit être écrite quelque part.
+        Ici, elle est dans l'application, et elle se change d'un clic.</p>
+    </div>
+
+    <div class="identgrid reveal">
+      <div>
+        <div class="lbl">Mode anonyme — par défaut</div>
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><em>Profils — identités : anonyme</em></div>
+          <img src="assets/shots/identite-anonyme.png" alt="Mode anonyme : code d'entretien, tranche d'âge, catégorie socio-professionnelle." loading="lazy">
+          <div class="shot-miss">Capture à ajouter — <code>assets/shots/identite-anonyme.png</code></div>
+        </div>
+        <p class="shot-cap">Plus aucun prénom : le code d'entretien fait foi. Les identifiants indirects sont
+          généralisés — tranche d'âge au lieu de l'âge, catégorie socio-professionnelle au lieu du métier —
+          et les colonnes nominatives sortent des filtres.</p>
+      </div>
+      <div>
+        <div class="lbl">Mode pseudonyme — sur demande</div>
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><em>Profils — identités : pseudonyme</em></div>
+          <img src="assets/shots/identite-pseudonyme.png" alt="Mode pseudonyme : prénom fictif stable, âge et métier détaillés." loading="lazy">
+          <div class="shot-miss">Capture à ajouter — <code>assets/shots/identite-pseudonyme.png</code></div>
+        </div>
+        <p class="shot-cap">Un prénom fictif, stable d'un bout à l'autre du corpus, remplace le prénom réel.
+          Les attributs détaillés restent lisibles : on suit un individu sans jamais le nommer.</p>
+      </div>
+    </div>
+
+    <div class="rulebox reveal">
+      <p><b>La règle, écrite.</b> Le prénom réel ne figure nulle part dans le fichier livré — il n'est pas
+        masqué à l'affichage, il est absent. La table de correspondance reste chez nous, hors du livrable.
+        Les marques citées dans un test concurrentiel peuvent être masquées de la même façon, y compris à
+        l'intérieur des transcriptions.</p>
+      <p>Ce que nous ne promettons pas : qu'un corpus pseudonymisé soit anonyme. Il ne l'est pas. Croiser un
+        métier détaillé, un âge exact et une zone d'habitation peut suffire à reconnaître quelqu'un. C'est
+        pour cette raison que le mode anonyme généralise ces trois attributs, et qu'il est le réglage par
+        défaut à la livraison.</p>
+      <p style="margin-top:18px;"><a class="btn btn-outline-dark" href="article-verbatims-donnees-personnelles.html">
+        Lire : vos verbatims sont des données personnelles
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CE QUE L'HUMAIN GARDE ═══════════════ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;">— La garantie</div>
+      <h2 class="display">Un outil de lecture,<br>pas un moteur à conclusions.</h2>
+      <p class="lead" style="margin-top:20px;">La plateforme range et retrouve. Elle ne décide pas.
+        L'interprétation, l'analyse et la recommandation restent le travail de nos consultants seniors —
+        c'est ce que vous achetez, et ce n'est pas délégable à une machine.</p>
+    </div>
+    <div class="missions-grid reveal">
+      <article class="mission-card">
+        <div class="mission-n">Traçabilité</div>
+        <h3>Chaque affichage a une source</h3>
+        <p>Un verbatim porte son identifiant d'entretien, sa position dans le guide et son horodatage.
+          Ce qui ne remonte pas à une source ne s'affiche pas comme un verbatim.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">Contrôle</div>
+        <h3>Le codage reste corrigeable</h3>
+        <p>Le milieu proposé par l'analyse automatique s'édite dans l'application, et le recalcul se propage
+          à toutes les vues. La proposition de la machine n'est jamais figée.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">Confidentialité</div>
+        <h3>Rien ne sort du poste</h3>
+        <p>Le livrable est un fichier unique qui fonctionne hors connexion. Aucun appel réseau, aucun compte,
+          aucun corpus client versé dans un modèle public.</p>
+      </article>
+      <article class="mission-card">
+        <div class="mission-n">Honnêteté</div>
+        <h3>Ce qui manque est signalé</h3>
+        <p>Les citations non retrouvées mot à mot sont marquées comme reformulées. Les entretiens à faible
+          appariement sont listés. Une donnée absente reste absente, elle n'est pas comblée.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CE QU'ON LIVRE ═══════════════ -->
+<section class="section-pad" style="background:var(--offwhite);">
+  <div class="container">
+    <div class="missions-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px;">— La livraison</div>
+      <h2 class="display">Trois formats,<br>selon qui doit y accéder.</h2>
+    </div>
+    <div class="deliv reveal">
+      <div>
+        <div class="tag">Format 01</div>
+        <h4>Un fichier, hors connexion</h4>
+        <p>Un seul document HTML d'une douzaine de mégaoctets, qui contient tout et s'ouvre d'un
+          double-clic. Pas d'installation, pas de compte, aucun appel réseau. Il circule par clé chiffrée
+          ou par votre espace interne, et vous restez maître de sa diffusion.</p>
+      </div>
+      <div>
+        <div class="tag">Format 02</div>
+        <h4>Un espace hébergé, avec comptes</h4>
+        <p>La même application derrière une authentification, pour ouvrir l'accès à plusieurs équipes sans
+          faire circuler de fichier. Les droits se règlent par périmètre : un service peut voir les
+          verbatims sans voir les transcriptions.</p>
+      </div>
+      <div>
+        <div class="tag">Format 03</div>
+        <h4>Un corpus prêt pour vos outils</h4>
+        <p>Le terrain structuré et documenté, exportable pour alimenter votre propre environnement — une
+          base interrogeable en langage naturel, ou un entrepôt existant. La règle d'anonymisation est
+          appliquée avant l'export.</p>
+      </div>
+    </div>
+
+    <div class="rulebox reveal" style="margin-top:44px;">
+      <p><b>Où ça se place dans la mission.</b> La plateforme se construit à l'étape d'analyse, à partir des
+        mêmes sources que le rapport. Elle est livrée avec lui, à l'étape de décision. Elle ne remplace ni la
+        restitution ni le rapport : elle prend le relais après, quand les questions arrivent une par une.</p>
+      <p>Sur une étude ad-hoc de cette taille, il n'y a pas de terrain supplémentaire à financer — le
+        surcoût porte sur la structuration du corpus et le codage, et se chiffre au cadrage.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block dark">
+  <div class="container">
+    <h2 class="display reveal">Votre dernière étude,<br>encore utilisable ?</h2>
+    <p class="lead reveal">Nous pouvons partir d'un terrain déjà réalisé pour en faire la démonstration sur
+      vos propres données. Comptez une semaine.</p>
+    <div class="ctas reveal">
+      <a href="contact.html" class="btn btn-primary-light">
+        <span>En parler</span>
+        <svg class="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1L13 5L9 9M13 5H1" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; letter-spacing: 0.22em; font-size: 18px; margin-bottom: 20px;">ACMÉ</div>
+        <p data-i18n="footer.about">50 ans d'expertise dans la connaissance client. Siège : 24 rue Turbil, 69003 Lyon, France.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.sectors">Secteurs</h4>
+        <ul>
+          <li><a href="secteur-mobilite.html" data-i18n="sec5.mob.title">Mobilité & Automobile</a></li>
+          <li><a href="secteur-retail-fmcg.html" data-i18n="sec5.fmcg.title">Retail et FMCG</a></li>
+          <li><a href="secteur-sante-cosmetiques.html" data-i18n="sec5.sante.title">Santé & Cosmétiques</a></li>
+          <li><a href="secteur-batiment.html" data-i18n="sec5.bat.title">Bâtiment</a></li>
+          <li><a href="secteur-territoires.html" data-i18n="sec5.terr.title">Territoires, Tourisme & RSE</a></li>
+          <li><a href="secteur-mode-luxe.html" data-i18n="sec5.mode.title">Mode & Luxe</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.territories">Territoires</h4>
+        <ul>
+          <li><a href="index.html#territoires" data-i18n="geo.europe">Europe</a></li>
+          <li><a href="index.html#territoires" data-i18n="geo.americas">Amériques</a></li>
+          <li><a href="index.html#territoires" data-i18n="geo.asia">Asie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@acme-consultant.fr">contact@acme-consultant.fr</a></li>
+          <li><a href="contact.html" data-i18n="footer.form">Formulaire</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-esomar">
+      <span data-i18n="esomar.member">Membre corporate</span>
+      <img src="assets/logos/esomar.png" alt="ESOMAR" loading="lazy">
+    </div>
+    <div class="footer-legal">
+      <div>© <span data-year></span> ACMÉ Consultants · <span data-i18n="footer.legal">Tous droits réservés</span></div>
+      <div data-i18n="footer.offices">Lyon · Paris · Munich · Milan</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Capture absente → cadre hachuré nommant le fichier attendu, au lieu d'une image cassée.
+   Les captures se régénèrent avec : python3 engine/capture_shots.py (dépôt plateforme-qual). */
+document.querySelectorAll('.shot img').forEach(function (img) {
+  var mark = function () { img.closest('.shot').classList.add('is-missing'); };
+  img.addEventListener('error', mark);
+  if (img.complete && img.naturalWidth === 0) mark();
+});
+</script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
