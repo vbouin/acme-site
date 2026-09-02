@@ -13,13 +13,30 @@ Le bouton **FR / EN** en haut à droite bascule tout le site en anglais
 |---|---|
 | **Décision rapide** — l'offre courte, avec un configurateur de dispositif | [/v5.2/decision-rapide.html](decision-rapide.html) |
 | **Contenus** — hub blog, études de cas, livre blanc, FAQ | [/v5.2/contenus.html](contenus.html) |
-| 22 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
+| 27 articles | [focus group Lyon](article-focus-group-lyon.html) · [IA et quali](article-ia-etudes-qualitatives.html) · [prix](article-prix-etude-qualitative.html) · [entretiens ou groupes](article-entretiens-ou-groupes.html) · [décider vite](article-decider-vite.html) · [répondants synthétiques](article-repondants-synthetiques.html) · [car clinic](article-car-clinic.html) · [brief d'étude](article-brief-etude-qualitative.html) |
+| **5 articles d'intention d'achat (sept. 2026)** | [quali ou quanti, dans quel ordre](article-quali-ou-quanti.html) · [combien d'entretiens](article-combien-entretiens.html) · [test de concept](article-test-de-concept.html) · [étude qualitative B2B](article-etude-qualitative-b2b.html) · [restitution et atelier de décision](article-restitution-atelier-decision.html) |
 | 3 études de cas anonymisées | [utilitaire & artisans](cas-utilitaire-artisans.html) · [clinique électrique](cas-clinique-electrique.html) · [fichier client](cas-fichier-client-materiaux.html) |
 | **Observatoire de marchés** | [citadines France/UK](marche-citadines-france-uk.html) · [le luxe et ses 20 M de clients perdus](marche-luxe-clients-perdus.html) · [bricolage et peur de mal faire](marche-bricolage-peur-de-mal-faire.html) |
 | **Parcours sectoriels** (gabarit ×6) | [mobilité](parcours-mobilite.html) · [retail & FMCG](parcours-retail-fmcg.html) · [cosmétique](parcours-sante-cosmetiques.html) · [bâtiment](parcours-batiment.html) · [mode & luxe](parcours-mode-luxe.html) · [territoires](parcours-territoires.html) |
 | **Page pilier** | [L'étude qualitative, du cadrage à la décision](etude-qualitative.html) |
 | Livre blanc, 7 chapitres | [/v5.2/livre-blanc.html](livre-blanc.html) |
 | FAQ, 22 questions | [/v5.2/faq.html](faq.html) |
+
+### Septembre 2026 — cinq articles d'intention d'achat
+
+Choisis d'après le corpus de prompts et la veille éditoriale : les questions qu'un
+acheteur pose en phase de cadrage (quali ou quanti, combien d'entretiens, tester un
+concept, interroger des décideurs B2B) et celle que personne ne pose mais qui décide
+de tout (à quoi sert le rapport). Aucune requête de définition, aucune requête
+« outil ». Chaque article cite ses sources en ligne (Hennink & Kaiser 2022, Guest 2006,
+Nielsen, IntoTheMinds, Enov, Greenbook, Quirk's) et porte un fait de terrain.
+
+Le cocon « L'étude qualitative » reçoit une quatrième branche, **« Jusqu'à la
+décision »** (décider vite + restitution). La FAQ globale et la page pilier renvoient
+désormais vers l'article canonique sur le nombre d'entretiens : une question, une page.
+
+⚠️ Signatures : TN (quali/quanti), CC (entretiens, B2B), VJ (test de concept),
+VB (restitution). Chacun relit et valide ce qui porte son nom avant publication.
 
 ## Décision rapide
 

@@ -420,13 +420,20 @@ COCONS = {
    "branches": {
      "Choisir un dispositif": ["article-entretiens-ou-groupes.html",
                                "article-car-clinic.html",
-                               "article-focus-group-lyon.html"],
+                               "article-focus-group-lyon.html",
+                               "article-quali-ou-quanti.html",
+                               "article-test-de-concept.html"],
      "Cadrer et budgéter":    ["article-brief-etude-qualitative.html",
                                "article-prix-etude-qualitative.html",
-                               "article-decider-vite.html"],
+                               "article-combien-entretiens.html"],
      "Tenir la rigueur":      ["article-declare-observe.html",
                                "article-biais-etude.html",
-                               "article-packaging-avant-lecture.html"],
+                               "article-packaging-avant-lecture.html",
+                               "article-etude-qualitative-b2b.html"],
+     # Ajoutée en septembre 2026 : la sortie de l'étude, là où se joue
+     # le positionnement (« jusqu'à la décision »).
+     "Jusqu'à la décision":   ["article-decider-vite.html",
+                               "article-restitution-atelier-decision.html"],
    }},
  "ia": {
    "titre": "L'IA et vos données",
@@ -1212,7 +1219,7 @@ FAQ = [
  ("Qu'est-ce qu'une étude qualitative ?",
   "Une étude qualitative cherche à comprendre <em>pourquoi</em> les gens font ce qu'ils font, là où une étude quantitative mesure <em>combien</em> le font. Elle repose sur un petit nombre d'entretiens ou de groupes conduits en profondeur, dont on analyse le contenu — les mots employés, les hésitations, les contradictions — plutôt que des scores. On y recourt en amont d'une décision, quand la question n'est pas encore assez claire pour être posée en questionnaire."),
  ("Combien de participants faut-il pour une étude qualitative ?",
-  "Douze à dix-huit entretiens sur une cible homogène, ou deux groupes de six à huit personnes par segment à comparer. Le seuil qui compte est la saturation&nbsp;: le moment où les entretiens supplémentaires n'apportent plus d'information neuve. Il arrive plus tard dès qu'on croise plusieurs profils ou plusieurs marchés."),
+  "Douze à dix-huit entretiens sur une cible homogène, ou deux groupes de six à huit personnes par segment à comparer. Le seuil qui compte est la saturation&nbsp;: le moment où les entretiens supplémentaires n'apportent plus d'information neuve. Il arrive plus tard dès qu'on croise plusieurs profils ou plusieurs marchés. Le détail, et ce que dit la recherche&nbsp;: <a href=\"article-combien-entretiens.html\">combien d'entretiens faut-il&nbsp;?</a>."),
  ("Faut-il choisir des focus groups ou des entretiens individuels ?",
   "Le groupe révèle les normes d'un milieu, l'entretien révèle les écarts individuels. Prenez le groupe pour tester un concept, un packaging ou un discours&nbsp;; prenez l'entretien pour un parcours d'achat, un prix, un sujet sensible ou une décision B2B. Nous détaillons l'arbitrage dans un <a href=\"article-entretiens-ou-groupes.html\">article dédié</a>."),
  ("Faites-vous des cliniques produit ?",
@@ -1259,7 +1266,7 @@ FAQ = [
  ("Peut-on n'acheter que le terrain ?",
   "Oui, et c'est un cas fréquent pour les équipes qui ont leurs propres analystes. Nous faisons le cadrage, le recrutement et le terrain, nous livrons le corpus structuré, et vous travaillez dessus. Vous pouvez décider plus tard d'ajouter des top lines ou un atelier."),
  ("Qu'est-ce qu'un atelier de décision ?",
-  "Une demi-journée animée avec vos équipes, où l'on travaille sur les constats de l'étude jusqu'à un arbitrage écrit. C'est une réponse directe au problème le plus courant des études&nbsp;: un rapport lu par trois personnes et jamais transformé en décision."),
+  "Une demi-journée animée avec vos équipes, où l'on travaille sur les constats de l'étude jusqu'à un arbitrage écrit. C'est une réponse directe au problème le plus courant des études&nbsp;: un rapport lu par trois personnes et jamais transformé en décision. Le détail, et ce que dit la recherche&nbsp;: <a href=\"article-restitution-atelier-decision.html\">pourquoi le rapport ne fait pas décider</a>."),
 ]),
 ]
 
@@ -1700,6 +1707,10 @@ def render_hub():
     # lit pas comme un article de méthode.
     obs = [a for a in ARTICLES if a["cat"].startswith("Observatoire")]
     autres = [a for a in ARTICLES if not a["cat"].startswith("Observatoire")]
+    # Les plus récents en tête : un article ajouté en fin de liste se
+    # retrouvait sinon en vingtième position, derrière les six parcours.
+    autres.sort(key=lambda a: a["date"], reverse=True)
+    obs.sort(key=lambda a: a["date"], reverse=True)
     arts = "".join(card(a, "article") for a in autres)
     obss = "".join(card(a, "obs") for a in obs)
     cass = "".join(card(c, "cas") for c in CAS)
@@ -3143,6 +3154,7 @@ ARTICLES += [
 
 <h2>Combien de personnes&nbsp;?</h2>
 <p><strong>Douze à dix-huit entretiens sur une cible homogène, ou deux groupes de six à huit personnes par segment à comparer.</strong> Le seuil qui compte est la saturation&nbsp;: le moment où un entretien supplémentaire n'apporte plus rien de neuf. Il arrive plus tard dès qu'on croise deux profils ou deux marchés.</p>
+<p class="art-more">Ce que la recherche a mesuré sur la saturation, et pourquoi trente entretiens ne valent pas mieux que quinze&nbsp;: <a href="article-combien-entretiens.html">combien d'entretiens pour une étude qualitative&nbsp;?</a></p>
 <p>Une règle qui ne se négocie pas&nbsp;: <strong>jamais un seul groupe par segment</strong>. Avec un groupe unique, vous ne pouvez pas distinguer ce qui tient au public de ce qui tient à la dynamique de cette salle-là.</p>
 
 <h2>Combien de temps&nbsp;?</h2>
@@ -3757,6 +3769,391 @@ def render_index_en():
                    "Insights — market watch | ACMÉ Consultants",
                    "Dated, attributed figures on mobility, luxury and DIY in France — and what fieldwork says beneath the figures.",
                    body, "contenus.html", extra_jsonld=ld, current="ct")
+
+
+
+# ═══════════════════════════════════════════════════════════════════════
+#  SEPTEMBRE 2026 — CINQ ARTICLES D'INTENTION D'ACHAT
+#  Choisis d'après le corpus de prompts et la veille : ce sont les
+#  questions qu'un acheteur pose en phase de cadrage (quali ou quanti,
+#  combien d'entretiens, tester un concept, interroger des décideurs) et
+#  la question que personne ne pose mais qui décide de tout (à quoi sert
+#  le rapport). Aucune requête de définition, aucune requête « outil ».
+#  Chaque article porte un fait qui ne s'écrit pas sans avoir fait le
+#  terrain, et au moins une source externe citée en ligne.
+# ═══════════════════════════════════════════════════════════════════════
+
+ARTICLES += [
+{
+ "slug": "article-quali-ou-quanti.html",
+ "auteur": "TN",
+ "illus": "courbes.webp",
+ "faq_titre": "Questions fréquentes sur le choix quali / quanti",
+ "faq": [
+  ("Un sondage avec des questions ouvertes remplace-t-il une étude qualitative ?", "Non. Une question ouverte dans un questionnaire obtient une phrase, écrite vite, sans relance. Un entretien obtient un récit, avec les contradictions et les hésitations qui font l'information. Les questions ouvertes d'un sondage servent à repérer des mots, pas à comprendre des raisons."),
+  ("Combien de temps de plus prend une étude en deux temps ?", "Trois à cinq semaines de plus qu'une étude seule, le temps de transformer les constats qualitatifs en questionnaire et de le faire passer. Ce délai s'économise rarement&nbsp;: un questionnaire écrit sans qualitatif se refait souvent une fois qu'on a compris ce qu'il fallait mesurer."),
+  ("Faut-il deux prestataires pour le qualitatif et le quantitatif ?", "Pas forcément, mais il faut deux métiers. Nous ne faisons pas de quantitatif&nbsp;: nous préparons le questionnaire avec l'institut qui le passera, à partir de notre terrain, et nous relisons ses résultats avec lui. Un institut qui prétend tout faire au même niveau mérite qu'on lui demande qui, précisément, fera quoi."),
+  ("Le qualitatif est-il moins fiable parce qu'il interroge moins de gens ?", "Il est moins fiable pour compter, et plus fiable pour comprendre. Quinze entretiens ne disent pas quelle part de vos clients pense quelque chose&nbsp;; ils disent ce que vos clients pensent que vous n'aviez pas imaginé. La fiabilité se juge sur la question posée, pas sur l'effectif."),
+ ],
+ "aide": {"titre": "Cadrer la question avant de choisir la méthode", "chapo": "Une part de notre travail de cadrage consiste à dire quand le qualitatif n'est pas la bonne réponse. Ça nous arrive de le dire, et c'est ce qui rend le reste crédible.", "points": [
+   "Une réunion de cadrage où l'on reformule la décision à prendre avant de parler de méthode",
+   "Un dispositif qualitatif dimensionné sur la saturation, pas sur un chiffre rond",
+   "La préparation du questionnaire quantitatif avec l'institut de votre choix, à partir de nos constats",
+   "Une restitution en atelier où les deux lectures, le combien et le pourquoi, sont mises côte à côte",
+ ]},
+ "loin": [
+  ("Combien d'entretiens pour une étude qualitative ?", "article-combien-entretiens.html"),
+  ("Ce que les gens disent, ce qu'ils font", "article-declare-observe.html"),
+  ("Combien coûte une étude qualitative ?", "article-prix-etude-qualitative.html"),
+ ],
+ "sources": [
+  ("Hennink &amp; Kaiser — Sample sizes for saturation in qualitative research", "revue systématique, Social Science &amp; Medicine, 2022&nbsp;: 9 à 17 entretiens ou 4 à 8 groupes pour saturer sur une cible homogène", "https://www.sciencedirect.com/science/article/pii/S0277953621008558"),
+  ("Gondola — 76 % des lancements de nouveaux produits échouent", "chiffres Nielsen sur la survie des innovations en grande consommation", "https://www.gondola.be/fr/news/76-des-lancements-de-nouveaux-produits-echouent"),
+  ("IntoTheMinds — Combien coûte une étude de marché", "repères publics&nbsp;: environ 600 € l'entretien en B2C, 750 € en B2B", "https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/"),
+ ],
+ "cat": "Repères",
+ "date": "2026-09-02",
+ "read": "8 min",
+ "title": "Étude qualitative ou quantitative : dans quel ordre ?",
+ "h1": "Le sondage vous dira<br>combien. Il ne dira jamais<br>ce que vous n'avez<br>pas demandé.",
+ "desc": "Qualitatif ou quantitatif : ce que chaque méthode sait faire, ce qu'elle ne saura jamais, et l'ordre dans lequel les enchaîner quand la décision est importante.",
+ "kw": "étude qualitative ou quantitative, quali ou quanti, différence étude qualitative quantitative, quelle étude commander",
+ "chapo": "La question nous arrive presque toujours sous cette forme&nbsp;: « on hésite entre un quali et un quanti ». Elle est mal posée, et c'est une bonne nouvelle&nbsp;: une fois reformulée, elle se règle en dix minutes.",
+ "body": """
+<h2>Quali ou quanti&nbsp;: pourquoi la question est mal posée</h2>
+<p><strong>Le quantitatif répond à « combien ». Le qualitatif répond à « pourquoi » et, surtout, à « quoi d'autre ». On ne choisit pas entre les deux, on choisit l'ordre.</strong> Un questionnaire ne peut mesurer que les réponses que vous avez pensé à proposer. Il est excellent pour trancher entre des options connues, et aveugle à tout ce qui n'y figure pas. L'entretien fait l'inverse&nbsp;: il ne mesure rien, et il fait apparaître ce qui manquait à la liste.</p>
+<p>La plupart des mauvaises études que nous voyons passer ne sont pas mal faites. Elles sont dans le mauvais ordre. Un questionnaire passé sur mille personnes a mesuré avec précision cinq critères de choix, et le sixième, celui qui décidait vraiment, n'y était pas parce que personne ne l'avait entendu avant d'écrire le questionnaire.</p>
+
+<h2>Dans quel ordre les enchaîner&nbsp;?</h2>
+<p><strong>Le qualitatif d'abord quand vous ne savez pas encore quelles questions poser. Le quantitatif d'abord quand vous avez déjà une hypothèse précise à mesurer.</strong> C'est la seule règle qui tienne, et elle se vérifie en une question&nbsp;: « si je devais écrire le questionnaire demain matin, saurais-je quoi mettre dans les réponses fermées&nbsp;? » Si la réponse est non, vous n'êtes pas prêt pour le quantitatif.</p>
+<p>Un exemple tiré de nos marchés. En bricolage, une étude nationale dit que sept Français sur dix sont freinés par la peur de mal faire. C'est un chiffre solide, et il ne permet de décider de rien&nbsp;: « peur de mal faire » recouvre la peur d'abîmer le mur, la peur d'acheter le mauvais produit, la peur du regard du vendeur, la peur de ne pas finir. Chacune appelle une réponse différente en magasin. Le quantitatif a dimensionné le problème&nbsp;; il faut le qualitatif pour savoir lequel résoudre.</p>
+""" + fig_matrice(
+  "Quelle méthode pour quelle question",
+  "Deux axes suffisent à trancher&nbsp;: sait-on déjà ce qu'il faut mesurer, et la décision porte-t-elle sur un volume ou sur un sens. La case en bas à gauche est celle où l'on arrive presque toujours en premier.",
+  "On sait déjà quoi mesurer →", "↑ La décision porte sur une proportion",
+  [(0, 0, "Qualitatif d'arbitrage", "Plusieurs lectures possibles, on veut comprendre laquelle tient avant d'engager du volume."),
+   (1, 0, "Quantitatif de mesure", "Hypothèse claire, options connues&nbsp;: un questionnaire donne la proportion et l'intervalle."),
+   (0, 1, "Qualitatif exploratoire", "On ne connaît pas encore les critères. Entretiens ou groupes, jusqu'à saturation."),
+   (1, 1, "Test quantitatif de concept", "Le concept est stabilisé, on mesure l'intention et le prix acceptable sur un échantillon.")]) + """
+<h2>Ce que coûte chacune des deux méthodes</h2>
+<p><strong>Le qualitatif se facture au dispositif, le quantitatif au répondant.</strong> Ça change tout dans la façon de dimensionner. Les repères publics du marché français situent l'entretien individuel autour de <a href="https://www.intotheminds.com/blog/combien-coute-une-etude-de-marche/" rel="nofollow noopener" target="_blank">600 € en B2C et 750 € en B2B</a>, tout compris, et un focus group entre 3 000 et 10 000 € selon la difficulté de recrutement et le livrable. Douze à dix-huit entretiens forment une étude complète sur une cible homogène. Ajouter des entretiens au-delà de la saturation n'améliore rien&nbsp;: nous détaillons ce point dans <a href="article-combien-entretiens.html">combien d'entretiens faut-il</a>.</p>
+<p>En quantitatif, le prix suit le nombre de répondants, la longueur du questionnaire et la rareté de la cible. C'est un métier que nous ne pratiquons pas. Quand une étude appelle les deux, nous préparons le questionnaire avec l'institut qui le passera, à partir de notre terrain, et nous relisons ses résultats avec lui. Le dire nous coûte quelques missions et nous en fait gagner d'autres.</p>
+
+<h2>Quand le quantitatif se trompe sans le savoir</h2>
+<p><strong>Dès qu'il mesure du déclaratif sur un comportement que les gens reconstruisent après coup.</strong> Un questionnaire d'intention d'achat obtient des intentions, sincères et fausses. La grande consommation en paie le prix chaque année&nbsp;: d'après les données Nielsen reprises par <a href="https://www.gondola.be/fr/news/76-des-lancements-de-nouveaux-produits-echouent" rel="nofollow noopener" target="_blank">Gondola</a>, <strong>76 % des lancements de nouveaux produits échouent la première année</strong>, et deux sur trois n'atteignent jamais dix mille unités vendues. La plupart avaient été testés. Ils avaient obtenu de bons scores sur des questions que les acheteurs ne se posent pas en rayon.</p>
+<p>Ce n'est pas un défaut du quantitatif, c'est une limite de la question fermée&nbsp;: elle recueille ce que le répondant croit de lui-même. Nous avons consacré un article à cet écart entre <a href="article-declare-observe.html">ce que les gens disent et ce qu'ils font</a>. Le qualitatif ne le supprime pas, mais il permet de l'entendre, parce qu'un participant qui se contredit en vingt minutes d'entretien vous donne les deux versions.</p>
+
+<h2>Quand le qualitatif ne suffit pas</h2>
+<p><strong>Dès que la décision porte sur une proportion.</strong> Un prix d'acceptation, une part de marché, la hiérarchie de critères à l'échelle d'une clientèle&nbsp;: quinze entretiens ne les mesurent pas, et un institut qualitatif qui vous le laisserait croire vous rendrait un mauvais service. Ce que le qualitatif peut faire à ce stade, c'est vous dire quelles proportions valent la peine d'être mesurées, et dans quels mots poser la question pour que les répondants la comprennent comme vous.</p>
+<p>Il y a une exception à retenir&nbsp;: invalider. Six entretiens bien menés suffisent souvent à démontrer qu'une hypothèse forte ne tient pas, et ça évite un questionnaire. On ne prouve pas une proportion en qualitatif&nbsp;; on peut y enterrer une certitude.</p>
+
+<h2>Peut-on faire les deux sur le même projet&nbsp;?</h2>
+<p><strong>Oui, et c'est le dispositif que nous recommandons dès que la décision engage un outillage, une gamme ou un prix.</strong> La séquence qui fonctionne&nbsp;: un qualitatif exploratoire qui fait remonter les critères réels et les mots des clients, un quantitatif qui mesure ces critères sur un échantillon représentatif, puis, si les chiffres surprennent, un retour qualitatif court pour comprendre la surprise. Le troisième temps est celui que l'on oublie, et c'est souvent lui qui produit la décision.</p>
+""" + fig_chaine(
+  "La séquence complète, quand la décision le justifie",
+  "Le premier maillon est celui que nous tenons. Le deuxième relève d'un institut quantitatif, préparé avec nos constats. Le troisième est court, et c'est lui qu'on oublie.",
+  [("Quali exploratoire", "12 à 18 entretiens"), ("Quanti de mesure", "questionnaire, échantillon"), ("Quali d'explication", "6 à 8 entretiens ciblés")],
+  pleines=1) + """
+<p class="art-more">Pour dimensionner le premier temps, notre <a href="decision-rapide.html#configurateur">configurateur Décision rapide</a> propose un dispositif et son calendrier en deux minutes.</p>
+""",
+},
+{
+ "slug": "article-combien-entretiens.html",
+ "auteur": "CC",
+ "illus": "bulles.webp",
+ "faq_titre": "Questions fréquentes sur le nombre d'entretiens",
+ "faq": [
+  ("Douze entretiens suffisent-ils pour une étude sur plusieurs pays ?", "Non&nbsp;: douze par pays, au minimum, si vous voulez pouvoir les comparer. La saturation se calcule par population homogène. Deux marchés sont deux populations, et c'est précisément la comparaison que vous achetez."),
+  ("La saturation se voit-elle à l'avance ?", "Non, elle se constate en cours de route. On tient un tableau des thèmes par entretien&nbsp;: quand deux ou trois entretiens consécutifs n'ajoutent plus de ligne, on y est. C'est pourquoi nous recrutons deux personnes de plus que la cible et décidons en fin de terrain de les interroger ou non."),
+  ("Peut-on ajouter des entretiens en cours d'étude ?", "Oui, et c'est le bon réflexe si un segment inattendu apparaît. Il faut alors le recruter comme tel, pas ajouter des voix au hasard. Ajouter cinq entretiens tirés de la même population qu'on a déjà saturée ne produit rien."),
+  ("Un focus group compte-t-il pour huit entretiens ?", "Non. Un groupe produit une conversation, pas huit récits&nbsp;: les participants se répondent, s'alignent, se taisent. Quatre à huit groupes saturent sur une cible homogène, ce qui recoupe l'ordre de grandeur des entretiens, mais on ne convertit pas l'un dans l'autre."),
+ ],
+ "aide": {"titre": "Dimensionner un terrain sur la saturation, pas sur un chiffre rond", "chapo": "Nous proposons systématiquement le nombre d'entretiens le plus bas qui tienne, et nous expliquons pourquoi. Ce qui est économisé finance un second segment, ou l'atelier de décision.", "points": [
+   "Un dispositif par population homogène, jamais un total réparti à l'aveugle",
+   "Un tableau de saturation tenu pendant le terrain et remis avec les transcripts",
+   "Deux participants recrutés en réserve, interrogés seulement si le corpus le demande",
+   "Le budget libéré réaffecté là où il produit&nbsp;: un segment de plus, un pays de plus, un atelier",
+ ]},
+ "loin": [
+  ("Étude qualitative ou quantitative&nbsp;: dans quel ordre", "article-quali-ou-quanti.html"),
+  ("Combien coûte une étude qualitative ?", "article-prix-etude-qualitative.html"),
+  ("Décider vite sans décider mal", "article-decider-vite.html"),
+ ],
+ "sources": [
+  ("Guest, Bunce &amp; Johnson — How many interviews are enough?", "Field Methods, 2006&nbsp;: sur soixante entretiens, la saturation est atteinte dans les douze premiers, et les grands thèmes dès le sixième", "https://journals.sagepub.com/doi/10.1177/1525822x05279903"),
+  ("Hennink &amp; Kaiser — Sample sizes for saturation in qualitative research", "revue systématique des tests empiriques, Social Science &amp; Medicine, 2022&nbsp;: 9 à 17 entretiens ou 4 à 8 groupes", "https://www.sciencedirect.com/science/article/pii/S0277953621008558"),
+  ("IntoTheMinds — Combien d'entretiens réaliser pour votre étude qualitative", "le point de vue d'un bureau d'études sur la taille d'échantillon", "https://www.intotheminds.com/fr/etude-qualitative-taille-echantillon"),
+ ],
+ "cat": "Méthode",
+ "date": "2026-09-02",
+ "read": "8 min",
+ "title": "Combien d'entretiens pour une étude qualitative ?",
+ "h1": "Le douzième entretien<br>n'apprend presque plus rien.<br>Le premier du segment<br>suivant, tout.",
+ "desc": "Neuf à dix-sept entretiens, quatre à huit groupes : ce que la recherche a mesuré sur la saturation, pourquoi les acheteurs en demandent trente, et ce que ça coûte.",
+ "kw": "combien d'entretiens étude qualitative, saturation étude qualitative, taille échantillon qualitatif, nombre de focus groups",
+ "chapo": "C'est la question la plus fréquente d'un brief, et celle où l'écart entre ce que le marché vend et ce que la recherche a mesuré est le plus grand. Voici les chiffres, et ce qu'on en fait sur le terrain.",
+ "body": """
+<h2>Combien d'entretiens faut-il&nbsp;?</h2>
+<p><strong>Neuf à dix-sept entretiens, ou quatre à huit focus groups, pour une population homogène et une question resserrée.</strong> C'est le résultat de la revue systématique publiée par <a href="https://www.sciencedirect.com/science/article/pii/S0277953621008558" rel="nofollow noopener" target="_blank">Hennink et Kaiser dans <em>Social Science &amp; Medicine</em> en 2022</a>, qui a passé en revue l'ensemble des tests empiriques de saturation disponibles. Il recoupe ce que nous constatons depuis quarante ans&nbsp;: sur une cible bien définie, le corpus cesse d'apporter du neuf entre le dixième et le quinzième entretien.</p>
+<p>La règle s'inverse dès que la population est hétérogène ou la question large. Ce n'est pas une exception, c'est la même règle appliquée plusieurs fois&nbsp;: chaque segment que vous voulez pouvoir opposer est une population, et chacune sature séparément.</p>
+
+<h2>D'où vient le chiffre de douze&nbsp;?</h2>
+<p><strong>D'une expérience de 2006 restée la référence du domaine.</strong> Guest, Bunce et Johnson ont analysé <a href="https://journals.sagepub.com/doi/10.1177/1525822x05279903" rel="nofollow noopener" target="_blank">soixante entretiens conduits sur une même population</a>, en codant les thèmes au fur et à mesure. Les grands thèmes étaient tous présents dès le sixième entretien&nbsp;; la saturation, c'est-à-dire le moment où plus aucun code nouveau n'apparaissait, était atteinte au douzième. Les quarante-huit entretiens suivants ont servi à vérifier qu'il n'y avait plus rien à trouver.</p>
+<p>Le chiffre s'est ensuite répandu sans sa condition&nbsp;: <em>une même population</em>. Douze entretiens répartis sur trois segments, ce sont trois corpus de quatre, et aucun des trois n'a saturé.</p>
+""" + fig_barres(
+  "Ce qu'apporte chaque tranche d'entretiens, sur une cible homogène",
+  "Schéma de principe, pas une mesure&nbsp;: la forme de la courbe est celle que décrivent les études de saturation et que l'on retrouve sur nos corpus. Le rendement des entretiens décroît vite, et le treizième coûte autant que le premier.",
+  [("Entretiens 1 à 4", 10, "l'essentiel des thèmes"), ("Entretiens 5 à 8", 5, "les nuances et les variantes"),
+   ("Entretiens 9 à 12", 2, "les cas rares, les contre-exemples"), ("13 et au-delà", 0.4, "presque rien de neuf")],
+  max_val=10) + """
+<h2>Qu'est-ce que la saturation, concrètement&nbsp;?</h2>
+<p><strong>Le moment où deux ou trois entretiens consécutifs n'ajoutent aucune ligne au tableau des thèmes.</strong> Ce n'est pas une impression d'analyste, c'est un tableau&nbsp;: en colonnes les entretiens, en lignes les thèmes, une croix quand un thème apparaît pour la première fois. Tant que des croix se posent sur de nouvelles lignes, on continue. Quand trois colonnes de suite restent vides, on arrête. Nous remettons ce tableau avec les transcripts&nbsp;: il justifie le nombre d'entretiens mieux que n'importe quel argument.</p>
+<p>La conséquence pratique est que le nombre exact ne se connaît pas au moment du devis. Nous recrutons donc deux personnes de plus que la cible, indemnisées dans tous les cas, et nous décidons en fin de terrain de les interroger ou non. Sur une dizaine de dispositifs, cette réserve sert une fois sur trois.</p>
+
+<h2>Quand faut-il plus d'entretiens&nbsp;?</h2>
+<p><strong>Quand il y a plusieurs populations, plusieurs pays, ou une question qui n'en est pas encore une.</strong> Trois cas reviennent&nbsp;:</p>
+<ul>
+  <li><strong>Les segments à comparer.</strong> Douze à quinze par segment, ou deux groupes par segment. Un seul groupe par segment ne se lit pas&nbsp;: vous ne savez pas si ce que vous entendez tient au segment ou à la dynamique de cette salle-là.</li>
+  <li><strong>Le multi-pays.</strong> Chaque marché est une population. Les auteurs de 2006 estimaient eux-mêmes qu'il faut vingt à quarante entretiens pour dégager des thèmes communs à plusieurs cultures&nbsp;; sur un terrain France-Italie, nous ne descendons pas sous douze par pays.</li>
+  <li><strong>La question encore floue.</strong> Une exploration sans hypothèse sature plus tard, parce que le tableau des thèmes se construit en même temps que le terrain. C'est le cas où un premier lot de six entretiens, suivi d'un recadrage, coûte moins cher qu'un lot de vingt décidé d'avance.</li>
+</ul>
+
+<h2>Quand faut-il moins&nbsp;?</h2>
+<p><strong>Quand il s'agit d'invalider une hypothèse forte, ou de trancher entre deux directions déjà connues.</strong> Six à huit entretiens suffisent à établir qu'une certitude interne ne tient pas chez les clients. Ils ne suffisent pas à dire ce qu'il faut faire à la place, et il faut le savoir en signant. C'est le principe de notre <a href="article-decider-vite.html">dispositif court</a>&nbsp;: une question unique, une population, un terrain serré.</p>
+
+<h2>Pourquoi les acheteurs demandent-ils trente entretiens&nbsp;?</h2>
+<p><strong>Parce que trente rassure, et que la règle des grands nombres a été transposée à tort d'un métier à l'autre.</strong> En quantitatif, l'effectif réduit la marge d'erreur. En qualitatif, il ne réduit rien&nbsp;: un thème présent chez un participant sur quinze est un thème, et il ne devient pas plus vrai à trois sur trente. Ce que l'effectif fait, en revanche, c'est doubler le budget.</p>
+<p>Le calcul est simple avec les repères publics du marché, autour de 600 € l'entretien B2C. Trente entretiens, c'est 18 000 € de terrain&nbsp;; quinze, c'est 9 000 €. La différence paie un second segment, un second pays, ou l'atelier de décision qui fera que l'étude serve à quelque chose. Nous préférons proposer quinze entretiens et un atelier que trente entretiens et un rapport. Ça nous fait perdre des consultations où le nombre d'entretiens sert de critère de comparaison, et nous l'assumons.</p>
+
+<h2>Le vrai risque n'est pas le nombre</h2>
+<p><strong>C'est le recrutement.</strong> Quinze entretiens sur les bonnes personnes valent plus que quarante sur un panel approximatif, et aucun effectif ne corrige un critère de recrutement mal posé. Le temps qu'on passe à discuter du nombre d'entretiens serait mieux employé à relire le questionnaire de recrutement. La qualité de l'étude se joue dans ces deux pages, et c'est aussi le premier poste du budget. Nous l'avons détaillé dans <a href="article-prix-etude-qualitative.html">combien coûte une étude qualitative</a>.</p>
+""",
+},
+{
+ "slug": "article-test-de-concept.html",
+ "auteur": "VJ",
+ "illus": "demontage.webp",
+ "faq_titre": "Questions fréquentes sur le test de concept",
+ "faq": [
+  ("Combien de concepts tester à la fois ?", "Trois à cinq, jamais un seul. Un concept présenté seul est jugé dans l'absolu, et dans l'absolu presque tout paraît intéressant. Confronté à des alternatives, il est jugé par rapport à quelque chose, et c'est ainsi que l'acheteur le jugera en rayon."),
+  ("Faut-il montrer le prix pendant un test de concept ?", "Oui, à un moment, et pas au début. On recueille d'abord la compréhension et l'usage imaginé, puis on introduit le prix et on regarde ce qui change. Un concept qui perd tout intérêt à l'annonce du prix vous apprend plus qu'un concept qui plaît sans prix."),
+  ("Un test de concept remplace-t-il un test produit ?", "Non. Le test de concept juge une promesse&nbsp;; le test produit juge un objet réel, dans la main. Un concept enthousiasmant peut donner un produit décevant, et l'inverse existe. Les deux se succèdent, avec des mois d'écart."),
+  ("Combien de temps et combien ça coûte ?", "Trois à cinq semaines pour un dispositif de quatre groupes, cadrage compris. Les repères publics situent un focus group entre 3 000 et 10 000 € tout compris, le recrutement en représentant souvent le premier poste. Le montant exact dépend de la cible et du livrable&nbsp;: nous le chiffrons en rendez-vous."),
+ ],
+ "aide": {"titre": "Tester une idée avant qu'elle ne coûte", "chapo": "Nous testons des concepts depuis quarante ans, en salle, en rayon simulé et en clinique produit. Ce que nous cherchons dans un test, ce n'est pas si le concept plaît&nbsp;: c'est ce qu'il remplace, et pour qui.", "points": [
+   "Trois à cinq concepts présentés dans les codes de la catégorie, jamais embellis",
+   "Des participants recrutés sur comportement d'achat réel, dans votre fichier quand il existe",
+   "Une consigne qui fait décrire avant de faire juger, et le prix introduit au bon moment",
+   "Une restitution qui distingue ce qui plaît de ce qui se vendra, jusqu'à l'arbitrage de gamme",
+ ]},
+ "loin": [
+  ("Ce qu'un packaging dit avant qu'on l'ait lu", "article-packaging-avant-lecture.html"),
+  ("Qu'est-ce qu'une car clinic ?", "article-car-clinic.html"),
+  ("Étude qualitative ou quantitative&nbsp;: dans quel ordre", "article-quali-ou-quanti.html"),
+ ],
+ "sources": [
+  ("Gondola — 76 % des lancements de nouveaux produits échouent", "données Nielsen&nbsp;: trois innovations sur quatre ne tiennent pas un an en rayon, deux sur trois n'atteignent pas 10 000 unités", "https://www.gondola.be/fr/news/76-des-lancements-de-nouveaux-produits-echouent"),
+  ("Esteval — 76 % des lancements échouent la première année", "reprise et commentaire des chiffres Nielsen", "https://www.esteval.fr/article.8473.76-pourcents-des-lancements-de-nouveaux-produits-echouent-la-1ere-annee"),
+  ("Square Cocoon — Prix d'un focus group", "repères de budget par groupe, 2026", "https://www.squarecocoon.fr/prix-d-un-focus-group/"),
+ ],
+ "cat": "Méthode",
+ "date": "2026-09-02",
+ "read": "8 min",
+ "title": "Test de concept : tester une idée avant de la lancer",
+ "h1": "Trois lancements sur quatre<br>quittent le rayon<br>en un an. Le test<br>avait dit oui.",
+ "desc": "Quand tester un concept, comment le présenter, quelles questions poser et comment lire les réponses pour que le test prédise le rayon plutôt que la salle.",
+ "kw": "test de concept, tester une idée de produit, test de concept qualitatif, étude concept produit, lancement produit étude",
+ "chapo": "Un test de concept sert à une seule chose&nbsp;: dépenser quelques milliers d'euros pour ne pas en dépenser des centaines de milliers dans un outillage. Encore faut-il qu'il prédise le rayon, et pas la salle.",
+ "body": """
+<h2>Qu'est-ce qu'un test de concept, et quand le faire&nbsp;?</h2>
+<p><strong>Confronter une idée qui n'existe pas encore à ses futurs acheteurs, avant que la moindre décision industrielle ne la fige.</strong> Le bon moment se reconnaît à deux signes&nbsp;: plusieurs directions sont encore ouvertes, et aucune n'a encore coûté d'argent. Dès qu'un moule est commandé ou qu'un fournisseur est engagé, le test change de nature&nbsp;: on ne teste plus pour choisir, on teste pour se rassurer, et les résultats sont lus en conséquence.</p>
+<p>Le test intervient donc tôt, sur des représentations, ce qui le distingue d'une clinique produit, où l'objet réel est présent à l'échelle. Nous avons expliqué cette différence dans <a href="article-car-clinic.html">qu'est-ce qu'une car clinic</a>.</p>
+
+<h2>Pourquoi tant de produits testés échouent-ils quand même&nbsp;?</h2>
+<p><strong>Parce que le test a mesuré une intention déclarée dans une salle, et que le rayon ne demande pas d'intention.</strong> Les chiffres de la grande consommation sont constants d'une année sur l'autre&nbsp;: d'après les données Nielsen reprises par <a href="https://www.gondola.be/fr/news/76-des-lancements-de-nouveaux-produits-echouent" rel="nofollow noopener" target="_blank">Gondola</a>, <strong>76 % des lancements échouent la première année</strong>, et deux innovations sur trois n'atteignent jamais dix mille unités. La quasi-totalité avait été testée, souvent avec de bons scores.</p>
+<p>Trois causes reviennent sur les tests que nous avons vus échouer à prédire&nbsp;:</p>
+<ul>
+  <li><strong>Le concept était présenté mieux qu'il ne le sera jamais.</strong> Une planche léchée, un texte qui explique, un animateur qui répond aux questions. En rayon, personne n'explique rien, et le produit a trois secondes.</li>
+  <li><strong>On a demandé une intention.</strong> « Achèteriez-vous ce produit&nbsp;? » obtient un oui poli, sincère et sans valeur. Ce que les gens déclarent et ce qu'ils font sont deux choses, et nous y avons consacré <a href="article-declare-observe.html">un article entier</a>.</li>
+  <li><strong>L'échantillon était aimable.</strong> Recruté large, sans exigence sur le comportement d'achat réel dans la catégorie. Des gens qui n'achètent jamais de chocolat professionnel ont un avis sur le chocolat professionnel, et il ne vaut rien.</li>
+</ul>
+
+<h2>Qualitatif ou quantitatif pour un test de concept&nbsp;?</h2>
+<p><strong>Le qualitatif d'abord, tant que les directions sont ouvertes&nbsp;; le quantitatif ensuite, sur le concept stabilisé, pour mesurer l'intention et le prix.</strong> Le qualitatif ne mesure pas la part d'acheteurs&nbsp;; il fait apparaître ce que le concept évoque, ce qu'il remplace, et les objections que le questionnaire n'aurait pas su proposer. Le quantitatif mesure ensuite, sur un échantillon représentatif, ce que le qualitatif a appris à formuler. Inverser l'ordre revient à mesurer précisément des questions mal posées, ce que nous détaillons dans <a href="article-quali-ou-quanti.html">quali ou quanti, dans quel ordre</a>.</p>
+""" + fig_chaine(
+  "Où se place le test dans le développement d'un produit",
+  "Le test de concept qualitatif intervient au deuxième maillon, quand plusieurs directions existent encore. Plus on le décale à droite, plus il coûte cher de tenir compte de ce qu'il dit.",
+  [("Idée", "hypothèses internes"), ("Directions", "test quali, 3 à 5 concepts"), ("Concept stabilisé", "test quanti, prix"), ("Prototype", "clinique, rayon simulé"), ("Lancement", "premiers mois d'usage")],
+  pleines=0) + """
+<h2>Comment présenter le concept&nbsp;?</h2>
+<p><strong>Le plus proche possible de ce que verra l'acheteur, et jamais mieux.</strong> Une planche concept classique, avec un visuel, une promesse et trois bénéfices, est un format d'agence, pas un format de rayon. Elle fait lire ce que personne ne lira. Quand la catégorie s'y prête, nous préférons un facing simulé parmi les concurrents réels, dans les codes de la catégorie&nbsp;: c'est ce que nous avons décrit à propos de <a href="article-packaging-avant-lecture.html">ce qu'un packaging dit avant d'être lu</a>. Le concept qui se distingue à trois mètres a déjà passé une épreuve que la planche ne fait pas passer.</p>
+<p>Deux règles de présentation qui coûtent peu et changent les résultats&nbsp;: montrer les concepts dans un ordre différent à chaque groupe, et ne jamais laisser l'animateur défendre un concept qu'un participant n'a pas compris. L'incompréhension est un résultat.</p>
+
+<h2>Les questions qui font parler</h2>
+<p><strong>Faire décrire avant de faire juger.</strong> « Que voyez-vous&nbsp;? À quoi ça sert&nbsp;? À qui&nbsp;? » avant tout « qu'en pensez-vous&nbsp;? ». Un participant qui décrit un concept vous dit ce qu'il a compris, et l'écart avec ce que vous vouliez dire est la première information du test. Viennent ensuite les trois questions qui, sur nos terrains, produisent l'essentiel&nbsp;:</p>
+<ul>
+  <li><strong>« Qu'est-ce que ça remplacerait, chez vous&nbsp;? »</strong> Un produit qui ne remplace rien n'a pas de place dans le panier. C'est la question la plus prédictive que nous connaissions.</li>
+  <li><strong>« À qui l'offririez-vous, ou le conseilleriez-vous&nbsp;? »</strong> Elle déplace le participant hors de lui-même et fait apparaître la cible réelle, qui n'est pas toujours celle du brief.</li>
+  <li><strong>« À quel prix ce serait trop cher, et à quel prix vous douteriez de la qualité&nbsp;? »</strong> Introduite tard, une fois le concept compris. Elle ne donne pas un prix&nbsp;: elle donne l'intervalle dans lequel le quantitatif devra chercher.</li>
+</ul>
+
+<h2>Comment lire les résultats&nbsp;?</h2>
+<p><strong>L'enthousiasme n'est pas un signal. Les objections précises et les substitutions le sont.</strong> Un groupe qui trouve un concept « sympa » ne vous apprend rien. Un groupe où trois personnes disent exactement pourquoi elles ne l'achèteraient pas, et deux disent ce qu'il remplacerait dans leur cuisine, vous a donné de quoi décider.</p>
+<p>Et une règle qui déplaît souvent en restitution&nbsp;: le concept qui divise vaut plus que celui qui plaît à tout le monde. Le consensus mou produit des produits que personne ne choisit. Sur une mission de refonte de gamme chez un chocolatier professionnel, treize concepts ont été confrontés à une trentaine d'artisans et de restaurateurs&nbsp;; cinq sont sortis, et aucun des cinq n'était celui qui avait recueilli le plus de « c'est bien ». Ils étaient ceux qui avaient déclenché des « ça, je le mettrais à la place de ».</p>
+""",
+},
+{
+ "slug": "article-etude-qualitative-b2b.html",
+ "auteur": "CC",
+ "illus": "conversation.webp",
+ "faq_titre": "Questions fréquentes sur les études qualitatives B2B",
+ "faq": [
+  ("Faut-il indemniser un décideur pour un entretien ?", "Oui, et pas symboliquement. Les repères publics situent l'entretien B2B autour de 750 € tout compris, indemnisation incluse&nbsp;: un directeur des achats qui vous accorde une heure la prend sur sa journée. Certains refusent l'argent&nbsp;; on propose alors un don, ou la restitution anonymisée des résultats, qui est souvent ce qui les intéresse vraiment."),
+  ("Peut-on interroger nos propres clients ?", "Oui, et c'est le meilleur terrain qui existe, à une condition&nbsp;: que ce ne soit pas leur commercial qui organise ni qui assiste. Nous qualifions dans votre fichier, nous prenons les rendez-vous, et le client sait qu'il parle à un tiers. Sinon vous obtenez une réunion de suivi de compte, pas un entretien."),
+  ("L'entretien à distance fonctionne-t-il en B2B ?", "Mieux qu'en B2C. Les décideurs sont habitués à la visioconférence, disponibles entre deux réunions, et l'absence de déplacement permet de couvrir plusieurs régions en une semaine. On perd le bureau, les documents sur la table, l'usine derrière la vitre&nbsp;: quand ils comptent, on se déplace."),
+  ("Comment éviter que le participant récite la position officielle ?", "En ne posant aucune question à laquelle la position officielle répond. « Quels sont vos critères de sélection&nbsp;? » obtient le discours. « Racontez-moi votre dernier appel d'offres, depuis le premier mail » obtient ce qui s'est passé. La position officielle ne survit pas au récit."),
+ ],
+ "aide": {"titre": "Faire parler des professionnels qui n'ont ni le temps ni l'envie", "chapo": "Acheteurs industriels, prescripteurs, artisans, dirigeants de PME&nbsp;: une part importante de nos terrains porte sur des gens dont l'étude n'est pas le métier. On les recrute autrement, on les interroge autrement.", "points": [
+   "Recrutement sur fonction et comportement d'achat vérifiés, ou qualification dans votre fichier client",
+   "Entretiens conduits par un consultant senior qui connaît le vocabulaire du métier avant d'arriver",
+   "Guides construits sur le récit d'un achat réel, pas sur une grille de critères",
+   "Anonymisation par rôle et taille d'entreprise, pour que le client ne reconnaisse pas ses clients",
+ ]},
+ "loin": [
+  ("Diviser le coût d'un terrain grâce au fichier client", "cas-fichier-client-materiaux.html"),
+  ("Vos verbatims sont des données personnelles", "article-verbatims-donnees-personnelles.html"),
+  ("Combien d'entretiens pour une étude qualitative ?", "article-combien-entretiens.html"),
+ ],
+ "sources": [
+  ("IntoTheMinds — Entretiens qualitatifs en B2B&nbsp;: quel budget prévoir", "150 à 350 € de recrutement par profil, entretiens de 45 à 90 minutes", "https://www.intotheminds.com/blog/entretiens-qualitatifs-b2b-budget/"),
+  ("IntoTheMinds — 7 approches pour recruter les répondants", "les canaux de recrutement en qualitatif et leurs limites", "https://www.intotheminds.com/blog/entretiens-qualitatifs-recrutement/"),
+  ("Enov — Études B2B&nbsp;: 3 clés pour obtenir des insights actionnables", "l'accroche et la logique gagnant-gagnant dans le recrutement de professionnels", "https://enov.fr/blog/actus/etudes-de-marche-b2b-engager-les-professionnels-et-produire-des-insights-actionnables"),
+ ],
+ "cat": "Terrain",
+ "date": "2026-09-02",
+ "read": "9 min",
+ "title": "Étude qualitative B2B : interroger des décideurs pressés",
+ "h1": "Un acheteur industriel<br>vous donnera quarante<br>minutes. Pas deux fois.",
+ "desc": "Recruter des décideurs, les indemniser, les faire parler autrement qu'en langue officielle, et restituer sans qu'ils soient reconnaissables.",
+ "kw": "étude qualitative B2B, entretiens décideurs, étude de marché B2B qualitative, interroger des acheteurs, recrutement B2B étude",
+ "chapo": "En B2B, la personne interrogée ne parle pas d'elle. Elle parle au nom d'une organisation où trois autres personnes ont décidé avec elle, et elle a quarante minutes. Tout le dispositif découle de ces deux contraintes.",
+ "body": """
+<h2>En quoi une étude qualitative B2B est-elle différente&nbsp;?</h2>
+<p><strong>Le participant parle au nom d'une organisation, et la décision qu'il décrit a été prise à plusieurs.</strong> Un particulier qui achète une voiture vous raconte sa décision. Un responsable maintenance qui a choisi un fournisseur vous raconte une partie d'une décision où l'acheteur, le directeur d'usine et parfois le siège ont pesé, chacun avec ses critères. Interroger une seule de ces personnes, c'est interroger un témoin.</p>
+<p>La conséquence est mécanique&nbsp;: une étude B2B interroge des rôles, pas des individus, et il faut couvrir chaque rôle qui pèse dans la décision. L'utilisateur qui manipule le produit, le prescripteur qui l'a mis dans le cahier des charges, l'acheteur qui a négocié, la direction qui a arbitré. Ils ne disent pas la même chose, et c'est l'écart entre eux qui est l'information.</p>
+""" + fig_matrice(
+  "Les quatre rôles d'un achat B2B, et ce qu'ils coûtent à interroger",
+  "L'axe horizontal dit qui est facile à joindre, l'axe vertical qui pèse dans la décision. Le prescripteur, en haut à gauche, est celui qu'on oublie parce qu'il est difficile&nbsp;: c'est souvent lui qui a écrit le cahier des charges.",
+  "Facile à recruter →", "↑ Pèse dans la décision",
+  [(0, 0, "Le prescripteur", "Bureau d'études, responsable technique. Rare, méfiant, décisif&nbsp;: il a écrit les critères."),
+   (1, 0, "L'acheteur", "Achats, direction. Joignable, mais parle volontiers la langue officielle."),
+   (0, 1, "La direction", "Arbitre en dernier ressort. Presque impossible à recruter hors fichier client."),
+   (1, 1, "L'utilisateur", "Opérateur, technicien. Facile à joindre, précis sur l'usage, sans poids sur le choix.")]) + """
+<h2>Comment recruter des décideurs&nbsp;?</h2>
+<p><strong>Dans votre fichier client d'abord, sur des panels professionnels ensuite, et jamais par le commercial qui tient le compte.</strong> Le recrutement est le poste le plus lourd d'une étude B2B&nbsp;: <a href="https://www.intotheminds.com/blog/entretiens-qualitatifs-b2b-budget/" rel="nofollow noopener" target="_blank">IntoTheMinds</a> le chiffre entre 150 et 350 € par profil selon sa rareté, avant même l'entretien, et les repères de marché placent l'entretien B2B complet autour de 750 €. Un directeur de site industriel dans un secteur donné, dans une région donnée, ce sont quelques dizaines de personnes en France&nbsp;; on ne les trouve pas sur un panel.</p>
+<p>Le fichier client change l'équation. Quand un distributeur de matériaux nous a confié deux cents contacts pour en retenir quatre-vingts, le coût de sourcing a été divisé et la précision du profil a été totale&nbsp;: nous l'avons raconté dans <a href="cas-fichier-client-materiaux.html">cette étude de cas</a>. Une condition, non négociable&nbsp;: le commercial du compte n'organise pas le rendez-vous et n'y assiste pas. Il peut prévenir que quelqu'un appellera, rien de plus. Sinon l'entretien devient une réunion de suivi de compte, et le client dit ce qu'il dit à son fournisseur.</p>
+<p>Sur l'accroche, <a href="https://enov.fr/blog/actus/etudes-de-marche-b2b-engager-les-professionnels-et-produire-des-insights-actionnables" rel="nofollow noopener" target="_blank">Enov</a> a raison d'insister sur la logique gagnant-gagnant&nbsp;: ce qui fait accepter un décideur, c'est rarement l'indemnité. C'est la promesse de recevoir, anonymisée, la synthèse de ce que ses pairs ont dit. Nous la tenons systématiquement.</p>
+
+<h2>Entretien ou focus group en B2B&nbsp;?</h2>
+<p><strong>L'entretien individuel, par défaut. Le groupe seulement entre pairs qui ne sont pas concurrents.</strong> Réunir dans une salle des acheteurs de trois entreprises du même secteur produit un silence poli&nbsp;: personne ne dit ce qu'il paie ni ce qui l'a fait changer de fournisseur. Le groupe fonctionne en B2B quand les participants partagent un métier sans partager un marché&nbsp;: des responsables maintenance de secteurs différents, des artisans de régions différentes.</p>
+<p>Un entretien B2B dure de quarante-cinq à quatre-vingt-dix minutes. La borne basse est la plus fréquente, et elle est imposée par l'agenda du participant, pas par le guide. Il faut donc un guide qui tienne en quarante minutes, avec les trois questions qui comptent dans le premier quart d'heure. Le reste est un bonus qu'on n'obtient pas toujours.</p>
+
+<h2>Comment conduire l'entretien&nbsp;?</h2>
+<p><strong>Faire raconter le dernier achat, du premier mail à la signature. Ne jamais demander les critères.</strong> La question « quels sont vos critères de choix&nbsp;? » obtient la réponse officielle, celle du cahier des charges&nbsp;: prix, qualité, délai, service. Elle est vraie et inutile. La question « racontez-moi le dernier appel d'offres, depuis le moment où vous avez su qu'il fallait changer » obtient ce qui s'est passé&nbsp;: le fournisseur historique qui n'a pas rappelé, le collègue qui connaissait quelqu'un, la démonstration qui a mal tourné. Les critères apparaissent dans le récit, hiérarchisés par ce qui a réellement fait basculer.</p>
+<p>Trois pratiques qui font la différence sur ce terrain&nbsp;:</p>
+<ul>
+  <li><strong>Connaître le métier avant d'arriver.</strong> Un participant qui doit expliquer son vocabulaire perd dix minutes sur quarante et vous range parmi les gens à qui on parle simplement. Nous passons du temps en immersion avant le premier entretien, et ce temps est dans le devis.</li>
+  <li><strong>Faire montrer les documents.</strong> Le tableau comparatif qu'il a fait, le mail du fournisseur, la fiche technique annotée. En visioconférence, le partage d'écran remplace la table. Ce que le participant montre contredit souvent ce qu'il vient de dire, et c'est ce qu'on cherche.</li>
+  <li><strong>Tenir le silence.</strong> Un décideur pressé donne d'abord la réponse courte. Les trois secondes qui suivent sont l'endroit où il se reprend. Un animateur qui enchaîne perd la phrase, et il n'y aura pas de second entretien.</li>
+</ul>
+
+<h2>Combien d'entretiens en B2B&nbsp;?</h2>
+<p><strong>Douze à quinze par rôle homogène, et donc plus qu'en B2C pour une même question, parce qu'il y a plusieurs rôles.</strong> La saturation se calcule par population, et un acheteur et un prescripteur sont deux populations. Une étude qui couvre trois rôles sur un marché commence rarement en dessous de vingt-cinq entretiens, et c'est le seul cas où nous en recommandons autant. Le détail de la règle, et la recherche qui la fonde, dans <a href="article-combien-entretiens.html">combien d'entretiens faut-il</a>.</p>
+<p>Sur les terrains multi-pays, courants en B2B industriel, chaque marché ajoute sa propre saturation. Le point délicat n'est pas la logistique&nbsp;: c'est l'équivalence des profils recrutés, un « responsable maintenance » n'ayant pas le même périmètre en France et en Allemagne.</p>
+
+<h2>Ce que le B2B change dans la restitution</h2>
+<p><strong>Une voix suffit à identifier quelqu'un.</strong> Dans un secteur où vingt entreprises se connaissent, un verbatim qui mentionne un volume, une région et un fournisseur désigne son auteur, même sans nom. Votre équipe commerciale reconnaîtra ses clients à la troisième citation. C'est un sujet de protection des données, que nous avons traité dans <a href="article-verbatims-donnees-personnelles.html">vos verbatims sont des données personnelles</a>, et un sujet de confiance&nbsp;: le participant qui se reconnaît dans un rapport diffusé chez son fournisseur ne participera plus jamais à une étude.</p>
+<p>Nous anonymisons donc par rôle et par taille d'entreprise, nous retirons les détails qui identifient sans rien apporter, et nous livrons les transcripts intégraux au commanditaire sous une clause d'usage interne. Le corpus vous appartient. La possibilité de reconnaître vos clients dedans, non.</p>
+""",
+},
+{
+ "slug": "article-restitution-atelier-decision.html",
+ "auteur": "VB",
+ "illus": "stylos.webp",
+ "faq_titre": "Questions fréquentes sur la restitution et l'atelier de décision",
+ "faq": [
+  ("Un atelier de décision remplace-t-il le rapport ?", "Non, il le précède. Le rapport complet arrive ensuite, pour documenter et pour ceux qui n'étaient pas dans la salle. Ce qui change, c'est qu'il documente une décision prise, au lieu d'espérer en provoquer une. On peut aussi s'en passer&nbsp;: des top lines et un arbitrage écrit suffisent à beaucoup de décisions."),
+  ("Qui doit être dans la salle ?", "Ceux qui décident et ceux qui devront faire. Le chef de produit, le marketing, le commercial concerné, et au moins une personne qui a le pouvoir d'arbitrer. Sans cette dernière, l'atelier produit une recommandation de plus. Nous refusons de l'animer si personne dans la salle ne peut dire oui."),
+  ("Combien de temps après le terrain ?", "Dix jours au plus après le dernier entretien. Au-delà, le sujet a quitté l'agenda, un autre projet a pris la place, et l'étude devient une lecture. Les top lines partent quarante-huit heures avant, pour que personne ne découvre les constats en séance."),
+  ("Et si les équipes ne sont pas d'accord avec l'étude ?", "C'est le meilleur atelier possible, à condition que le désaccord porte sur des verbatims et pas sur des paraphrases. Chaque constat que nous projetons est remontable jusqu'à sa source horodatée&nbsp;: on écoute l'extrait, on relit le passage, et le désaccord se déplace de « je n'y crois pas » à « qu'est-ce qu'on en fait »."),
+ ],
+ "aide": {"titre": "Une étude qui finit par une décision, pas par un fichier", "chapo": "L'atelier de décision est la dernière option de notre socle, et celle que nous recommandons le plus. C'est aussi celle qui nous expose le plus&nbsp;: on est jugé sur ce qui a été décidé, pas sur l'épaisseur du livrable.", "points": [
+   "Des top lines de cinq à huit pages, envoyées quarante-huit heures avant",
+   "Une demi-journée animée avec les équipes qui décident et celles qui feront",
+   "Chaque constat projeté remontable jusqu'au verbatim, horodaté et écoutable en séance",
+   "Un arbitrage écrit en sortie, ou la liste précise de ce qui manque pour trancher",
+ ]},
+ "loin": [
+  ("Décider vite sans décider mal", "article-decider-vite.html"),
+  ("Le livre blanc&nbsp;: la parole client jusqu'à la décision", "livre-blanc.html"),
+  ("Comment rédiger un brief d'étude qualitative", "article-brief-etude-qualitative.html"),
+ ],
+ "sources": [
+  ("Greenbook — The Insights Industry Has a Decision Problem", "15 % seulement des dirigeants intègrent systématiquement la voix du client dans leurs décisions (McKinsey, 2025), et le coût de l'écart", "https://www.greenbook.org/insights/research-methodologies/the-insights-industry-has-a-decision-problem-and-its-costing-companies-millions"),
+  ("Quirk's — When Insights Lie Dormant", "jusqu'à un tiers des données d'étude jamais exploitées, 30 à 40 % des rapports sans valeur ajoutée", "https://www.quirks.com/articles/when-insights-lie-dormant-how-enterprises-can-revive-unused-data-through-better-storytelling"),
+  ("Greenbook — How Insights Become Business Decisions", "pourquoi un rapport seul ne change pas une organisation", "https://www.greenbook.org/insights/insights-business-growth/how-insights-become-business-decisions-why-the-best-research-improves-decision-quality-not-just-action"),
+ ],
+ "cat": "Point de vue",
+ "date": "2026-09-02",
+ "read": "8 min",
+ "title": "Restitution d'étude : pourquoi le rapport ne fait pas décider",
+ "h1": "Le rapport a été lu<br>par trois personnes.<br>La décision s'est prise<br>ailleurs.",
+ "desc": "Un tiers des résultats d'études ne sert jamais. Pourquoi le rapport n'est pas le bon format de sortie, et ce qu'un atelier de décision change.",
+ "kw": "restitution étude qualitative, atelier de décision, rapport d'étude non utilisé, exploiter une étude de marché, insights décision",
+ "chapo": "Ce n'est presque jamais l'étude qui est mauvaise. C'est ce qui lui arrive après&nbsp;: un fichier de cent vingt pages, envoyé un vendredi, lu par la personne qui l'a commandé et par deux autres. La décision, elle, s'est prise en réunion, sans le fichier.",
+ "body": """
+<h2>Pourquoi une étude bien faite ne change-t-elle rien&nbsp;?</h2>
+<p><strong>Parce que sa sortie n'a pas le format d'une décision.</strong> Les chiffres du secteur sont sévères et concordants. D'après une analyse McKinsey de 2025 reprise par <a href="https://www.greenbook.org/insights/research-methodologies/the-insights-industry-has-a-decision-problem-and-its-costing-companies-millions" rel="nofollow noopener" target="_blank">Greenbook</a>, <strong>15 % seulement des dirigeants intègrent systématiquement la voix du client</strong> dans leurs décisions. <a href="https://www.quirks.com/articles/when-insights-lie-dormant-how-enterprises-can-revive-unused-data-through-better-storytelling" rel="nofollow noopener" target="_blank">Quirk's</a> estime qu'un tiers des données d'étude ne sont jamais exploitées, et que 30 à 40 % des rapports n'apportent que peu ou pas de valeur&nbsp;: cloisonnés, oubliés, ou trop complexes pour être activés.</p>
+""" + stats([("15 %", "des dirigeants intègrent systématiquement la voix du client dans leurs décisions", "McKinsey, 2025, via Greenbook"),
+             ("1 sur 3", "part des données d'étude qui ne sont jamais exploitées", "Quirk's, 2025"),
+             ("30 à 40 %", "des rapports d'étude n'apportent que peu ou pas de valeur", "Quirk's, 2025")]) + """
+<p>Nous avons vu ces chiffres de l'intérieur pendant quarante ans. Une étude est commandée par une personne, qui doit ensuite convaincre dix autres. On lui remet un document conçu pour prouver le travail accompli&nbsp;: exhaustif, prudent, sans arbitrage. Elle en tire trois slides, les présente en comité, et le comité décide sur autre chose. Le problème n'est ni la qualité du terrain ni celle de l'analyse. C'est que le rapport a été écrit pour être complet, pas pour être décidé.</p>
+
+<h2>Qu'est-ce qui fait qu'un rapport n'est pas lu&nbsp;?</h2>
+<p><strong>Il arrive trop tard, il est trop long, et il ne tranche pas.</strong> Trois défauts qui se cumulent&nbsp;:</p>
+<ul>
+  <li><strong>Il arrive après la décision.</strong> Trois semaines d'analyse et de mise en forme après le dernier entretien, c'est trois semaines pendant lesquelles le comité s'est réuni deux fois. Le sujet a été tranché sur ce qu'on savait déjà.</li>
+  <li><strong>Il est écrit pour prouver le travail.</strong> Cent vingt pages où chaque verbatim justifie son coût. Un décideur n'a pas besoin de la preuve que le terrain a eu lieu&nbsp;; il a besoin de savoir ce qui change.</li>
+  <li><strong>Il ne contient pas d'arbitrage.</strong> « Les participants expriment des attentes contrastées » est une phrase vraie qui n'engage personne. Un rapport prudent est un rapport qui laisse la décision à quelqu'un qui n'a pas lu le rapport.</li>
+</ul>
+<p>À quoi s'ajoute une raison que personne n'écrit&nbsp;: le rapport est remis à une personne seule. Il lui revient de porter les constats devant des collègues qui n'ont pas entendu les clients, et qui ont chacun une opinion. Elle perd presque toujours, non parce qu'elle a tort, mais parce qu'un fichier ne pèse rien contre une conviction dans une salle.</p>
+
+<h2>Qu'est-ce qu'un atelier de décision&nbsp;?</h2>
+<p><strong>Une demi-journée, dans les dix jours qui suivent le terrain, avec les gens qui décident et ceux qui devront faire, qui se termine par un arbitrage écrit ou par la liste précise de ce qui manque pour trancher.</strong> Ce n'est pas une présentation suivie de questions. C'est un travail&nbsp;: on part des constats, on formule les lectures concurrentes, on les confronte aux verbatims, et on écrit ce qu'on décide.</p>
+<p>La règle qui change tout est la dernière&nbsp;: on ne sort pas sans avoir écrit quelque chose. Soit une décision, soit la liste de ce qui empêche de la prendre, avec un nom et une date pour chaque manque. Un atelier qui finit sur « c'est très intéressant, on va y réfléchir » est un atelier raté, et nous le disons dans la salle.</p>
+""" + fig_chaine(
+  "Du dernier entretien à la décision, en dix jours",
+  "Le rapport complet arrive en dernier, et il est optionnel. Ce qui ne l'est pas, c'est la décision écrite avant que le sujet quitte l'agenda.",
+  [("Transcripts", "J+2, intégraux"), ("Top lines", "J+7, 5 à 8 pages"), ("Atelier", "J+10, une demi-journée"), ("Arbitrage écrit", "J+10, en sortie"), ("Rapport complet", "J+20, si besoin")],
+  pleines=0) + """
+<h2>Comment le préparer pour qu'il produise une décision&nbsp;?</h2>
+<p><strong>Des top lines quarante-huit heures avant, des verbatims écoutables en séance, et un animateur qui n'est pas l'auteur de l'étude.</strong> Le détail&nbsp;:</p>
+<ul>
+  <li><strong>Les top lines.</strong> Cinq à huit pages, envoyées deux jours avant, pour que personne ne découvre les constats en séance. Découvrir, c'est réagir&nbsp;; on veut que les gens arrivent en ayant déjà réagi.</li>
+  <li><strong>Les verbatims, pas les paraphrases.</strong> Chaque constat projeté est remontable jusqu'à l'extrait audio horodaté. Quand quelqu'un dit « je n'y crois pas », on écoute. Le désaccord change alors de nature&nbsp;: il ne porte plus sur la crédibilité de l'étude, mais sur ce qu'on fait de ce qu'on vient d'entendre. C'est le principe de traçabilité que nous avons développé dans <a href="livre-blanc.html">le livre blanc</a>.</li>
+  <li><strong>Un format en trois colonnes.</strong> Ce qu'on a entendu, ce qu'on en déduit, ce qu'on décide. La première colonne est remplie avant l'atelier, la deuxième est discutée, la troisième est écrite en séance. Ce qui reste vide dans la troisième colonne est la liste de ce qui manque.</li>
+  <li><strong>Un animateur distinct de l'analyste.</strong> L'analyste défend ses constats, c'est son rôle. L'animateur tient la salle, le temps et la règle de sortie. Quand c'est la même personne, l'atelier redevient une présentation.</li>
+</ul>
+
+<h2>Que faire des chiffres du quantitatif dans un atelier&nbsp;?</h2>
+<p><strong>Un chiffre par constat, jamais plus, et toujours à côté du verbatim qui lui donne un sens.</strong> Un atelier où l'on projette des tableaux redevient une réunion de lecture. Le chiffre dit l'ampleur, le verbatim dit la nature, et la décision a besoin des deux&nbsp;: « sept clients sur dix hésitent au moment du prix » ne dit pas quoi faire&nbsp;; « sept sur dix, et voici ce qu'ils disent au moment d'hésiter » le dit. Nous avons détaillé cette complémentarité dans <a href="article-quali-ou-quanti.html">quali ou quanti, dans quel ordre</a>.</p>
+
+<h2>Ce que ça change pour l'institut</h2>
+<p><strong>On est jugé sur la décision, pas sur le livrable.</strong> C'est plus exposé qu'un rapport, et c'est un choix. Un institut qui livre un fichier a fait son travail quoi qu'il arrive ensuite. Un institut qui anime l'arbitrage est dans la pièce quand ça se décide, et il porte une part de ce qui en sort. Nous avons choisi cette position parce que c'est la seule qui règle le problème des chiffres du début&nbsp;: une étude qui ne sert pas est une étude qui a coûté pour rien, et nous ne voulons pas en vendre.</p>
+<p>Ce choix nous sort de certains appels d'offres, où l'acheteur compare un nombre d'entretiens et un prix au jour, et où l'atelier apparaît comme une option chère. Nous l'acceptons. Sur les dispositifs courts, en revanche, l'atelier est presque toujours la meilleure dépense&nbsp;: c'est ce que nous expliquons dans <a href="article-decider-vite.html">décider vite sans décider mal</a>.</p>
+""",
+},
+]
 
 
 # Le point d'entrée reste EN DERNIER : tout ce qui est déclaré après ne serait
