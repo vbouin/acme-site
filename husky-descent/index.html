@@ -58,7 +58,8 @@ body.ask .hud,body.run .hud{opacity:1;transform:none}
 .prompt.swap{animation:swap .55s var(--ease)}
 @keyframes swap{0%{opacity:0;transform:translateY(-16px) scale(.97)}100%{opacity:1;transform:none}}
 .portrait{width:84px;height:84px;border-radius:18px;background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.22),rgba(255,255,255,.04));flex:none;display:grid;place-items:center}
-.portrait img{width:100%;height:100%;object-fit:contain;display:block}
+.portrait img{width:100%;height:100%;object-fit:contain;display:block;animation:bob 2.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.04,.97)}}
 .ptxt{min-width:0;padding-left:4px}
 .pmain{font:600 clamp(22px,3.6vw,34px)/1.12 var(--display)}
 .pmain b{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.02em}
@@ -75,10 +76,12 @@ body.ask .hud,body.run .hud{opacity:1;transform:none}
 .fiche.on{transform:translate(-50%,0)}
 .fiche .portrait{width:104px;height:104px}
 .fiche h3{font:700 24px/1.1 var(--display);margin:0 0 4px;color:var(--accent)}
-.fiche p{margin:0 0 8px;font-size:16px;line-height:1.35}
+.fiche p{margin:0 0 8px;font-size:16px;line-height:1.35;max-height:9.5em;overflow:auto}
 .frow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .chipbtn{font:600 15px var(--body);padding:8px 14px;border-radius:12px;border:2px solid var(--line);background:var(--panel2);cursor:pointer;text-decoration:none;color:var(--ink);min-height:40px;display:inline-flex;align-items:center}
 .fnote{font-size:12px;color:var(--muted);margin-top:6px}
+.fnote a,.dcard small a{color:var(--accent)}
+.dcard small{display:block;font-size:11px;color:var(--muted)}
 
 .screen{position:absolute;inset:0;z-index:20;display:grid;place-items:center;padding:16px;background:rgba(3,12,16,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow:auto;touch-action:pan-y;opacity:0;visibility:hidden;transform:scale(1.03);transition:opacity .4s,transform .5s var(--ease),visibility 0s .4s}
 .screen.on{opacity:1;visibility:visible;transform:none;transition:opacity .4s,transform .5s var(--ease)}
@@ -116,7 +119,7 @@ h1 span{color:var(--accent)}
 .dcard p{font-size:14px;margin:2px 0 4px;color:var(--ink)}
 .dcard a{font-size:13px;color:var(--accent)}
 .dcard.seen h3::after{content:"★";color:var(--accent);font-size:16px}
-@media (prefers-reduced-motion:reduce){body.ask .arrow{animation:none}.prompt.swap,.stars.pop{animation:none}}
+@media (prefers-reduced-motion:reduce){body.ask .arrow{animation:none}.prompt.swap,.stars.pop,.portrait img{animation:none}}
 </style>
 </head>
 <body>
@@ -154,7 +157,7 @@ h1 span{color:var(--accent)}
         <a class="chipbtn" id="fLink" target="_blank" rel="noopener">Wikipédia</a>
         <button class="chipbtn" id="fClose" type="button">Fermer</button>
       </div>
-      <div class="fnote">Texte court écrit pour ce jeu, à vérifier sur Wikipédia.</div>
+      <div class="fnote" id="fNote"></div>
     </div>
   </aside>
 
@@ -252,6 +255,7 @@ function shadowItem(x,y,z,r,al){
 /* ---------- données pédagogiques : 25 animaux ---------- */
 var AN={
   husky:{fr:'husky',art:'le',en:'husky',s:.9,color:'noir'},
+  huskygris:{fr:'husky gris',art:'le',en:'grey husky',s:.9,hero:true},
   chien:{fr:'chien',art:'le',en:'dog',s:.9,color:'marron'},
   chat:{fr:'chat',art:'le',en:'cat',s:.8,color:'orange',size:'petit'},
   lapin:{fr:'lapin',art:'le',en:'rabbit',s:.8,color:'blanc',size:'petit',speed:'rapide'},
@@ -284,10 +288,11 @@ var ADJ={
   rose:{en:'pink',type:'color'},vert:{en:'green',type:'color'},orange:{en:'orange',type:'color'},marron:{en:'brown',type:'color'},
   'rayé':{en:'striped',type:'pattern'}
 };
-var NAMES=Object.keys(AN),ADJS=Object.keys(ADJ);
+var NAMES=Object.keys(AN).filter(function(k){return !AN[k].hero;}),ADJS=Object.keys(ADJ);
 function has(a,adj){return AN[a][ADJ[adj].type]===adj;}
-var HEROES=['husky','chien','chat','lapin','souris','renard','panda','koala','pingouin','canard','cochon','hibou','mouton','grenouille'];
+var HEROES=['husky','huskygris','chien','chat','lapin','souris','renard','panda','koala','pingouin','canard','cochon','hibou','mouton','grenouille'];
 
+/*FW:BEGIN*/var FW={};/*FW:END*/
 /* fiches : textes courts écrits pour le jeu (non copiés de Wikipédia), à vérifier ; le lien ouvre la recherche Wikipédia */
 var FI={
   husky:{fr:"Le husky sibérien est un chien de traîneau originaire de Sibérie. Il a un épais pelage et souvent des yeux bleus.",en:"The Siberian Husky is a sled dog from Siberia. It has a thick coat and often blue eyes.",sf:'Husky sibérien',se:'Siberian Husky'},
@@ -318,10 +323,20 @@ var FI={
 };
 
 /* ---------- animaux en boîtes ---------- */
+var HEAD={
+  husky:function(y,z){return z>=1.15;},elephant:function(y){return y>=.5;},souris:function(y){return y>=.2;},tortue:function(y){return y>=.5;},
+  lapin:function(y,z){return z>=.65;},girafe:function(y,z){return z>=2.7;},pingouin:function(y,z){return z>=1.4;},grenouille:function(y,z){return z>=.6;},
+  cochon:function(y){return y>=.45;},canard:function(y,z){return z>=.75&&y>=.1;},renard:function(y){return y>=.2;},chat:function(y,z){return z>=.65;},
+  lion:function(y){return y>=.1;},tigre:function(y){return y>=.3;},panda:function(y,z){return z>=1.05;},vache:function(y){return y>=.35;},
+  mouton:function(y){return y>=.5;},cheval:function(y,z){return z>=1.3&&y>=-.05;},ours:function(y){return y>=.5;},loup:function(y){return y>=.2;},
+  hibou:function(y,z){return z>=1.2;},crocodile:function(y){return y>=.5;},koala:function(y,z){return z>=1.0;}
+};
+HEAD.huskygris=HEAD.husky;HEAD.chien=HEAD.husky;HEAD.zebre=HEAD.cheval;
 function builder(o,out){
-  var s=o.s,tr=o.face==='x',zs=o.zs||1,zb=o.z+(o.dz||0)+.004;
+  var s=o.s,tr=o.face==='x',zs=o.zs||1,zb=o.z+(o.dz||0)+.004,hp=HEAD[o.kind],hd=o.hd||0,hx=o.hx||0,hy=o.hy||0;
   function B(lx0,lx1,ly0,ly1,lz0,lz1,hex,ex){
-    var X0=lx0*s,X1=lx1*s,Y0=ly0*s,Y1=ly1*s,Z0=zb+lz0*s*zs,Z1=zb+lz1*s*zs;
+    var h=hp&&(hd||hx||hy)?hp(ly0,lz0):false,ax=h?hx:0,ay=h?hy:0,az=h?hd:0;
+    var X0=(lx0+ax)*s,X1=(lx1+ax)*s,Y0=(ly0+ay)*s,Y1=(ly1+ay)*s,Z0=zb+(lz0+az)*s*zs,Z1=zb+(lz1+az)*s*zs;
     var it=tr?mk(o.x+Y0,o.x+Y1,o.y+X0,o.y+X1,Z0,Z1,hex,ex):mk(o.x+X0,o.x+X1,o.y+Y0,o.y+Y1,Z0,Z1,hex,ex);
     out.push(it);return it;
   }
@@ -353,9 +368,10 @@ function roundEyes(g,w,h,xs,y,r,mode,iris){
   }
 }
 var P_HUSKY={body:'#2b2f38',dark:'#15171c',ear:'#15171c',white:'#f4f6f8',eye:'#69c7ff'};
+var P_HUSKYG={body:'#8f98a6',dark:'#4f5766',ear:'#4f5766',white:'#f4f6f8',eye:'#69c7ff'};
 var P_CHIEN={body:'#c98a4b',dark:'#8a5a2c',ear:'#7a4a22',white:'#f1e3c9',eye:'#5a3a1e'};
 function dogBody(B,o,pal){
-  var hd=o.hd||0,f=B.f,wg=Math.sin((o.t||0)*(o.wag||6))*.14,ex=o.expr||'open',W=pal.white;
+  var hd=0,f=B.f,wg=Math.sin((o.t||0)*(o.wag||6))*.14*(o.wamp||1),ex=o.expr||'open',W=pal.white;
   B(-.46,.46,-.85,.15,0,.55,pal.body);B(-.38,.38,-.5,.2,.55,1.2,pal.body);B(-.38,.38,-.5,.2,1.2,1.3,pal.dark);
   B(-.24,.24,.2,.3,.6,1.2,W);B(-.36,-.14,.2,.42,0,.6,W);B(.14,.36,.2,.42,0,.6,W);
   B(-.5,.5,-.25,.5,1.3+hd,1.85+hd,pal.body,{decal:{face:f,fn:function(g,w,h){
@@ -380,12 +396,48 @@ function horseBody(B,o,pal){
   B(-.07+wg,.07+wg,-1.3,-.95,.7,1.3,pal.mane);
   if(pal.stripe){for(i=0;i<5;i++){k=-.85+i*.25;B(.35,.37,k,k+.1,.75,1.3,K);}B(.18,.2,.12,.38,1.4,1.5,K);B(.18,.2,.12,.38,1.7,1.8,K);}
 }
+var BL={
+  husky:['wag','pant','tilt','look','hop','shake','stretch'],loup:['look','tilt','nod','stretch','shake'],renard:['look','tilt','wag','hop','nod'],
+  chat:['look','tilt','stretch','wag','nod'],lapin:['hop','nod','look','shake'],souris:['nod','look','hop','shake'],elephant:['sway','look','nod','shake'],
+  girafe:['look','nod','sway','stretch'],tortue:['peek','look','nod'],grenouille:['hop','look','nod'],canard:['nod','look','hop','shake'],
+  cochon:['nod','look','wag','hop'],pingouin:['look','hop','nod','shake'],lion:['look','nod','stretch','wag'],tigre:['look','stretch','wag','nod'],
+  panda:['nod','look','tilt','sway'],vache:['nod','look','wag','sway'],mouton:['nod','look','hop','shake'],cheval:['nod','look','wag','shake','stretch'],
+  ours:['look','sway','nod','shake'],hibou:['look','tilt','nod','shake'],crocodile:['look','wag','nod'],koala:['nod','tilt','look','stretch']
+};
+BL.huskygris=BL.husky;BL.chien=BL.husky;BL.zebre=BL.cheval;
+function hash(n){var x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);}
+function behavior(kind,t,seed){
+  var list=BL[kind]||BL.chat,P=5.2+hash(seed)*2.2,tt=t+seed*3.1,k=Math.floor(tt/P),u=tt-k*P,dur=1.7;
+  var b={dz:0,hd:0,hx:0,hy:0,zs:1,tongue:false,wamp:1,lat:0};
+  if(u>dur)return b;
+  var name=list[Math.floor(hash(k*7.3+seed)*list.length)],w=u/dur,e=Math.sin(Math.PI*w);
+  switch(name){
+    case 'look':b.hx=Math.sin(w*Math.PI*2)*.22;break;
+    case 'nod':b.hd=-Math.abs(Math.sin(w*Math.PI*3))*.1;b.hy=Math.abs(Math.sin(w*Math.PI*3))*.05;break;
+    case 'tilt':b.hx=e*.14;b.hd=e*.04;break;
+    case 'wag':b.wamp=1+e*2.4;break;
+    case 'pant':b.tongue=true;b.hd=Math.sin(w*Math.PI*8)*.025;break;
+    case 'hop':b.dz=Math.abs(Math.sin(w*Math.PI*2))*.3;b.zs=1-.1*Math.max(0,Math.cos(w*Math.PI*4));break;
+    case 'stretch':b.zs=1+.12*e;b.hd=-.05*e;break;
+    case 'shake':b.lat=Math.sin(w*Math.PI*14)*.06*(1-w);break;
+    case 'sway':b.lat=Math.sin(w*Math.PI*2)*.09;break;
+    case 'peek':b.hy=e*.3;break;
+  }
+  return b;
+}
+function applyBeh(o){
+  var b=o.beh;if(!b)return;
+  o.dz=(o.dz||0)+b.dz;o.hd=(o.hd||0)+b.hd;o.hx=(o.hx||0)+b.hx;o.hy=(o.hy||0)+b.hy;o.zs=(o.zs||1)*b.zs;if(b.tongue)o.tongue=true;o.wamp=b.wamp;
+  if(b.lat&&!o.nolat){if(o.face==='y')o.x+=b.lat;else o.y+=b.lat;}
+}
 function animalItems(kind,o,out){
-  var B=builder(o,out),f=B.f,ex=o.expr||'open',t=o.t||0,wg=Math.sin(t*5)*.1;
+  o.kind=kind;applyBeh(o);
+  var B=builder(o,out),f=B.f,ex=o.expr||'open',t=o.t||0,wg=Math.sin(t*5)*.1*(o.wamp||1);
   function eyeDecal(xs,y,sz){return {face:f,fn:function(g,w,h){eyesGen(g,w,h,xs,y,sz,ex);}};}
   var G,D,PK,O,Br,K,W0,L,i;
   switch(kind){
   case 'husky':dogBody(B,o,P_HUSKY);break;
+  case 'huskygris':dogBody(B,o,P_HUSKYG);break;
   case 'chien':dogBody(B,o,P_CHIEN);break;
   case 'elephant':
     G='#9ca6b2';D='#7d8896';
@@ -816,10 +868,13 @@ function updateHUD(swap){
 }
 function toast(msg,kind){var t=$('toast');t.textContent=msg;t.className='toast';void t.offsetWidth;t.className='toast show '+kind;}
 function wikiUrl(k){var f=FI[k];return 'https://'+G.lang+'.wikipedia.org/wiki/Special:Search?search='+encodeURIComponent(G.lang==='en'?f.se:f.sf)+'&go=Go';}
+function fiData(k){var f=FI[k],w=FW[k]&&FW[k][G.lang],real=!!(w&&w.t);return {t:real?w.t:(G.lang==='en'?f.en:f.fr),real:real,url:real?w.u:wikiUrl(k),title:real?w.n:''};}
+var CC='<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>';
+function noteOf(d){return d.real?'Extrait de <a href="'+d.url+'" target="_blank" rel="noopener">Wikipédia, « '+d.title+' »</a>, licence '+CC+'.':'Texte court écrit pour ce jeu, à vérifier sur Wikipédia.';}
 function showFiche(k){
-  var f=FI[k];if(!f)return;SEEN[k]=1;save('husky-descent-seen',SEEN);
-  $('fImg').src=thumbOf(k);$('fName').textContent=nameOf(k);$('fTxt').textContent=G.lang==='en'?f.en:f.fr;
-  $('fLink').href=wikiUrl(k);$('fLink').textContent=G.lang==='en'?'Wikipedia':'Wikipédia';$('fiche').classList.add('on');G.fk=k;ficheT=T+11;
+  var f=FI[k];if(!f)return;SEEN[k]=1;save('husky-descent-seen',SEEN);var d=fiData(k);
+  $('fImg').src=thumbOf(k);$('fName').textContent=nameOf(k);$('fTxt').textContent=d.t;$('fNote').innerHTML=noteOf(d);
+  $('fLink').href=d.url;$('fLink').textContent=G.lang==='en'?'Wikipedia':'Wikipédia';$('fiche').classList.add('on');G.fk=k;ficheT=T+(d.real?16:11);
 }
 function hideFiche(){$('fiche').classList.remove('on');ficheT=0;}
 function buildHeroes(){
@@ -828,8 +883,8 @@ function buildHeroes(){
 }
 function refreshHeroNames(){Array.prototype.forEach.call(document.querySelectorAll('.hero'),function(b){b.querySelector('span').textContent=nameOf(b.getAttribute('data-hero'));});}
 function buildDex(){
-  var h='';NAMES.forEach(function(k){var f=FI[k];
-    h+='<div class="dcard'+(SEEN[k]?' seen':'')+'"><img alt="" src="'+thumbOf(k)+'"><div><h3>'+nameOf(k)+'</h3><p>'+(G.lang==='en'?f.en:f.fr)+'</p><a href="'+wikiUrl(k)+'" target="_blank" rel="noopener">'+(G.lang==='en'?'Wikipedia':'Wikipédia')+'</a></div></div>';});
+  var h='';NAMES.forEach(function(k){var d=fiData(k);
+    h+='<div class="dcard'+(SEEN[k]?' seen':'')+'"><img alt="" src="'+thumbOf(k)+'"><div><h3>'+nameOf(k)+'</h3><p>'+d.t+'</p><a href="'+d.url+'" target="_blank" rel="noopener">'+(G.lang==='en'?'Wikipedia':'Wikipédia')+'</a>'+(d.real?'<small>Extrait Wikipédia, '+CC+'</small>':'')+'</div></div>';});
   $('dgrid').innerHTML=h;
 }
 
@@ -907,6 +962,7 @@ function step(dt){
     }else if(t>2.1){run=null;phase='ask';setBody('ask');}
     if(run&&run.ok&&t>T0&&t<T0+TL&&T-lastRip>.4){var bp=boatPose();lastRip=T;ripples.push({x:bp.x-(run.dir==='x'?.9:0),y:bp.y-(run.dir==='y'?.9:0),z:cur.oz,t0:T,life:1.8,max:1.0});}
   }
+  if(phase==='ask'&&T-lastRip>1.7){lastRip=T;ripples.push({x:cur.ox,y:cur.oy,z:cur.oz,t0:T,life:1.5,max:.85});}
   mist+=dt*40;
   while(mist>=1){mist--;
     [cur,prev].forEach(function(L){if(!L)return;
@@ -964,7 +1020,7 @@ function render(){
           if(op.dim&&run&&L===cur&&run.side===side)jx=Math.sin((T-run.t0)*40)*.07*Math.exp(-(T-run.t0)*3);
           var s=AN[op.animal].s*1.4*pop,ex=op.expr==='open'&&blink(si*1.3)?'closed':op.expr,idle=Math.sin(T*2+si*2)*.025,
               px=dir==='x'?sp.x:sp.x+jx,py=dir==='x'?sp.y+jx:sp.y;
-          animalItems(op.animal,{x:px,y:py,z:L.oz+.5+idle,s:s,face:dir,t:T,expr:ex,dz:jump,wag:5},arr);
+          animalItems(op.animal,{x:px,y:py,z:L.oz+.5+idle,s:s,face:dir,t:T,expr:ex,dz:jump,wag:5,beh:behavior(op.animal,T,si+1.7+(L.ox+L.oy)*.13)},arr);
           arr.push(shadowItem(px,py,L.oz+.5+.001,.75*pop,.22));
         }
       });
@@ -973,7 +1029,7 @@ function render(){
   var bp=boatPose(),tr=bp.face==='x',hs=clamp(AN[G.hero].s*.95,.62,.86);
   function HB2(lx0,lx1,ly0,ly1,lz0,lz1,hex){var Z0=bp.z+.004+lz0*bp.zs,Z1=bp.z+.004+lz1*bp.zs;arr.push(tr?mk(bp.x+ly0,bp.x+ly1,bp.y+lx0,bp.y+lx1,Z0,Z1,hex):mk(bp.x+lx0,bp.x+lx1,bp.y+ly0,bp.y+ly1,Z0,Z1,hex));}
   HB2(-.75,.75,-1,1,0,.35,'#e0734a');HB2(-.4,.4,1,1.3,0,.28,'#e0734a');
-  animalItems(G.hero,{x:bp.x,y:bp.y,z:bp.z+.35*bp.zs,s:hs,face:bp.face,expr:bp.eyes==='open'&&blink(.5)?'closed':bp.eyes,tongue:bp.tongue,t:T,wag:bp.wag,zs:bp.zs,hd:Math.sin(T*2.2)*.02},arr);
+  animalItems(G.hero,{x:bp.x,y:bp.y,z:bp.z+.35*bp.zs,s:hs,face:bp.face,expr:bp.eyes==='open'&&blink(.5)?'closed':bp.eyes,tongue:bp.tongue,t:T,wag:bp.wag,zs:bp.zs,hd:Math.sin(T*2.2)*.02,nolat:true,beh:run?null:behavior(G.hero,T,.5)},arr);
   if(bp.shadow)arr.push(shadowItem(bp.x,bp.y,bp.z+.001,1.25,.2));
   var sorted=sortItems(arr);
   for(i=0;i<sorted.length;i++){var it=sorted[i];if(it.draw)it.draw();else drawBox(it);}
@@ -1026,7 +1082,7 @@ $('bMenu').addEventListener('click',function(){phase='menu';setBody('');run=null
 $('bSay').addEventListener('click',function(){if(cur&&cur.q){ac();speak(cur.q.say,G.lang);}});
 $('bSound').addEventListener('click',function(){soundOn=!soundOn;$('bSound').classList.toggle('off',!soundOn);if(!soundOn&&'speechSynthesis' in window){try{speechSynthesis.cancel();}catch(e){}}});
 $('fClose').addEventListener('click',hideFiche);
-$('fSay').addEventListener('click',function(){var f=FI[G.fk];if(f){ac();speak(G.lang==='en'?f.en:f.fr,G.lang);}});
+$('fSay').addEventListener('click',function(){if(FI[G.fk]){ac();speak(fiData(G.fk).t,G.lang);}});
 $('eMet').addEventListener('click',function(e){var b=e.target.closest?e.target.closest('button'):null;if(b)showFiche(b.getAttribute('data-fiche'));});
 window.addEventListener('resize',layout);
 ['lang','mode'].forEach(function(k){Array.prototype.forEach.call(document.querySelectorAll('.opt[data-k="'+k+'"]'),function(o){o.setAttribute('aria-pressed',o.getAttribute('data-v')===G[k]?'true':'false');});});
@@ -1034,7 +1090,7 @@ layout();AY=AYt;SC=SC0;
 cur=mkLevel(0,0,0,null);attachChildren(cur);setQuestion(cur,makeQuestion(0));cur.born=-5;
 (function(){var a=anchor(cur);CAM.x=a.x;CAM.y=a.y;CAM.z=a.z;})();
 setTimeout(function(){buildHeroes();},30);
-window.__hd={G:G,get cur(){return cur;},get phase(){return phase;},choose:choose,thumb:thumbOf,names:NAMES,
+window.__hd={showFiche:showFiche,behavior:behavior,G:G,get cur(){return cur;},get phase(){return phase;},choose:choose,thumb:thumbOf,names:NAMES,
   step:function(n,dt){for(var i=0;i<n;i++)step(dt||1/30);render();},render:render,layout:layout,get HB(){return HB;},get SC(){return SC;}};
 requestAnimationFrame(frame);
 })();
