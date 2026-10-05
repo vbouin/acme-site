@@ -2,6 +2,8 @@
 
 Jeu isométrique en une seule page (`index.html`, aucune dépendance) : le héros descend un canal, l'élève touche
 le côté gauche ou droit de l'écran pour choisir la bonne réponse (noms d'animaux et adjectifs, français ou anglais).
+La descente est infinie, de fontaine en fontaine ; le bouton Menu met en pause, permet de reprendre ou de terminer avec un bilan.
+La qualité d'affichage s'adapte toute seule si l'écran peine (textures, reflets, brume retirés en premier).
 
 ## Extraits Wikipédia réels
 
