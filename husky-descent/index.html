@@ -120,7 +120,41 @@ h1 span{color:var(--accent)}
 .dcard p{font-size:14px;margin:2px 0 4px;color:var(--ink)}
 .dcard a{font-size:13px;color:var(--accent)}
 .dcard.seen h3::after{content:"★";color:var(--accent);font-size:16px}
-@media (prefers-reduced-motion:reduce){body.ask .arrow{animation:none}.prompt.swap,.stars.pop,.portrait img{animation:none}}
+body.zoo .zone,body.zoo .arrow,body.zoo .hud{display:none}
+.zz{position:absolute;inset:0;z-index:5;touch-action:none;display:none;cursor:pointer}body.zoo .zz{display:block}
+.zhud{position:absolute;left:0;right:0;top:0;z-index:10;padding:max(10px,env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) 0 max(14px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:12px;opacity:0;pointer-events:none;transform:translateY(-14px);transition:opacity .4s,transform .5s var(--ease)}
+body.zoo .zhud{opacity:1;pointer-events:auto;transform:none}
+.ztitle{font:700 clamp(22px,4vw,32px) var(--display);flex:1;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.zwallet{display:flex;align-items:center;gap:6px;font:700 24px var(--display);color:var(--accent);background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:8px 14px}
+.zwallet svg{width:24px;height:24px}
+.zadoptbtn{min-height:50px;font:700 17px var(--display);padding:10px 18px;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.zpanel{position:absolute;left:50%;bottom:max(12px,env(safe-area-inset-bottom,0px));transform:translate(-50%,130%);z-index:11;width:min(calc(100% - 24px),900px);background:var(--panel);border:2px solid var(--line);border-radius:26px;padding:12px;display:grid;gap:10px;box-shadow:0 16px 50px rgba(0,0,0,.5);transition:transform .5s var(--ease);touch-action:manipulation}
+.zpanel.on{transform:translate(-50%,0)}
+.zhead{display:grid;grid-template-columns:auto 1fr minmax(160px,230px);gap:12px;align-items:center}
+.zhead .portrait{width:92px;height:92px}
+.zinfo h3{font:700 24px/1.1 var(--display);margin:0 0 4px;color:var(--accent)}
+.ztags{display:flex;gap:6px;flex-wrap:wrap}
+.ztagc{font:600 13px var(--body);padding:3px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2)}
+.ztagc.st{border-color:var(--accent);color:var(--accent)}
+.zinfo p{margin:6px 0 0;font:600 16px/1.25 var(--display);color:var(--ink);min-height:1.3em}
+.zbars{display:grid;gap:6px}
+.zbar{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;font:600 13px var(--body);color:var(--muted)}
+.zbar i{height:10px;border-radius:5px;background:rgba(255,255,255,.15);overflow:hidden;display:block}
+.zbar b{display:block;height:100%;background:var(--good);transition:width .4s,background .3s;width:0}
+.zbar b.low{background:var(--bad)}
+.zacts{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.zact{display:grid;justify-items:center;gap:2px;min-height:68px;padding:8px 4px;border-radius:16px;border:2px solid var(--line);background:var(--panel2);cursor:pointer;color:var(--ink);transition:transform .15s var(--ease),background .2s,border-color .2s}
+.zact:active{transform:scale(.95)}
+.zact svg{width:26px;height:26px}
+.zact .zl{font:600 15px var(--display)}
+.zact small{font:700 12px var(--body);color:var(--accent);min-height:14px}
+.zact.need{border-color:var(--accent);background:rgba(255,200,87,.16);animation:nudge 1.6s ease-in-out infinite}
+.acard{display:grid;justify-items:center;gap:2px;padding:10px;border-radius:20px;border:2px solid var(--line);background:var(--panel2);cursor:pointer;text-align:center;color:var(--ink)}
+.acard img{width:84px;height:84px;object-fit:contain}
+.acard .an{font:700 18px var(--display)}.acard .at{font:600 13px var(--body);color:var(--accent)}.acard .af{font-size:12px;color:var(--muted)}
+.acard b{margin-top:4px;font:700 15px var(--display);background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:4px 14px}
+@media (max-width:760px){.zhead{grid-template-columns:auto 1fr}.zbars{grid-column:1/-1}.zacts{grid-template-columns:repeat(3,1fr)}.zadoptbtn{padding:10px 12px}}
+@media (prefers-reduced-motion:reduce){.zact.need{animation:none}body.ask .arrow{animation:none}.prompt.swap,.stars.pop,.portrait img{animation:none}}
 </style>
 </head>
 <body>
@@ -149,6 +183,29 @@ h1 span{color:var(--accent)}
   </div>
   <div class="toast" id="toast"></div>
 
+  <div class="zz" id="zzone"></div>
+  <div class="zhud" id="zhud">
+    <button class="ico" id="zBack" type="button" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4 7 12l8 8"/></svg></button>
+    <div class="ztitle" id="zTitle">Mon zoo</div>
+    <div class="zwallet"><svg viewBox="0 0 24 24" fill="#ffc857"><path d="m12 2 3 6.5 7 .9-5.2 4.9 1.3 7-6.1-3.4-6.1 3.4 1.3-7L2 9.4l7-.9z"/></svg><span id="zStars">0</span></div>
+    <button class="chipbtn zadoptbtn" id="zAdopt" type="button">Adopter</button>
+  </div>
+  <div class="zpanel" id="zpanel">
+    <div class="zhead">
+      <div class="portrait"><img id="zImg" alt=""></div>
+      <div class="zinfo"><h3 id="zName"></h3><div class="ztags"><span class="ztagc" id="zArch"></span><span class="ztagc st" id="zState"></span><span class="ztagc" id="zFood"></span></div><p id="zLine"></p></div>
+      <div class="zbars" id="zbars"></div>
+    </div>
+    <div class="zacts">
+      <button class="zact" data-act="feed" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M8 8c1-2 3-2 4 0M13 7c1-2 3-2 4 0"/></svg><span class="zl">Nourrir</span><small></small></button>
+      <button class="zact" data-act="heal" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg><span class="zl">Soigner</span><small></small></button>
+      <button class="zact" data-act="clean" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="m18 15 .8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><span class="zl">Nettoyer</span><small></small></button>
+      <button class="zact" data-act="play" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M4.5 9c5 1 10 1 15 0M4.5 15c5-1 10-1 15 0"/></svg><span class="zl">Jouer</span><small></small></button>
+      <button class="zact" data-act="pet" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg><span class="zl">Caresser</span><small></small></button>
+      <button class="zact" data-act="house" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span class="zl">Loger</span><small></small></button>
+    </div>
+  </div>
+
   <aside class="fiche" id="fiche" aria-live="polite">
     <div class="portrait"><img id="fImg" alt=""></div>
     <div>
@@ -174,7 +231,7 @@ h1 span{color:var(--accent)}
         <div class="row"><button class="opt" data-k="mode" data-v="words" type="button" aria-pressed="false">Les animaux</button><button class="opt" data-k="mode" data-v="adj" type="button" aria-pressed="false">Les adjectifs</button><button class="opt" data-k="mode" data-v="mix" type="button" aria-pressed="true">Mélange</button></div></div>
       <button class="play" id="bResume" type="button" hidden style="background:var(--accent);color:var(--accent-ink)">Reprendre la descente</button>
       <button class="play" id="bPlay" type="button">Jouer</button>
-      <div class="row"><button class="opt" id="bDex" type="button">Mes animaux</button><button class="opt" id="bFinish" type="button" hidden>Terminer et voir le bilan</button></div>
+      <div class="row"><button class="opt" id="bZoo" type="button">Mon zoo</button><button class="opt" id="bDex" type="button">Mes animaux</button><button class="opt" id="bFinish" type="button" hidden>Terminer et voir le bilan</button></div>
       <div class="by">Prototype pédagogique par <a href="https://exoflow.fr" target="_blank" rel="noopener">Exoflow</a> (innovation et Design Thinking, Lyon) et <a href="https://acmeconsultants.fr" target="_blank" rel="noopener">Acmé Consultants</a> (études qualitatives, Lyon).</div>
     </div>
   </section>
@@ -185,6 +242,15 @@ h1 span{color:var(--accent)}
       <p>Les animaux avec une étoile ont déjà été rencontrés pendant une descente.</p>
       <div class="dgrid" id="dgrid"></div>
       <button class="play" id="bDexBack" type="button">Retour</button>
+    </div>
+  </section>
+
+  <section class="screen" id="sAdopt">
+    <div class="card dex">
+      <h1 style="font-size:clamp(28px,5vw,40px)">Adopter un <span>animal</span></h1>
+      <p>Étoiles : <b id="aStars">0</b> ★. Chaque animal a son tempérament et mange quelque chose de différent.</p>
+      <div class="dgrid" id="agrid"></div>
+      <button class="play" id="aBack" type="button">Retour</button>
     </div>
   </section>
 
@@ -931,7 +997,7 @@ function attachChildren(L){kids(L);kids(L.cl);kids(L.cr);}
 function visLevels(){var a=trail.slice();a.push(cur,cur.cl,cur.cr);[cur.cl,cur.cr].forEach(function(c){if(c.cl)a.push(c.cl,c.cr);});return a.sort(function(x,y){return y.oz-x.oz;});}
 
 /* ---------- écrans et interface ---------- */
-function showScreen(id){['sMenu','sDex','sEnd'].forEach(function(s){$(s).classList.toggle('on',s===id);});}
+function showScreen(id){['sMenu','sDex','sEnd','sAdopt'].forEach(function(s){$(s).classList.toggle('on',s===id);});if(id==='sMenu'&&typeof updateZooBtn==='function')updateZooBtn();}
 function setBody(c){document.body.className=c||'';}
 function setQuestion(L,q){L.q=q;}
 function updateHUD(swap){
@@ -995,7 +1061,7 @@ function choose(side){
     var first=cur.q.tries===0;
     G.log.push({label:(cur.q.type==='n2a'||cur.q.type==='a2n')?nounLabel(cur.q.word):adjLabel(cur.q.word),ok:first});
     if(G.met.indexOf(cur.q.fiche)<0)G.met.push(cur.q.fiche);
-    if(first){G.stars++;var st=$('stars');st.classList.remove('pop');void st.offsetWidth;st.classList.add('pop');}
+    if(first){G.stars++;Z.stars++;zsave();var st=$('stars');st.classList.remove('pop');void st.offsetWidth;st.classList.add('pop');}
     var p=PR[cur.q.key]||(PR[cur.q.key]={ok:0,miss:0});if(first)p.ok++;else p.miss++;
     o.expr='happy';
     setTimeout(function(){sfx('go');},60);setTimeout(function(){sfx('ok');},320);
@@ -1141,17 +1207,369 @@ function render(){
   var vg=ctx.createRadialGradient(CW/2,CH/2,Math.min(CW,CH)*.4,CW/2,CH/2,Math.max(CW,CH)*.78);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.42)');ctx.fillStyle=vg;ctx.fillRect(0,0,CW,CH);
 }
 
+/* ======================= MODE ZOO ======================= */
+var mode='game',ZT=0,ZPEN=5,ZGAP=.7,ZCOLS=3,ZROWS=2,ZKEY='husky-descent-zoo';
+var ZSCo=40,ZSCd=60,ZAYo=300,ZAYd=300,zsel=null,zcam={x:8,y:5,sc:40,ay:300},zsaveT=0,zpanT=0,zparts=[],ZR={},zadoptPen=null,zopenedAt=0;
+var HAB={grass:'#79b45a',sand:'#e0cb86',snow:'#eef3f6',forest:'#5e9a48',savane:'#cdb468',swamp:'#7aa05a',farm:'#8cc05e'};
+var FOOD={
+  meat:{fr:'viande',en:'meat',c:'#c0392b'},bone:{fr:'os',en:'bone',c:'#f0e8d8'},fish:{fr:'poisson',en:'fish',c:'#8fa8b8'},carrot:{fr:'carotte',en:'carrot',c:'#f08a24'},
+  cheese:{fr:'fromage',en:'cheese',c:'#f2c94c'},grass:{fr:'herbe',en:'grass',c:'#6fb04a'},leaves:{fr:'feuilles',en:'leaves',c:'#4f9a4a'},insects:{fr:'insectes',en:'insects',c:'#4a4a4a'},
+  seeds:{fr:'graines',en:'seeds',c:'#e0b52a'},fruit:{fr:'fruits',en:'fruit',c:'#e04a4a'},bamboo:{fr:'bambou',en:'bamboo',c:'#7cb342'},hay:{fr:'foin',en:'hay',c:'#d9c27a'},
+  honey:{fr:'miel',en:'honey',c:'#e0a020'},eucalyptus:{fr:'eucalyptus',en:'eucalyptus',c:'#7fa88f'}
+};
+var AR={
+  gourmand:{n:['Gourmand','Greedy'],spd:.8,m:{meal:1.6,joy:1,play:1,pet:1,cl:1,feedJoy:2},L:{
+    sick:['Aïe, mon ventre…','Ouch, my tummy…'],hungry:["J'ai faim, faim, faim !","I'm hungry, hungry, hungry!"],dirty:['Ça sent bizarre ici…','It smells odd in here…'],bored:['Un petit snack ?','Got a snack?'],happy:['Quel festin !','What a feast!'],
+    fed:['Miam, délicieux !','Yum, delicious!'],played:['Jouer, ça creuse !','Playing makes me hungry!'],petted:['Mmh, merci.','Mmh, thanks.'],cleaned:['Plus de place pour manger !','More room to eat!'],healed:['Je peux manger à nouveau !','I can eat again!']}},
+  joueur:{n:['Joueur','Playful'],spd:1.2,m:{meal:1,joy:1.5,play:1.5,pet:1,cl:1,feedJoy:1},L:{
+    sick:["Je n'ai plus d'énergie…",'I have no energy…'],hungry:['Une pause repas ?','A lunch break?'],dirty:['On joue dans la boue ?',"Let's play in the mud?"],bored:["On joue ? S'il te plaît !",'Wanna play? Please!'],happy:['Hop hop hop !','Hop hop hop!'],
+    fed:['Merci, je repars jouer !','Thanks, back to play!'],played:['Encore, encore !','Again, again!'],petted:['Hihi, ça chatouille !','Hehe, that tickles!'],cleaned:['Je glisse partout !','I slide everywhere!'],healed:['Je rejoue enfin !','I can play again!']}},
+  timide:{n:['Timide','Shy'],spd:.7,m:{meal:1,joy:.7,play:.8,pet:.5,cl:1,feedJoy:1},L:{
+    sick:['Je me cache un peu…','I will hide a bit…'],hungry:['Euh… un peu faim…','Um… a bit hungry…'],dirty:["C'est… pas très propre.","It's… not very clean."],bored:['Tu es là ?','Are you there?'],happy:['Je me sens en sécurité.','I feel safe.'],
+    fed:['Oh, merci beaucoup.','Oh, thank you so much.'],played:["C'était amusant… doucement.",'That was fun… gently.'],petted:['Oh… merci…','Oh… thank you…'],cleaned:['Joli et calme.','Nice and quiet.'],healed:["Merci d'être resté.",'Thanks for staying.']}},
+  paresseux:{n:['Paresseux','Lazy'],spd:.45,m:{meal:.7,joy:.7,play:.6,pet:1,cl:.8,feedJoy:1},L:{
+    sick:['Je dors un peu plus…','I will sleep a bit more…'],hungry:['Mh… manger ? Plus tard…','Mm… eat? Later…'],dirty:['Bof, ça ira…','Meh, it will do…'],bored:['Zzz… oh, tu es là.','Zzz… oh, you are here.'],happy:['Quelle belle sieste !','What a great nap!'],
+    fed:['On mange allongé ?','Can I eat lying down?'],played:['Déjà fatigué…','Already tired…'],petted:['Oooh, continue…','Ooh, keep going…'],cleaned:['Un lit tout propre !','A clean bed!'],healed:['Je suis reposé !','I feel rested!']}},
+  curieux:{n:['Curieux','Curious'],spd:1,m:{meal:1,joy:1.1,play:1.1,pet:1,cl:1,feedJoy:1},L:{
+    sick:["Qu'est-ce que j'ai ?",'What do I have?'],hungry:['Ça se mange, ça ?','Is this edible?'],dirty:["Oh, qu'est-ce que c'est ?",'Oh, what is that?'],bored:['Je veux explorer !','I want to explore!'],happy:["J'ai tout exploré !",'I explored it all!'],
+    fed:["Intéressant, c'est bon !","Interesting, it's tasty!"],played:['Et ça, comment ça marche ?','And how does this work?'],petted:['Pourquoi tu fais ça ?','Why do you do that?'],cleaned:["Qu'as-tu changé ?",'What did you change?'],healed:["Je suis guéri, j'explore !","I'm cured, off to explore!"]}},
+  fier:{n:['Fier','Proud'],spd:.9,m:{meal:1,joy:1,play:.9,pet:.8,cl:1.5,feedJoy:1},L:{
+    sick:["Ce n'est rien du tout.","It's nothing at all."],hungry:["Mon repas, s'il vous plaît.",'My meal, please.'],dirty:['Ce lieu est indigne de moi.','This place is beneath me.'],bored:['Admirez-moi un peu.','Admire me a little.'],happy:['Je suis magnifique, non ?','I look magnificent, right?'],
+    fed:['Acceptable.','Acceptable.'],played:['Je gagne toujours.','I always win.'],petted:['Bon… une fois.','Well… just once.'],cleaned:['Enfin digne de moi.','Finally worthy of me.'],healed:['Évidemment, je guéris vite.','Of course I heal fast.']}},
+  calin:{n:['Câlin','Cuddly'],spd:.9,m:{meal:1,joy:1.3,play:1,pet:2,cl:1,feedJoy:1},L:{
+    sick:['Reste avec moi…','Stay with me…'],hungry:["J'ai faim, câlin d'abord ?",'Hungry. Hug first?'],dirty:['Mes poils sont sales…','My fur is dirty…'],bored:['Tu viens me voir ?','Will you visit me?'],happy:["Je t'aime !",'I love you!'],
+    fed:['Merci, et un câlin !','Thanks, and a cuddle!'],played:['Encore avec toi !','More with you!'],petted:['Oh oui, encore !','Oh yes, more!'],cleaned:['Tout doux et propre !','All soft and clean!'],healed:["Tu m'as sauvé !",'You saved me!']}},
+  energique:{n:['Énergique','Energetic'],spd:1.4,m:{meal:1.3,joy:1.2,play:1.4,pet:.9,cl:1,feedJoy:1},L:{
+    sick:['Je dois me reposer…','I have to rest…'],hungry:["Besoin d'énergie, vite !",'Need energy, fast!'],dirty:['Je nettoie en courant !','I clean while running!'],bored:['Je tourne en rond !',"I'm going in circles!"],happy:['Plus vite, plus haut !','Faster, higher!'],
+    fed:["Plein d'énergie !",'Full of energy!'],played:['Une autre course !','Another race!'],petted:["Allez, on y va !","Come on, let's go!"],cleaned:['Prêt à courir !','Ready to run!'],healed:['Je cours déjà !','Already running!']}}
+};
+var ZI={
+  husky:{arch:'energique',food:'meat',hab:'snow'},huskygris:{arch:'calin',food:'meat',hab:'snow'},chien:{arch:'calin',food:'bone',hab:'grass'},chat:{arch:'fier',food:'fish',hab:'grass'},
+  lapin:{arch:'timide',food:'carrot',hab:'grass'},souris:{arch:'curieux',food:'cheese',hab:'farm'},elephant:{arch:'gourmand',food:'grass',hab:'savane'},girafe:{arch:'curieux',food:'leaves',hab:'savane',tree:1},
+  tortue:{arch:'paresseux',food:'leaves',hab:'grass',pond:1},grenouille:{arch:'joueur',food:'insects',hab:'swamp',pond:1},canard:{arch:'joueur',food:'seeds',hab:'grass',pond:1},cochon:{arch:'gourmand',food:'fruit',hab:'farm'},
+  pingouin:{arch:'fier',food:'fish',hab:'snow',pond:1},renard:{arch:'curieux',food:'meat',hab:'forest',tree:1},lion:{arch:'fier',food:'meat',hab:'savane'},tigre:{arch:'energique',food:'meat',hab:'forest',tree:1},
+  panda:{arch:'gourmand',food:'bamboo',hab:'forest',tree:1},vache:{arch:'paresseux',food:'grass',hab:'farm'},mouton:{arch:'timide',food:'grass',hab:'farm'},cheval:{arch:'energique',food:'hay',hab:'farm'},
+  zebre:{arch:'timide',food:'grass',hab:'savane'},ours:{arch:'gourmand',food:'honey',hab:'forest',tree:1},loup:{arch:'fier',food:'meat',hab:'forest',tree:1},hibou:{arch:'curieux',food:'meat',hab:'forest',tree:1},
+  crocodile:{arch:'fier',food:'fish',hab:'swamp',pond:1},koala:{arch:'paresseux',food:'eucalyptus',hab:'forest',tree:1}
+};
+var ZLIST=NAMES.concat(['huskygris']);
+var Z={stars:12,unlocked:2,pens:[],ts:Date.now(),started:false};
+try{var zd=JSON.parse(localStorage.getItem(ZKEY)||'null');if(zd&&zd.pens)Z=zd;}catch(e){}
+while(Z.pens.length<ZCOLS*ZROWS)Z.pens.push(null);
+function zsave(){Z.ts=Date.now();save(ZKEY,Z);}
+function zt(fr,en){return G.lang==='en'?en:fr;}
+function penX(i){return (i%ZCOLS)*(ZPEN+ZGAP);}
+function penY(i){return Math.floor(i/ZCOLS)*(ZPEN+ZGAP);}
+var BOWL=[3.9,3.3],EAT=[3.0,3.3],REST=[2.7,2.1];
+function newPen(a){return {a:a,meal:80,health:100,joy:70,clean:100,sh:1,sick:0,coins:0,cp:0,food:0};}
+function zrt(i){
+  if(!ZR[i]||ZR[i].a!==Z.pens[i].a)ZR[i]={a:Z.pens[i].a,x:penX(i)+2.8,y:penY(i)+3,tx:null,ty:null,goal:'wander',mode:'idle',until:0,face:'y',moving:false,petCd:0,playT:0,ball:null,react:null,seed:i*1.7+.3};
+  return ZR[i];
+}
+function zdecay(p,sec,f){
+  var a=AR[ZI[p.a].arch].m,sh=[1,1,.75,.55][p.sh],m=sec/60*f;
+  p.meal=clamp(p.meal-5*a.meal*m,0,100);
+  p.clean=clamp(p.clean-3.5*a.cl*sh*m,0,100);
+  p.joy=clamp(p.joy-(2.5*a.joy-(p.sh-1)*.4)*m-(p.sick?3*m:0)-(p.meal<=0?3*m:0),0,100);
+  if(p.meal<20||p.clean<20)p.health=clamp(p.health-4*m,0,100);else p.health=clamp(p.health+(p.sick?0:1.5)*m,0,100);
+  if(!p.sick&&p.health<45&&Math.random()<.25*m)p.sick=1;
+  if(p.sick)p.health=clamp(p.health,10,100);
+  if(!p.sick&&p.joy>=50&&p.meal>=30){p.cp+=m*(p.joy/100);while(p.cp>=1&&p.coins<5){p.cp-=1;p.coins++;}if(p.coins>=5)p.cp=0;}
+}
+function zburst(x,y,z,n,col,kind){for(var i=0;i<n;i++){var an=Math.random()*6.2832,sp=.6+Math.random()*1.4;zparts.push({x:x,y:y,z:z,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp,vz:1.5+Math.random()*2.2,life:.9+Math.random()*.6,col:col,kind:kind,r:5+Math.random()*4});}}
+function zreact(i,key){
+  var rt=zrt(i);rt.react={k:key,t:ZT+3.4};var p=Z.pens[i];
+  if(key==='petted')zburst(rt.x,rt.y,AN[p.a].s*2.2,8,'#ff7a9a','heart');
+  else if(key==='healed')zburst(rt.x,rt.y,1,16,'#7ee08a','spark');
+  else if(key==='cleaned')zburst(rt.x,rt.y,1,16,'#8fd3ff','spark');
+  else if(key==='played')zburst(rt.x,rt.y,1.5,12,'#ffd35a','spark');
+  else if(key==='fed')zburst(rt.x,rt.y,AN[p.a].s*2,6,'#ff7a9a','heart');
+}
+function zpick(i){
+  var p=Z.pens[i],rt=ZR[i],ox=penX(i),oy=penY(i);
+  if(rt.playT>ZT&&rt.ball){rt.tx=rt.ball.x;rt.ty=rt.ball.y;rt.goal='ball';return;}
+  if(p.sick){rt.tx=ox+REST[0];rt.ty=oy+REST[1];rt.goal='rest';return;}
+  if(p.meal<70&&p.food>.03){rt.tx=ox+EAT[0];rt.ty=oy+EAT[1];rt.goal='eat';return;}
+  for(var k=0;k<12;k++){var x=.9+Math.random()*3.2,y=.9+Math.random()*3.2;if(x<2.6&&y<2.6)continue;if(x>2.7&&y<2.2)continue;rt.tx=ox+x;rt.ty=oy+y;rt.goal='wander';return;}
+  rt.tx=ox+3;rt.ty=oy+3;rt.goal='wander';
+}
+function zai(i,dt){
+  var p=Z.pens[i],rt=zrt(i),ar=AR[ZI[p.a].arch];
+  if(rt.ball){var b=rt.ball,ox=penX(i),oy=penY(i);b.x+=b.vx*dt;b.y+=b.vy*dt;b.z=Math.abs(Math.sin(ZT*7))*.5;
+    if(b.x<ox+.7||b.x>ox+ZPEN-.7)b.vx=-b.vx;if(b.y<oy+.7||b.y>oy+ZPEN-.7)b.vy=-b.vy;b.x=clamp(b.x,ox+.7,ox+ZPEN-.7);b.y=clamp(b.y,oy+.7,oy+ZPEN-.7);
+    if(rt.playT<=ZT)rt.ball=null;}
+  if(rt.mode==='eat'){
+    p.meal=clamp(p.meal+18*dt,0,100);p.food=Math.max(0,p.food-.3*dt);p.joy=clamp(p.joy+.8*dt*ar.m.feedJoy,0,100);
+    if(p.meal>=98||p.food<=.01||p.sick){var done=p.meal>=98||p.food<=.01;rt.mode='idle';rt.until=ZT+1;rt.goal='wander';if(done&&!p.sick)zreact(i,'fed');}
+    return;
+  }
+  if(rt.mode==='rest'||rt.mode==='idle'){
+    var urgent=(p.sick&&rt.goal!=='rest')||(!p.sick&&p.meal<70&&p.food>.03&&rt.goal!=='eat')||(rt.playT>ZT&&rt.goal!=='ball');
+    if(ZT<rt.until&&!urgent)return;
+    zpick(i);rt.mode='walk';
+  }
+  if(rt.playT>ZT&&rt.ball&&rt.goal==='ball'){rt.tx=rt.ball.x;rt.ty=rt.ball.y;}
+  var dx=rt.tx-rt.x,dy=rt.ty-rt.y,d=Math.sqrt(dx*dx+dy*dy),spd=ar.spd*(p.sick?.4:1)*(p.joy<30?.7:1)*(rt.goal==='ball'?1.5:1);
+  if(d<.2){
+    rt.moving=false;
+    if(rt.goal==='eat'&&p.meal<98&&p.food>.01&&!p.sick){rt.mode='eat';rt.face='x';}
+    else if(rt.goal==='rest'){rt.mode='rest';rt.until=ZT+4;}
+    else{rt.mode='idle';rt.until=ZT+1+Math.random()*3;if(rt.goal==='ball')rt.goal='wander';}
+    return;
+  }
+  var st=Math.min(d,spd*dt);rt.x+=dx/d*st;rt.y+=dy/d*st;rt.moving=true;rt.face=Math.abs(dx)>Math.abs(dy)?'x':'y';
+}
+function zstate(p){
+  if(p.sick)return ['malade','sick'];if(p.meal<35)return ['affamé','hungry'];if(p.clean<35)return ['sale','dirty'];if(p.joy<35)return ['triste','sad'];
+  if(p.joy>75&&p.meal>50)return ['content','happy'];return ['calme','calm'];
+}
+function zline(p,rt){
+  var a=AR[ZI[p.a].arch],k;
+  if(rt.react&&rt.react.t>ZT)k=rt.react.k;else if(p.sick)k='sick';else if(p.meal<35)k='hungry';else if(p.clean<35)k='dirty';else if(p.joy<35)k='bored';else k='happy';
+  return zt(a.L[k][0],a.L[k][1]);
+}
+
+/* ---------- actions ---------- */
+var ZACT_FR={feed:'Nourrir',heal:'Soigner',clean:'Nettoyer',play:'Jouer',pet:'Caresser',house:'Loger'},ZACT_EN={feed:'Feed',heal:'Heal',clean:'Clean',play:'Play',pet:'Pet',house:'House'};
+var ZBARS_FR=['Repas','Santé','Joie','Propreté'],ZBARS_EN=['Meal','Health','Joy','Clean'];
+function houseCost(p){return p.sh>=3?0:(p.sh===1?4:8);}
+function zact(kind){
+  var i=zsel;if(i==null)return;var p=Z.pens[i];if(!p)return;var rt=zrt(i),ar=AR[ZI[p.a].arch];ac();
+  var verb=(G.lang==='en'?ZACT_EN:ZACT_FR)[kind];speak(verb,G.lang);
+  if(kind==='feed'){
+    if(p.food>.6){toast(zt('Le bol est plein','The bowl is full'),'bad');return;}
+    p.food=1;sfx('tap');zburst(penX(i)+BOWL[0],penY(i)+BOWL[1],.5,8,FOOD[ZI[p.a].food].c,'spark');
+  }else if(kind==='heal'){
+    if(!p.sick){toast(zt('En pleine forme !','In great shape!'),'good');return;}
+    if(Z.stars<1){toast(zt('Il faut 1 étoile','Needs 1 star'),'bad');return;}
+    Z.stars--;p.sick=0;p.health=Math.max(p.health,70);zreact(i,'healed');sfx('ok');
+  }else if(kind==='clean'){
+    if(p.clean>95){toast(zt('Déjà propre !','Already clean!'),'good');return;}
+    p.clean=100;p.joy=clamp(p.joy+3+(ZI[p.a].arch==='fier'?10:0),0,100);zreact(i,'cleaned');sfx('ok');
+  }else if(kind==='play'){
+    if(rt.playT>ZT){toast(zt('Il joue déjà !','Already playing!'),'good');return;}
+    rt.playT=ZT+3.2;p.joy=clamp(p.joy+25*ar.m.play,0,100);p.meal=clamp(p.meal-6,0,100);p.clean=clamp(p.clean-5,0,100);
+    rt.ball={x:penX(i)+2.5,y:penY(i)+3,z:0,vx:(Math.random()<.5?-1:1)*1.6,vy:(Math.random()<.5?-1:1)*1.2};if(rt.mode!=='walk'){rt.mode='idle';rt.until=0;}
+    zreact(i,'played');sfx('tap');
+  }else if(kind==='pet'){
+    if(rt.petCd>ZT)return;rt.petCd=ZT+1.5;p.joy=clamp(p.joy+12*ar.m.pet,0,100);zreact(i,'petted');sfx('tap');
+  }else if(kind==='house'){
+    var c=houseCost(p);
+    if(!c){toast(zt("L'abri est au maximum !",'House is maxed out!'),'good');return;}
+    if(Z.stars<c){toast(zt('Il faut '+c+' étoiles','Needs '+c+' stars'),'bad');return;}
+    Z.stars-=c;p.sh++;p.joy=clamp(p.joy+15+(ZI[p.a].arch==='curieux'?10:0),0,100);zburst(penX(i)+1.4,penY(i)+1.4,1.4,20,'#ffd35a','spark');sfx('ok');
+  }
+  zsave();zpanel();
+}
+function zcollect(i){
+  var p=Z.pens[i];if(!p||!p.coins)return;var n=p.coins;Z.stars+=n;p.coins=0;zburst(penX(i)+2.5,penY(i)+2.5,2,10+n*3,'#ffd35a','star');sfx('ok');toast('+'+n+' ★','good');zsave();
+}
+function zselect(i){
+  zsel=i;var p=Z.pens[i];if(p){zcollect(i);speak(nameOf(p.a),G.lang);}
+  zlayout();zpanel();
+}
+function zdeselect(){zsel=null;zlayout();zpanel();}
+
+/* ---------- mise en page et caméra ---------- */
+function zlayout(){
+  layout();
+  var top=70,pan=$('zpanel').getBoundingClientRect().height,panel=zsel!=null?(pan>40?pan+14:250):70,avail=Math.max(200,CH-top-panel);
+  var gw=ZCOLS*ZPEN+(ZCOLS-1)*ZGAP,gh=ZROWS*ZPEN+(ZROWS-1)*ZGAP;
+  ZSCo=clamp(Math.min(CW/((gw+gh)*C30+2),avail/((gw+gh)/2+4.5)),20,80);ZAYo=top+avail*.5+ZSCo*1.4;
+  var hv=zsel!=null?avail:CH-top-70;
+  ZSCd=clamp(Math.min(CW/11.5,hv/9.8),30,110);ZAYd=top+hv*.58;
+}
+function ztarget(){
+  if(zsel==null)return {x:(ZCOLS*ZPEN+(ZCOLS-1)*ZGAP)/2,y:(ZROWS*ZPEN+(ZROWS-1)*ZGAP)/2,sc:ZSCo,ay:ZAYo};
+  return {x:penX(zsel)+ZPEN/2,y:penY(zsel)+ZPEN/2,sc:ZSCd,ay:ZAYd};
+}
+function zsnap(){var t=ztarget();zcam.x=t.x;zcam.y=t.y;zcam.sc=t.sc;zcam.ay=t.ay;CAM.x=t.x;CAM.y=t.y;CAM.z=0;SC=t.sc;AY=t.ay;}
+function zpanel(){
+  var on=zsel!=null&&Z.pens[zsel];$('zpanel').classList.toggle('on',!!on);$('zStars').textContent=Z.stars;
+  if(!on)return;
+  var p=Z.pens[zsel],rt=zrt(zsel),inf=ZI[p.a],ar=AR[inf.arch],st=zstate(p),vals=[p.meal,p.health,p.joy,p.clean],bars=$('zbars').children,k;
+  $('zImg').src=thumbOf(p.a);$('zName').textContent=nameOf(p.a);$('zArch').textContent=zt(ar.n[0],ar.n[1]);
+  $('zFood').textContent=zt('Mange : ','Eats: ')+zt(FOOD[inf.food].fr,FOOD[inf.food].en);$('zState').textContent=zt(st[0],st[1]);$('zLine').textContent=zline(p,rt);
+  for(k=0;k<4;k++){bars[k].querySelector('span').textContent=(G.lang==='en'?ZBARS_EN:ZBARS_FR)[k];var b=bars[k].querySelector('b');b.style.width=Math.round(vals[k])+'%';b.className=vals[k]<35?'low':'';}
+  var btns=document.querySelectorAll('.zact');
+  Array.prototype.forEach.call(btns,function(bt){var a=bt.getAttribute('data-act');bt.querySelector('.zl').textContent=(G.lang==='en'?ZACT_EN:ZACT_FR)[a];
+    var sm=bt.querySelector('small');if(a==='heal')sm.textContent=p.sick?'1 ★':'';else if(a==='house')sm.textContent=p.sh>=3?'max':houseCost(p)+' ★';else sm.textContent='';
+    bt.classList.toggle('need',(a==='heal'&&p.sick)||(a==='feed'&&p.meal<35&&p.food<.3)||(a==='clean'&&p.clean<35)||(a==='pet'&&p.joy<35));});
+}
+
+/* ---------- boucle zoo ---------- */
+function zoffline(){
+  var mins=Math.min(90,(Date.now()-Z.ts)/60000);if(mins<.2)return;
+  Z.pens.forEach(function(p){if(p){var sk=p.sick;zdecay(p,mins*60,.12);p.sick=sk;p.meal=Math.max(p.meal,35);p.clean=Math.max(p.clean,35);p.joy=Math.max(p.joy,35);p.coins=Math.min(p.coins,3);}});
+}
+function zstep(dt){
+  ZT+=dt;
+  for(var i=0;i<Z.pens.length;i++){var p=Z.pens[i];if(!p)continue;zdecay(p,dt,1);zai(i,dt);}
+  for(var j=zparts.length-1;j>=0;j--){var q=zparts[j];q.vz-=4*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.z+=q.vz*dt;q.life-=dt;if(q.life<=0||q.z<0)zparts.splice(j,1);}
+  var t=ztarget(),k=1-Math.exp(-dt*5);
+  zcam.x+=(t.x-zcam.x)*k;zcam.y+=(t.y-zcam.y)*k;zcam.sc+=(t.sc-zcam.sc)*k;zcam.ay+=(t.ay-zcam.ay)*k;
+  CAM.x=zcam.x;CAM.y=zcam.y;CAM.z=0;SC=zcam.sc;AY=zcam.ay;
+  zpanT+=dt;if(zpanT>.3){zpanT=0;zpanel();}
+  zsaveT+=dt;if(zsaveT>6){zsaveT=0;zsave();}
+}
+
+/* ---------- rendu zoo ---------- */
+function zpenItems(i,arr){
+  var p=Z.pens[i],ox=penX(i),oy=penY(i),locked=i>=Z.unlocked,inf=p?ZI[p.a]:null,gc=locked?'#6d7d76':(inf?HAB[inf.hab]:'#79b45a'),wood='#9b6f3d';
+  arr.push(mk(ox,ox+ZPEN,oy,oy+ZPEN,-.4,0,gc));
+  arr.push(mk(ox,ox+ZPEN,oy,oy+.2,0,1.0,wood));arr.push(mk(ox,ox+.2,oy+.2,oy+ZPEN,0,1.0,wood));
+  arr.push(mk(ox+ZPEN-.2,ox+ZPEN,oy+.2,oy+ZPEN,0,.4,wood));arr.push(mk(ox+.2,ox+ZPEN-.2,oy+ZPEN-.2,oy+ZPEN,0,.4,wood));
+  if(locked||!p)return;
+  var lv=p.sh,sw=1.5+.25*lv,shh=1.1+.3*lv,x0=ox+.5,y0=oy+.5,rc=['','#c0583a','#3f7ca8','#8a4fb0'][lv];
+  arr.push(mk(x0,x0+sw,y0,y0+sw,0,shh,'#b98650',{decal:{face:'y',fn:function(g,w,h){g.fillStyle='#4a2f18';g.fillRect(w*.32,0,w*.36,h*.62);}}}));
+  arr.push(mk(x0-.15,x0+sw+.15,y0-.15,y0+sw+.15,shh,shh+.3,rc));
+  if(lv>=2)arr.push(mk(x0+.2,x0+.5,y0+.2,y0+.5,shh+.3,shh+.7,'#7d6a5a'));
+  if(lv>=3){arr.push(mk(x0+sw-.15,x0+sw-.08,y0+.1,y0+.17,shh+.3,shh+1.3,'#d8d8d8'));arr.push(mk(x0+sw-.7,x0+sw-.15,y0+.1,y0+.17,shh+.95,shh+1.3,'#e0473a'));}
+  var bx=ox+BOWL[0],by=oy+BOWL[1];
+  arr.push(mk(bx-.4,bx+.4,by-.4,by+.4,0,.22,'#9aa0a8'));
+  if(p.food>.02)arr.push(mk(bx-.3,bx+.3,by-.3,by+.3,.22,.26+.16*p.food,FOOD[inf.food].c));
+  if(inf.pond){
+    var px0=ox+3.0,px1=ox+4.6,py0=oy+.5,py1=oy+1.9;
+    arr.push({x0:px0,x1:px1,y0:py0,y1:py1,z0:0,z1:.03,draw:function(){
+      var a=P(px0,py0,.03),b=P(px1,py0,.03),c=P(px1,py1,.03),d=P(px0,py1,.03);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.lineTo(c[0],c[1]);ctx.lineTo(d[0],d[1]);ctx.closePath();
+      ctx.fillStyle='#5b7f6b';ctx.fill();var e=P(px0+.15,py0+.15,.03),f=P(px1-.15,py0+.15,.03),g=P(px1-.15,py1-.15,.03),h=P(px0+.15,py1-.15,.03);
+      ctx.beginPath();ctx.moveTo(e[0],e[1]);ctx.lineTo(f[0],f[1]);ctx.lineTo(g[0],g[1]);ctx.lineTo(h[0],h[1]);ctx.closePath();ctx.fillStyle='#5cb9b5';ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.4)';ctx.lineWidth=1.5;ctx.beginPath();for(var k=0;k<3;k++){var yy=py0+.4+k*.35,s0=P(px0+.3,yy,.03),s1=P(px1-.3,yy,.03);ctx.moveTo(s0[0],s0[1]+Math.sin(ZT*2+k)*1.5);ctx.lineTo(s1[0],s1[1]-Math.sin(ZT*2+k)*1.5);}ctx.stroke();
+    }});
+  }else if(inf.tree){
+    var tx=ox+3.9,ty=oy+1.0;
+    arr.push(mk(tx,tx+.4,ty,ty+.4,0,1.4,'#7a5530'));arr.push(mk(tx-.5,tx+.9,ty-.5,ty+.9,1.4,2.5,'#4a8a3a'));arr.push(mk(tx-.25,tx+.65,ty-.25,ty+.65,2.5,3.1,'#5da048'));
+  }
+  var rt=zrt(i);if(rt.ball){var b=rt.ball;arr.push(mk(b.x-.2,b.x+.2,b.y-.2,b.y+.2,.02+b.z,.42+b.z,'#e0473a'));}
+}
+function zbadge(x,y,kind,col){
+  var r=clamp(SC*.28,12,22);ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.arc(0,0,r,0,6.2832);ctx.fillStyle='rgba(255,255,255,.95)';ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=8;ctx.fill();ctx.shadowColor='transparent';
+  ctx.fillStyle=col;ctx.strokeStyle=col;ctx.lineWidth=r*.18;ctx.lineCap='round';
+  if(kind==='sick'){ctx.fillRect(-r*.15,-r*.55,r*.3,r*1.1);ctx.fillRect(-r*.55,-r*.15,r*1.1,r*.3);}
+  else if(kind==='hungry'){ctx.beginPath();ctx.arc(0,-r*.05,r*.55,0,Math.PI);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(-r*.3,-r*.4);ctx.quadraticCurveTo(0,-r*.8,r*.3,-r*.4);ctx.stroke();}
+  else if(kind==='dirty'){for(var k=0;k<3;k++){ctx.beginPath();ctx.arc(-r*.4+k*r*.4,(k%2?r*.15:-r*.15),r*.18,0,6.2832);ctx.fill();}}
+  else if(kind==='sad'){ctx.beginPath();ctx.moveTo(0,-r*.55);ctx.quadraticCurveTo(r*.5,r*.1,0,r*.5);ctx.quadraticCurveTo(-r*.5,r*.1,0,-r*.55);ctx.fill();}
+  else if(kind==='heart'){ctx.beginPath();ctx.moveTo(0,r*.5);ctx.bezierCurveTo(-r*.9,-r*.05,-r*.45,-r*.7,0,-r*.2);ctx.bezierCurveTo(r*.45,-r*.7,r*.9,-r*.05,0,r*.5);ctx.fill();}
+  else if(kind==='coin'){ctx.beginPath();for(var s=0;s<10;s++){var rr=s%2?r*.28:r*.62,an=-1.5708+s*.6283;ctx.lineTo(Math.cos(an)*rr,Math.sin(an)*rr);}ctx.closePath();ctx.fill();}
+  ctx.restore();
+}
+function ztag(txt,x,y,sub){
+  var fs=clamp(SC*.3,13,22);ctx.font='700 '+fs+'px Fredoka,"Avenir Next Rounded","Trebuchet MS",system-ui,sans-serif';
+  var w=ctx.measureText(txt).width+fs*1.2,h=fs*1.7;ctx.save();ctx.translate(x,y);ctx.beginPath();if(ctx.roundRect)ctx.roundRect(-w/2,-h/2,w,h,h/2);else ctx.rect(-w/2,-h/2,w,h);
+  ctx.fillStyle=sub==='dim'?'rgba(230,240,238,.7)':'#fff';ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=8;ctx.fill();ctx.shadowColor='transparent';ctx.lineWidth=2.5;ctx.strokeStyle=sub==='gold'?'#e0a020':'#1e7f7a';ctx.stroke();
+  ctx.fillStyle='#10302d';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(txt,0,1);ctx.restore();
+}
+function zvis(i){return onScreen({x0:penX(i),x1:penX(i)+ZPEN,y0:penY(i),y1:penY(i)+ZPEN,z0:-.4,z1:3.6});}
+function zrender(){
+  ctx.setTransform(DPR,0,0,DPR,0,0);CAM.z=0;
+  drawBG(ZT);
+  var arr=[],i,N0=ZCOLS*ZROWS,vis=[];
+  for(i=0;i<N0;i++){if(!zvis(i))continue;vis.push(i);zpenItems(i,arr);
+    var p=Z.pens[i];if(p&&i<Z.unlocked){
+      var rt=zrt(i),ar=AR[ZI[p.a].arch],st=zstate(p),beh=behavior(p.a,ZT,rt.seed),sc=AN[p.a].s*1.35,expr='open',dz=0;
+      if(rt.moving)dz=Math.abs(Math.sin(ZT*8*ar.spd))*.07;
+      if(rt.mode==='eat'){beh={dz:0,hd:-Math.abs(Math.sin(ZT*9))*.12,hx:0,hy:.04,zs:1,tongue:false,wamp:1,lat:0};}
+      else if(p.sick||rt.mode==='rest'){beh={dz:0,hd:-.08,hx:0,hy:0,zs:1,tongue:false,wamp:.2,lat:0};expr='closed';}
+      else if(p.joy<35){beh.hd-=.07;beh.wamp=.3;}
+      else if(p.joy>85){beh.wamp=2;if(!beh.dz)beh.dz=Math.max(0,Math.sin(ZT*3+rt.seed))*.04;expr='happy';}
+      if(expr==='open'&&((ZT+rt.seed)%3.7)<.12)expr='closed';
+      animalItems(p.a,{x:rt.x,y:rt.y,z:.01,s:sc,face:rt.face,t:ZT,expr:expr,dz:dz,wag:5,beh:beh},arr);
+      arr.push(shadowItem(rt.x,rt.y,.012,.75*sc,.22));
+    }
+  }
+  var sorted=sortItems(arr);
+  for(i=0;i<sorted.length;i++){var it=sorted[i];if(it.draw)it.draw();else drawBox(it);}
+  /* particules */
+  for(i=0;i<zparts.length;i++){var q=zparts[i],pp=P(q.x,q.y,q.z),r=q.r*(SC/50);ctx.globalAlpha=clamp(q.life*1.6,0,1);ctx.fillStyle=q.col;
+    if(q.kind==='heart'){ctx.save();ctx.translate(pp[0],pp[1]);ctx.beginPath();ctx.moveTo(0,r);ctx.bezierCurveTo(-r*1.8,-r*.1,-r*.9,-r*1.4,0,-r*.4);ctx.bezierCurveTo(r*.9,-r*1.4,r*1.8,-r*.1,0,r);ctx.fill();ctx.restore();}
+    else if(q.kind==='star'){ctx.beginPath();for(var s=0;s<10;s++){var rr=s%2?r*.5:r*1.3,an=-1.5708+s*.6283;ctx.lineTo(pp[0]+Math.cos(an)*rr,pp[1]+Math.sin(an)*rr);}ctx.closePath();ctx.fill();}
+    else{ctx.beginPath();ctx.arc(pp[0],pp[1],r*.8,0,6.2832);ctx.fill();}}
+  ctx.globalAlpha=1;
+  /* anneaux, étiquettes, badges */
+  for(var vi=0;vi<vis.length;vi++){
+    i=vis[vi];var p2=Z.pens[i],cx=penX(i)+ZPEN/2,cy=penY(i)+ZPEN/2,c0=P(cx,cy,.4);
+    if(i===zsel){var a=P(penX(i),penY(i),.06),b=P(penX(i)+ZPEN,penY(i),.06),c=P(penX(i)+ZPEN,penY(i)+ZPEN,.06),d=P(penX(i),penY(i)+ZPEN,.06);
+      ctx.strokeStyle='rgba(255,200,87,'+(.6+.3*Math.sin(ZT*4))+')';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.lineTo(c[0],c[1]);ctx.lineTo(d[0],d[1]);ctx.closePath();ctx.stroke();}
+    if(zsel!=null&&i!==zsel)continue;
+    if(i>=Z.unlocked){var cost=10+4*(i-2);ztag(zt('Débloquer · ','Unlock · ')+cost+' ★',c0[0],c0[1],'dim');continue;}
+    if(!p2){ztag(zt('+ Adopter','+ Adopt'),c0[0],c0[1],'gold');continue;}
+    var rt2=zrt(i),sc2=AN[p2.a].s*1.35,hp=P(rt2.x,rt2.y,sc2*2.7+.5);
+    if(zsel==null)ztag(nameOf(p2.a),c0[0],P(cx,cy+ZPEN/2-.2,0)[1]+SC*.3);
+    var bx=hp[0],by=hp[1]-SC*.2,st2=zstate(p2);
+    if(p2.sick)zbadge(bx,by,'sick','#e0473a');
+    else if(p2.meal<35)zbadge(bx,by,'hungry',FOOD[ZI[p2.a].food].c);
+    else if(p2.clean<35)zbadge(bx,by,'dirty','#8a5a2c');
+    else if(p2.joy<35)zbadge(bx,by,'sad','#4a90d9');
+    else if(p2.joy>85)zbadge(bx,by,'heart','#ff5a7a');
+    if(p2.coins){var kx=bx+SC*.9;zbadge(kx,by,'coin','#e0a020');ctx.fillStyle='#10302d';ctx.font='700 '+clamp(SC*.22,10,16)+'px Fredoka,system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('x'+p2.coins,kx,by+clamp(SC*.28,12,22)+10);}
+  }
+  drawFG();
+  var vg=ctx.createRadialGradient(CW/2,CH/2,Math.min(CW,CH)*.4,CW/2,CH/2,Math.max(CW,CH)*.78);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.4)');ctx.fillStyle=vg;ctx.fillRect(0,0,CW,CH);
+}
+
+/* ---------- saisie et écrans ---------- */
+function ztap(px,py){
+  var best=-1,bd=1e9,i;
+  for(i=0;i<ZCOLS*ZROWS;i++){
+    if(zsel!=null&&i!==zsel)continue;
+    var c=P(penX(i)+ZPEN/2,penY(i)+ZPEN/2,.5),hw=ZPEN*C30*SC,hh=ZPEN*S50*SC,dx=Math.abs(px-c[0])/hw,dy=Math.abs(py-(c[1]-SC*.8))/(hh*1.5),d=dx+dy;
+    if(d<=1.15&&d<bd){bd=d;best=i;}
+  }
+  if(best<0)return;
+  var p=Z.pens[best];
+  if(best>=Z.unlocked){var cost=10+4*(best-2);if(best!==Z.unlocked){toast(zt("Débloque d'abord l'enclos précédent",'Unlock the previous pen first'),'bad');return;}
+    if(Z.stars<cost){toast(zt('Il faut '+cost+' étoiles','Needs '+cost+' stars'),'bad');return;}
+    Z.stars-=cost;Z.unlocked++;zburst(penX(best)+2.5,penY(best)+2.5,1,24,'#ffd35a','star');sfx('ok');zsave();zpanel();return;}
+  if(!p){zadoptPen=best;openAdopt();return;}
+  if(zsel==null){zselect(best);return;}
+  var rt=zrt(best),hp=P(rt.x,rt.y,AN[p.a].s*1.35*1.4);
+  if(Math.abs(px-hp[0])<SC*1.6&&Math.abs(py-hp[1])<SC*2.2)zact('pet');
+}
+function openAdopt(){
+  var have={};Z.pens.forEach(function(p){if(p)have[p.a]=1;});var h='',any=false;
+  ZLIST.forEach(function(k){
+    if(have[k])return;any=true;var inf=ZI[k],ar=AR[inf.arch];
+    h+='<button class="acard" type="button" data-adopt="'+k+'"><img alt="" src="'+thumbOf(k)+'"><span class="an">'+nameOf(k)+'</span><span class="at">'+zt(ar.n[0],ar.n[1])+'</span><span class="af">'+zt('Mange : ','Eats: ')+zt(FOOD[inf.food].fr,FOOD[inf.food].en)+'</span><b>'+(Z.started&&Z.pens.some(Boolean)?'6 ★':zt('Gratuit','Free'))+'</b></button>';});
+  $('agrid').innerHTML=any?h:'<p>'+zt('Tous les animaux sont adoptés !','All animals are adopted!')+'</p>';
+  $('aStars').textContent=Z.stars;zopenedAt=performance.now();showScreen('sAdopt');
+}
+function zadopt(k){
+  var i=zadoptPen;if(i==null||Z.pens[i])return;var free=!Z.pens.some(Boolean),cost=free?0:6;
+  if(Z.stars<cost){toast(zt('Il faut 6 étoiles','Needs 6 stars'),'bad');return;}
+  Z.stars-=cost;Z.pens[i]=newPen(k);Z.started=true;zsave();showScreen(null);zselect(i);zburst(penX(i)+2.5,penY(i)+2.5,1.5,24,'#ffd35a','star');sfx('ok');
+}
+function zooEnter(){
+  mode='zoo';paused=true;setBody('zoo');showScreen(null);hideFiche();
+  if(!Z.pens.some(Boolean)){var hv=G.hero;Z.pens[0]=newPen(ZI[hv]?hv:'husky');Z.started=true;}
+  zoffline();zsel=null;zlayout();zsnap();zpanel();zsave();
+}
+function zooExit(){mode='game';zsave();setBody('');showScreen('sMenu');updateZooBtn();}
+function updateZooBtn(){var b=$('bZoo');if(b)b.textContent=zt('Mon zoo','My zoo')+' · '+Z.stars+' ★';}
+function zinit(){
+  var bars='';for(var k=0;k<4;k++)bars+='<div class="zbar"><span></span><i><b></b></i></div>';$('zbars').innerHTML=bars;
+  $('zzone').addEventListener('pointerdown',function(e){e.preventDefault();var r=cv.getBoundingClientRect();ztap(e.clientX-r.left,e.clientY-r.top);});
+  Array.prototype.forEach.call(document.querySelectorAll('.zact'),function(b){b.addEventListener('click',function(){zact(b.getAttribute('data-act'));});});
+  $('zBack').addEventListener('click',function(){if(zsel!=null)zdeselect();else zooExit();});
+  $('zAdopt').addEventListener('click',function(){var e=-1;for(var i=0;i<Z.unlocked;i++)if(!Z.pens[i]){e=i;break;}if(e<0){toast(zt('Aucun enclos libre','No free pen'),'bad');return;}zadoptPen=e;openAdopt();});
+  $('agrid').addEventListener('click',function(e){if(performance.now()-zopenedAt<500)return;var b=e.target.closest?e.target.closest('.acard'):null;if(b)zadopt(b.getAttribute('data-adopt'));});
+  $('aBack').addEventListener('click',function(){showScreen(null);});
+  $('bZoo').addEventListener('click',function(){ac();zooEnter();});
+  window.addEventListener('resize',function(){if(mode==='zoo'){zlayout();}});
+  updateZooBtn();
+}
+
 /* ---------- commandes ---------- */
 var last=0;
 function frame(now){
   var raw=(now-last)/1000||0,dt=Math.min(.05,raw);last=now;
-  if(raw>0&&raw<.5&&!paused&&phase!=='menu'){
+  if(raw>0&&raw<.5&&(mode==='zoo'||(!paused&&phase!=='menu'))){
     dtEMA+=(raw-dtEMA)*.05;
     if(dtEMA>.026){lowT+=raw;hiT=0;if(lowT>1.5&&Q>0){Q--;lowT=0;qLocked++;}}
     else if(dtEMA<.019){hiT+=raw;lowT=0;if(hiT>8&&Q<2&&qLocked<2){Q++;hiT=0;}}
     else{lowT=0;hiT=0;}
   }
-  step(dt);render();requestAnimationFrame(frame);
+  if(mode==='zoo'){zstep(dt);zrender();}else{step(dt);render();}
+  requestAnimationFrame(frame);
 }
 function press(el,e){var r=el.getBoundingClientRect();el.style.setProperty('--px',(e&&e.clientX!=null?(e.clientX-r.left)/r.width*100:50)+'%');el.classList.add('press');setTimeout(function(){el.classList.remove('press');},180);}
 function bindZone(el,side){el.addEventListener('pointerdown',function(e){e.preventDefault();press(el,e);choose(side);});}
@@ -1187,11 +1605,13 @@ $('fSay').addEventListener('click',function(){if(FI[G.fk]){ac();speak(fiData(G.f
 $('eMet').addEventListener('click',function(e){var b=e.target.closest?e.target.closest('button'):null;if(b)showFiche(b.getAttribute('data-fiche'));});
 window.addEventListener('resize',layout);
 ['lang','mode'].forEach(function(k){Array.prototype.forEach.call(document.querySelectorAll('.opt[data-k="'+k+'"]'),function(o){o.setAttribute('aria-pressed',o.getAttribute('data-v')===G[k]?'true':'false');});});
+zinit();
 layout();AY=AYt;SC=SC0;
 cur=mkLevel(0,0,0,null);attachChildren(cur);setQuestion(cur,makeQuestion(0));cur.born=-5;
 (function(){var a=anchor(cur);CAM.x=a.x;CAM.y=a.y;CAM.z=a.z;})();
 setTimeout(function(){buildHeroes();},30);
-window.__hd={setQ:function(q){Q=q;qLocked=9;},get Q(){return Q;},showFiche:showFiche,behavior:behavior,G:G,get cur(){return cur;},get phase(){return phase;},choose:choose,thumb:thumbOf,names:NAMES,
+window.__hd={zoo:{Z:Z,enter:zooEnter,exit:zooExit,select:zselect,act:zact,tap:ztap,adoptOpen:openAdopt,adopt:zadopt,get sel(){return zsel;},get mode(){return mode;},setPen:function(i){zadoptPen=i;},
+  step:function(n,dt){for(var i=0;i<n;i++)zstep(dt||1/30);zrender();},render:zrender,zt:function(){return ZT;}},setQ:function(q){Q=q;qLocked=9;},get Q(){return Q;},showFiche:showFiche,behavior:behavior,G:G,get cur(){return cur;},get phase(){return phase;},choose:choose,thumb:thumbOf,names:NAMES,
   step:function(n,dt){for(var i=0;i<n;i++)step(dt||1/30);render();},render:render,layout:layout,get HB(){return HB;},get SC(){return SC;}};
 requestAnimationFrame(frame);
 })();

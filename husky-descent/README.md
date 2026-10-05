@@ -14,3 +14,12 @@ extraits de Wikipédia (API REST officielle, licence CC BY-SA 4.0, source et lic
 
 Il faut que `fr.wikipedia.org` et `en.wikipedia.org` soient joignables. Le script garde 2 ou 3 phrases entières,
 ignore les pages d'homonymie et ne modifie rien si le réseau est bloqué. Test hors réseau : `--mock fichier.json`.
+
+## Mode zoo
+
+Les étoiles gagnées pendant la descente (bonne réponse du premier coup) servent de monnaie dans « Mon zoo » :
+adopter un animal, débloquer un enclos, soigner, améliorer l'abri. Chaque animal a un tempérament parmi huit
+(gourmand, joueur, timide, paresseux, curieux, fier, câlin, énergique) qui change ses besoins, ses déplacements
+et ses répliques. Actions : nourrir (remplit la gamelle, l'animal vient manger), soigner, nettoyer, jouer, caresser, loger.
+La progression est enregistrée dans le navigateur ; absent, l'animal vieillit très doucement et ne risque rien.
+Les régimes, tempéraments et habitats sont des choix de jeu simplifiés, pas des données scientifiques.
