@@ -92,21 +92,20 @@ function createScene(canvas, { alpha = true } = {}) {
   ro.observe(canvas);
   window.addEventListener('resize', resize);
 
-  // Perf: only render while the canvas is on-screen and the tab is visible.
-  // The animation loops keep spinning (cheap trig), but the costly WebGL draw
-  // is skipped when off-screen — so at most 1–2 scenes render at once.
-  canvas.__visible = true;
+  // Perf: the animation loop only runs while the canvas is on-screen and the
+  // tab is visible — off-screen scenes cost nothing, not even a frame callback.
+  let tick = null;
+  let visible = true;
+  const sync = () => renderer.setAnimationLoop(tick && visible && !document.hidden ? tick : null);
   const vio = new IntersectionObserver(
-    (entries) => { canvas.__visible = entries[0].isIntersecting; },
+    (entries) => { visible = entries[0].isIntersecting; sync(); },
     { threshold: 0 }
   );
   vio.observe(canvas);
-  const realRender = renderer.render.bind(renderer);
-  renderer.render = (sc, cam) => {
-    if (canvas.__visible && !document.hidden) realRender(sc, cam);
-  };
+  document.addEventListener('visibilitychange', sync);
+  const loop = (fn) => { tick = fn; sync(); };
 
-  return { renderer, scene, camera, resize };
+  return { renderer, scene, camera, resize, loop };
 }
 
 /* Build a more anatomically-real wireframe car */
@@ -408,7 +407,7 @@ function buildMannequin(scale = 1, side = 1) {
 /* -------- Tier mini-scenes -------- */
 function initTierScene(canvas, type) {
   if (typeof THREE === 'undefined') return;
-  const { renderer, scene, camera } = createScene(canvas);
+  const { renderer, scene, camera, loop } = createScene(canvas);
   camera.position.set(0, 0, 4);
   const group = new THREE.Group();
   scene.add(group);
@@ -504,15 +503,14 @@ function initTierScene(canvas, type) {
       group.rotation.x = Math.cos(t * 0.3) * 0.2;
     }
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
   }
-  animate();
+  loop(animate);
 }
 
 /* -------- Expertise scenes -------- */
 function initExpertiseScene(canvas, kind) {
   if (typeof THREE === 'undefined') return;
-  const { renderer, scene, camera } = createScene(canvas);
+  const { renderer, scene, camera, loop } = createScene(canvas);
   camera.position.set(0, 0.3, 5);
   const group = new THREE.Group();
   scene.add(group);
@@ -815,15 +813,14 @@ function initExpertiseScene(canvas, kind) {
       });
     }
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
   }
-  animate();
+  loop(animate);
 }
 
 /* -------- Pillar data-visualization scenes (ACMÉ brand vocabulary) -------- */
 function initPillarScene(canvas, kind) {
   if (typeof THREE === 'undefined') return;
-  const { renderer, scene, camera } = createScene(canvas);
+  const { renderer, scene, camera, loop } = createScene(canvas);
   camera.position.set(0, 0.4, 6);
   const root = new THREE.Group();
   scene.add(root);
@@ -942,9 +939,8 @@ function initPillarScene(canvas, kind) {
         });
       }
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
     }
-    animate();
+    loop(animate);
     return;
   }
 
@@ -1035,9 +1031,8 @@ function initPillarScene(canvas, kind) {
         });
       }
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
     }
-    animate();
+    loop(animate);
     return;
   }
 
@@ -1153,9 +1148,8 @@ function initPillarScene(canvas, kind) {
         });
       }
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
     }
-    animate();
+    loop(animate);
     return;
   }
 }

@@ -251,6 +251,29 @@ acmeconsultants.fr annonce « +40 ans » et « +4 000 études » — les deux s�
 pas compatibles et la question doit être tranchée avant mise en ligne. Le pied de page
 hérité dit encore « 50 ans » : à corriger sur l'ensemble du site.
 
+## Scènes 3D (three.js)
+
+Les trois vitrines 3D de l'accueil tournent sur **three.js r186**, servi depuis le site
+(`vendor/three/three.min.js`) et non plus depuis cdnjs, bloqué à r128 (2021). Le fichier
+ne contient que les classes utilisées par `main.js` : 562 Ko, 147 Ko gzip, soit le poids
+de l'ancien r128 complet.
+
+| Point | Avant | Après |
+|---|---|---|
+| Version | r128 via cdnjs | r186 hébergé sur le site, chargé en `defer` |
+| Scène hors écran | boucle `requestAnimationFrame` active, dessin sauté | boucle arrêtée (`setAnimationLoop(null)`), zéro calcul |
+| Onglet en arrière-plan | idem | boucle arrêtée |
+
+Captures avant/après en mouvement réduit : formes et couleurs identiques. Seule
+l'opacité des hachures de la scène « axes » varie, elle est tirée au hasard à chaque
+chargement.
+
+**Après tout ajout d'une classe `THREE.Xxx` dans `main.js`**, reconstruire le fichier :
+
+```bash
+v5.2/vendor/three/build.sh
+```
+
 ## Lancer en local
 
 ```bash
